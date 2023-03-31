@@ -14,7 +14,7 @@ function App() {
       <Routes>
         <Route
           exact
-          path="/"
+          path="/playlistShuffle/"
           element={
             <>
               <Home />
