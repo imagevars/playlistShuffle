@@ -1,0 +1,37 @@
+.cardContainer {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.mediaButtons {
+  font-size: 5rem;
+  cursor: pointer;
+}
+iframe{
+  width: 490px;
+  height: 350px;
+}
+
+.cardText {
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+.playlistUsed {
+  display: flex;
+
+}
+
+.playlistUsedButton {
+  height: 30px;
+  width: 30px;
+}
+
+.mainContent {
+  display: flex;
+}
+
+.songTitle {
+  font-size: 2rem;
+  font-weight: 600;
+}
