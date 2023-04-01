@@ -34,9 +34,10 @@ const Search = ({ addSongs, currentSong, nextSong, addToPlaylistDetails }) => {
   };
   return (
     <div className="searchContaienr">
-      <div>Enter Youtube playlist</div>
+      <div className="searchText">Enter a Youtube playlist</div>
       <form onSubmit={(e) => handleSubmit(e)}>
         <input
+        className="inputSearch"
           pattern="^(https?:\/\/)?(www\.)?youtube\.com\/playlist\?list=PL[a-zA-Z0-9_-]+$|^(PL[a-zA-Z0-9_-]+)$"
           title="Please enter a valid YouTube playlist URL or ID"
           type="text"
@@ -44,7 +45,7 @@ const Search = ({ addSongs, currentSong, nextSong, addToPlaylistDetails }) => {
           value={playlistId}
           placeholder="playlist url or playlist ID"
         />
-        <button className="  " type="submit">
+        <button className="submitBtn" type="submit">
           Submit
         </button>
       </form>

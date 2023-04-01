@@ -59,9 +59,9 @@ const Card = ({
           width="auto"
         />
         <div className='cardText'>
-          <label className="  ">{ele.snippet.title}</label>
+          <label className="cardTitle">{ele.snippet.title}</label>
           <br />
-          <p className=" "> {ele.snippet.videoOwnerChannelTitle}</p>
+          <p className="cardArtist"> {ele.snippet.videoOwnerChannelTitle}</p>
         </div>
         {/* <button className="cursor-pointer">X</button> */}
       </ol>

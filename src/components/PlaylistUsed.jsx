@@ -41,7 +41,7 @@ const PlaylistUsed = ({
               className="usedContent"
             >
               <img src={element.PlaylistImage} height="auto" width="auto" />
-              <p className="usedName">{element.playlistName}</p>
+              <p className="usedPlaylistName">{element.playlistName}</p>
             </div>
             <button className="playlistUsedButton" onClick={() => deleteFromPlaylist(element.playlistId)}>
               X
