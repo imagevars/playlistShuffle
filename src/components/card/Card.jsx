@@ -9,6 +9,21 @@ const Card = ({
   currentSong,
   nextSong,
 }) => {
+
+  const refs = songs.reduce((acc, value) => {
+    
+    acc[value.snippet.resourceId.videoId] = React.createRef();
+    return acc;
+  },{})
+
+  useEffect(() => {
+    console.log('refff current Song')
+    refs[player.currentSong].current.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    })
+  }, [player.currentSong])
+
   useEffect(() => {
     if (player.isShuffleActive === true) {
       shuffleisActive();
@@ -40,14 +55,14 @@ const Card = ({
     nextSong(songs[currIndex + 1]?.snippet.resourceId.videoId);
   };
 
-
-
   const song = songs?.map((ele) =>
     ele.snippet.title !== "Private video" &&
     ele.snippet.title !== "Deleted video" ? (
-      <ol
+      <li
+        ref={refs[ele.snippet.resourceId.videoId]}
+        id={`${ele.snippet.resourceId.videoId}`}
         className={`cardContent ${
-          player.currentSong === ele.snippet.resourceId.videoId ? "playing" : "no"
+          player.currentSong === ele.snippet.resourceId.videoId ? "playing" : ""
         }`}
         onClick={() => handleClick(ele.snippet.resourceId.videoId)}
         key={ele.snippet.resourceId.videoId + ele.snippet.title}
@@ -64,12 +79,12 @@ const Card = ({
           <p className="cardArtist"> {ele.snippet.videoOwnerChannelTitle}</p>
         </div>
         {/* <button className="cursor-pointer">X</button> */}
-      </ol>
+      </li>
     ) : null
   );
   return (
     <div className="cardContainer">
-      {song}
+      <ul className="ulListCards">{song}</ul>
     </div>
   );
 };

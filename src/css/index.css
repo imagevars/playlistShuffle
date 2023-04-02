@@ -15,6 +15,7 @@ h1 {
   word-spacing: 0.4rem;
 }
 .cardTitle {
+  cursor: pointer;
   font-size: 1.4rem;
   font-weight: 400 ;
   font-style: normal;

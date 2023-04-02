@@ -18,9 +18,7 @@ const Playlist = () => {
     <div className="container">
       <div className="mainContent">
         <Player />
-        <div className="">
           <Card />
-        </div>
       </div>
       <div>
       <PlayingRightNow />
