@@ -62,8 +62,21 @@ h1 {
   border-radius: 4px;
 }
 
+
+.cardContent  {
+  display: flex;
+  margin: 0;
+}
+
+.cardContent.playing {
+  background: #a9a9a9;
+  color :blue;
+  margin: .3rem;
+
+}
 .cardContainer {
-  max-height: 500px;
+  position: relative;
+  max-height: 530px;
   overflow-y: auto;
 }
 

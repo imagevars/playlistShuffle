@@ -9,10 +9,8 @@ const Card = ({
   currentSong,
   nextSong,
 }) => {
-
   useEffect(() => {
     if (player.isShuffleActive === true) {
-
       shuffleisActive();
     }
   }, [player.isShuffleActive]);
@@ -29,13 +27,11 @@ const Card = ({
 
     addSongs(shuffleArr);
 
-    
     currentSong(shuffleArr[0].snippet.resourceId.videoId);
     nextSong(shuffleArr[1].snippet.resourceId.videoId);
   };
 
   const handleClick = (id) => {
-    
     const currIndex = songs.findIndex((ele) => {
       return ele.snippet?.resourceId.videoId === id;
     });
@@ -44,13 +40,17 @@ const Card = ({
     nextSong(songs[currIndex + 1]?.snippet.resourceId.videoId);
   };
 
+
+
   const song = songs?.map((ele) =>
     ele.snippet.title !== "Private video" &&
     ele.snippet.title !== "Deleted video" ? (
       <ol
-        className="cardContent "
+        className={`cardContent ${
+          player.currentSong === ele.snippet.resourceId.videoId ? "playing" : "no"
+        }`}
         onClick={() => handleClick(ele.snippet.resourceId.videoId)}
-        key={ele.snippet.resourceId.videId + ele.snippet.title}
+        key={ele.snippet.resourceId.videoId + ele.snippet.title}
       >
         <img
           src={ele.snippet.thumbnails.default?.url}
@@ -58,7 +58,7 @@ const Card = ({
           height="50px"
           width="auto"
         />
-        <div className='cardText'>
+        <div className="cardText">
           <label className="cardTitle">{ele.snippet.title}</label>
           <br />
           <p className="cardArtist"> {ele.snippet.videoOwnerChannelTitle}</p>
@@ -69,7 +69,6 @@ const Card = ({
   );
   return (
     <div className="cardContainer">
-      <div className="">Card</div>
       {song}
     </div>
   );

@@ -10,23 +10,21 @@ const PlaylistUsed = ({
   nextSong,
   deleteFromPlaylistDetails,
 }) => {
-  console.log("maaap  ", playlistDetails);
   const navigate = useNavigate();
+  const baseURL = import.meta.env.BASE_URL
 
   const handleClick = async (id) => {
-    console.log("eeeee  ", id);
 
     const data = await fetchData(id);
     addSongs(data.responseArrToAdd);
     currentSong(data.currentSong);
     nextSong(data.nextSong);
 
-    navigate(`/playlist/${id}`);
+    navigate(`${baseURL}playlist/${id}`);
   };
 
   const deleteFromPlaylist = (id) => {
     
-    console.log(id);
     deleteFromPlaylistDetails(id)
   };
 

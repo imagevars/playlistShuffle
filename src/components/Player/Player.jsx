@@ -24,7 +24,6 @@ const Player = ({
 
   useEffect(() => {
     if (songs) {
-      console.log("999999999", songs[0]?.snippet);
       currentSong(songs[0]?.snippet.resourceId.videoId);
     }
   }, []);
@@ -44,12 +43,7 @@ const Player = ({
     }
   };
 
-  // useEffect(() => {
-  //   console.log('==== USEEFFECTTTTT====== ',songs.findIndex(ele => ele.snippet.resourceId.videoId === player.currentSong))
-  //   console.log("==LENGTHHHHHplayyyyer ", songs.length -1);
 
-  //   console.log("PLAYER REF", playerRef);
-  // }, [player]);
 
   const handlePlay = () => {
     playerRef.current.internalPlayer.playVideo();
@@ -79,8 +73,8 @@ const Player = ({
     // 5 (video cued).
 
     //DURATION OF VIDEO
-    console.log("DURATION  ", e.target.getDuration());
-    console.log("CURRENT dURATIO  ", e.target.getCurrentTime());
+    console.log("Duration on ms", e.target.getDuration());
+    console.log("Current Time on ms", e.target.getCurrentTime());
 
     if (e.data === 0) {
       // isPlaying(false);

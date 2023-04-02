@@ -33,7 +33,6 @@ export const fetchData = async (id) => {
           playlistId: id,
         },
       });
-      console.log("AXIOS RESPONSE", responseListItems);
       responseArr.push(...responseListItems.data.items);
       if (responseListItems.data.nextPageToken) {
         nextToken = responseListItems.data.nextPageToken;

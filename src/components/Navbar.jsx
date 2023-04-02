@@ -4,9 +4,11 @@ import Search from './Search'
 import { useNavigate } from 'react-router-dom'
 const Navbar = () => {
 const navigate = useNavigate();
+const baseURL = import.meta.env.BASE_URL
 
   const handleClick = () => {
-    navigate(`/`);
+    
+    navigate(`${baseURL}`);
   }
   return (
     <div className='navbar'>

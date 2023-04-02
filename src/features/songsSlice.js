@@ -3,7 +3,6 @@ const initialState = [];
 export default function songsReducer(state = initialState, action) {
   switch (action.type) {
     case "songs/addSongs": {
-      console.log(action.payload)
       return action.payload;
     };
 

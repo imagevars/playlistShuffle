@@ -1,15 +1,26 @@
 import React, { useEffect } from "react";
+// import {
+//   MdPlayCircleOutline,
+//   MdPauseCircleOutline,
+//   MdOutlineShuffleOn,
+//   MdOutlineShuffle,
+//   MdOutlineSkipPrevious,
+//   MdOutlineSkipNext,
+//   MdSkipPrevious,
+//   MdSkipNext,
+// } from "react-icons/md";
+
 import {
-  MdPlayCircleOutline,
-  MdPauseCircleOutline,
-  MdOutlineShuffleOn,
-  MdOutlineShuffle,
-  MdOutlineSkipPrevious,
-  MdOutlineSkipNext,
-  MdSkipPrevious,
-  MdSkipNext,
-} from "react-icons/md";
+  BiPlayCircle,
+  BiPauseCircle,
+  BiShuffle,
+  BiSkipPreviousCircle,
+  BiSkipNextCircle,
+
+} from "react-icons/bi";
+import {TbRepeatOff, TbRepeatOnce, TbRepeat} from 'react-icons/tb'
 import { connect } from "react-redux";
+
 
 const MediaButtons = ({
   songs,
@@ -71,32 +82,33 @@ const MediaButtons = ({
   };
   return (
       <div className="mediaButtons ">
-        <MdOutlineSkipPrevious onClick={handleClickPreviousButton} />
+        <BiSkipPreviousCircle onClick={handleClickPreviousButton} />
         {/* <MdSkipPrevious /> */}
         {player.isPlaying === true ? (
-          <MdPauseCircleOutline
+          <BiPauseCircle
             className="   "
             onClick={() => playPauseButton(false)}
           />
         ) : (
-          <MdPlayCircleOutline
+          <BiPlayCircle
             className=" "
             onClick={() => playPauseButton(true)}
           />
         )}
-        <MdOutlineSkipNext onClick={handleClickNextButton} />
+        <BiSkipNextCircle onClick={handleClickNextButton} />
         {/* <MdSkipNext /> */}
         {player.isShuffleActive ? (
-          <MdOutlineShuffleOn
+          <BiShuffle
             className=""
             onClick={handleClickShuffle}
           />
         ) : (
-          <MdOutlineShuffle
+          <BiShuffle
             className=" "
             onClick={handleClickShuffle}
           />
         )}
+        <TbRepeatOff />
       </div>
   );
 };

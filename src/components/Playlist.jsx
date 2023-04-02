@@ -5,15 +5,20 @@ import MediaButtons from "./MediaButtons/MediaButtons";
 import Player from "./Player/Player";
 import PlayingRightNow from "./PlayingRightNow";
 import Search from "./Search";
+import Navbar from './Navbar'
 
 const Playlist = () => {
   const { id } = useParams();
-  console.log("id  in playlist is", id);
   return (
+    <div>
+
+    <header>
+    <Navbar/>    
+    </header>
     <div className="container">
       <div className="mainContent">
         <Player />
-        <div className="playerContainer">
+        <div className="">
           <Card />
         </div>
       </div>
@@ -23,6 +28,7 @@ const Playlist = () => {
       <div className="mediaButtonsContainer">
         <MediaButtons />
       </div>
+    </div>
     </div>
   );
 };

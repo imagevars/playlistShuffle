@@ -8,15 +8,14 @@ const Search = ({ addSongs, currentSong, nextSong, addToPlaylistDetails }) => {
   const [playlistId, setPlaylistId] = useState("");
   const navigate = useNavigate();
 
+  const baseURL = import.meta.env.BASE_URL;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(playlistId);
 
     const regex = /PL(.*)/;
     const match = playlistId.match(regex);
     const id = "PL" + match[1];
-
-    //https://www.youtube.com/playlist?list=PLi06ybkpczJDt0Ydo3Umjtv97bDOcCtAZ
 
     const data = await fetchData(id);
 
@@ -25,7 +24,7 @@ const Search = ({ addSongs, currentSong, nextSong, addToPlaylistDetails }) => {
     currentSong(data.currentSong);
     nextSong(data.nextSong);
 
-    navigate(`/playlist/${id}`);
+    navigate(`${baseURL}playlist/${id}`);
   };
 
   const handleChange = (e) => {
@@ -37,10 +36,11 @@ const Search = ({ addSongs, currentSong, nextSong, addToPlaylistDetails }) => {
       <div className="searchText">Enter a Youtube playlist</div>
       <form onSubmit={(e) => handleSubmit(e)}>
         <input
-        className="inputSearch"
-          pattern="^(https?:\/\/)?(www\.)?youtube\.com\/playlist\?list=PL[a-zA-Z0-9_-]+$|^(PL[a-zA-Z0-9_-]+)$"
+          className="inputSearch"
+          pattern="^(?=.*.{24,})(?=.*PL).*"
           title="Please enter a valid YouTube playlist URL or ID"
           type="text"
+          required
           onChange={(e) => handleChange(e)}
           value={playlistId}
           placeholder="playlist url or playlist ID"
