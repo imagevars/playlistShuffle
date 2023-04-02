@@ -1,14 +1,11 @@
 import React from "react";
-import { useParams } from "react-router-dom";
 import Card from "./card/Card";
 import MediaButtons from "./MediaButtons/MediaButtons";
 import Player from "./Player/Player";
 import PlayingRightNow from "./PlayingRightNow";
-import Search from "./Search";
 import Navbar from './Navbar'
 
-const Playlist = () => {
-  const { id } = useParams();
+const PlaylistPage = () => {
   return (
     <div>
 
@@ -31,4 +28,4 @@ const Playlist = () => {
   );
 };
 
-export default Playlist;
+export default PlaylistPage;
