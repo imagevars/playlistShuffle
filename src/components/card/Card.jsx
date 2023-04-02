@@ -9,20 +9,18 @@ const Card = ({
   currentSong,
   nextSong,
 }) => {
-
   const refs = songs.reduce((acc, value) => {
-    
     acc[value.snippet.resourceId.videoId] = React.createRef();
     return acc;
-  },{})
+  }, {});
 
   useEffect(() => {
-    console.log('refff current Song')
+    console.log("refff current Song");
     refs[player.currentSong].current.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start'
-    })
-  }, [player.currentSong])
+      behavior: "smooth",
+      block: "start",
+    });
+  }, [player.currentSong]);
 
   useEffect(() => {
     if (player.isShuffleActive === true) {
