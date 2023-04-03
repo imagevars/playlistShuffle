@@ -2,6 +2,9 @@ const initialState = [];
 
 export default function playlistDetailsReducer(state = initialState, action) {
   switch (action.type) {
+    case "playlistDetails/add": {
+      return action.payload
+    }
     case "playlistDetails/addToPlaylistDetails": {
       if(state.filter(element => element.playlistId === action.payload.playlistId).length ) {
         return state

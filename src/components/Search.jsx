@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchData } from "./utils/fetchData";
+import { stringify } from "postcss";
 
 const Search = ({ addSongs, currentSong, nextSong, addToPlaylistDetails }) => {
   const [playlistId, setPlaylistId] = useState("");
@@ -19,11 +20,11 @@ const Search = ({ addSongs, currentSong, nextSong, addToPlaylistDetails }) => {
 
     const data = await fetchData(id);
 
-    addToPlaylistDetails(data.playlistDetailsObject);
     addSongs(data.responseArrToAdd);
     currentSong(data.currentSong);
     nextSong(data.nextSong);
 
+      addToPlaylistDetails(data.playlistDetailsObject)
     navigate(`${baseURL}playlist/${id}`);
   };
 
@@ -52,6 +53,7 @@ const Search = ({ addSongs, currentSong, nextSong, addToPlaylistDetails }) => {
     </div>
   );
 };
+
 const mapDispatchToProps = (dispatch) => {
   return {
     addSongs: (payload) => dispatch({ type: "songs/addSongs", payload }),
@@ -59,6 +61,7 @@ const mapDispatchToProps = (dispatch) => {
     nextSong: (payload) => dispatch({ type: "player/nextSong", payload }),
     addToPlaylistDetails: (payload) =>
       dispatch({ type: "playlistDetails/addToPlaylistDetails", payload }),
+
   };
 };
 

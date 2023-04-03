@@ -12,12 +12,12 @@ const persisConfig = {
 
 const composedEnhacer = composeWithDevTools(applyMiddleware(thunkMiddleware))
 
-// const persistedReducer = persistReducer(persisConfig, rootReducer)
+const persistedReducer = persistReducer(persisConfig, rootReducer)
 
-// const store = createStore(persistedReducer, composedEnhacer)
-const store = createStore(rootReducer, composedEnhacer)
+const store = createStore(persistedReducer, composedEnhacer)
+// const store = createStore(rootReducer, composedEnhacer)
 
 const persistor = persistStore(store)
 
-// export  {persistor,store}
-export default store
+export  {persistor,store}
+// export default store

@@ -1,5 +1,5 @@
 import React from "react";
-import Card from "./card/Card";
+import Card from "./Card/Card";
 import MediaButtons from "./MediaButtons/MediaButtons";
 import Player from "./Player/Player";
 import PlayingRightNow from "./PlayingRightNow";
@@ -17,11 +17,14 @@ const PlaylistPage = () => {
         <Player />
           <Card />
       </div>
+      <div className="bottomMedia">
+
       <div>
       <PlayingRightNow />
       </div>
       <div className="mediaButtonsContainer">
         <MediaButtons />
+      </div>
       </div>
     </div>
     </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { fetchData } from "./utils/fetchData";
 import { useNavigate } from "react-router-dom";
@@ -9,12 +9,38 @@ const PlaylistUsed = ({
   currentSong,
   nextSong,
   deleteFromPlaylistDetails,
+  addToPlaylistDetails
 }) => {
   const navigate = useNavigate();
-  const baseURL = import.meta.env.BASE_URL
+  const baseURL = import.meta.env.BASE_URL;
+
+
+
+  useEffect(() => {
+    console.log('playlistUSEDQQQQ', playlistDetails)
+  })
+
+  const playlists =playlistDetails.map(
+    (element) => (
+      <div className="playlistUsedList" key={element.playlistId}>
+        <div
+          onClick={() => handleClick(element.playlistId)}
+          className="usedContentTextandImage"
+        >
+          <img className="imgUsedPlaylist" src={element.PlaylistImage}  />
+          <p className="usedPlaylistName">{element.playlistName}</p>
+        </div>
+        <button
+          className="playlistUsedButton"
+          onClick={() => deleteFromPlaylist(element.playlistId)}
+        >
+          X
+        </button>
+      </div>
+    )
+  );
 
   const handleClick = async (id) => {
-
     const data = await fetchData(id);
     addSongs(data.responseArrToAdd);
     currentSong(data.currentSong);
@@ -24,30 +50,16 @@ const PlaylistUsed = ({
   };
 
   const deleteFromPlaylist = (id) => {
-    
     deleteFromPlaylistDetails(id)
+
   };
 
   return (
-    <div className="playlistUsed">
-      {playlistDetails ? (
-        playlistDetails.map((element) => (
-          <div className="playlistUsed" key={element.playlistId}>
-            <div
-              onClick={() => handleClick(element.playlistId)}
-              
-              className="usedContent"
-            >
-              <img src={element.PlaylistImage} height="auto" width="auto" />
-              <p className="usedPlaylistName">{element.playlistName}</p>
-            </div>
-            <button className="playlistUsedButton" onClick={() => deleteFromPlaylist(element.playlistId)}>
-              X
-            </button>
-          </div>
-        ))
+    <div className="playlistUsedContainer">
+      {playlistDetails.length ? (
+        playlists
       ) : (
-        <p>No Playlist Used</p>
+        null
       )}
     </div>
   );
@@ -69,8 +81,9 @@ const mapDispatchToProps = (dispatch) => {
     addToPlaylistDetails: (payload) =>
       dispatch({ type: "playlistDetails/addToPlaylistDetails", payload }),
 
-    deleteFromPlaylistDetails: (payload) =>
+      deleteFromPlaylistDetails: (payload) =>
       dispatch({ type: "playlistDetails/deleteFromPlaylistDetails", payload }),
+
   };
 };
 
