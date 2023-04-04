@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import YouTube from "react-youtube";
 import { connect } from "react-redux";
+import { AspectRatio } from "@chakra-ui/react";
 
 const Player = ({
   songs,
@@ -43,11 +44,8 @@ const Player = ({
     }
   };
 
-
-
   const handlePlay = () => {
     playerRef.current.internalPlayer.playVideo();
-    // playerStatus()
   };
 
   useEffect(() => {
@@ -57,8 +55,6 @@ const Player = ({
   }, [player.isPlaying]);
 
   const onReady = (e) => {
-    // if(player.isPlaying){
-
     e.target.playVideo();
     // }
   };
@@ -94,16 +90,16 @@ const Player = ({
     }
   };
   return (
-    <div className="player">
+    <AspectRatio minW={"100%"} maxH={"100%"} ratio={1} className="player">
       <YouTube
-      className="youtubePlayer"
+        className="youtubePlayer"
         videoId={player.currentSong}
         opts={opts}
         ref={playerRef}
         onReady={onReady}
         onStateChange={onStateChange}
       />
-    </div>
+    </AspectRatio>
   );
 };
 

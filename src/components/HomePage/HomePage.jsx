@@ -1,21 +1,32 @@
 import React from "react";
-import PlaylistUsed from "../PlaylistUsed";
-import Search from "../Search";
-
+import PlaylistUsed from "../PlaylistUsed/PlaylistUsed";
+import Search from "../Search/Search";
+import { useNavigate } from "react-router-dom";
+import { Container, Heading, Box, Center } from "@chakra-ui/react";
 const HomePage = () => {
-  return (
-    <div className="homeContainer">
-      <div className="contentContaier">
+  const baseUrl = import.meta.env.BASE_URL;
+  const navigate = useNavigate();
+  const handleClick = () => {
+    console.log("BASE ", baseUrl);
 
-      <div className="home">
-        <h1 className="title">Playlist Shuffle</h1>
-        <Search />
-      </div>
-      <div className="playlistInHomePage">
-        <PlaylistUsed />
-      </div>
-      </div>
-    </div>
+    return navigate(baseUrl);
+  };
+  return (
+    <Container h="calc(100vh)" w="100%" maxWidth="2266px" bg="whiteAlpha.900">
+      <Box w="85%" m={"0 auto"}>
+        <Heading onClick={handleClick} color={"black"} className="title">
+          {" "}
+          <Center>Playlist Shuffle</Center>
+        </Heading>
+        <Box>
+          <Search />
+        </Box>
+
+        <Box>
+          <PlaylistUsed />
+        </Box>
+      </Box>
+    </Container>
   );
 };
 

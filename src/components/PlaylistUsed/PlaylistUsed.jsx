@@ -1,7 +1,17 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { fetchData } from "./utils/fetchData";
+import { fetchData } from "../utils/fetchData";
 import { useNavigate } from "react-router-dom";
+import {
+  Button,
+  Card,
+  Flex,
+  Spacer,
+  Image,
+  Text,
+  CloseButton,
+  Heading,
+} from "@chakra-ui/react";
 
 const PlaylistUsed = ({
   playlistDetails,
@@ -9,36 +19,51 @@ const PlaylistUsed = ({
   currentSong,
   nextSong,
   deleteFromPlaylistDetails,
-  addToPlaylistDetails
 }) => {
   const navigate = useNavigate();
   const baseURL = import.meta.env.BASE_URL;
 
-
-
   useEffect(() => {
-    console.log('playlistUSEDQQQQ', playlistDetails)
-  })
+    console.log("playlistUSEDQQQQ", playlistDetails);
+  });
 
-  const playlists =playlistDetails.map(
-    (element) => (
-      <div className="playlistUsedList" key={element.playlistId}>
-        <div
+  const playlists = playlistDetails.map((element) => (
+    <Card
+      w={"100%"}
+      mt={2}
+      bg={""}
+      className="playlistUsedList"
+      key={element.playlistId}
+    >
+      <Flex bg="red.500" borderRadius={"5px"} cursor={"pointer"} m={2}>
+        <Flex
           onClick={() => handleClick(element.playlistId)}
           className="usedContentTextandImage"
         >
-          <img className="imgUsedPlaylist" src={element.PlaylistImage}  />
-          <p className="usedPlaylistName">{element.playlistName}</p>
-        </div>
-        <button
+          <Image
+            borderRadius="lg"
+            alt={element.playlistName}
+            boxSize={["75px", "85px", "120px"]}
+            objectFit="cover"
+            className="imgUsedPlaylist"
+            src={element.PlaylistImage}
+          />
+          <Heading size={["md", "md", "lg"]} className="usedPlaylistName">
+            <Text color={"whiteAlpha.900"} noOfLines={[2, 2]}>
+              {element.playlistName}
+            </Text>
+          </Heading>
+        </Flex>
+        <Spacer />
+        <CloseButton
+          colorScheme="whiteAlpha"
+          color={"white"}
           className="playlistUsedButton"
           onClick={() => deleteFromPlaylist(element.playlistId)}
-        >
-          X
-        </button>
-      </div>
-    )
-  );
+        />
+      </Flex>
+    </Card>
+  ));
 
   const handleClick = async (id) => {
     const data = await fetchData(id);
@@ -50,18 +75,13 @@ const PlaylistUsed = ({
   };
 
   const deleteFromPlaylist = (id) => {
-    deleteFromPlaylistDetails(id)
-
+    deleteFromPlaylistDetails(id);
   };
 
   return (
-    <div className="playlistUsedContainer">
-      {playlistDetails.length ? (
-        playlists
-      ) : (
-        null
-      )}
-    </div>
+    <Flex flexDirection={"column"} className="playlistUsedContainer">
+      {playlistDetails.length ? playlists : null}
+    </Flex>
   );
 };
 
@@ -81,9 +101,8 @@ const mapDispatchToProps = (dispatch) => {
     addToPlaylistDetails: (payload) =>
       dispatch({ type: "playlistDetails/addToPlaylistDetails", payload }),
 
-      deleteFromPlaylistDetails: (payload) =>
+    deleteFromPlaylistDetails: (payload) =>
       dispatch({ type: "playlistDetails/deleteFromPlaylistDetails", payload }),
-
   };
 };
 

@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import "./css/index.css";
 import HomePage from "./components/HomePage/HomePage";
-import PlaylistPage from "./components/PlaylistPage";
+import PlaylistPage from "./components/PlaylistPage/PlaylistPage";
 
 function App() {
   const baseURL = import.meta.env.BASE_URL;

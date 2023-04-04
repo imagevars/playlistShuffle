@@ -1,26 +1,14 @@
-import React, { useEffect } from "react";
-// import {
-//   MdPlayCircleOutline,
-//   MdPauseCircleOutline,
-//   MdOutlineShuffleOn,
-//   MdOutlineShuffle,
-//   MdOutlineSkipPrevious,
-//   MdOutlineSkipNext,
-//   MdSkipPrevious,
-//   MdSkipNext,
-// } from "react-icons/md";
-
+import React from "react";
+import { Box, Flex, IconButton } from "@chakra-ui/react";
 import {
   BiPlayCircle,
   BiPauseCircle,
   BiShuffle,
   BiSkipPreviousCircle,
   BiSkipNextCircle,
-
 } from "react-icons/bi";
-import {TbRepeatOff, TbRepeatOnce, TbRepeat} from 'react-icons/tb'
+import { TbRepeatOff, TbRepeatOnce, TbRepeat } from "react-icons/tb";
 import { connect } from "react-redux";
-
 
 const MediaButtons = ({
   songs,
@@ -35,8 +23,6 @@ const MediaButtons = ({
   const playPauseButton = (e) => {
     isPlaying(e);
   };
-
-
 
   const handleClickPreviousButton = () => {
     const currIndex = songs.findIndex((song) => {
@@ -53,19 +39,18 @@ const MediaButtons = ({
       return ele.snippet?.resourceId.videoId === player.currentSong;
     });
 
-    if (currIndex < songs.length -1) {
+    if (currIndex < songs.length - 1) {
       previousSong(songs[currIndex]?.snippet.resourceId.videoId);
       currentSong(songs[currIndex + 1]?.snippet.resourceId.videoId);
       nextSong(songs[currIndex + 2]?.snippet.resourceId.videoId);
-    } else if (currIndex === songs.length -1){
+    } else if (currIndex === songs.length - 1) {
       // previousSong(songs[currIndex]?.snippet.resourceId.videoId);
       // currentSong(songs[currIndex + 1]?.snippet.resourceId.videoId);
       // nextSong('');
-
     }
   };
 
-  const handleClickShuffle =  () => {
+  const handleClickShuffle = () => {
     if (player.isShuffleActive === false) {
       isShuffleActive(true);
     } else {
@@ -81,35 +66,99 @@ const MediaButtons = ({
     }
   };
   return (
-      <div className="mediaButtons ">
-        <BiSkipPreviousCircle onClick={handleClickPreviousButton} />
-        {/* <MdSkipPrevious /> */}
-        {player.isPlaying === true ? (
-          <BiPauseCircle
-            className="   "
+    <Flex
+      flexDirection={"row"}
+      alignItems={"baseline"}
+      className="mediaButtons "
+      maxW={"100%"}
+    >
+      <Box>
+        <IconButton
+          colorScheme="red"
+          size="1.5rem"
+          ml={"1.5"}
+          mr={"1.5"}
+          icon={<TbRepeatOff size={50} />}
+        />
+      </Box>
+      <Box>
+        <IconButton
+          onClick={handleClickPreviousButton}
+          colorScheme="red"
+          size="2rem"
+          ml={"1.5"}
+          mr={"1.5"}
+          icon={<BiSkipPreviousCircle size={50} />}
+        />
+      </Box>
+      {/* <MdSkipPrevious /> */}
+      {player.isPlaying === true ? (
+        <Box>
+          <IconButton
             onClick={() => playPauseButton(false)}
+            colorScheme="red"
+            size="2rem"
+            ml={"1.5"}
+            mr={"1.5"}
+            icon={<BiPauseCircle size={65} />}
           />
-        ) : (
-          <BiPlayCircle
-            className=" "
+        </Box>
+      ) : (
+        <Box>
+          <IconButton
             onClick={() => playPauseButton(true)}
+            colorScheme="red"
+            size="2rem"
+            ml={"1.5"}
+            mr={"1.5"}
+            icon={<BiPlayCircle size={65} />}
           />
-        )}
-        <BiSkipNextCircle onClick={handleClickNextButton} />
-        {/* <MdSkipNext /> */}
-        {player.isShuffleActive ? (
-          <BiShuffle
-            className=""
+
+          {/* <BiPlayCircle className=" " onClick={} /> */}
+        </Box>
+      )}
+      <Box>
+        <IconButton
+          onClick={handleClickNextButton}
+          colorScheme="red"
+          size="1.5rem"
+          ml={"1.5"}
+          mr={"1.5"}
+          icon={<BiSkipNextCircle size={50} />}
+        />
+      </Box>
+      {/* <MdSkipNext /> */}
+      {player.isShuffleActive ? (
+        <Box>
+          <IconButton
             onClick={handleClickShuffle}
+            bg={"red.800"}
+            color={"white"}
+            size="1.5rem"
+            ml={"1.5"}
+            mr={"1.5"}
+            _hover={{
+              background: "var(--chakra-colors-red-600)",
+              color: "white",
+            }}
+            icon={<BiShuffle size={50} />}
           />
-        ) : (
-          <BiShuffle
-            className=" "
+        </Box>
+      ) : (
+        <Box>
+          <IconButton
             onClick={handleClickShuffle}
+            colorScheme="red"
+            size="1.5rem"
+            ml={"1.5"}
+            mr={"1.5"}
+            icon={<BiShuffle size={50} />}
           />
-        )}
-        <TbRepeatOff />
-      </div>
+
+          {/* <BiShuffle className=" " onClick={handleClickShuffle} /> */}
+        </Box>
+      )}
+    </Flex>
   );
 };
 

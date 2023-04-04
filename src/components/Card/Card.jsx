@@ -1,6 +1,15 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import MersenneTwister from "mersenne-twister";
+import {
+  Card as CardChakra,
+  Flex,
+  Image,
+  UnorderedList,
+  Box,
+  Heading,
+  Text,
+} from "@chakra-ui/react";
 const Card = ({
   songs,
   addSongs,
@@ -56,34 +65,64 @@ const Card = ({
   const song = songs?.map((ele) =>
     ele.snippet.title !== "Private video" &&
     ele.snippet.title !== "Deleted video" ? (
-      <li
+      <CardChakra
+        w={["95%", "90%"]}
+        cursor={"pointer"}
+        title={ele.snippet.title}
+        m={"2"}
         ref={refs[ele.snippet.resourceId.videoId]}
         id={`${ele.snippet.resourceId.videoId}`}
-        className={`cardContent ${
-          player.currentSong === ele.snippet.resourceId.videoId ? "playing" : ""
-        }`}
         onClick={() => handleClick(ele.snippet.resourceId.videoId)}
         key={ele.snippet.resourceId.videoId + ele.snippet.title}
       >
-        <img
-          src={ele.snippet.thumbnails.default?.url}
-          alt="song image"
-          height="50px"
-          width="auto"
-        />
-        <div className="cardText">
-          <label className="cardTitle">{ele.snippet.title}</label>
-          <br />
-          <p className="cardArtist"> {ele.snippet.videoOwnerChannelTitle}</p>
-        </div>
-        {/* <button className="cursor-pointer">X</button> */}
-      </li>
+        <CardChakra
+          border={"1px solid var(--chakra-colors-red-600)"}
+          bg={
+            player.currentSong === ele.snippet.resourceId.videoId
+              ? "var(--chakra-colors-red-600)"
+              : null
+          }
+          color={
+            player.currentSong === ele.snippet.resourceId.videoId ? "white" : ""
+          }
+          _hover={{
+            background: "var(--chakra-colors-red-600)",
+            color: "white",
+          }}
+        >
+          <Flex>
+            <Image
+              borderRadius="lg"
+              src={ele.snippet.thumbnails.default?.url}
+              alt="song image"
+              boxSize={["45px", "55px", "65px"]}
+              objectFit="cover"
+            />
+            <Box className="cardText">
+              <Heading size={["xs", "sm", "md"]}>
+                <Text noOfLines={[1, 2]}>{ele.snippet.title}</Text>
+              </Heading>
+
+              <Text noOfLines={"1"} className="cardArtist">
+                {" "}
+                {ele.snippet.videoOwnerChannelTitle}
+              </Text>
+            </Box>
+    
+          </Flex>
+        </CardChakra>
+      </CardChakra>
     ) : null
   );
   return (
-    <div className="cardContainer">
-      <ul className="ulListCards">{song}</ul>
-    </div>
+    <Box
+      mt={"1.5"}
+      overflowY={"scroll"}
+      h={"inherit"}
+      className="cardContainer"
+    >
+      <UnorderedList className="ulListCards">{song}</UnorderedList>
+    </Box>
   );
 };
 

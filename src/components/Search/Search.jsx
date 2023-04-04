@@ -2,8 +2,14 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
-import { fetchData } from "./utils/fetchData";
-import { stringify } from "postcss";
+import { fetchData } from "../utils/fetchData";
+import {
+  Button,
+  Input,
+  FormControl,
+  FormErrorMessage,
+  Flex,
+} from "@chakra-ui/react";
 
 const Search = ({ addSongs, currentSong, nextSong, addToPlaylistDetails }) => {
   const [playlistId, setPlaylistId] = useState("");
@@ -24,19 +30,25 @@ const Search = ({ addSongs, currentSong, nextSong, addToPlaylistDetails }) => {
     currentSong(data.currentSong);
     nextSong(data.nextSong);
 
-      addToPlaylistDetails(data.playlistDetailsObject)
+    addToPlaylistDetails(data.playlistDetailsObject);
     navigate(`${baseURL}playlist/${id}`);
   };
 
   const handleChange = (e) => {
+    console.log("submited");
+    console.log("EE ", e.target.value)
     e.preventDefault();
     setPlaylistId(e.target.value);
   };
   return (
-    <div className="searchContaienr">
-      <div className="searchText">Enter a Youtube playlist</div>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <input
+    <Flex className="searchContaienr">
+      <form style={{width: '100%'}} onSubmit={(e) => handleSubmit(e)}>
+
+      <FormControl display={"flex"} >
+        <Input
+          variant="flushed"
+          colorScheme="red"
+          size="lg"
           className="inputSearch"
           pattern="^(?=.*.{24,})(?=.*PL).*"
           title="Please enter a valid YouTube playlist URL or ID"
@@ -45,12 +57,19 @@ const Search = ({ addSongs, currentSong, nextSong, addToPlaylistDetails }) => {
           onChange={(e) => handleChange(e)}
           value={playlistId}
           placeholder="playlist url or playlist ID"
-        />
-        <button className="submitBtn" type="submit">
+          />
+        <Button
+          colorScheme="red"
+          ml={"1.5"}
+          size="lg"
+          className="submitBtn"
+          type="submit"
+          >
           Submit
-        </button>
-      </form>
-    </div>
+        </Button>
+      </FormControl>
+        </form>
+    </Flex>
   );
 };
 
@@ -61,7 +80,6 @@ const mapDispatchToProps = (dispatch) => {
     nextSong: (payload) => dispatch({ type: "player/nextSong", payload }),
     addToPlaylistDetails: (payload) =>
       dispatch({ type: "playlistDetails/addToPlaylistDetails", payload }),
-
   };
 };
 
