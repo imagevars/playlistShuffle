@@ -12,5 +12,7 @@ Playlist Shuffle - A web application with a better algorithm than YouTube's for 
 - "ArrowLeft" to play the previous video.
 - "ArrowRight" to play the next video.
 
+In the future will add more...
+
 ## Uses mersenne-twister to randomize the videos
 https://www.npmjs.com/package/mersenne-twister
