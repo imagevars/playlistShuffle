@@ -45,9 +45,7 @@ const MediaButtons = ({
       currentSong(songs[currIndex + 1]?.snippet.resourceId.videoId);
       nextSong(songs[currIndex + 2]?.snippet.resourceId.videoId);
     } else if (currIndex === songs.length - 1) {
-      // previousSong(songs[currIndex]?.snippet.resourceId.videoId);
-      // currentSong(songs[currIndex + 1]?.snippet.resourceId.videoId);
-      // nextSong('');
+      console.log("No more songs left")
     }
   };
 
@@ -56,14 +54,7 @@ const MediaButtons = ({
       isShuffleActive(true);
     } else {
       isShuffleActive(false);
-      let unShuffleArr = [];
-      unShuffleArr.push(...songs);
-      unShuffleArr.sort(function (a, b) {
-        return a.snippet.position - b.snippet.position;
-      });
-      addSongs(unShuffleArr);
-      currentSong(unShuffleArr[0].snippet.resourceId.videoId);
-      nextSong(unShuffleArr[1].snippet.resourceId.videoId);
+
     }
   };
   return (

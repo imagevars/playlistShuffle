@@ -31,12 +31,16 @@ const Card = ({
   }, [player.currentSong]);
 
   useEffect(() => {
-    if (player.isShuffleActive === true) {
+    console.log("shuffle ACTIVE  ", player.isShuffleActive)
       shuffleisActive();
-    }
+    
   }, [player.isShuffleActive]);
 
   const shuffleisActive = () => {
+    console.log("ssssshufffleee===", player.isShuffleActive)
+    
+
+    if (player.isShuffleActive === true) { 
     const generator = new MersenneTwister();
     let shuffleArr = [];
     shuffleArr.push(...songs);
@@ -45,11 +49,23 @@ const Card = ({
       const j = Math.floor(generator.random() * (i + 1));
       [shuffleArr[i], shuffleArr[j]] = [shuffleArr[j], shuffleArr[i]];
     }
-
     addSongs(shuffleArr);
 
     currentSong(shuffleArr[0].snippet.resourceId.videoId);
     nextSong(shuffleArr[1].snippet.resourceId.videoId);
+
+
+  } else {
+    console.log('false ', false)
+    let unShuffleArr = [];
+    unShuffleArr.push(...songs);
+    unShuffleArr.sort(function (a, b) {
+      return a.snippet.position - b.snippet.position;
+    });
+    addSongs(unShuffleArr);
+    currentSong(unShuffleArr[0].snippet.resourceId.videoId);
+    nextSong(unShuffleArr[1].snippet.resourceId.videoId);
+  }
   };
 
   const handleClick = (id) => {
@@ -120,7 +136,7 @@ const Card = ({
       h={"inherit"}
       className="cardContainer"
     >
-      <UnorderedList pt={"1"} className="ulListCards">{song}</UnorderedList>
+      <UnorderedList pt={"1"} w={["95%","95%",null,null,"100%"]} className="ulListCards">{song}</UnorderedList>
     </Box>
   );
 };
