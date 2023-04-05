@@ -8,7 +8,6 @@ const PlaylistInfo = ({ playlistDetails }) => {
     name: "",
     image: "",
   });
-  console.log("PPP ", playlistDetails);
   useEffect(() => {
     const info = playlistDetails?.find((ele) => ele.playlistId === id);
     setPlaylistInfo({
@@ -17,7 +16,6 @@ const PlaylistInfo = ({ playlistDetails }) => {
     });
   }, []);
 
-  console.log("dddidddd ", id);
   return (
     <Flex alignItems={"center"}>
       <Image
@@ -26,7 +24,7 @@ const PlaylistInfo = ({ playlistDetails }) => {
         borderRadius="full"
         src={playlistInfo.image}
       />
-      <Heading ml={"1"} size={["sm", "md", "lg"]}>
+      <Heading ml={"1"} size={["sm", "md", "md", "md"]}>
         {playlistInfo.name}
       </Heading>
     </Flex>

@@ -24,7 +24,6 @@ const Card = ({
   }, {});
 
   useEffect(() => {
-    console.log("refff current Song");
     refs[player.currentSong].current.scrollIntoView({
       behavior: "smooth",
       block: "start",
@@ -96,8 +95,8 @@ const Card = ({
               src={ele.snippet.thumbnails.default?.url}
               alt="song image"
               boxSize={["45px", "55px", "65px"]}
-              objectFit="cover"
-            />
+              objectFit="none"
+              />
             <Box className="cardText">
               <Heading size={["xs", "sm", "md"]}>
                 <Text noOfLines={[1, 2]}>{ele.snippet.title}</Text>
@@ -116,12 +115,12 @@ const Card = ({
   );
   return (
     <Box
-      mt={"1.5"}
+      mt={ ["0" , "10", "10", "0"]}
       overflowY={"scroll"}
       h={"inherit"}
       className="cardContainer"
     >
-      <UnorderedList className="ulListCards">{song}</UnorderedList>
+      <UnorderedList pt={"1"} className="ulListCards">{song}</UnorderedList>
     </Box>
   );
 };

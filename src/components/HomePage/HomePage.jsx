@@ -7,7 +7,7 @@ const HomePage = () => {
   const baseUrl = import.meta.env.BASE_URL;
   const navigate = useNavigate();
   const handleClick = () => {
-    console.log("BASE ", baseUrl);
+    
 
     return navigate(baseUrl);
   };

@@ -23,10 +23,7 @@ const PlaylistUsed = ({
   const navigate = useNavigate();
   const baseURL = import.meta.env.BASE_URL;
 
-  useEffect(() => {
-    console.log("playlistUSEDQQQQ", playlistDetails);
-  });
-
+ 
   const playlists = playlistDetails.map((element) => (
     <Card
       w={"100%"}

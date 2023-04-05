@@ -14,6 +14,7 @@ const MediaButtons = ({
   songs,
   player,
   isPlaying,
+  isLoopActive,
   isShuffleActive,
   previousSong,
   currentSong,
@@ -72,49 +73,73 @@ const MediaButtons = ({
       className="mediaButtons "
       maxW={"100%"}
     >
-      <Box>
-        <IconButton
-          colorScheme="red"
-          size="1.5rem"
-          ml={"1.5"}
-          mr={"1.5"}
-          icon={<TbRepeatOff size={50} />}
-        />
-      </Box>
+      {player.isLoopActive === true ? (
+        <Box onClick={() => isLoopActive(false)}>
+          <IconButton
+            colorScheme="red"
+            size="2rem"
+            ml={"1.5"}
+            mr={"1.5"}
+            icon={<TbRepeatOnce size={45} />}
+          />
+        </Box>
+      ) : (
+        <Box>
+          <IconButton
+            colorScheme="red"
+            size="2rem"
+            ml={"1.5"}
+            mr={"1.5"}
+            icon={
+              <TbRepeatOff
+                onClick={() => isLoopActive(true)}
+                size={45}
+              />
+            }
+          />
+
+          {/* <BiPlayCircle className=" " onClick={() => playPauseButton(true) /> */}
+        </Box>
+      )}
+      
       <Box>
         <IconButton
           onClick={handleClickPreviousButton}
           colorScheme="red"
-          size="2rem"
+          size="1.5rem"
           ml={"1.5"}
           mr={"1.5"}
-          icon={<BiSkipPreviousCircle size={50} />}
+          icon={<BiSkipPreviousCircle size={45} />}
         />
       </Box>
       {/* <MdSkipPrevious /> */}
       {player.isPlaying === true ? (
         <Box>
           <IconButton
-            onClick={() => playPauseButton(false)}
             colorScheme="red"
             size="2rem"
             ml={"1.5"}
             mr={"1.5"}
-            icon={<BiPauseCircle size={65} />}
+            onClick={() => playPauseButton(false)}
+            icon={<BiPauseCircle size={55} />}
           />
         </Box>
       ) : (
         <Box>
           <IconButton
-            onClick={() => playPauseButton(true)}
             colorScheme="red"
             size="2rem"
             ml={"1.5"}
             mr={"1.5"}
-            icon={<BiPlayCircle size={65} />}
+            onClick={() => playPauseButton(true)}
+            icon={
+              <BiPlayCircle
+                size={55}
+              />
+            }
           />
 
-          {/* <BiPlayCircle className=" " onClick={} /> */}
+          {/* <BiPlayCircle className=" " onClick={() => playPauseButton(true) /> */}
         </Box>
       )}
       <Box>
@@ -124,7 +149,7 @@ const MediaButtons = ({
           size="1.5rem"
           ml={"1.5"}
           mr={"1.5"}
-          icon={<BiSkipNextCircle size={50} />}
+          icon={<BiSkipNextCircle size={45} />}
         />
       </Box>
       {/* <MdSkipNext /> */}
@@ -141,7 +166,7 @@ const MediaButtons = ({
               background: "var(--chakra-colors-red-600)",
               color: "white",
             }}
-            icon={<BiShuffle size={50} />}
+            icon={<BiShuffle size={45} />}
           />
         </Box>
       ) : (
@@ -152,7 +177,7 @@ const MediaButtons = ({
             size="1.5rem"
             ml={"1.5"}
             mr={"1.5"}
-            icon={<BiShuffle size={50} />}
+            icon={<BiShuffle size={45} />}
           />
 
           {/* <BiShuffle className=" " onClick={handleClickShuffle} /> */}
@@ -172,6 +197,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     isPlaying: (payload) => dispatch({ type: "player/isPlaying", payload }),
+    isLoopActive: (payload) => dispatch({ type: "player/isLoopActive", payload }),
     isShuffleActive: (payload) =>
       dispatch({ type: "player/isShuffleActive", payload }),
     isShuffleLoading: (payload) =>

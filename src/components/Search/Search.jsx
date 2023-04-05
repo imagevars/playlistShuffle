@@ -35,8 +35,6 @@ const Search = ({ addSongs, currentSong, nextSong, addToPlaylistDetails }) => {
   };
 
   const handleChange = (e) => {
-    console.log("submited");
-    console.log("EE ", e.target.value)
     e.preventDefault();
     setPlaylistId(e.target.value);
   };

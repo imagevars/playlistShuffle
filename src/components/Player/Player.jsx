@@ -1,7 +1,7 @@
-import React, { useRef, useEffect } from "react";
-import YouTube from "react-youtube";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { AspectRatio } from "@chakra-ui/react";
+import ReactPlayer from "react-player/youtube";
 
 const Player = ({
   songs,
@@ -10,14 +10,13 @@ const Player = ({
   previousSong,
   currentSong,
   nextSong,
+  isLoopActive,
 }) => {
-  const playerRef = useRef(null);
-
   const opts = {
     height: "100%",
     width: "100%",
     playerVars: {
-      autoplay: 1,
+      // autoplay: 1,
       color: "red",
       modestbranding: 1,
     },
@@ -44,60 +43,46 @@ const Player = ({
     }
   };
 
-  const handlePlay = () => {
-    playerRef.current.internalPlayer.playVideo();
-  };
-
-  useEffect(() => {
-    player.isPlaying === true
-      ? playerRef.current.internalPlayer.playVideo()
-      : playerRef.current.internalPlayer.pauseVideo();
-  }, [player.isPlaying]);
-
-  const onReady = (e) => {
-    e.target.playVideo();
-    // }
-  };
-
-  const onStateChange = (e) => {
-    // states
-    // -1 (unstarted)
-    // 0 (ended)
-    // 1 (playing)
-    // 2 (paused)
-    // 3 (buffering)
-    // 5 (video cued).
-
-    //DURATION OF VIDEO
-    console.log("Duration on ms", e.target.getDuration());
-    console.log("Current Time on ms", e.target.getCurrentTime());
-
-    if (e.data === 0) {
-      // isPlaying(false);
-      if (
-        songs.findIndex(
-          (ele) => ele.snippet.resourceId.videoId === player.currentSong
-        ) ===
-        songs.length - 1
-      ) {
-        console.log("Playlist Ended");
-        isPlaying(false);
-      } else afterSongEnds();
-    } else if (e.data === 2) {
+  const handleEnd = () => {
+    console.log("ended");
+    if (
+      songs.findIndex(
+        (ele) => ele.snippet.resourceId.videoId === player.currentSong
+      ) ===
+      songs.length - 1
+    ) {
+      console.log("Playlist Ended");
       isPlaying(false);
-    } else if (e.data === 1) {
-      isPlaying(true);
-    }
+    } else afterSongEnds();
   };
+  // When some songs cat be played outside of youtube this function will trigger and playlist the next song, or if it is the last the playlist will end
+  const handleError = (e) => {
+    console.log("error", e);
+    if (
+      songs.findIndex(
+        (ele) => ele.snippet.resourceId.videoId === player.currentSong
+      ) ===
+      songs.length - 1
+    ) {
+      console.log("Playlist Ended");
+      // isPlaying(false);
+    } else afterSongEnds();
+  };
+
   return (
     <AspectRatio minW={"100%"} maxH={"100%"} ratio={1} className="player">
-      <YouTube
-        className="youtubePlayer"
-        videoId={player.currentSong}
-        opts={opts}
-        ref={playerRef}
-        onReady={onReady}
-        onStateChange={onStateChange}
+      <ReactPlayer
+        onError={handleError}
+        onPlay={() => isPlaying(true)}
+        onPause={() => isPlaying(false)}
+        onReady={() => isPlaying(true)}
+        onEnded={handleEnd}
+        width={"100%"}
+        height={"100%"}
+        controls={true}
+        loop={player.isLoopActive}
+        playing={player.isPlaying}
+        url={`https://www.youtube.com/watch?v=${player.currentSong}`}
       />
     </AspectRatio>
   );

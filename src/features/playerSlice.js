@@ -4,6 +4,7 @@ const initialState = {
   currentSong: "",
   nextSong: "",
   isShuffleActive: false,
+  isLoopActive: false,
 };
 
 export default function playerRedicer(state = initialState, action) {
@@ -11,9 +12,11 @@ export default function playerRedicer(state = initialState, action) {
     case "player/previousSong": {
       return state;
     }
-    case "player/isPlaying": {
+    case "player/isPlaying":
       return { ...state, isPlaying: action.payload };
-    }
+    case "player/isLoopActive":
+      return { ...state, isLoopActive: action.payload };
+
     case "player/isShuffleActive": {
       return { ...state, isShuffleActive: action.payload };
     }

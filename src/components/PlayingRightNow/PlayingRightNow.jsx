@@ -9,21 +9,24 @@ const PlayingRightNow = ({ player, songs }) => {
   return (
     <Flex mt={"1"} alignItems={"center"}>
       <Image
-        boxSize={["45px", "55px", "65px", "75px"]}
-        objectFit="cover"
+        boxSize={["45px", "55px", "65px", "75px, 100px"]}
+        objectFit="none"
         borderRadius="full"
         alt={songs[currIndex].snippet.title}
         src={songs[currIndex].snippet.thumbnails.default.url}
       />
+      <Flex>
+
       <Heading
         textAlign={"center"}
         width={"95%"}
         color={"var(--chakra-colors-red-600)"}
         className="songTitle"
-        size={["sm", "md", "md", "lg", "lg", "3xl"]}
-      >
+        size={["sm", "md", "md", "md", "lg", "4xl"]}
+        >
         <Text noOfLines={"1"}>{songs[currIndex].snippet.title}</Text>{" "}
       </Heading>
+        </Flex>
     </Flex>
   );
 };

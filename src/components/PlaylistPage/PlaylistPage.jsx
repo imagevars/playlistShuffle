@@ -24,16 +24,16 @@ const PlaylistPage = () => {
       >
         <Flex
           className="mainContent"
-          h={"xl"}
+          h={ [null,null, null, "2xl", "2xl", "2xl"] }
           maxH={"1900px"}
           flexDirection={["column", "column", "row"]}
-          alignItems={"center"}
+          alignItems={  ["center","center","center","inherit"]  }
           w={"100%"}
         >
-          <Box w={["90%", "90%", null, "40%"]} h={"90%"} maxH={"1900px"}>
+          <Box w={["90%", "90%", null, "40%"]} h={ ["30vh","30vh","95%"] } maxH={"1900px"}>
             <Player />
           </Box>
-          <Box w={["100%", null, null, "50%"]} h={"95%"} maxH={"1900px"}>
+          <Box mt={["10px","10px", null, null]} w={["100%", "100%", null, "50%"]} h={  ["35vh","35vh","35vh", "80%"]  } maxH={"1900px"}>
             <Card />
           </Box>
         </Flex>
@@ -49,9 +49,12 @@ const PlaylistPage = () => {
           <Flex justify={"center"}>
             <PlayingRightNow />
           </Flex>
+          <footer>
+
           <Flex justify={"center"} className="mediaButtonsContainer">
             <MediaButtons />
           </Flex>
+          </footer>
         </Box>
       </Box>
     </Container>
