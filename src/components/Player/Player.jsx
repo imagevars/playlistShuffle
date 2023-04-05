@@ -10,19 +10,8 @@ const Player = ({
   previousSong,
   currentSong,
   nextSong,
-  isLoopActive,
 }) => {
-  const opts = {
-    height: "100%",
-    width: "100%",
-    playerVars: {
-      // autoplay: 1,
-      color: "red",
-      modestbranding: 1,
-    },
-  };
-
-  useEffect(() => {
+ useEffect(() => {
     if (songs) {
       currentSong(songs[0]?.snippet.resourceId.videoId);
     }
