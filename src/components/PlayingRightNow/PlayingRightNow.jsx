@@ -2,9 +2,10 @@ import React from "react";
 import { connect } from "react-redux";
 import { Heading, Text, Flex, Image } from "@chakra-ui/react";
 
-const PlayingRightNow = ({ player, songs }) => {
-  const currIndex = songs.findIndex((ele) => {
-    return ele.snippet?.resourceId.videoId === player.currentSong;
+const PlayingRightNow = ({ player,  playlistSongsById }) => {
+  const currIndex = playlistSongsById[player.currentActivePlaylistId]?.findIndex((ele) => {
+    return ele.snippet.resourceId.videoId === player.currentSong;
+   
   });
   return (
     <Flex mt={"1"} alignItems={"center"}>
@@ -12,8 +13,8 @@ const PlayingRightNow = ({ player, songs }) => {
         boxSize={["45px", "55px", "65px", "75px, 100px"]}
         objectFit="none"
         borderRadius="lg"
-        alt={songs[currIndex].snippet.title}
-        src={songs[currIndex].snippet.thumbnails.default.url}
+        alt={playlistSongsById[player.currentActivePlaylistId][currIndex]?.snippet.title}
+        src={playlistSongsById[player.currentActivePlaylistId][currIndex]?.snippet.thumbnails.default.url}
       />
       <Flex>
         <Heading
@@ -26,7 +27,7 @@ const PlayingRightNow = ({ player, songs }) => {
           maxW={["60", "60", "60", "60", "60"]}
         >
           <Text noOfLines={["1", "1", "2", "2"]}>
-            {songs[currIndex].snippet.title}
+            {playlistSongsById[player.currentActivePlaylistId][currIndex].snippet.title}
           </Text>
         </Heading>
       </Flex>
@@ -36,6 +37,7 @@ const PlayingRightNow = ({ player, songs }) => {
 
 const mapStateToProps = (state) => {
   return {
+    playlistSongsById: state.playlistSongsById,
     songs: state.songs,
     player: state.player,
   };

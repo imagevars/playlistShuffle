@@ -19,6 +19,9 @@ const PlaylistUsed = ({
   currentSong,
   nextSong,
   deleteFromPlaylistDetails,
+  addSongsByPlaylistID,
+  setcurrentActivePlaylistId,
+  removePlaylistSongsById
 }) => {
   const navigate = useNavigate();
   const baseURL = import.meta.env.BASE_URL;
@@ -35,9 +38,9 @@ const PlaylistUsed = ({
       m={"16 0"}
       className="playlistUsedList"
       key={element.playlistId}
-      onClick={() => handleClick(element.playlistId)}
-    >
-      <Flex className="usedContentTextandImage">
+      
+      >
+      <Flex className="usedContentTextandImage" onClick={() => handleClickPlaylist(element.playlistId)}> 
         <Image
           borderRadius="lg"
           alt={element.playlistName}
@@ -62,21 +65,30 @@ const PlaylistUsed = ({
         colorScheme="whiteAlpha"
         color={"white"}
         className="playlistUsedButton"
-        onClick={() => deleteFromPlaylist(element.playlistId)}
+        onClick={() => handleDeleteFromPlaylist(element.playlistId)}
       />
     </Card>
   ));
 
-  const handleClick = async (id) => {
+  const handleClickPlaylist = async (id) => {
     const data = await fetchData(id);
-    addSongs(data.responseArrToAdd);
+    // addSongs(data.responseArrToAdd);
+    const playlistObject = {
+      id: data.playlistDetailsObject.playlistId,
+      songs: data.responseArrToAdd,
+    };
+
+
+    setcurrentActivePlaylistId(id);
+    addSongsByPlaylistID(playlistObject);
     currentSong(data.currentSong);
     nextSong(data.nextSong);
 
     navigate(`${baseURL}/playlist/${id}`);
   };
 
-  const deleteFromPlaylist = (id) => {
+  const handleDeleteFromPlaylist = (id) => {
+    removePlaylistSongsById(id)
     deleteFromPlaylistDetails(id);
   };
 
@@ -89,6 +101,7 @@ const PlaylistUsed = ({
 
 const mapStateToProps = (state) => {
   return {
+    playlistSongsById: state.playlistSongsById,
     songs: state.songs,
     player: state.player,
     playlistDetails: state.playlistDetails,
@@ -105,6 +118,11 @@ const mapDispatchToProps = (dispatch) => {
 
     deleteFromPlaylistDetails: (payload) =>
       dispatch({ type: "playlistDetails/deleteFromPlaylistDetails", payload }),
+    addSongsByPlaylistID: (payload) =>
+      dispatch({ type: "songs/addSongsByPlaylistID", payload }),
+      setcurrentActivePlaylistId: (payload) => dispatch({ type: "player/setcurrentActivePlaylistId", payload }),
+      removePlaylistSongsById: (payload) => dispatch({type: "playlistSongs/removePlaylistSongsById", payload})
+
   };
 };
 

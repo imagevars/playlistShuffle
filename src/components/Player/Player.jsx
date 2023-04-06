@@ -10,43 +10,44 @@ const Player = ({
   previousSong,
   currentSong,
   nextSong,
+  playlistSongsById,
 }) => {
  useEffect(() => {
-    if (songs) {
-      currentSong(songs[0]?.snippet.resourceId.videoId);
+    if (playlistSongsById[player.currentActivePlaylistId]) {
+      currentSong(playlistSongsById[player.currentActivePlaylistId][0]?.snippet.resourceId.videoId);
     }
   }, []);
 
   const afterSongEnds = () => {
-    const currIndex = songs.findIndex((ele) => {
+    const currIndex = playlistSongsById[player.currentActivePlaylistId].findIndex((ele) => {
       return ele.snippet?.resourceId.videoId === player.currentSong;
     });
-    if (currIndex < songs.length - 1) {
-      previousSong(songs[currIndex]?.snippet.resourceId.videoId);
-      currentSong(songs[currIndex + 1]?.snippet.resourceId.videoId);
-      nextSong(songs[currIndex + 2]?.snippet.resourceId.videoId);
+    if (currIndex < playlistSongsById[player.currentActivePlaylistId].length - 1) {
+      previousSong(playlistSongsById[player.currentActivePlaylistId][currIndex]?.snippet.resourceId.videoId);
+      currentSong(playlistSongsById[player.currentActivePlaylistId][currIndex + 1]?.snippet.resourceId.videoId);
+      nextSong(playlistSongsById[player.currentActivePlaylistId][currIndex + 2]?.snippet.resourceId.videoId);
     } else {
-      previousSong(songs[currIndex]?.snippet.resourceId.videoId);
-      currentSong(songs[currIndex + 1]?.snippet.resourceId.videoId);
+      previousSong(playlistSongsById[player.currentActivePlaylistId][currIndex]?.snippet.resourceId.videoId);
+      currentSong(playlistSongsById[player.currentActivePlaylistId][currIndex + 1]?.snippet.resourceId.videoId);
       nextSong("");
     }
   };
 
   const handleEnd = () => {
     if (
-      songs.findIndex(
+      playlistSongsById[player.currentActivePlaylistId].findIndex(
         (ele) => ele.snippet.resourceId.videoId === player.currentSong
       ) ===
-      songs.length - 1
+      playlistSongsById[player.currentActivePlaylistId].length - 1
     ) {
       console.log("Playlist Ended");
       isPlaying(false);
     } else afterSongEnds();
   };
-  // When some songs cat be played outside of youtube this function will trigger and playlist the next song, or if it is the last the playlist will end
+  // When some songs can't be played outside of youtube this function will trigger and playlist the next song, or if it is the last the playlist will end
   const handleError = (e) => {
     if (
-      songs.findIndex(
+      playlistSongsById[player.currentActivePlaylistId].findIndex(
         (ele) => ele.snippet.resourceId.videoId === player.currentSong
       ) ===
       songs.length - 1
@@ -89,6 +90,7 @@ const mapStateToProps = (state) => {
   return {
     songs: state.songs,
     player: state.player,
+    playlistSongsById: state.playlistSongsById
   };
 };
 

@@ -5,6 +5,7 @@ const initialState = {
   nextSong: "",
   isShuffleActive: false,
   isLoopActive: false,
+  currentActivePlaylistId: "",
 };
 
 export default function playerRedicer(state = initialState, action) {
@@ -29,6 +30,9 @@ export default function playerRedicer(state = initialState, action) {
     }
     case "player/nextSong": {
       return { ...state, nextSong: action.payload };
+    }
+    case "player/setcurrentActivePlaylistId": {
+      return { ...state, currentActivePlaylistId: action.payload };
     }
     default:
       return state;

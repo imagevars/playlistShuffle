@@ -1,12 +1,11 @@
 import { combineReducers } from "redux";
 import playerRedicer  from "./features/playerSlice";
-import playlistReducer from "./features/playlistSlice";
-import songsReducer from "./features/songsSlice";
+// import songsReducer from "./features/songsSlice";
 import playlistDetailsReducer from "./features/playlistDetailsSlice";
-
+import playlistSongsByIdReducer from "./features/playlistSongsByIdSlice";
 const rootReducer = combineReducers({
-  playlist: playlistReducer,
-  songs: songsReducer,
+  playlistSongsById: playlistSongsByIdReducer,
+  // songs: songsReducer,
   player: playerRedicer,
   playlistDetails: playlistDetailsReducer,
 });

@@ -1,5 +1,5 @@
-import React  from "react";
-import Card from "../Card/Card";
+import React, { useEffect }  from "react";
+import SongCard from "../SongCard/SongCard";
 import MediaButtons from "../MediaButtons/MediaButtons";
 import Player from "../Player/Player";
 import PlayingRightNow from "../PlayingRightNow/PlayingRightNow";
@@ -18,9 +18,13 @@ const PlaylistPage = ({
   currentSong,
   previousSong,
   nextSong,
+  playlistSongsById,
 }) => {
   const {id} = useParams()
-  console.log("ID is ", id)
+
+  useEffect(() => {
+    console.log("The playlist ID is ", id)
+  },[])
   const handleKeyPress = (e) => {
     switch (e.code) {
       case "Space": {
@@ -36,26 +40,26 @@ const PlaylistPage = ({
         break;
       }
       case "ArrowLeft": {
-        const currIndex = songs.findIndex((song) => {
+        const currIndex = playlistSongsById[player.currentActivePlaylistId].findIndex((song) => {
           return song.snippet.resourceId.videoId === player.currentSong;
         });
         if (currIndex !== 0) {
-          previousSong(songs[currIndex - 2]?.snippet.resourceId.videoId);
-          currentSong(songs[currIndex - 1]?.snippet.resourceId.videoId);
-          nextSong(songs[currIndex]?.snippet.resourceId.videoId);
+          previousSong(playlistSongsById[player.currentActivePlaylistId][currIndex - 2]?.snippet.resourceId.videoId);
+          currentSong(playlistSongsById[player.currentActivePlaylistId][currIndex - 1]?.snippet.resourceId.videoId);
+          nextSong(playlistSongsById[player.currentActivePlaylistId][currIndex]?.snippet.resourceId.videoId);
         }
         break;
       }
       case "ArrowRight": {
-        const currIndex = songs.findIndex((ele) => {
+        const currIndex = playlistSongsById[player.currentActivePlaylistId].findIndex((ele) => {
           return ele.snippet?.resourceId.videoId === player.currentSong;
         });
 
-        if (currIndex < songs.length - 1) {
-          previousSong(songs[currIndex]?.snippet.resourceId.videoId);
-          currentSong(songs[currIndex + 1]?.snippet.resourceId.videoId);
-          nextSong(songs[currIndex + 2]?.snippet.resourceId.videoId);
-        } else if (currIndex === songs.length - 1) {
+        if (currIndex < playlistSongsById[player.currentActivePlaylistId].length - 1) {
+          previousSong(playlistSongsById[player.currentActivePlaylistId][currIndex]?.snippet.resourceId.videoId);
+          currentSong(playlistSongsById[player.currentActivePlaylistId][currIndex + 1]?.snippet.resourceId.videoId);
+          nextSong(playlistSongsById[player.currentActivePlaylistId][currIndex + 2]?.snippet.resourceId.videoId);
+        } else if (currIndex === playlistSongsById[player.currentActivePlaylistId].length - 1) {
           console.log("No more songs left");
         }
         break;
@@ -104,7 +108,7 @@ const PlaylistPage = ({
             h={["100%","100%", "85%"]}
             maxH={"1900px"}
           >
-            <Card />
+            <SongCard />
           </Box>
         </Flex>
         <Box
@@ -154,6 +158,7 @@ const mapStateToProps = (state) => {
   return {
     songs: state.songs,
     player: state.player,
+    playlistSongsById: state.playlistSongsById,
   };
 };
 

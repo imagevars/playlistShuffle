@@ -6,12 +6,11 @@ import { Container, Heading, Flex } from "@chakra-ui/react";
 
 function App() {
   const baseURL = import.meta.env.BASE_URL;
-  console.log(baseURL)
   return (
     <>
       <Routes>
         <Route exact path={`${baseURL}`} element={<HomePage />} />
-        <Route path={`${baseURL}/playlist/:id`} element={<PlaylistPage />} />
+        <Route exact path={`${baseURL}/playlist/:id`} element={<PlaylistPage />} />
         <Route
           path={`${baseURL}/*`}
           element={

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
@@ -11,7 +11,7 @@ import {
   Flex,
 } from "@chakra-ui/react";
 
-const Search = ({ addSongs, currentSong, nextSong, addToPlaylistDetails }) => {
+const Search = ({ addSongs, currentSong, nextSong, addToPlaylistDetails, addSongsByPlaylistID, playlistSongsById,setcurrentActivePlaylistId  }) => {
   const [playlistId, setPlaylistId] = useState("");
   const navigate = useNavigate();
 
@@ -25,8 +25,13 @@ const Search = ({ addSongs, currentSong, nextSong, addToPlaylistDetails }) => {
     const id = "PL" + match[1];
 
     const data = await fetchData(id);
-
-    addSongs(data.responseArrToAdd);
+    const playlistObject = {
+      id: data.playlistDetailsObject.playlistId,
+      songs: data.responseArrToAdd
+    }
+    addSongsByPlaylistID(playlistObject)
+    setcurrentActivePlaylistId(data.playlistDetailsObject.playlistId)
+    // addSongs(data.responseArrToAdd);
     currentSong(data.currentSong);
     nextSong(data.nextSong);
 
@@ -70,6 +75,11 @@ const Search = ({ addSongs, currentSong, nextSong, addToPlaylistDetails }) => {
   );
 };
 
+const mapStateToProps = (state) => ({
+  playlistSongsById: state.playlistSongsById
+})
+
+
 const mapDispatchToProps = (dispatch) => {
   return {
     addSongs: (payload) => dispatch({ type: "songs/addSongs", payload }),
@@ -77,7 +87,9 @@ const mapDispatchToProps = (dispatch) => {
     nextSong: (payload) => dispatch({ type: "player/nextSong", payload }),
     addToPlaylistDetails: (payload) =>
       dispatch({ type: "playlistDetails/addToPlaylistDetails", payload }),
+    addSongsByPlaylistID: (payload) => dispatch({type: "songs/addSongsByPlaylistID", payload}),
+    setcurrentActivePlaylistId: (payload) => dispatch({type: "player/setcurrentActivePlaylistId", payload})
   };
 };
 
-export default connect(null, mapDispatchToProps)(Search);
+export default connect(mapStateToProps, mapDispatchToProps)(Search);

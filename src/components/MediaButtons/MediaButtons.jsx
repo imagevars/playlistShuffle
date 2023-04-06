@@ -20,31 +20,32 @@ const MediaButtons = ({
   currentSong,
   nextSong,
   addSongs,
+  playlistSongsById
 }) => {
   const playPauseButton = (e) => {
     isPlaying(e);
   };
 
   const handleClickPreviousButton = () => {
-    const currIndex = songs.findIndex((song) => {
+    const currIndex = playlistSongsById[player.currentActivePlaylistId].findIndex((song) => {
       return song.snippet.resourceId.videoId === player.currentSong;
     });
     if (currIndex !== 0) {
-      previousSong(songs[currIndex - 2]?.snippet.resourceId.videoId);
-      currentSong(songs[currIndex - 1]?.snippet.resourceId.videoId);
-      nextSong(songs[currIndex]?.snippet.resourceId.videoId);
+      previousSong(playlistSongsById[player.currentActivePlaylistId][currIndex - 2]?.snippet.resourceId.videoId);
+      currentSong(playlistSongsById[player.currentActivePlaylistId][currIndex - 1]?.snippet.resourceId.videoId);
+      nextSong(playlistSongsById[player.currentActivePlaylistId][currIndex]?.snippet.resourceId.videoId);
     }
   };
   const handleClickNextButton = () => {
-    const currIndex = songs.findIndex((ele) => {
+    const currIndex = playlistSongsById[player.currentActivePlaylistId].findIndex((ele) => {
       return ele.snippet?.resourceId.videoId === player.currentSong;
     });
 
-    if (currIndex < songs.length - 1) {
-      previousSong(songs[currIndex]?.snippet.resourceId.videoId);
-      currentSong(songs[currIndex + 1]?.snippet.resourceId.videoId);
-      nextSong(songs[currIndex + 2]?.snippet.resourceId.videoId);
-    } else if (currIndex === songs.length - 1) {
+    if (currIndex < playlistSongsById[player.currentActivePlaylistId].length - 1) {
+      previousSong(playlistSongsById[player.currentActivePlaylistId][currIndex]?.snippet.resourceId.videoId);
+      currentSong(playlistSongsById[player.currentActivePlaylistId][currIndex + 1]?.snippet.resourceId.videoId);
+      nextSong(playlistSongsById[player.currentActivePlaylistId][currIndex + 2]?.snippet.resourceId.videoId);
+    } else if (currIndex === playlistSongsById[player.currentActivePlaylistId].length - 1) {
       console.log("No more songs left")
     }
   };
@@ -89,7 +90,6 @@ const MediaButtons = ({
             }
           />
 
-          {/* <BiPlayCircle className=" " onClick={() => playPauseButton(true) /> */}
         </Box>
       )}
       
@@ -182,6 +182,7 @@ const mapStateToProps = (state) => {
   return {
     player: state.player,
     songs: state.songs,
+    playlistSongsById : state.playlistSongsById,
   };
 };
 

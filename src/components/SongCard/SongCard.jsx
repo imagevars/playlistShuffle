@@ -11,14 +11,17 @@ import {
   Text,
 } from "@chakra-ui/react";
 const Card = ({
-  songs,
-  addSongs,
+
   player,
   previousSong,
   currentSong,
   nextSong,
+  playlistSongsById,
+  addSongsByPlaylistID
+  
 }) => {
-  const refs = songs.reduce((acc, value) => {
+  console.log('REFFF   ', playlistSongsById)
+  const refs = playlistSongsById[player.currentActivePlaylistId]?.reduce((acc, value) => {
     acc[value.snippet.resourceId.videoId] = React.createRef();
     return acc;
   }, {});
@@ -38,38 +41,46 @@ const Card = ({
     if (player.isShuffleActive === true) {
       const generator = new MersenneTwister();
       let shuffleArr = [];
-      shuffleArr.push(...songs);
+      shuffleArr.push(...playlistSongsById[player.currentActivePlaylistId]);
 
       for (let i = shuffleArr.length - 1; i > 0; i--) {
         const j = Math.floor(generator.random() * (i + 1));
         [shuffleArr[i], shuffleArr[j]] = [shuffleArr[j], shuffleArr[i]];
       }
-      addSongs(shuffleArr);
+      const playlistObject = {
+        id: player.currentActivePlaylistId,
+        songs: shuffleArr,
+      };
+      addSongsByPlaylistID(playlistObject);
 
       currentSong(shuffleArr[0].snippet.resourceId.videoId);
       nextSong(shuffleArr[1].snippet.resourceId.videoId);
     } else {
       let unShuffleArr = [];
-      unShuffleArr.push(...songs);
+      unShuffleArr.push(...playlistSongsById[player.currentActivePlaylistId]);
       unShuffleArr.sort(function (a, b) {
         return a.snippet.position - b.snippet.position;
       });
-      addSongs(unShuffleArr);
+      const playlistObject = {
+        id: player.currentActivePlaylistId,
+        songs: unShuffleArr,
+      };
+      addSongsByPlaylistID(playlistObject);
       currentSong(unShuffleArr[0].snippet.resourceId.videoId);
       nextSong(unShuffleArr[1].snippet.resourceId.videoId);
     }
   };
 
   const handleClick = (id) => {
-    const currIndex = songs.findIndex((ele) => {
+    const currIndex = playlistSongsById[player.currentActivePlaylistId].findIndex((ele) => {
       return ele.snippet?.resourceId.videoId === id;
     });
-    previousSong(songs[currIndex - 1]?.snippet.resourceId.videoId);
-    currentSong(songs[currIndex]?.snippet.resourceId.videoId);
-    nextSong(songs[currIndex + 1]?.snippet.resourceId.videoId);
+    previousSong(playlistSongsById[player.currentActivePlaylistId][currIndex - 1]?.snippet.resourceId.videoId);
+    currentSong(playlistSongsById[player.currentActivePlaylistId][currIndex]?.snippet.resourceId.videoId);
+    nextSong(playlistSongsById[player.currentActivePlaylistId][currIndex + 1]?.snippet.resourceId.videoId);
   };
 
-  const song = songs?.map((ele) =>
+  const song = playlistSongsById[player.currentActivePlaylistId]?.map((ele) =>
     ele.snippet.title !== "Private video" &&
     ele.snippet.title !== "Deleted video" ? (
       <CardChakra
@@ -148,11 +159,14 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({ type: "player/previousSong", payload }),
     currentSong: (payload) => dispatch({ type: "player/currentSong", payload }),
     nextSong: (payload) => dispatch({ type: "player/nextSong", payload }),
+    addSongsByPlaylistID: (payload) =>
+    dispatch({ type: "songs/addSongsByPlaylistID", payload }),
   };
 };
 
 const mapStateToProps = (state) => {
   return {
+    playlistSongsById: state.playlistSongsById,
     songs: state.songs,
     player: state.player,
   };
