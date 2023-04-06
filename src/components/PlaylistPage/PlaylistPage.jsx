@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React  from "react";
 import Card from "../Card/Card";
 import MediaButtons from "../MediaButtons/MediaButtons";
 import Player from "../Player/Player";
@@ -7,6 +7,7 @@ import Navbar from "../Navbar/Navbar";
 import { Flex, Container, Box } from "@chakra-ui/react";
 import PlaylistInfo from "../PlaylistInfo/PlaylistInfo";
 import { connect } from "react-redux";
+import { useParams } from "react-router-dom";
 
 const PlaylistPage = ({
   songs,
@@ -18,25 +19,20 @@ const PlaylistPage = ({
   previousSong,
   nextSong,
 }) => {
-  useEffect(() => {
-    console.log(player);
-  });
+  const {id} = useParams()
+  console.log("ID is ", id)
   const handleKeyPress = (e) => {
-    console.log(e.code);
     switch (e.code) {
       case "Space": {
         isPlaying(player.isPlaying === true ? false : true);
-        console.log(true);
         break;
       }
       case "KeyR": {
         isLoopActive(player.isLoopActive === true ? false : true);
-        console.log(true);
         break;
       }
       case "KeyS": {
         isShuffleActive(player.isShuffleActive === true ? false : true);
-        console.log(true);
         break;
       }
       case "ArrowLeft": {
@@ -77,7 +73,7 @@ const PlaylistPage = ({
     >
       <Navbar />
 
-      <Flex mb={"1.5"}>
+      <Flex justify={["center", "center", "left", "left"]} mb={"1.5"}>
         <PlaylistInfo />
       </Flex>
 
@@ -89,7 +85,7 @@ const PlaylistPage = ({
       >
         <Flex
           className="mainContent"
-          h={[null, null, null, "2xl", "2xl", "2xl"]}
+          h={["400px", "600px", null, "2xl", "2xl", "2xl"]}
           maxH={"1900px"}
           flexDirection={["column", "column", "row"]}
           alignItems={["center", "center", "center", "inherit"]}
@@ -105,7 +101,7 @@ const PlaylistPage = ({
           <Box
             mt={["10px", "10px", null, null]}
             w={["100%", "100%", null, "50%"]}
-            h={["35vh", "35vh", "35vh", "80%"]}
+            h={["100%","100%", "85%"]}
             maxH={"1900px"}
           >
             <Card />
@@ -115,19 +111,23 @@ const PlaylistPage = ({
           minW={"100%"}
           position={"fixed"}
           bottom={"0"}
+          left={"0"}
           bg={"red.100"}
           className="bottomMedia"
           display={"flex"}
-          flexDirection={["column", "column", "column", "column"]}
+          pt={["1", "1", "5"]}
+          pb={[null, null, "2"]}
+          flexDirection={["column", "column", "row", "row"]}
+          justifyContent={["center"]}
         >
           <Flex justify={"center"}>
             <PlayingRightNow />
           </Flex>
-          <footer>
-            <Flex justify={"center"} className="mediaButtonsContainer">
+            <Flex justify={"center"} 
+            alignItems={"center"}
+            className="mediaButtonsContainer">
               <MediaButtons />
             </Flex>
-          </footer>
         </Box>
       </Box>
     </Container>

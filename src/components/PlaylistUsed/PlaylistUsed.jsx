@@ -23,42 +23,47 @@ const PlaylistUsed = ({
   const navigate = useNavigate();
   const baseURL = import.meta.env.BASE_URL;
 
- 
   const playlists = playlistDetails.map((element) => (
     <Card
       w={"100%"}
       mt={2}
-      bg={""}
+      display={"flex"}
+      flexDirection={"row"}
+      bg="red.500"
+      borderRadius={"lg"}
+      cursor={"pointer"}
+      m={"16 0"}
       className="playlistUsedList"
       key={element.playlistId}
+      onClick={() => handleClick(element.playlistId)}
     >
-      <Flex bg="red.500" borderRadius={"5px"} cursor={"pointer"} m={2}>
-        <Flex
-          onClick={() => handleClick(element.playlistId)}
-          className="usedContentTextandImage"
-        >
-          <Image
-            borderRadius="lg"
-            alt={element.playlistName}
-            boxSize={["75px", "85px", "120px"]}
-            objectFit="cover"
-            className="imgUsedPlaylist"
-            src={element.PlaylistImage}
-          />
-          <Heading size={["md", "md", "lg"]} className="usedPlaylistName">
-            <Text color={"whiteAlpha.900"} noOfLines={[2, 2]}>
-              {element.playlistName}
-            </Text>
-          </Heading>
-        </Flex>
-        <Spacer />
-        <CloseButton
-          colorScheme="whiteAlpha"
-          color={"white"}
-          className="playlistUsedButton"
-          onClick={() => deleteFromPlaylist(element.playlistId)}
+      <Flex className="usedContentTextandImage">
+        <Image
+          borderRadius="lg"
+          alt={element.playlistName}
+          boxSize={["75px", "85px", "120px"]}
+          objectFit="cover"
+          className="imgUsedPlaylist"
+          src={element.PlaylistImage}
         />
+        <Heading
+          size={["md", "md", "lg"]}
+          noOfLines={"2"}
+          className="usedPlaylistName"
+        >
+          <Text color={"whiteAlpha.900"} noOfLines={[2, 2]}>
+            {element.playlistName}
+          </Text>
+        </Heading>
       </Flex>
+      <Spacer />
+      <CloseButton
+        ml={["5px", "5px", "15px", "15px"]}
+        colorScheme="whiteAlpha"
+        color={"white"}
+        className="playlistUsedButton"
+        onClick={() => deleteFromPlaylist(element.playlistId)}
+      />
     </Card>
   ));
 
@@ -68,7 +73,7 @@ const PlaylistUsed = ({
     currentSong(data.currentSong);
     nextSong(data.nextSong);
 
-    navigate(`${baseURL}playlist/${id}`);
+    navigate(`${baseURL}/playlist/${id}`);
   };
 
   const deleteFromPlaylist = (id) => {

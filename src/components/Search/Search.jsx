@@ -31,7 +31,7 @@ const Search = ({ addSongs, currentSong, nextSong, addToPlaylistDetails }) => {
     nextSong(data.nextSong);
 
     addToPlaylistDetails(data.playlistDetailsObject);
-    navigate(`${baseURL}playlist/${id}`);
+    navigate(`${baseURL}/playlist/${id}`);
   };
 
   const handleChange = (e) => {
@@ -39,34 +39,33 @@ const Search = ({ addSongs, currentSong, nextSong, addToPlaylistDetails }) => {
     setPlaylistId(e.target.value);
   };
   return (
-    <Flex className="searchContaienr">
-      <form style={{width: '100%'}} onSubmit={(e) => handleSubmit(e)}>
-
-      <FormControl display={"flex"} >
-        <Input
-          variant="flushed"
-          colorScheme="red"
-          size="lg"
-          className="inputSearch"
-          pattern="^(?=.*.{24,})(?=.*PL).*"
-          title="Please enter a valid YouTube playlist URL or ID"
-          type="text"
-          required
-          onChange={(e) => handleChange(e)}
-          value={playlistId}
-          placeholder="playlist url or playlist ID"
+    <Flex mt={"20"} className="searchContainer">
+      <form style={{ width: "100%" }} onSubmit={(e) => handleSubmit(e)}>
+        <FormControl display={"flex"}>
+          <Input
+            variant="flushed"
+            colorScheme="red"
+            size="lg"
+            className="inputSearch"
+            pattern="^(?=.*.{24,})(?=.*PL).*"
+            title="Please enter a valid YouTube playlist URL or ID"
+            type="text"
+            required
+            onChange={(e) => handleChange(e)}
+            value={playlistId}
+            placeholder="playlist URL or  ID"
           />
-        <Button
-          colorScheme="red"
-          ml={"1.5"}
-          size="lg"
-          className="submitBtn"
-          type="submit"
+          <Button
+            colorScheme="red"
+            ml={"1.5"}
+            size="lg"
+            className="submitBtn"
+            type="submit"
           >
-          Submit
-        </Button>
-      </FormControl>
-        </form>
+            Submit
+          </Button>
+        </FormControl>
+      </form>
     </Flex>
   );
 };

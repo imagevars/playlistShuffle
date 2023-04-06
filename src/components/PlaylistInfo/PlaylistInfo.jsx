@@ -21,10 +21,14 @@ const PlaylistInfo = ({ playlistDetails }) => {
       <Image
         boxSize={["45px", "60px", "80px"]}
         objectFit="cover"
-        borderRadius="full"
+        borderRadius="lg"
         src={playlistInfo.image}
       />
-      <Heading ml={"1"} size={["sm", "md", "md", "md"]}>
+      <Heading
+        ml={"1"}
+        noOfLines={["1", "1", "2", "2"]}
+        size={["sm", "sm", "md", "md"]}
+      >
         {playlistInfo.name}
       </Heading>
     </Flex>

@@ -33,7 +33,6 @@ const Player = ({
   };
 
   const handleEnd = () => {
-    console.log("ended");
     if (
       songs.findIndex(
         (ele) => ele.snippet.resourceId.videoId === player.currentSong
@@ -46,7 +45,6 @@ const Player = ({
   };
   // When some songs cat be played outside of youtube this function will trigger and playlist the next song, or if it is the last the playlist will end
   const handleError = (e) => {
-    console.log("error", e);
     if (
       songs.findIndex(
         (ele) => ele.snippet.resourceId.videoId === player.currentSong

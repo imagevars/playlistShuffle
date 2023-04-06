@@ -31,41 +31,33 @@ const Card = ({
   }, [player.currentSong]);
 
   useEffect(() => {
-    console.log("shuffle ACTIVE  ", player.isShuffleActive)
-      shuffleisActive();
-    
+    shuffleisActive();
   }, [player.isShuffleActive]);
 
   const shuffleisActive = () => {
-    console.log("ssssshufffleee===", player.isShuffleActive)
-    
+    if (player.isShuffleActive === true) {
+      const generator = new MersenneTwister();
+      let shuffleArr = [];
+      shuffleArr.push(...songs);
 
-    if (player.isShuffleActive === true) { 
-    const generator = new MersenneTwister();
-    let shuffleArr = [];
-    shuffleArr.push(...songs);
+      for (let i = shuffleArr.length - 1; i > 0; i--) {
+        const j = Math.floor(generator.random() * (i + 1));
+        [shuffleArr[i], shuffleArr[j]] = [shuffleArr[j], shuffleArr[i]];
+      }
+      addSongs(shuffleArr);
 
-    for (let i = shuffleArr.length - 1; i > 0; i--) {
-      const j = Math.floor(generator.random() * (i + 1));
-      [shuffleArr[i], shuffleArr[j]] = [shuffleArr[j], shuffleArr[i]];
+      currentSong(shuffleArr[0].snippet.resourceId.videoId);
+      nextSong(shuffleArr[1].snippet.resourceId.videoId);
+    } else {
+      let unShuffleArr = [];
+      unShuffleArr.push(...songs);
+      unShuffleArr.sort(function (a, b) {
+        return a.snippet.position - b.snippet.position;
+      });
+      addSongs(unShuffleArr);
+      currentSong(unShuffleArr[0].snippet.resourceId.videoId);
+      nextSong(unShuffleArr[1].snippet.resourceId.videoId);
     }
-    addSongs(shuffleArr);
-
-    currentSong(shuffleArr[0].snippet.resourceId.videoId);
-    nextSong(shuffleArr[1].snippet.resourceId.videoId);
-
-
-  } else {
-    console.log('false ', false)
-    let unShuffleArr = [];
-    unShuffleArr.push(...songs);
-    unShuffleArr.sort(function (a, b) {
-      return a.snippet.position - b.snippet.position;
-    });
-    addSongs(unShuffleArr);
-    currentSong(unShuffleArr[0].snippet.resourceId.videoId);
-    nextSong(unShuffleArr[1].snippet.resourceId.videoId);
-  }
   };
 
   const handleClick = (id) => {
@@ -81,6 +73,7 @@ const Card = ({
     ele.snippet.title !== "Private video" &&
     ele.snippet.title !== "Deleted video" ? (
       <CardChakra
+        borderRadius="lg"
         w={["95%", "90%"]}
         cursor={"pointer"}
         title={ele.snippet.title}
@@ -91,7 +84,7 @@ const Card = ({
         key={ele.snippet.resourceId.videoId + ele.snippet.title}
       >
         <CardChakra
-          border={"1px solid var(--chakra-colors-red-600)"}
+          borderRadius="lg"
           bg={
             player.currentSong === ele.snippet.resourceId.videoId
               ? "var(--chakra-colors-red-600)"
@@ -110,12 +103,12 @@ const Card = ({
               borderRadius="lg"
               src={ele.snippet.thumbnails.default?.url}
               alt="song image"
-              boxSize={["45px", "55px", "65px"]}
+              boxSize={["40px", "40px", "65px"]}
               objectFit="none"
-              />
-            <Box className="cardText">
-              <Heading size={["xs", "sm", "md"]}>
-                <Text noOfLines={[1, 2]}>{ele.snippet.title}</Text>
+            />
+            <Box ml={"1"} className="cardText">
+              <Heading size={["xs", "xs", "md", "md"]}>
+                <Text noOfLines={[1, 1, 2, 2]}>{ele.snippet.title}</Text>
               </Heading>
 
               <Text noOfLines={"1"} className="cardArtist">
@@ -123,7 +116,6 @@ const Card = ({
                 {ele.snippet.videoOwnerChannelTitle}
               </Text>
             </Box>
-    
           </Flex>
         </CardChakra>
       </CardChakra>
@@ -131,12 +123,20 @@ const Card = ({
   );
   return (
     <Box
-      mt={ ["0" , "10", "10", "0"]}
+      mt={["0", "10", "10", "0"]}
       overflowY={"scroll"}
       h={"inherit"}
       className="cardContainer"
     >
-      <UnorderedList pt={"1"} w={["95%","95%",null,null,"100%"]} className="ulListCards">{song}</UnorderedList>
+      <UnorderedList
+        h={"100%"}
+        pt={"1"}
+        w={["95%", "95%", "95%", null, "100%"]}
+        margin={["0 auto", "0 auto", "0 auto", null]}
+        className="ulListCards"
+      >
+        {song}
+      </UnorderedList>
     </Box>
   );
 };
