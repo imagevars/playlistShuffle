@@ -4,7 +4,6 @@ const fetchPlaylistVideos = async (id, etag) => {
   const baseApiUrl = "https://www.googleapis.com/youtube/v3";
   const apikey = "AIzaSyA8JtiLpC8D9nhMK44CRTciv64H1MNFNDw";
   let responseEtag = "";
-  console.log("header etag  ", etag);
   try {
     let nextToken = "";
 
@@ -23,11 +22,6 @@ const fetchPlaylistVideos = async (id, etag) => {
             "etag,nextPageToken,items(snippet(title,videoOwnerChannelTitle, thumbnails(default(url)), resourceId(videoId))),pageInfo",
         },
       });
-
-      console.log(
-        "Getting the new playlist    responseListItems.data    ",
-        responseListItems.data
-      );
 
       responseArr.push(...responseListItems.data.items);
       if (responseEtag === "") {

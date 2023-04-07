@@ -93,7 +93,7 @@ const Search = ({
             required
             onChange={(e) => handleChange(e)}
             value={playlistId}
-            placeholder="youtube.com/playlist?list=PLi06ybkpczJDt0Ydo3Umjtv97bDOcCtAZ"
+            placeholder="example: youtube.com/playlist?list=PLi06ybkpczJDt0Ydo3Umjtv97bDOcCtAZ"
           />
           <Button
             colorScheme="red"
