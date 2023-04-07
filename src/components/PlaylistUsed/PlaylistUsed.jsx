@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { fetchData } from "../utils/fetchData";
+import fetchPlaylistVideos from "../utils/fetchPlaylistVideos";
+import fetchPlaylistData from "../utils/fetchPlaylistData";
 import { useNavigate } from "react-router-dom";
 import {
   Button,
@@ -15,13 +16,16 @@ import {
 
 const PlaylistUsed = ({
   playlistDetails,
-  addSongs,
-  currentSong,
+  addToPlaylistDetails,
   nextSong,
+  playlistSongsById,
+  player,
   deleteFromPlaylistDetails,
   addSongsByPlaylistID,
   setcurrentActivePlaylistId,
-  removePlaylistSongsById
+  removePlaylistSongsById,
+  currentSong,
+  modifyEtagInPlaylistDetailsById,
 }) => {
   const navigate = useNavigate();
   const baseURL = import.meta.env.BASE_URL;
@@ -38,9 +42,11 @@ const PlaylistUsed = ({
       m={"16 0"}
       className="playlistUsedList"
       key={element.playlistId}
-      
+    >
+      <Flex
+        className="usedContentTextandImage"
+        onClick={() => handleClickPlaylist(element.playlistId)}
       >
-      <Flex className="usedContentTextandImage" onClick={() => handleClickPlaylist(element.playlistId)}> 
         <Image
           borderRadius="lg"
           alt={element.playlistName}
@@ -71,24 +77,50 @@ const PlaylistUsed = ({
   ));
 
   const handleClickPlaylist = async (id) => {
-    const data = await fetchData(id);
-    // addSongs(data.responseArrToAdd);
-    const playlistObject = {
-      id: data.playlistDetailsObject.playlistId,
-      songs: data.responseArrToAdd,
-    };
+    console.log("PLAYLISTTTTTTT   playlistDetails    ", playlistDetails);
+    await setcurrentActivePlaylistId(id);
+    const currentPlaylistInfo = playlistDetails.filter((element) => {
+      return element.playlistId === id;
+    });
 
+    const data = await fetchPlaylistVideos(
+      id,
+      currentPlaylistInfo[0].playlistEtag
+    );
 
-    setcurrentActivePlaylistId(id);
-    addSongsByPlaylistID(playlistObject);
-    currentSong(data.currentSong);
-    nextSong(data.nextSong);
+    // if playlistDataInfo is 304 it means that the playlist hasn't change so we can use the one in localstorage, that way we save api quota
+    if (data === 304) {
+      await currentSong(
+        playlistSongsById[currentPlaylistInfo[0].playlistId][0].snippet
+          .resourceId.videoId
+      );
+      await nextSong(
+        playlistSongsById[currentPlaylistInfo[0].playlistId][1].snippet
+          .resourceId.videoId
+      );
+    } else {
+      const playlistObject = {
+        id: id,
+        songs: data.responseArrToAdd,
+      };
+
+      const playlistDataInfo = await fetchPlaylistData(id, data.playlistEtag);
+      const playlistEtagAndId = {
+        playlistId: id,
+        etag: data.playlistEtag,
+      };
+      await addToPlaylistDetails(playlistDataInfo);
+      await modifyEtagInPlaylistDetailsById(playlistEtagAndId);
+      addSongsByPlaylistID(playlistObject);
+      currentSong(data.currentSong);
+      nextSong(data.nextSong);
+    }
 
     navigate(`${baseURL}/playlist/${id}`);
   };
 
   const handleDeleteFromPlaylist = (id) => {
-    removePlaylistSongsById(id)
+    removePlaylistSongsById(id);
     deleteFromPlaylistDetails(id);
   };
 
@@ -120,10 +152,12 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({ type: "playlistDetails/deleteFromPlaylistDetails", payload }),
     addSongsByPlaylistID: (payload) =>
       dispatch({ type: "songs/addSongsByPlaylistID", payload }),
-      setcurrentActivePlaylistId: (payload) => dispatch({ type: "player/setcurrentActivePlaylistId", payload }),
-      removePlaylistSongsById: (payload) => dispatch({type: "playlistSongs/removePlaylistSongsById", payload})
-
+    setcurrentActivePlaylistId: (payload) =>
+      dispatch({ type: "player/setcurrentActivePlaylistId", payload }),
+    removePlaylistSongsById: (payload) =>
+      dispatch({ type: "playlistSongs/removePlaylistSongsById", payload }),
+    modifyEtagInPlaylistDetailsById: (payload) =>
+      dispatch({ type: "playlistDetails/Etag", payload }),
   };
 };
-
 export default connect(mapStateToProps, mapDispatchToProps)(PlaylistUsed);

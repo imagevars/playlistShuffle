@@ -20,33 +20,61 @@ const MediaButtons = ({
   currentSong,
   nextSong,
   addSongs,
-  playlistSongsById
+  playlistSongsById,
 }) => {
   const playPauseButton = (e) => {
     isPlaying(e);
   };
 
   const handleClickPreviousButton = () => {
-    const currIndex = playlistSongsById[player.currentActivePlaylistId].findIndex((song) => {
+    const currIndex = playlistSongsById[
+      player.currentActivePlaylistId
+    ].findIndex((song) => {
       return song.snippet.resourceId.videoId === player.currentSong;
     });
     if (currIndex !== 0) {
-      previousSong(playlistSongsById[player.currentActivePlaylistId][currIndex - 2]?.snippet.resourceId.videoId);
-      currentSong(playlistSongsById[player.currentActivePlaylistId][currIndex - 1]?.snippet.resourceId.videoId);
-      nextSong(playlistSongsById[player.currentActivePlaylistId][currIndex]?.snippet.resourceId.videoId);
+      previousSong(
+        playlistSongsById[player.currentActivePlaylistId][currIndex - 2]
+          ?.snippet.resourceId.videoId
+      );
+      currentSong(
+        playlistSongsById[player.currentActivePlaylistId][currIndex - 1]
+          ?.snippet.resourceId.videoId
+      );
+      nextSong(
+        playlistSongsById[player.currentActivePlaylistId][currIndex]?.snippet
+          .resourceId.videoId
+      );
     }
   };
   const handleClickNextButton = () => {
-    const currIndex = playlistSongsById[player.currentActivePlaylistId].findIndex((ele) => {
+    const currIndex = playlistSongsById[
+      player.currentActivePlaylistId
+    ].findIndex((ele) => {
       return ele.snippet?.resourceId.videoId === player.currentSong;
     });
 
-    if (currIndex < playlistSongsById[player.currentActivePlaylistId].length - 1) {
-      previousSong(playlistSongsById[player.currentActivePlaylistId][currIndex]?.snippet.resourceId.videoId);
-      currentSong(playlistSongsById[player.currentActivePlaylistId][currIndex + 1]?.snippet.resourceId.videoId);
-      nextSong(playlistSongsById[player.currentActivePlaylistId][currIndex + 2]?.snippet.resourceId.videoId);
-    } else if (currIndex === playlistSongsById[player.currentActivePlaylistId].length - 1) {
-      console.log("No more songs left")
+    if (
+      currIndex <
+      playlistSongsById[player.currentActivePlaylistId].length - 1
+    ) {
+      previousSong(
+        playlistSongsById[player.currentActivePlaylistId][currIndex]?.snippet
+          .resourceId.videoId
+      );
+      currentSong(
+        playlistSongsById[player.currentActivePlaylistId][currIndex + 1]
+          ?.snippet.resourceId.videoId
+      );
+      nextSong(
+        playlistSongsById[player.currentActivePlaylistId][currIndex + 2]
+          ?.snippet.resourceId.videoId
+      );
+    } else if (
+      currIndex ===
+      playlistSongsById[player.currentActivePlaylistId].length - 1
+    ) {
+      console.log("No more songs left");
     }
   };
 
@@ -55,7 +83,6 @@ const MediaButtons = ({
       isShuffleActive(true);
     } else {
       isShuffleActive(false);
-
     }
   };
   return (
@@ -82,17 +109,11 @@ const MediaButtons = ({
             size="2rem"
             ml={"1.5"}
             mr={"1.5"}
-            icon={
-              <TbRepeatOff
-                onClick={() => isLoopActive(true)}
-                size={45}
-              />
-            }
+            icon={<TbRepeatOff onClick={() => isLoopActive(true)} size={45} />}
           />
-
         </Box>
       )}
-      
+
       <Box>
         <IconButton
           onClick={handleClickPreviousButton}
@@ -123,11 +144,7 @@ const MediaButtons = ({
             ml={"1.5"}
             mr={"1.5"}
             onClick={() => playPauseButton(true)}
-            icon={
-              <BiPlayCircle
-                size={55}
-              />
-            }
+            icon={<BiPlayCircle size={55} />}
           />
 
           {/* <BiPlayCircle className=" " onClick={() => playPauseButton(true) /> */}
@@ -182,14 +199,15 @@ const mapStateToProps = (state) => {
   return {
     player: state.player,
     songs: state.songs,
-    playlistSongsById : state.playlistSongsById,
+    playlistSongsById: state.playlistSongsById,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     isPlaying: (payload) => dispatch({ type: "player/isPlaying", payload }),
-    isLoopActive: (payload) => dispatch({ type: "player/isLoopActive", payload }),
+    isLoopActive: (payload) =>
+      dispatch({ type: "player/isLoopActive", payload }),
     isShuffleActive: (payload) =>
       dispatch({ type: "player/isShuffleActive", payload }),
     isShuffleLoading: (payload) =>

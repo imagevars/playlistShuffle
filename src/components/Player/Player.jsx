@@ -12,23 +12,46 @@ const Player = ({
   nextSong,
   playlistSongsById,
 }) => {
- useEffect(() => {
+  useEffect(() => {
     if (playlistSongsById[player.currentActivePlaylistId]) {
-      currentSong(playlistSongsById[player.currentActivePlaylistId][0]?.snippet.resourceId.videoId);
+      currentSong(
+        playlistSongsById[player.currentActivePlaylistId][0]?.snippet.resourceId
+          .videoId
+      );
     }
   }, []);
 
   const afterSongEnds = () => {
-    const currIndex = playlistSongsById[player.currentActivePlaylistId].findIndex((ele) => {
+    const currIndex = playlistSongsById[
+      player.currentActivePlaylistId
+    ].findIndex((ele) => {
       return ele.snippet?.resourceId.videoId === player.currentSong;
     });
-    if (currIndex < playlistSongsById[player.currentActivePlaylistId].length - 1) {
-      previousSong(playlistSongsById[player.currentActivePlaylistId][currIndex]?.snippet.resourceId.videoId);
-      currentSong(playlistSongsById[player.currentActivePlaylistId][currIndex + 1]?.snippet.resourceId.videoId);
-      nextSong(playlistSongsById[player.currentActivePlaylistId][currIndex + 2]?.snippet.resourceId.videoId);
+    if (
+      currIndex <
+      playlistSongsById[player.currentActivePlaylistId].length - 1
+    ) {
+      previousSong(
+        playlistSongsById[player.currentActivePlaylistId][currIndex]?.snippet
+          .resourceId.videoId
+      );
+      currentSong(
+        playlistSongsById[player.currentActivePlaylistId][currIndex + 1]
+          ?.snippet.resourceId.videoId
+      );
+      nextSong(
+        playlistSongsById[player.currentActivePlaylistId][currIndex + 2]
+          ?.snippet.resourceId.videoId
+      );
     } else {
-      previousSong(playlistSongsById[player.currentActivePlaylistId][currIndex]?.snippet.resourceId.videoId);
-      currentSong(playlistSongsById[player.currentActivePlaylistId][currIndex + 1]?.snippet.resourceId.videoId);
+      previousSong(
+        playlistSongsById[player.currentActivePlaylistId][currIndex]?.snippet
+          .resourceId.videoId
+      );
+      currentSong(
+        playlistSongsById[player.currentActivePlaylistId][currIndex + 1]
+          ?.snippet.resourceId.videoId
+      );
       nextSong("");
     }
   };
@@ -90,7 +113,7 @@ const mapStateToProps = (state) => {
   return {
     songs: state.songs,
     player: state.player,
-    playlistSongsById: state.playlistSongsById
+    playlistSongsById: state.playlistSongsById,
   };
 };
 

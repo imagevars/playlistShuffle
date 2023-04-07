@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { Flex, Heading } from "@chakra-ui/react";
 
 const Navbar = () => {
-
   const baseUrl = import.meta.env.BASE_URL;
   const navigate = useNavigate();
   const handleClick = () => {

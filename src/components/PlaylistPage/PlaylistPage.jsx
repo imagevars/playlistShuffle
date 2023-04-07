@@ -1,5 +1,5 @@
-import React, { useEffect }  from "react";
-import SongCard from "../SongCard/SongCard";
+import React, { useEffect } from "react";
+import VideoCard from "../VideoCard/VideoCard";
 import MediaButtons from "../MediaButtons/MediaButtons";
 import Player from "../Player/Player";
 import PlayingRightNow from "../PlayingRightNow/PlayingRightNow";
@@ -20,11 +20,8 @@ const PlaylistPage = ({
   nextSong,
   playlistSongsById,
 }) => {
-  const {id} = useParams()
+  const { id } = useParams();
 
-  useEffect(() => {
-    console.log("The playlist ID is ", id)
-  },[])
   const handleKeyPress = (e) => {
     switch (e.code) {
       case "Space": {
@@ -40,26 +37,54 @@ const PlaylistPage = ({
         break;
       }
       case "ArrowLeft": {
-        const currIndex = playlistSongsById[player.currentActivePlaylistId].findIndex((song) => {
+        const currIndex = playlistSongsById[
+          player.currentActivePlaylistId
+        ].findIndex((song) => {
           return song.snippet.resourceId.videoId === player.currentSong;
         });
         if (currIndex !== 0) {
-          previousSong(playlistSongsById[player.currentActivePlaylistId][currIndex - 2]?.snippet.resourceId.videoId);
-          currentSong(playlistSongsById[player.currentActivePlaylistId][currIndex - 1]?.snippet.resourceId.videoId);
-          nextSong(playlistSongsById[player.currentActivePlaylistId][currIndex]?.snippet.resourceId.videoId);
+          previousSong(
+            playlistSongsById[player.currentActivePlaylistId][currIndex - 2]
+              ?.snippet.resourceId.videoId
+          );
+          currentSong(
+            playlistSongsById[player.currentActivePlaylistId][currIndex - 1]
+              ?.snippet.resourceId.videoId
+          );
+          nextSong(
+            playlistSongsById[player.currentActivePlaylistId][currIndex]
+              ?.snippet.resourceId.videoId
+          );
         }
         break;
       }
       case "ArrowRight": {
-        const currIndex = playlistSongsById[player.currentActivePlaylistId].findIndex((ele) => {
+        const currIndex = playlistSongsById[
+          player.currentActivePlaylistId
+        ].findIndex((ele) => {
           return ele.snippet?.resourceId.videoId === player.currentSong;
         });
 
-        if (currIndex < playlistSongsById[player.currentActivePlaylistId].length - 1) {
-          previousSong(playlistSongsById[player.currentActivePlaylistId][currIndex]?.snippet.resourceId.videoId);
-          currentSong(playlistSongsById[player.currentActivePlaylistId][currIndex + 1]?.snippet.resourceId.videoId);
-          nextSong(playlistSongsById[player.currentActivePlaylistId][currIndex + 2]?.snippet.resourceId.videoId);
-        } else if (currIndex === playlistSongsById[player.currentActivePlaylistId].length - 1) {
+        if (
+          currIndex <
+          playlistSongsById[player.currentActivePlaylistId].length - 1
+        ) {
+          previousSong(
+            playlistSongsById[player.currentActivePlaylistId][currIndex]
+              ?.snippet.resourceId.videoId
+          );
+          currentSong(
+            playlistSongsById[player.currentActivePlaylistId][currIndex + 1]
+              ?.snippet.resourceId.videoId
+          );
+          nextSong(
+            playlistSongsById[player.currentActivePlaylistId][currIndex + 2]
+              ?.snippet.resourceId.videoId
+          );
+        } else if (
+          currIndex ===
+          playlistSongsById[player.currentActivePlaylistId].length - 1
+        ) {
           console.log("No more songs left");
         }
         break;
@@ -72,7 +97,7 @@ const PlaylistPage = ({
       tabIndex={0}
       className="container"
       w="100%"
-      h={'100vh'}
+      h={"100vh"}
       maxWidth="1866px"
     >
       <Navbar />
@@ -105,10 +130,10 @@ const PlaylistPage = ({
           <Box
             mt={["10px", "10px", null, null]}
             w={["100%", "100%", null, "50%"]}
-            h={["100%","100%", "85%"]}
+            h={["100%", "100%", "85%"]}
             maxH={"1900px"}
           >
-            <SongCard />
+            <VideoCard />
           </Box>
         </Flex>
         <Box
@@ -127,11 +152,13 @@ const PlaylistPage = ({
           <Flex justify={"center"}>
             <PlayingRightNow />
           </Flex>
-            <Flex justify={"center"} 
+          <Flex
+            justify={"center"}
             alignItems={"center"}
-            className="mediaButtonsContainer">
-              <MediaButtons />
-            </Flex>
+            className="mediaButtonsContainer"
+          >
+            <MediaButtons />
+          </Flex>
         </Box>
       </Box>
     </Container>

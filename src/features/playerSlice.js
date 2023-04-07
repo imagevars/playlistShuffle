@@ -34,6 +34,7 @@ export default function playerRedicer(state = initialState, action) {
     case "player/setcurrentActivePlaylistId": {
       return { ...state, currentActivePlaylistId: action.payload };
     }
+    
     default:
       return state;
   }
