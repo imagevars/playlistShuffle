@@ -11,7 +11,7 @@ const PlayingRightNow = ({ player, playlistSongsById }) => {
   return (
     <Flex mt={"1"} alignItems={"center"}>
       <Image
-        boxSize={["35px", "45px", "65px", "75px, 100px"]}
+        boxSize={["35px", "35px", "45px", "75px, 100px"]}
         objectFit="none"
         borderRadius="lg"
         alt={

@@ -19,7 +19,7 @@ const PlaylistInfo = ({ playlistDetails }) => {
   return (
     <Flex alignItems={"center"}>
       <Image
-        boxSize={["45px", "60px", "80px"]}
+        boxSize={["45px", "45px", "45px", "60px"]}
         objectFit="cover"
         borderRadius="lg"
         src={playlistInfo.image}

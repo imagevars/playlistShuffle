@@ -1,10 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import { AspectRatio } from "@chakra-ui/react";
 import ReactPlayer from "react-player/youtube";
 
 const Player = ({
-  songs,
   player,
   isPlaying,
   previousSong,
@@ -12,6 +11,15 @@ const Player = ({
   nextSong,
   playlistSongsById,
 }) => {
+  const playerRef = useRef(null);
+
+  useEffect(() => {
+    const player = playerRef.current.getInternalPlayer();
+    if (player) {
+      console.log("STATE    ", player.getPlayerState());
+    }
+  });
+
   useEffect(() => {
     if (playlistSongsById[player.currentActivePlaylistId]) {
       currentSong(
@@ -73,20 +81,40 @@ const Player = ({
       playlistSongsById[player.currentActivePlaylistId].findIndex(
         (ele) => ele.snippet.resourceId.videoId === player.currentSong
       ) ===
-      songs.length - 1
+      playlistSongsById[player.currentActivePlaylistId].length - 1
     ) {
       console.log("Playlist Ended");
-      // isPlaying(false);
+      isPlaying(false);
     } else afterSongEnds();
   };
 
+  const handlePlay = () => {
+    isPlaying(true);
+  };
+  const handlePause = () => {
+    isPlaying(false);
+  };
+
+  const handleReady = () => {
+    isPlaying(true);
+  };
+
   return (
-    <AspectRatio w={"100%"}   h={"100%"} ratio={1} className="player">
+    <AspectRatio
+      w={"100%"}
+      h={["100%"]}
+      passive="true"
+      _before={{ pb: "0" }}
+      ratio={1}
+      className="player"
+    >
       <ReactPlayer
+        ref={playerRef}
+        passive="true"
         onError={handleError}
-        onPlay={() => isPlaying(true)}
-        onPause={() => isPlaying(false)}
-        onReady={() => isPlaying(true)}
+        onPlay={() => handlePlay}
+        onPause={() => handlePause}
+        onReady={() => handleReady}
         onEnded={handleEnd}
         width={"100%"}
         height={"100%"}

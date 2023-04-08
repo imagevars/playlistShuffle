@@ -28,7 +28,6 @@ const VideoCard = ({
 
   useEffect(() => {
     refs[player.currentSong].current.scrollIntoView({
-      behavior: "smooth",
       block: "start",
     });
   }, [player.currentSong]);
@@ -148,10 +147,11 @@ const VideoCard = ({
   );
   return (
     <Box
-    className="cardContainer"
-      mt={["0", "4", "3", "3", "3"]}
+      passive="true"
+      className="cardContainer"
+      mt={["0", "4", "0", "0", "0"]}
       overflowY={"scroll"}
-      h={[ "37vh", "37vh", "100%", "90%", "90%" ]}
+      h={["37vh", "37vh", "100%", "95%", "100%"]}
     >
       <UnorderedList
         h={"100%"}

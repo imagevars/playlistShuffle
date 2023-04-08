@@ -56,6 +56,7 @@ const PlaylistUsed = ({
           src={element.PlaylistImage}
         />
         <Heading
+        mt={"1.5"}
           size={["md", "md", "lg"]}
           noOfLines={"2"}
           className="usedPlaylistName"

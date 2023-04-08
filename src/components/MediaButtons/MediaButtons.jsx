@@ -7,11 +7,10 @@ import {
   BiSkipPreviousCircle,
   BiSkipNextCircle,
 } from "react-icons/bi";
-import { TbRepeatOff, TbRepeatOnce, TbRepeat } from "react-icons/tb";
+import { TbRepeatOff, TbRepeatOnce } from "react-icons/tb";
 import { connect } from "react-redux";
 
 const MediaButtons = ({
-  songs,
   player,
   isPlaying,
   isLoopActive,
@@ -19,7 +18,6 @@ const MediaButtons = ({
   previousSong,
   currentSong,
   nextSong,
-  addSongs,
   playlistSongsById,
 }) => {
   const playPauseButton = (e) => {
@@ -93,7 +91,7 @@ const MediaButtons = ({
       maxW={"100%"}
     >
       {player.isLoopActive === true ? (
-        <Box onClick={() => isLoopActive(false)}>
+        <Box passive="true" onClick={() => isLoopActive(false)}>
           <IconButton
             colorScheme="red"
             size="2rem"
@@ -108,14 +106,17 @@ const MediaButtons = ({
             colorScheme="red"
             size="2rem"
             ml={"1.5"}
+            passive="true"
+            onClick={() => isLoopActive(true)}
             mr={"1.5"}
-            icon={<TbRepeatOff onClick={() => isLoopActive(true)} size={45} />}
+            icon={<TbRepeatOff size={45} />}
           />
         </Box>
       )}
 
       <Box>
         <IconButton
+          passive="true"
           onClick={handleClickPreviousButton}
           colorScheme="red"
           size="1.5rem"
@@ -124,10 +125,10 @@ const MediaButtons = ({
           icon={<BiSkipPreviousCircle size={45} />}
         />
       </Box>
-      {/* <MdSkipPrevious /> */}
       {player.isPlaying === true ? (
         <Box>
           <IconButton
+            passive="true"
             colorScheme="red"
             size="2rem"
             ml={"1.5"}
@@ -142,12 +143,11 @@ const MediaButtons = ({
             colorScheme="red"
             size="2rem"
             ml={"1.5"}
+            passive="true"
             mr={"1.5"}
             onClick={() => playPauseButton(true)}
             icon={<BiPlayCircle size={55} />}
           />
-
-          {/* <BiPlayCircle className=" " onClick={() => playPauseButton(true) /> */}
         </Box>
       )}
       <Box>
@@ -155,12 +155,12 @@ const MediaButtons = ({
           onClick={handleClickNextButton}
           colorScheme="red"
           size="1.5rem"
+          passive="true"
           ml={"1.5"}
           mr={"1.5"}
           icon={<BiSkipNextCircle size={45} />}
         />
       </Box>
-      {/* <MdSkipNext /> */}
       {player.isShuffleActive ? (
         <Box>
           <IconButton
@@ -168,6 +168,7 @@ const MediaButtons = ({
             bg={"red.800"}
             color={"white"}
             size="1.5rem"
+            passive="true"
             ml={"1.5"}
             mr={"1.5"}
             _hover={{
@@ -183,12 +184,11 @@ const MediaButtons = ({
             onClick={handleClickShuffle}
             colorScheme="red"
             size="1.5rem"
+            passive="true"
             ml={"1.5"}
             mr={"1.5"}
             icon={<BiShuffle size={45} />}
           />
-
-          {/* <BiShuffle className=" " onClick={handleClickShuffle} /> */}
         </Box>
       )}
     </Flex>

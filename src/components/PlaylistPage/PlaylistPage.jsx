@@ -10,7 +10,6 @@ import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 
 const PlaylistPage = ({
-  songs,
   isPlaying,
   player,
   isLoopActive,
@@ -25,7 +24,6 @@ const PlaylistPage = ({
 
   useEffect(() => {
     const handleClick = (e) => {
-
       switch (e.code) {
         case "Space": {
           isPlaying(player.isPlaying === true ? false : true);
@@ -50,12 +48,13 @@ const PlaylistPage = ({
               playlistSongsById[player.currentActivePlaylistId][currIndex - 2]
                 ?.snippet.resourceId.videoId
             );
-            currentSong(
-              playlistSongsById[player.currentActivePlaylistId][currIndex - 1]
-                ?.snippet.resourceId.videoId
-            );
+
             nextSong(
               playlistSongsById[player.currentActivePlaylistId][currIndex]
+                ?.snippet.resourceId.videoId
+            );
+            currentSong(
+              playlistSongsById[player.currentActivePlaylistId][currIndex - 1]
                 ?.snippet.resourceId.videoId
             );
           }
@@ -97,10 +96,10 @@ const PlaylistPage = ({
 
     const element = ref.current;
 
-    element.addEventListener("keydown", handleClick, { passive: true});
+    element.addEventListener("keydown", handleClick, { passive: true });
 
     return () => {
-      element.removeEventListener("keydown", handleClick, { passive: true});
+      element.removeEventListener("keydown", handleClick, { passive: true });
     };
   }, [player]);
 
@@ -108,7 +107,6 @@ const PlaylistPage = ({
     <Container
       ref={ref}
       passive="true"
-
       tabIndex={0}
       className="container"
       w="100%"
