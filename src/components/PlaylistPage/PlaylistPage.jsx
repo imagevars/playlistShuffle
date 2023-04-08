@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import VideoCard from "../VideoCard/VideoCard";
 import MediaButtons from "../MediaButtons/MediaButtons";
 import Player from "../Player/Player";
@@ -21,79 +21,94 @@ const PlaylistPage = ({
   playlistSongsById,
 }) => {
   const { id } = useParams();
+  const ref = useRef(null);
 
-  const handleKeyPress = (e) => {
-    switch (e.code) {
-      case "Space": {
-        isPlaying(player.isPlaying === true ? false : true);
-        break;
-      }
-      case "KeyR": {
-        isLoopActive(player.isLoopActive === true ? false : true);
-        break;
-      }
-      case "KeyS": {
-        isShuffleActive(player.isShuffleActive === true ? false : true);
-        break;
-      }
-      case "ArrowLeft": {
-        const currIndex = playlistSongsById[
-          player.currentActivePlaylistId
-        ].findIndex((song) => {
-          return song.snippet.resourceId.videoId === player.currentSong;
-        });
-        if (currIndex !== 0) {
-          previousSong(
-            playlistSongsById[player.currentActivePlaylistId][currIndex - 2]
-              ?.snippet.resourceId.videoId
-          );
-          currentSong(
-            playlistSongsById[player.currentActivePlaylistId][currIndex - 1]
-              ?.snippet.resourceId.videoId
-          );
-          nextSong(
-            playlistSongsById[player.currentActivePlaylistId][currIndex]
-              ?.snippet.resourceId.videoId
-          );
-        }
-        break;
-      }
-      case "ArrowRight": {
-        const currIndex = playlistSongsById[
-          player.currentActivePlaylistId
-        ].findIndex((ele) => {
-          return ele.snippet?.resourceId.videoId === player.currentSong;
-        });
+  useEffect(() => {
+    const handleClick = (e) => {
 
-        if (
-          currIndex <
-          playlistSongsById[player.currentActivePlaylistId].length - 1
-        ) {
-          previousSong(
-            playlistSongsById[player.currentActivePlaylistId][currIndex]
-              ?.snippet.resourceId.videoId
-          );
-          currentSong(
-            playlistSongsById[player.currentActivePlaylistId][currIndex + 1]
-              ?.snippet.resourceId.videoId
-          );
-          nextSong(
-            playlistSongsById[player.currentActivePlaylistId][currIndex + 2]
-              ?.snippet.resourceId.videoId
-          );
-        } else if (
-          currIndex ===
-          playlistSongsById[player.currentActivePlaylistId].length - 1
-        ) {
-          console.log("No more songs left");
+      switch (e.code) {
+        case "Space": {
+          isPlaying(player.isPlaying === true ? false : true);
+          break;
         }
-        break;
+        case "KeyR": {
+          isLoopActive(player.isLoopActive === true ? false : true);
+          break;
+        }
+        case "KeyS": {
+          isShuffleActive(player.isShuffleActive === true ? false : true);
+          break;
+        }
+        case "ArrowLeft": {
+          const currIndex = playlistSongsById[
+            player.currentActivePlaylistId
+          ].findIndex((song) => {
+            return song.snippet.resourceId.videoId === player.currentSong;
+          });
+          if (currIndex !== 0) {
+            previousSong(
+              playlistSongsById[player.currentActivePlaylistId][currIndex - 2]
+                ?.snippet.resourceId.videoId
+            );
+            currentSong(
+              playlistSongsById[player.currentActivePlaylistId][currIndex - 1]
+                ?.snippet.resourceId.videoId
+            );
+            nextSong(
+              playlistSongsById[player.currentActivePlaylistId][currIndex]
+                ?.snippet.resourceId.videoId
+            );
+          }
+          break;
+        }
+        case "ArrowRight": {
+          const currIndex = playlistSongsById[
+            player.currentActivePlaylistId
+          ].findIndex((ele) => {
+            return ele.snippet?.resourceId.videoId === player.currentSong;
+          });
+
+          if (
+            currIndex <
+            playlistSongsById[player.currentActivePlaylistId].length - 1
+          ) {
+            previousSong(
+              playlistSongsById[player.currentActivePlaylistId][currIndex]
+                ?.snippet.resourceId.videoId
+            );
+            currentSong(
+              playlistSongsById[player.currentActivePlaylistId][currIndex + 1]
+                ?.snippet.resourceId.videoId
+            );
+            nextSong(
+              playlistSongsById[player.currentActivePlaylistId][currIndex + 2]
+                ?.snippet.resourceId.videoId
+            );
+          } else if (
+            currIndex ===
+            playlistSongsById[player.currentActivePlaylistId].length - 1
+          ) {
+            console.log("No more songs left");
+          }
+          break;
+        }
       }
-    }
-  };
+    };
+
+    const element = ref.current;
+
+    element.addEventListener("keydown", handleClick, { passive: true});
+
+    return () => {
+      element.removeEventListener("keydown", handleClick, { passive: true});
+    };
+  }, [player]);
+
   return (
     <Container
-      onKeyUp={(e) => handleKeyPress(e)}
+      ref={ref}
+      passive="true"
+
       tabIndex={0}
       className="container"
       w="100%"
@@ -107,7 +122,7 @@ const PlaylistPage = ({
       </Flex>
 
       <Box
-      className="box"
+        className="box"
         w={["95%", null, null, "95%"]}
         m={"0 auto"}
         display={"flex"}
@@ -123,15 +138,15 @@ const PlaylistPage = ({
         >
           <Box
             w={["100%", "100%", null, "40%"]}
-            h={["30vh", "30vh", "95%"]}
+            h={["30vh", "30vh", "95%", "100%"]}
             maxH={"1900px"}
           >
             <Player />
           </Box>
           <Box
-            mt={["10px", "10px", "10px", null]}
+            mt={["10px", "10px", "0", "0"]}
             w={["100%", "100%", null, "50%"]}
-            h={["100%", "100%", "100%"]}
+            h={["100%", "100%", "100%", "100%"]}
             maxH={"1900px"}
           >
             <VideoCard />
@@ -142,7 +157,7 @@ const PlaylistPage = ({
           minW={"100%"}
           position={"fixed"}
           bottom={"0"}
-          h={ ["18%", "14%" ] }
+          h={["18%", "14%"]}
           left={"0"}
           bg={"red.100"}
           display={"flex"}
