@@ -77,7 +77,6 @@ const PlaylistUsed = ({
   ));
 
   const handleClickPlaylist = async (id) => {
-    console.log("PLAYLISTTTTTTT   playlistDetails    ", playlistDetails);
     await setcurrentActivePlaylistId(id);
     const currentPlaylistInfo = playlistDetails.filter((element) => {
       return element.playlistId === id;

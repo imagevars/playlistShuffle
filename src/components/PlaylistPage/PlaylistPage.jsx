@@ -107,14 +107,15 @@ const PlaylistPage = ({
       </Flex>
 
       <Box
-        w={["95%", null, null, "85%"]}
+      className="box"
+        w={["95%", null, null, "95%"]}
         m={"0 auto"}
         display={"flex"}
         justifyContent={"center"}
       >
         <Flex
           className="mainContent"
-          h={["400px", "600px", null, "2xl", "2xl", "2xl"]}
+          h={["100%", "600px", "65vh", "65vh", "65vh", "65vh"]}
           maxH={"1900px"}
           flexDirection={["column", "column", "row"]}
           alignItems={["center", "center", "center", "inherit"]}
@@ -128,21 +129,22 @@ const PlaylistPage = ({
             <Player />
           </Box>
           <Box
-            mt={["10px", "10px", null, null]}
+            mt={["10px", "10px", "10px", null]}
             w={["100%", "100%", null, "50%"]}
-            h={["100%", "100%", "85%"]}
+            h={["100%", "100%", "100%"]}
             maxH={"1900px"}
           >
             <VideoCard />
           </Box>
         </Flex>
         <Box
+          className="bottomMedia"
           minW={"100%"}
           position={"fixed"}
           bottom={"0"}
+          h={ ["18%", "14%" ] }
           left={"0"}
           bg={"red.100"}
-          className="bottomMedia"
           display={"flex"}
           pt={["1", "1", "5"]}
           pb={[null, null, "2"]}

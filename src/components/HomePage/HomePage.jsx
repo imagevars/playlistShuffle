@@ -14,7 +14,7 @@ const HomePage = () => {
   return (
     <Container h="calc(100vh)" w="100%" maxWidth="2266px" bg="whiteAlpha.900">
       <Box w="85%" m={"0 auto"}>
-        <Heading onClick={handleClick} color={"black"} className="title">
+        <Heading onClick={handleClick} cursor={"pointer"} color={"black"} className="title">
           {" "}
           <Center>Playlist Shuffle</Center>
         </Heading>

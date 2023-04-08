@@ -81,7 +81,7 @@ const Player = ({
   };
 
   return (
-    <AspectRatio minW={"100%"} maxH={"100%"} ratio={1} className="player">
+    <AspectRatio w={"100%"}   h={"100%"} ratio={1} className="player">
       <ReactPlayer
         onError={handleError}
         onPlay={() => isPlaying(true)}

@@ -132,7 +132,7 @@ const VideoCard = ({
                 objectFit="none"
               />
               <Box ml={"1"} className="cardText">
-                <Heading size={["xs", "xs", "md", "md"]}>
+                <Heading size={["xs", "xs", "sm", "md"]}>
                   <Text noOfLines={[1, 1, 2, 2]}>{ele.snippet.title}</Text>
                 </Heading>
 
@@ -148,10 +148,10 @@ const VideoCard = ({
   );
   return (
     <Box
-      mt={["0", "10", "10", "0"]}
+    className="cardContainer"
+      mt={["0", "4", "3", "3", "3"]}
       overflowY={"scroll"}
-      h={"inherit"}
-      className="cardContainer"
+      h={[ "37vh", "37vh", "100%", "90%", "90%" ]}
     >
       <UnorderedList
         h={"100%"}
