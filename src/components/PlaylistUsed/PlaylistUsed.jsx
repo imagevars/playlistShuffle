@@ -48,7 +48,7 @@ const PlaylistUsed = ({
         onClick={() => handleClickPlaylist(element.playlistId)}
       >
         <Image
-          borderRadius="lg"
+          borderRadius="5% 0 0 5%"
           alt={element.playlistName}
           boxSize={["75px", "85px", "120px"]}
           objectFit="cover"
