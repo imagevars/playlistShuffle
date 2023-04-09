@@ -3,6 +3,16 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import fetchPlaylistVideos from "../utils/fetchPlaylistVideos";
+import { PLAYLISTSONGS_ADDSONGSBYPLAYLISTID } from "../../constants/playlistSongsByIdTypes";
+import {
+  PLAYER_SETCURRENTACTIVEPLAYLIST,
+  PLAYER_NEXTSONG,
+  PLAYER_CURRENTSONG,
+} from "../../constants/playerTypes";
+import {
+  PLAYLISTDETAILS_ADDTOPLAYLISTDETAILS,
+  PLAYLISTDETAILS_ETAG,
+} from "../../constants/playlistDetailsTypes";
 import fetchPlaylistData from "../utils/fetchPlaylistData";
 import {
   Button,
@@ -118,17 +128,16 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addSongs: (payload) => dispatch({ type: "songs/addSongs", payload }),
-    currentSong: (payload) => dispatch({ type: "player/currentSong", payload }),
-    nextSong: (payload) => dispatch({ type: "player/nextSong", payload }),
+    currentSong: (payload) => dispatch({ type: PLAYER_CURRENTSONG, payload }),
+    nextSong: (payload) => dispatch({ type: PLAYER_NEXTSONG, payload }),
     addToPlaylistDetails: (payload) =>
-      dispatch({ type: "playlistDetails/addToPlaylistDetails", payload }),
+      dispatch({ type: PLAYLISTDETAILS_ADDTOPLAYLISTDETAILS, payload }),
     addSongsByPlaylistID: (payload) =>
-      dispatch({ type: "songs/addSongsByPlaylistID", payload }),
+      dispatch({ type: PLAYLISTSONGS_ADDSONGSBYPLAYLISTID, payload }),
     setcurrentActivePlaylistId: (payload) =>
-      dispatch({ type: "player/setcurrentActivePlaylistId", payload }),
+      dispatch({ type: PLAYER_SETCURRENTACTIVEPLAYLIST, payload }),
     modifyEtagInPlaylistDetailsById: (payload) =>
-      dispatch({ type: "playlistDetails/Etag", payload }),
+      dispatch({ type: PLAYLISTDETAILS_ETAG, payload }),
   };
 };
 

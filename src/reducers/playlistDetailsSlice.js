@@ -1,3 +1,9 @@
+import {
+  PLAYLISTDETAILS_ADDTOPLAYLISTDETAILS,
+  PLAYLISTDETAILS_DELETEFROMPLAYLISTDETAILS,
+  PLAYLISTDETAILS_ETAG,
+} from "../constants/playlistDetailsTypes";
+
 const initialState = [];
 
 export default function playlistDetailsReducer(state = initialState, action) {
@@ -5,7 +11,7 @@ export default function playlistDetailsReducer(state = initialState, action) {
     case "playlistDetails/add": {
       return action.payload;
     }
-    case "playlistDetails/addToPlaylistDetails": {
+    case PLAYLISTDETAILS_ADDTOPLAYLISTDETAILS: {
       if (
         state.filter(
           (element) => element.playlistId === action.payload.playlistId
@@ -14,10 +20,10 @@ export default function playlistDetailsReducer(state = initialState, action) {
         return state;
       } else return [...state, action.payload];
     }
-    case "playlistDetails/deleteFromPlaylistDetails": {
+    case PLAYLISTDETAILS_DELETEFROMPLAYLISTDETAILS: {
       return state.filter((element) => element.playlistId !== action.payload);
     }
-    case "playlistDetails/Etag": {
+    case PLAYLISTDETAILS_ETAG: {
       return state.map((ele) => {
         if (ele.playlistId === action.payload.playlistId) {
           return {

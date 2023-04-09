@@ -1,7 +1,13 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { AspectRatio } from "@chakra-ui/react";
 import ReactPlayer from "react-player/youtube";
+import {
+  PLAYER_ISPLAYING,
+  PLAYER_CURRENTSONG,
+  PLAYER_NEXTSONG,
+  PLAYER_PREVIOUSSONG,
+} from "../../constants/playerTypes";
 
 const Player = ({
   player,
@@ -11,15 +17,6 @@ const Player = ({
   nextSong,
   playlistSongsById,
 }) => {
-  const playerRef = useRef(null);
-
-  useEffect(() => {
-    const player = playerRef.current.getInternalPlayer();
-    if (player) {
-      console.log("STATE    ", player.getPlayerState());
-    }
-  });
-
   useEffect(() => {
     if (playlistSongsById[player.currentActivePlaylistId]) {
       currentSong(
@@ -109,7 +106,6 @@ const Player = ({
       className="player"
     >
       <ReactPlayer
-        ref={playerRef}
         passive="true"
         onError={handleError}
         onPlay={() => handlePlay}
@@ -129,11 +125,10 @@ const Player = ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    isPlaying: (payload) => dispatch({ type: "player/isPlaying", payload }),
-    previousSong: (payload) =>
-      dispatch({ type: "player/previousSong", payload }),
-    currentSong: (payload) => dispatch({ type: "player/currentSong", payload }),
-    nextSong: (payload) => dispatch({ type: "player/nextSong", payload }),
+    isPlaying: (payload) => dispatch({ type: PLAYER_ISPLAYING, payload }),
+    previousSong: (payload) => dispatch({ type: PLAYER_PREVIOUSSONG, payload }),
+    currentSong: (payload) => dispatch({ type: PLAYER_CURRENTSONG, payload }),
+    nextSong: (payload) => dispatch({ type: PLAYER_NEXTSONG, payload }),
   };
 };
 

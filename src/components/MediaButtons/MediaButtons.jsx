@@ -1,4 +1,12 @@
 import React from "react";
+import {
+  PLAYER_ISPLAYING,
+  PLAYER_ISLOOPACTIVE,
+  PLAYER_ISSHUFFLEACTIVE,
+  PLAYER_PREVIOUSSONG,
+  PLAYER_NEXTSONG,
+  PLAYER_CURRENTSONG,
+} from "../../constants/playerTypes";
 import { Box, Flex, IconButton } from "@chakra-ui/react";
 import {
   BiPlayCircle,
@@ -205,18 +213,13 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    isPlaying: (payload) => dispatch({ type: "player/isPlaying", payload }),
-    isLoopActive: (payload) =>
-      dispatch({ type: "player/isLoopActive", payload }),
+    isPlaying: (payload) => dispatch({ type: PLAYER_ISPLAYING, payload }),
+    isLoopActive: (payload) => dispatch({ type: PLAYER_ISLOOPACTIVE, payload }),
     isShuffleActive: (payload) =>
-      dispatch({ type: "player/isShuffleActive", payload }),
-    isShuffleLoading: (payload) =>
-      dispatch({ type: "player/isShuffleLoading", payload }),
-    previousSong: (payload) =>
-      dispatch({ type: "player/previousSong", payload }),
-    currentSong: (payload) => dispatch({ type: "player/currentSong", payload }),
-    nextSong: (payload) => dispatch({ type: "player/nextSong", payload }),
-    addSongs: (payload) => dispatch({ type: "songs/addSongs", payload }),
+      dispatch({ type: PLAYER_ISSHUFFLEACTIVE, payload }),
+    previousSong: (payload) => dispatch({ type: PLAYER_PREVIOUSSONG, payload }),
+    currentSong: (payload) => dispatch({ type: PLAYER_CURRENTSONG, payload }),
+    nextSong: (payload) => dispatch({ type: PLAYER_NEXTSONG, payload }),
   };
 };
 

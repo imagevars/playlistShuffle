@@ -1,5 +1,11 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import {
+  PLAYER_CURRENTSONG,
+  PLAYER_NEXTSONG,
+  PLAYER_PREVIOUSSONG,
+} from "../../constants/playerTypes";
+import { PLAYLISTSONGS_ADDSONGSBYPLAYLISTID } from "../../constants/playlistSongsByIdTypes";
 import MersenneTwister from "mersenne-twister";
 import {
   Card as CardChakra,
@@ -168,13 +174,11 @@ const VideoCard = ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addSongs: (payload) => dispatch({ type: "songs/addSongs", payload }),
-    previousSong: (payload) =>
-      dispatch({ type: "player/previousSong", payload }),
-    currentSong: (payload) => dispatch({ type: "player/currentSong", payload }),
-    nextSong: (payload) => dispatch({ type: "player/nextSong", payload }),
+    previousSong: (payload) => dispatch({ type: PLAYER_PREVIOUSSONG, payload }),
+    currentSong: (payload) => dispatch({ type: PLAYER_CURRENTSONG, payload }),
+    nextSong: (payload) => dispatch({ type: PLAYER_NEXTSONG, payload }),
     addSongsByPlaylistID: (payload) =>
-      dispatch({ type: "songs/addSongsByPlaylistID", payload }),
+      dispatch({ type: PLAYLISTSONGS_ADDSONGSBYPLAYLISTID, payload }),
   };
 };
 

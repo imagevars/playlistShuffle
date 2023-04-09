@@ -2,6 +2,14 @@ import React, { useEffect, useRef } from "react";
 import VideoCard from "../VideoCard/VideoCard";
 import MediaButtons from "../MediaButtons/MediaButtons";
 import Player from "../Player/Player";
+import {
+  PLAYER_ISPLAYING,
+  PLAYER_ISSHUFFLEACTIVE,
+  PLAYER_CURRENTSONG,
+  PLAYER_ISLOOPACTIVE,
+  PLAYER_NEXTSONG,
+  PLAYER_PREVIOUSSONG,
+} from "../../constants/playerTypes";
 import PlayingRightNow from "../PlayingRightNow/PlayingRightNow";
 import Navbar from "../Navbar/Navbar";
 import { Flex, Container, Box } from "@chakra-ui/react";
@@ -182,17 +190,13 @@ const PlaylistPage = ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    isPlaying: (payload) => dispatch({ type: "player/isPlaying", payload }),
-    isLoopActive: (payload) =>
-      dispatch({ type: "player/isLoopActive", payload }),
+    isPlaying: (payload) => dispatch({ type: PLAYER_ISPLAYING, payload }),
+    isLoopActive: (payload) => dispatch({ type: PLAYER_ISLOOPACTIVE, payload }),
     isShuffleActive: (payload) =>
-      dispatch({ type: "player/isShuffleActive", payload }),
-    isShuffleLoading: (payload) =>
-      dispatch({ type: "player/isShuffleLoading", payload }),
-    previousSong: (payload) =>
-      dispatch({ type: "player/previousSong", payload }),
-    currentSong: (payload) => dispatch({ type: "player/currentSong", payload }),
-    nextSong: (payload) => dispatch({ type: "player/nextSong", payload }),
+      dispatch({ type: PLAYER_ISSHUFFLEACTIVE, payload }),
+    previousSong: (payload) => dispatch({ type: PLAYER_PREVIOUSSONG, payload }),
+    currentSong: (payload) => dispatch({ type: PLAYER_CURRENTSONG, payload }),
+    nextSong: (payload) => dispatch({ type: PLAYER_NEXTSONG, payload }),
   };
 };
 

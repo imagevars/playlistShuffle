@@ -1,3 +1,13 @@
+import {
+  PLAYER_ISPLAYING,
+  PLAYER_ISLOOPACTIVE,
+  PLAYER_ISSHUFFLEACTIVE,
+  PLAYER_PREVIOUSSONG,
+  PLAYER_CURRENTSONG,
+  PLAYER_NEXTSONG,
+  PLAYER_SETCURRENTACTIVEPLAYLIST,
+} from "../constants/playerTypes";
+
 const initialState = {
   isPlaying: true,
   previousSong: "",
@@ -10,31 +20,28 @@ const initialState = {
 
 export default function playerRedicer(state = initialState, action) {
   switch (action.type) {
-    case "player/previousSong": {
-      return state;
-    }
-    case "player/isPlaying":
+    case PLAYER_ISPLAYING:
       return { ...state, isPlaying: action.payload };
-    case "player/isLoopActive":
+    case PLAYER_ISLOOPACTIVE:
       return { ...state, isLoopActive: action.payload };
 
-    case "player/isShuffleActive": {
+    case PLAYER_ISSHUFFLEACTIVE: {
       return { ...state, isShuffleActive: action.payload };
     }
 
-    case "player/previousSong": {
+    case PLAYER_PREVIOUSSONG: {
       return { ...state, previousSong: action.payload };
     }
-    case "player/currentSong": {
+    case PLAYER_CURRENTSONG: {
       return { ...state, currentSong: action.payload };
     }
-    case "player/nextSong": {
+    case PLAYER_NEXTSONG: {
       return { ...state, nextSong: action.payload };
     }
-    case "player/setcurrentActivePlaylistId": {
+    case PLAYER_SETCURRENTACTIVEPLAYLIST: {
       return { ...state, currentActivePlaylistId: action.payload };
     }
-    
+
     default:
       return state;
   }
