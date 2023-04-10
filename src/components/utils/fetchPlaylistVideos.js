@@ -33,15 +33,16 @@ const fetchPlaylistVideos = async (id, etag) => {
     } while (nextToken);
   } catch (error) {
     if (error.response.status === 304) {
-      console.log(
-        error.response.status,
-        ` The playlist was not modified so we are using the cached version`
-      );
-
       return error.response.status;
+
+    } else if (error.response.status === 404) {
+      return error.response.status;
+
     } else {
-      console.log("Error fetching data: ", error);
+      console.log("Error ", error.response)
+      return 404
     }
+
   }
   const dataReturned = {
     playlistEtag: responseEtag,
