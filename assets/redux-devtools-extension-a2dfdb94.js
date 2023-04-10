@@ -1,0 +1,1 @@
+import{r as o}from"./redux-f29a9c13.js";var e=o.compose,r=typeof window<"u"&&window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__?window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__:function(){if(arguments.length!==0)return typeof arguments[0]=="object"?e:e.apply(null,arguments)};export{r as c};
