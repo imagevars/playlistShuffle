@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, memo, useState } from "react";
 import VideoCard from "../VideoCard/VideoCard";
 import MediaButtons from "../MediaButtons/MediaButtons";
 import Player from "../Player/Player";
@@ -16,8 +16,8 @@ import { Flex, Container, Box } from "@chakra-ui/react";
 import PlaylistInfo from "../PlaylistInfo/PlaylistInfo";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
-
-const PlaylistPage = ({
+import PlaylistPageHelmet from "./PlaylistPageHelmet";
+const PlaylistPage = memo(({
   isPlaying,
   player,
   isLoopActive,
@@ -27,8 +27,20 @@ const PlaylistPage = ({
   nextSong,
   playlistSongsById,
 }) => {
+  const [currentSongName, setCurrentSongName] = useState("");
   const { id } = useParams();
   const ref = useRef(null);
+
+  useEffect(() => {
+    const songIndex = playlistSongsById[
+      player.currentActivePlaylistId
+    ].findIndex((song) => {
+      return song.snippet.resourceId.videoId === player.currentSong;
+    });
+    setCurrentSongName(
+      playlistSongsById[player.currentActivePlaylistId][songIndex].snippet.title
+    );
+  }, [player.currentSong]);
 
   useEffect(() => {
     const handleClick = (e) => {
@@ -121,6 +133,7 @@ const PlaylistPage = ({
       h={"100vh"}
       maxWidth="1866px"
     >
+      <PlaylistPageHelmet title={`${currentSongName} - Playlist Shuffle`} />
       <Navbar />
 
       <Flex justify={["center", "center", "left", "left"]} mb={"1.5"}>
@@ -129,29 +142,29 @@ const PlaylistPage = ({
 
       <Box
         className="box"
-        w={["95%", null, null, "95%"]}
+        w={["98%", "98%", "98%", "95%"]}
         m={"0 auto"}
         display={"flex"}
         justifyContent={"center"}
       >
         <Flex
           className="mainContent"
-          h={["100%", "600px", "65vh", "65vh", "65vh", "65vh"]}
+          h={["100%", "100%", "65vh", "65vh", "65vh", "65vh"]}
           maxH={"1900px"}
           flexDirection={["column", "column", "row"]}
           alignItems={["center", "center", "center", "inherit"]}
           w={"100%"}
         >
           <Box
-            w={["100%", "100%", null, "40%"]}
-            h={["30vh", "30vh", "95%", "100%"]}
+            w={["100%", "100%", "40%", "40%"]}
+            h={["30vh", "30vh", "100%", "100%"]}
             maxH={"1900px"}
           >
             <Player />
           </Box>
           <Box
             mt={["10px", "10px", "0", "0"]}
-            w={["100%", "100%", null, "50%"]}
+            w={["100%", "100%", "100%", "50%"]}
             h={["100%", "100%", "100%", "100%"]}
             maxH={"1900px"}
           >
@@ -186,7 +199,7 @@ const PlaylistPage = ({
       </Box>
     </Container>
   );
-};
+});
 
 const mapDispatchToProps = (dispatch) => {
   return {
