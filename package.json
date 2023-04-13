@@ -8,7 +8,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --open --node-env=development",
-    "build": "webpack --config ./webpack.config.js --mode=production",
+    "build": "webpack --config ./webpack.config.js --node-env=production",
     "watch": "webpack --watch",
     "deploy": "gh-pages -d dist"
   },
