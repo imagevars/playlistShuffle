@@ -5,10 +5,9 @@
   "main": "main.bundle.js",
   "sideEffects": false,
   "homepage": "https://jooonathann.github.io/playlistShuffle",
-
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --open",
+    "dev": "webpack-dev-server --open --node-env=development",
     "build": "webpack --config ./webpack.config.js --mode=production",
     "watch": "webpack --watch",
     "deploy": "gh-pages -d dist"
@@ -44,6 +43,7 @@
     "webpack-cli": "^5.0.1"
   },
   "devDependencies": {
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.10",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "autoprefixer": "^10.4.14",
@@ -53,6 +53,7 @@
     "gh-pages": "^5.0.0",
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.7.5",
+    "react-refresh": "^0.14.0",
     "redux-devtools-extension": "^2.13.9",
     "terser-webpack-plugin": "^5.3.7",
     "webpack-bundle-analyzer": "^4.8.0",

@@ -8,8 +8,13 @@ const CompressionPlugin = require("compression-webpack-plugin");
 const BundleAnalyzerPlugin =
   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const BrotliPlugin = require("brotli-webpack-plugin");
+const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
+const { HotModuleReplacementPlugin } = require("webpack");
+
+const isDevelopment = process.env.NODE_ENV !== "production";
+console.log("process.env.NODE_ENV  ", process.env.NODE_ENV)
 module.exports = {
-  mode: "production",
+  mode: isDevelopment ? "development" : "production",
   entry: "./src/main.jsx",
   output: {
     publicPath: "/playlistShuffle",
@@ -32,10 +37,19 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: ["babel-loader"],
+        use: [
+          {
+            loader: require.resolve("babel-loader"),
+            options: {
+              plugins: [
+                isDevelopment && require.resolve("react-refresh/babel"),
+              ].filter(Boolean),
+            },
+          },
+        ],
       },
       {
-        test: /\.css$/,
+        test: /\.css$/i,
         use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
     ],
@@ -48,6 +62,7 @@ module.exports = {
       template: "./index.html",
       scriptLoading: "defer",
     }),
+    new MiniCssExtractPlugin(),
     new FaviconsWebpackPlugin("./src/icon.svg"),
     new WebpackManifestPlugin(),
     // new BundleAnalyzerPlugin(),
@@ -58,8 +73,12 @@ module.exports = {
     new BrotliPlugin({
       test: /.js$|.css$/,
     }),
-  ],
+    isDevelopment && new HotModuleReplacementPlugin(),
+    isDevelopment && new ReactRefreshWebpackPlugin(),
+  ].filter(Boolean),
   devServer: {
+    hot: true,
+
     client: {
       overlay: {
         errors: true,
