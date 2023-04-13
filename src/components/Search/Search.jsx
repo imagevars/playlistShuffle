@@ -18,7 +18,6 @@ import {
   Button,
   Input,
   FormControl,
-  FormLabel,
   FormErrorMessage,
   FormHelperText,
   Flex,
@@ -32,7 +31,6 @@ const Search = ({
   addSongsByPlaylistID,
   playlistSongsById,
   setcurrentActivePlaylistId,
-  player,
   modifyEtagInPlaylistDetailsById,
 }) => {
   const [playlistId, setPlaylistId] = useState("");
@@ -40,7 +38,6 @@ const Search = ({
   const [isIdInvalid, setIsIdInvalid] = useState(false);
   const navigate = useNavigate();
 
-  const baseURL = import.meta.env.BASE_URL;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -69,30 +66,28 @@ const Search = ({
           .resourceId.videoId
       );
       setisLoadingButton(false);
-      navigate(`${baseURL}/playlist/${id}`);
+      navigate(`playlist/${id}`);
     } else if (data === 404) {
-      console.log("data is ", data)
-      setIsIdInvalid(true)
+      setIsIdInvalid(true);
       setisLoadingButton(false);
-
     } else {
-      const playlistObject = {
-        id: id,
-        songs: data.responseArrToAdd,
-      };
-
       const playlistDataInfo = await fetchPlaylistData(id, data.playlistEtag);
       const playlistEtagAndId = {
         playlistId: id,
         etag: data.playlistEtag,
       };
       await addToPlaylistDetails(playlistDataInfo);
+      const playlistObject = {
+        id: id,
+        songs: data.responseArrToAdd,
+      };
+
       await modifyEtagInPlaylistDetailsById(playlistEtagAndId);
       setisLoadingButton(false);
       await addSongsByPlaylistID(playlistObject);
       await currentSong(data.currentSong);
       await nextSong(data.nextSong);
-      navigate(`${baseURL}/playlist/${id}`);
+      navigate(`playlist/${id}`);
     }
   };
   const handleChange = (e) => {
@@ -105,12 +100,11 @@ const Search = ({
         <FormControl isInvalid={isIdInvalid}>
           <Flex>
             <Input
-              errorBorderColor="red.300"
-              variant="flushed"
+              errorBorderColor="red.500"
+              variant="outline"
               size="lg"
               className="inputSearch"
               pattern="^(?=.*.{24,})(?=.*PL).*"
-              title="Please enter a valid YouTube playlist URL or ID"
               type="text"
               required
               onChange={(e) => handleChange(e)}
@@ -128,7 +122,9 @@ const Search = ({
             </Button>
           </Flex>
           {isIdInvalid ? (
-            <FormErrorMessage>The ID is invalid</FormErrorMessage>
+            <FormErrorMessage>
+              THE ID OR URL IS NOT A VALID ONE{" "}
+            </FormErrorMessage>
           ) : (
             <FormHelperText>ID or playlist URL</FormHelperText>
           )}

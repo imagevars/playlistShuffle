@@ -38,6 +38,10 @@ const fetchPlaylistVideos = async (id, etag) => {
     } else if (error.response.status === 404) {
       return error.response.status;
 
+    }     else if (error.response.status === 500) {
+      console.log("Server Error")
+      return 404;
+
     } else {
       console.log("Error ", error.response)
       return 404

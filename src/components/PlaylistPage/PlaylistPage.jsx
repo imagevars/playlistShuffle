@@ -1,7 +1,6 @@
-import React, { useEffect, useRef, memo, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import VideoCard from "../VideoCard/VideoCard";
 import MediaButtons from "../MediaButtons/MediaButtons";
-import Player from "../Player/Player";
 import {
   PLAYER_ISPLAYING,
   PLAYER_ISSHUFFLEACTIVE,
@@ -16,8 +15,9 @@ import { Flex, Container, Box } from "@chakra-ui/react";
 import PlaylistInfo from "../PlaylistInfo/PlaylistInfo";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
-import PlaylistPageHelmet from "./PlaylistPageHelmet";
-const PlaylistPage = memo(({
+import HelmetHelper from "../Helmet/HelmetHelper";
+import Player from "../Player/Player";
+const PlaylistPage = ({
   isPlaying,
   player,
   isLoopActive,
@@ -123,6 +123,8 @@ const PlaylistPage = memo(({
     };
   }, [player]);
 
+  // const PlaylistInfo = lazy(() => import("../PlaylistInfo/PlaylistInfo"))
+
   return (
     <Container
       ref={ref}
@@ -133,7 +135,13 @@ const PlaylistPage = memo(({
       h={"100vh"}
       maxWidth="1866px"
     >
-      <PlaylistPageHelmet title={`${currentSongName} - Playlist Shuffle`} />
+      <HelmetHelper
+        title={
+          currentSongName
+            ? `${currentSongName} - Playlist Shuffle`
+            : "Paylist Shuffle | randomize your playlist"
+        }
+      />
       <Navbar />
 
       <Flex justify={["center", "center", "left", "left"]} mb={"1.5"}>
@@ -199,7 +207,7 @@ const PlaylistPage = memo(({
       </Box>
     </Container>
   );
-});
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {

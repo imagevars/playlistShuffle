@@ -14,11 +14,11 @@ import {
   PLAYER_SETCURRENTACTIVEPLAYLIST,
   PLAYER_NEXTSONG,
   PLAYER_CURRENTSONG,
+  PLAYER_ISPLAYING,
 } from "../../constants/playerTypes";
 import fetchPlaylistData from "../utils/fetchPlaylistData";
 import { useNavigate } from "react-router-dom";
 import {
-  Button,
   Card,
   Flex,
   Spacer,
@@ -34,6 +34,7 @@ const PlaylistUsed = ({
   nextSong,
   playlistSongsById,
   player,
+  isPlaying,
   deleteFromPlaylistDetails,
   addSongsByPlaylistID,
   setcurrentActivePlaylistId,
@@ -42,7 +43,6 @@ const PlaylistUsed = ({
   modifyEtagInPlaylistDetailsById,
 }) => {
   const navigate = useNavigate();
-  const baseURL = import.meta.env.BASE_URL;
 
   const playlists = playlistDetails.map((element) => (
     <Card
@@ -112,6 +112,7 @@ const PlaylistUsed = ({
         playlistSongsById[currentPlaylistInfo[0].playlistId][1].snippet
           .resourceId.videoId
       );
+      isPlaying(true);
     } else {
       const playlistObject = {
         id: id,
@@ -130,7 +131,7 @@ const PlaylistUsed = ({
       nextSong(data.nextSong);
     }
 
-    navigate(`${baseURL}/playlist/${id}`);
+    navigate(`playlist/${id}`);
   };
 
   const handleDeleteFromPlaylist = (id) => {
@@ -144,7 +145,6 @@ const PlaylistUsed = ({
     </Flex>
   );
 };
-
 const mapStateToProps = (state) => {
   return {
     playlistSongsById: state.playlistSongsById,
@@ -171,6 +171,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({ type: PLAYLISTSONGS_REMOVEPLAYLISTSONGSBYID, payload }),
     modifyEtagInPlaylistDetailsById: (payload) =>
       dispatch({ type: PLAYLISTDETAILS_ETAG, payload }),
+    isPlaying: (payload) => dispatch({ type: PLAYER_ISPLAYING, payload }),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(PlaylistUsed);

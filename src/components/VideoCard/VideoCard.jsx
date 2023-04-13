@@ -32,6 +32,7 @@ const VideoCard = ({
     {}
   );
 
+
   useEffect(() => {
     refs[player.currentSong].current.scrollIntoView({
       block: "start",
@@ -130,6 +131,7 @@ const VideoCard = ({
           >
             <Flex>
               <Image
+                loading="lazy"
                 borderRadius="lg"
                 src={ele.snippet.thumbnails.default?.url}
                 alt="song image"

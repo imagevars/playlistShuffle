@@ -1,28 +1,38 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, memo, useMemo } from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Flex, Heading, Image } from "@chakra-ui/react";
-const PlaylistInfo = ({ playlistDetails }) => {
+
+const PlaylistInfo = memo(function ({ playlistDetails })  {
   const { id } = useParams();
   const [playlistInfo, setPlaylistInfo] = useState({
     name: "",
     image: "",
   });
+
+
+
+  const info = useMemo(() => {
+    return playlistDetails?.find((ele) => ele.playlistId === id);
+  }, [playlistDetails, id]);
+
   useEffect(() => {
-    const info = playlistDetails?.find((ele) => ele.playlistId === id);
+    console.log("re render")
+
     setPlaylistInfo({
-      name: info.playlistName,
-      image: info.PlaylistImage,
+      name: info?.playlistName,
+      image: info?.PlaylistImage,
     });
-  }, []);
+  }, [info]);
 
   return (
     <Flex alignItems={"center"}>
       <Image
-        boxSize={["45px", "45px", "45px", "60px"]}
+        boxSize={["35px", "40px", "45px", "60px"]}
         objectFit="cover"
         borderRadius="lg"
         src={playlistInfo.image}
+        alt={playlistInfo.name}
       />
       <Heading
         ml={"1"}
@@ -33,7 +43,7 @@ const PlaylistInfo = ({ playlistDetails }) => {
       </Heading>
     </Flex>
   );
-};
+});
 
 const mapStateToProps = (state) => {
   return {
@@ -42,4 +52,5 @@ const mapStateToProps = (state) => {
     playlistDetails: state.playlistDetails,
   };
 };
-export default connect(mapStateToProps, null)(PlaylistInfo);
+
+export default connect(mapStateToProps, null)(memo(PlaylistInfo));

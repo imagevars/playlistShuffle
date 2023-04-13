@@ -73,7 +73,7 @@ const Player = ({
     } else afterSongEnds();
   };
   // When some songs can't be played outside of youtube this function will trigger and playlist the next song, or if it is the last the playlist will end
-  const handleError = (e) => {
+  const handleError = () => {
     if (
       playlistSongsById[player.currentActivePlaylistId].findIndex(
         (ele) => ele.snippet.resourceId.videoId === player.currentSong
@@ -107,11 +107,11 @@ const Player = ({
     >
       <ReactPlayer
         passive="true"
-        onError={handleError}
-        onPlay={() => handlePlay}
-        onPause={() => handlePause}
-        onReady={() => handleReady}
-        onEnded={handleEnd}
+        onError={() => handleError()}
+        onPlay={() => handlePlay()}
+        onPause={() => handlePause()}
+        onReady={() => handleReady()}
+        onEnded={() => handleEnd()}
         width={"100%"}
         height={"100%"}
         controls={true}

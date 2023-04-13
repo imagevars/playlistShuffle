@@ -1,8 +1,8 @@
-import React from "react";
+import React, { memo } from "react";
 import { connect } from "react-redux";
 import { Heading, Text, Flex, Image } from "@chakra-ui/react";
 
-const PlayingRightNow = ({ player, playlistSongsById }) => {
+const PlayingRightNow = memo(({ player, playlistSongsById }) => {
   const currentIndex = playlistSongsById[
     player.currentActivePlaylistId
   ]?.findIndex((ele) => {
@@ -43,7 +43,7 @@ const PlayingRightNow = ({ player, playlistSongsById }) => {
       </Flex>
     </Flex>
   );
-};
+});
 
 const mapStateToProps = (state) => {
   return {

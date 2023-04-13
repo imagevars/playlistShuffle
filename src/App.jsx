@@ -1,18 +1,16 @@
 import { Route, Routes } from "react-router-dom";
-import "./css/index.css";
 import HomePage from "./components/HomePage/HomePage";
 import PlaylistPage from "./components/PlaylistPage/PlaylistPage";
 import { Container, Heading, Flex } from "@chakra-ui/react";
 
 function App() {
-  const baseURL = import.meta.env.BASE_URL;
   return (
     <>
       <Routes>
-        <Route exact path={`${baseURL}`} element={<HomePage />} />
-        <Route exact path={`${baseURL}/playlist/:id`} element={<PlaylistPage />} />
+        <Route exact path={`/`} element={<HomePage />} />
+        <Route exact path={`playlist/:id`} element={<PlaylistPage />} />
         <Route
-          path={`${baseURL}/*`}
+          path={`/*`}
           element={
             <Container>
               <Flex justify={"center"}>

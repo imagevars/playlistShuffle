@@ -18,7 +18,7 @@ const initialState = {
   currentActivePlaylistId: "",
 };
 
-export default function playerRedicer(state = initialState, action) {
+export default function playerReducer(state = initialState, action) {
   switch (action.type) {
     case PLAYER_ISPLAYING:
       return { ...state, isPlaying: action.payload };
