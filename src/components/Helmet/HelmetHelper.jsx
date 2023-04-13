@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet-async";
 const HelmetHelper = ({ title }) => {
   return (
     <Helmet
-      defaultTitle="Paylist Shuffle | randomize your playlist"
+      defaultTitle="Paylist Shuffle - The randomizer of your playlists"
       title={title}
       defer={false}
     />
