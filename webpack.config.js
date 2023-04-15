@@ -12,7 +12,7 @@ const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin"
 const { HotModuleReplacementPlugin } = require("webpack");
 
 const isDevelopment = process.env.NODE_ENV !== "production";
-console.log("process.env.NODE_ENV  ", process.env.NODE_ENV)
+console.log("process.env.NODE_ENV  ", process.env.NODE_ENV);
 module.exports = {
   mode: isDevelopment ? "development" : "production",
   entry: "./src/main.jsx",
@@ -67,11 +67,12 @@ module.exports = {
     new WebpackManifestPlugin(),
     // new BundleAnalyzerPlugin(),
     new CompressionPlugin({
+      test: /\.js$|\.css$|\.html$/,
       algorithm: "gzip",
-      test: /.js$|.css$/,
     }),
-    new BrotliPlugin({
-      test: /.js$|.css$/,
+    new CompressionPlugin({
+      test: /\.js$|\.css$|\.html$/,
+      algorithm: "brotliCompress",
     }),
     isDevelopment && new HotModuleReplacementPlugin(),
     isDevelopment && new ReactRefreshWebpackPlugin(),
