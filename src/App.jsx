@@ -1,7 +1,8 @@
+import React from "react";
 import { Route, Routes } from "react-router-dom";
 import HomePage from "./components/HomePage/HomePage";
 import PlaylistPage from "./components/PlaylistPage/PlaylistPage";
-import { Container, Heading, Flex } from "@chakra-ui/react";
+import "./app.css";
 
 function App() {
   return (
@@ -12,11 +13,11 @@ function App() {
         <Route
           path={`/*`}
           element={
-            <Container>
-              <Flex justify={"center"}>
-                <Heading>Error 404</Heading>
-              </Flex>
-            </Container>
+            <div>
+              <div>
+                <h1>Error 404</h1>
+              </div>
+            </div>
           }
         />
       </Routes>

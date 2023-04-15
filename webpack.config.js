@@ -12,10 +12,10 @@ const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin"
 const { HotModuleReplacementPlugin } = require("webpack");
 
 const isDevelopment = process.env.NODE_ENV !== "production";
-console.log("process.env.NODE_ENV  ", process.env.NODE_ENV)
+console.log("process.env.NODE_ENV  ", process.env.NODE_ENV);
 module.exports = {
   mode: isDevelopment ? "development" : "production",
-  entry: "./src/main.jsx",
+  entry: ["./src/main.jsx", "./src/app.css"],
   output: {
     publicPath: "/playlistShuffle",
     path: path.join(process.cwd(), "dist"),
@@ -41,6 +41,7 @@ module.exports = {
           {
             loader: require.resolve("babel-loader"),
             options: {
+              presets: ["@babel/preset-env", "@babel/preset-react"],
               plugins: [
                 isDevelopment && require.resolve("react-refresh/babel"),
               ].filter(Boolean),
@@ -50,7 +51,9 @@ module.exports = {
       },
       {
         test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
+        exclude: /node_modules/,
+        include: path.resolve(__dirname, "src"),
+        use: ["style-loader", "css-loader", "postcss-loader"],
       },
     ],
   },
@@ -67,18 +70,21 @@ module.exports = {
     new WebpackManifestPlugin(),
     // new BundleAnalyzerPlugin(),
     new CompressionPlugin({
+      test: /\.js$|\.css$|\.html$/,
       algorithm: "gzip",
-      test: /.js$|.css$/,
     }),
-    new BrotliPlugin({
-      test: /.js$|.css$/,
+
+    new CompressionPlugin({
+      test: /\.(js|css|html|svg)$/,
+      algorithm: "brotliCompress",
     }),
+
     isDevelopment && new HotModuleReplacementPlugin(),
     isDevelopment && new ReactRefreshWebpackPlugin(),
   ].filter(Boolean),
   devServer: {
     hot: true,
-
+    watchFiles: ["src/**/*"],
     client: {
       overlay: {
         errors: true,

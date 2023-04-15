@@ -18,15 +18,7 @@ import {
 } from "../../constants/playerTypes";
 import fetchPlaylistData from "../utils/fetchPlaylistData";
 import { useNavigate } from "react-router-dom";
-import {
-  Card,
-  Flex,
-  Spacer,
-  Image,
-  Text,
-  CloseButton,
-  Heading,
-} from "@chakra-ui/react";
+
 
 const PlaylistUsed = ({
   playlistDetails,
@@ -45,50 +37,48 @@ const PlaylistUsed = ({
   const navigate = useNavigate();
 
   const playlists = playlistDetails.map((element) => (
-    <Card
-      w={"100%"}
-      mt={2}
-      display={"flex"}
-      flexDirection={"row"}
-      bg="red.500"
-      borderRadius={"lg"}
-      cursor={"pointer"}
-      m={"16 0"}
-      className="playlistUsedList"
+    <div
+      // w={"100%"}
+      // mt={2}
+      // display={"flex"}
+      // flexDirection={"row"}
+      // bg="red.500"
+      // borderRadius={"lg"}
+      // cursor={"pointer"}
+      // m={"16 0"}
+      className="playlistUsedList bg-[#bb86fc] flex justify-between w-full"
       key={element.playlistId}
     >
-      <Flex
-        className="usedContentTextandImage"
+      <div
+        className="flex"
         onClick={() => handleClickPlaylist(element.playlistId)}
       >
-        <Image
-          borderRadius="5% 0 0 5%"
-          alt={element.playlistName}
-          boxSize={["75px", "85px", "120px"]}
-          objectFit="cover"
-          className="imgUsedPlaylist"
+        <img
+          // borderRadius="5% 0 0 5%"
+          // alt={element.playlistName}
+          // boxSize={["75px", "85px", "120px"]}
+          // objectFit="cover"
+          className="object-cover w-28 h-28"
           src={element.PlaylistImage}
         />
-        <Heading
-          mt={"1.5"}
-          size={["md", "md", "lg"]}
-          noOfLines={"2"}
-          className="usedPlaylistName"
+        <p
+          // mt={"1.5"}
+          // size={["md", "md", "lg"]}
+          // noOfLines={"2"}
+          className="usedPlaylistName text-white"
         >
-          <Text color={"whiteAlpha.900"} noOfLines={[2, 2]}>
             {element.playlistName}
-          </Text>
-        </Heading>
-      </Flex>
-      <Spacer />
-      <CloseButton
-        ml={["5px", "5px", "15px", "15px"]}
-        colorScheme="whiteAlpha"
-        color={"white"}
+        </p>
+      </div>
+      <br />
+      <button
+        // ml={["5px", "5px", "15px", "15px"]}
+        // colorScheme="whiteAlpha"
+        // color={"white"}
         className="playlistUsedButton"
         onClick={() => handleDeleteFromPlaylist(element.playlistId)}
-      />
-    </Card>
+      >X</button>
+    </div>
   ));
 
   const handleClickPlaylist = async (id) => {
@@ -140,9 +130,9 @@ const PlaylistUsed = ({
   };
 
   return (
-    <Flex flexDirection={"column"} className="playlistUsedContainer">
+    <div   className="playlistUsedContainer w-11/12 mx-auto">
       {playlistDetails.length ? playlists : null}
-    </Flex>
+    </div>
   );
 };
 const mapStateToProps = (state) => {

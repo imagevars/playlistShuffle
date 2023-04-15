@@ -1,7 +1,6 @@
 import React, { memo } from "react";
 // import Search from '../Search/Search'
 import { useNavigate } from "react-router-dom";
-import { Flex, Heading } from "@chakra-ui/react";
 import { connect } from "react-redux";
 import {
   PLAYER_ISPLAYING,
@@ -30,16 +29,16 @@ const Navbar = ({isPlaying,
     return navigate("/");
   };
   return (
-    <Flex className="navbar">
-      <Heading
+    <div className="navbar">
+      <h1
         cursor={"pointer"}
         onClick={handleClick}
-        m={"0 auto"}
-        color={"black"}
+        // m={"0 auto"}
+        // color={"black"}
       >
         Playlist Shuffle{" "}
-      </Heading>
-    </Flex>
+      </h1>
+    </div>
   );
 };
 const mapDispatchToProps = (dispatch) => {
