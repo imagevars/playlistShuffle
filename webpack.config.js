@@ -70,15 +70,12 @@ module.exports = {
     new WebpackManifestPlugin(),
     // new BundleAnalyzerPlugin(),
     new CompressionPlugin({
-      test: /\.js$|\.css$|\.html$/,
       algorithm: "gzip",
+      test: /.js$|.css$/,
     }),
-
-    new CompressionPlugin({
-      test: /\.(js|css|html|svg)$/,
-      algorithm: "brotliCompress",
+    new BrotliPlugin({
+      test: /.js$|.css$/,
     }),
-
     isDevelopment && new HotModuleReplacementPlugin(),
     isDevelopment && new ReactRefreshWebpackPlugin(),
   ].filter(Boolean),
