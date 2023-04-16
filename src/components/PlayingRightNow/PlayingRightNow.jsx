@@ -11,7 +11,7 @@ const PlayingRightNow = memo(({ player, playlistSongsById }) => {
     <div
     //  mt={"1"} alignItems={"center"}
      >
-      <img
+      {/* <img
         // boxSize={["35px", "35px", "45px", "75px, 100px"]}
         // objectFit="none"
         // borderRadius="lg"
@@ -23,14 +23,14 @@ const PlayingRightNow = memo(({ player, playlistSongsById }) => {
           playlistSongsById[player.currentActivePlaylistId][currentIndex]
             ?.snippet.thumbnails.default.url
         }
-      />
+      /> */}
       <div>
         <p
           // ml={"1"}
           // textAlign={"center"}
           // width={"100%"}
           // color={"var(--chakra-colors-red-600)"}
-          className="songTitle"
+          className="songTitle text-white text-center truncate"
           // size={["sm", "sm", "md", "md", "md", "md"]}
           // maxW={["60", "60", "60", "60", "60"]}
         >

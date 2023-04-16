@@ -19,7 +19,6 @@ import {
 import fetchPlaylistData from "../utils/fetchPlaylistData";
 import { useNavigate } from "react-router-dom";
 
-
 const PlaylistUsed = ({
   playlistDetails,
   addToPlaylistDetails,
@@ -46,11 +45,11 @@ const PlaylistUsed = ({
       // borderRadius={"lg"}
       // cursor={"pointer"}
       // m={"16 0"}
-      className="playlistUsedList bg-[#bb86fc] flex justify-between w-full"
+      className="playlistUsedList cursor-pointer h-24 my-2 rounded-sm bg-[#bb86fc] flex justify-between w-full"
       key={element.playlistId}
     >
       <div
-        className="flex"
+        className="flex w-11/12"
         onClick={() => handleClickPlaylist(element.playlistId)}
       >
         <img
@@ -58,26 +57,28 @@ const PlaylistUsed = ({
           // alt={element.playlistName}
           // boxSize={["75px", "85px", "120px"]}
           // objectFit="cover"
-          className="object-cover w-28 h-28"
+          className="object-cover w-24 h-24 rounded-l-sm"
           src={element.PlaylistImage}
         />
         <p
           // mt={"1.5"}
           // size={["md", "md", "lg"]}
           // noOfLines={"2"}
-          className="usedPlaylistName text-white"
+          className="usedPlaylistName  text-lg font-semibold text-white"
         >
-            {element.playlistName}
+          {element.playlistName}
         </p>
       </div>
-      <br />
+
       <button
         // ml={["5px", "5px", "15px", "15px"]}
         // colorScheme="whiteAlpha"
         // color={"white"}
-        className="playlistUsedButton"
+        className="playlistUsedButton mx-1 text-lg text-white font-medium  self-baseline"
         onClick={() => handleDeleteFromPlaylist(element.playlistId)}
-      >X</button>
+      >
+        X
+      </button>
     </div>
   ));
 
@@ -130,7 +131,7 @@ const PlaylistUsed = ({
   };
 
   return (
-    <div   className="playlistUsedContainer w-11/12 mx-auto">
+    <div className="playlistUsedContainer w-11/12 mx-auto ">
       {playlistDetails.length ? playlists : null}
     </div>
   );

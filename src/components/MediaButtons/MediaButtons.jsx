@@ -92,24 +92,29 @@ const MediaButtons = memo(
       }
     };
     return (
-      <div
-
-      >
+      <div className=" text-white flex items-center ">
         {player.isLoopActive === true ? (
           <div passive="true">
-            icon=
-            {<TbRepeatOnce onClick={() => isLoopActive(false)} size={45} />}
+            <TbRepeatOnce
+              className="cursor-pointer"
+              onClick={() => isLoopActive(false)}
+              size={45}
+            />
           </div>
         ) : (
           <div>
-            icon={<TbRepeatOff onClick={() => isLoopActive(true)} size={45} />}
+            <TbRepeatOff
+              className="cursor-pointer"
+              onClick={() => isLoopActive(true)}
+              size={45}
+            />
           </div>
         )}
 
         <div>
-          icon=
           {
             <BiSkipPreviousCircle
+              className="cursor-pointer"
               onClick={handleClickPreviousButton}
               size={45}
             />
@@ -117,20 +122,44 @@ const MediaButtons = memo(
         </div>
         {player.isPlaying === true ? (
           <div>
-            icon={<BiPauseCircle onClick={() => isPlaying(false)} size={55} />}
+            <BiPauseCircle
+              className="cursor-pointer"
+              onClick={() => isPlaying(false)}
+              size={55}
+            />
           </div>
         ) : (
           <div>
-            icon={<BiPlayCircle onClick={() => isPlaying(true)} size={55} />}
+            <BiPlayCircle
+              className="cursor-pointer"
+              onClick={() => isPlaying(true)}
+              size={55}
+            />
           </div>
         )}
         <div>
-          icon={<BiSkipNextCircle onClick={handleClickNextButton} size={45} />}
+          <BiSkipNextCircle
+            className="cursor-pointer"
+            onClick={handleClickNextButton}
+            size={45}
+          />
         </div>
         {player.isShuffleActive ? (
-          <div>icon={<BiShuffle onClick={handleClickShuffle} size={45} />}</div>
+          <div>
+            <BiShuffle
+              className="cursor-pointer"
+              onClick={handleClickShuffle}
+              size={45}
+            />
+          </div>
         ) : (
-          <div>icon={<BiShuffle onClick={handleClickShuffle} size={45} />}</div>
+          <div>
+            <BiShuffle
+              className="cursor-pointer"
+              onClick={handleClickShuffle}
+              size={45}
+            />
+          </div>
         )}
       </div>
     );

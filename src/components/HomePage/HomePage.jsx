@@ -13,7 +13,7 @@ const HomePage = () => {
       // h="calc(100vh)" w="100%" maxWidth="2266px"
       className="min-h-screen bg-slate-800"
     >
-      <div className=" align-middle bg-red-300 w-10/12 flex  mx-auto" >
+      <div className=" align-middle  w-10/12 flex  mx-auto" >
         <div
         className="w-full"
         //  w="85%" m={"0 auto"}
@@ -22,11 +22,11 @@ const HomePage = () => {
             onClick={handleClick}
             // cursor={"pointer"}
             // color={"black"}
-            className="text-3xl text-center text-white font-bold cursor-pointer"
+            className="text-4xl text-center text-white font-bold cursor-pointer"
           >
             Playlist Shuffle
           </h1>
-          <div className="mt-16 mb-10   ">
+          <div className="mt-20 mb-10   ">
             <Search />
           </div>
 

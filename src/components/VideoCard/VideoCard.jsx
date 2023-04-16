@@ -94,6 +94,7 @@ const VideoCard = ({
       ele.snippet.title !== "Private video" &&
       ele.snippet.title !== "Deleted video" ? (
         <div
+        className="mx-2 my-1 cursor-pointer"
           // borderRadius="lg"
           // w={["95%", "90%"]}
           // cursor={"pointer"}
@@ -105,6 +106,9 @@ const VideoCard = ({
           key={ele.snippet.resourceId.videoId + "index" + i}
         >
           <div
+          className={`${player.currentSong === ele.snippet.resourceId.videoId
+                 ? "bg-[#bb86fc]"
+                 : null} truncate overflow-hidden hover:bg-[#bb86fc]`}
             // borderRadius="lg"
             // bg={
             //   player.currentSong === ele.snippet.resourceId.videoId
@@ -121,8 +125,9 @@ const VideoCard = ({
             //   color: "white",
             // }}
           >
-            <div>
+            <div className="flex">
               <img
+              className="w-10 h-10"
                 // loading="lazy"
                 // borderRadius="lg"
                 src={ele.snippet.thumbnails.default?.url}
@@ -134,6 +139,7 @@ const VideoCard = ({
               // ml={"1"} 
               className="cardText">
                 <p 
+                className="text-white"
                 // size={["xs", "xs", "sm", "md"]}>
                 //   <Text noOfLines={[1, 1, 2, 2]}
                 >
@@ -141,7 +147,7 @@ const VideoCard = ({
                 </p>
 
                 <p 
-                className="cardArtist">
+                className="cardArtist text-white">
                   {ele.snippet.videoOwnerChannelTitle}
                 </p>
               </div>
@@ -153,7 +159,7 @@ const VideoCard = ({
   return (
     <div
       passive="true"
-      className="cardContainer"
+      className="cardContainer h-[50vh]"
       // mt={["0", "4", "0", "0", "0"]}
       // overflowY={"scroll"}
       // h={["37vh", "37vh", "100%", "95%", "100%"]}
@@ -163,7 +169,7 @@ const VideoCard = ({
         // pt={"1"}
         // w={["95%", "95%", "95%", null, "100%"]}
         // margin={["0 auto", "0 auto", "0 auto", null]}
-        className="ulListCards"
+        className="ulListCards mt-1 h-full  overflow-y-auto "
       >
         {song}
       </ul>

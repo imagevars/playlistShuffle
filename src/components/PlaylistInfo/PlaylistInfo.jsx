@@ -26,16 +26,19 @@ const PlaylistInfo = memo(function ({ playlistDetails })  {
 
   return (
     <div
+    className="flex my-2"
     //  alignItems={"center"}
      >
       <img
         // boxSize={["35px", "40px", "45px", "60px"]}
         // objectFit="cover"
         // borderRadius="lg"
+        className="w-9 h-9 rounded-sm"
         src={playlistInfo.image}
         alt={playlistInfo.name}
       />
       <p
+      className="text-white"
         // ml={"1"}
         // noOfLines={["1", "1", "2", "2"]}
         // size={["sm", "sm", "md", "md"]}

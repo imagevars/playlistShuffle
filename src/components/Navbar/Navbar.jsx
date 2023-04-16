@@ -31,6 +31,7 @@ const Navbar = ({isPlaying,
   return (
     <div className="navbar">
       <h1
+      className="text-4xl text-center text-white font-bold cursor-pointer"
         cursor={"pointer"}
         onClick={handleClick}
         // m={"0 auto"}

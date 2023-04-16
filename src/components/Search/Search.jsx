@@ -92,12 +92,12 @@ const Search = ({
       <form  className=""
       //  isInvalid={isIdInvalid} 
         onSubmit={(e) => handleSubmit(e)}>
-          <div className="w-full flex  justify-between">
+          <div className="w-full flex h-12 justify-between">
             <input
 
               // variant="outline"
               // size="lg"
-              className="inputSearch w- h-10"
+              className="inputSearch h-full rounded-sm w-5/6  "
               pattern="^(?=.*.{24,})(?=.*PL).*"
               type="text"
               required
@@ -109,7 +109,7 @@ const Search = ({
               // colorScheme="red"
               // ml={"1.5"}
               // size="lg"
-              className="submitBtn px-4 bg-slate-500 h-10"
+              className="submitBtn w-[13%] h-full bg-[#bb86fc] font-medium text-white  rounded-sm "
               type="submit"
             >
               Play

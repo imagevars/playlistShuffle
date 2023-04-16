@@ -129,80 +129,84 @@ const PlaylistPage = ({
       ref={ref}
       passive="true"
       // tabIndex={0}
-      className="container"
+      className="min-h-screen bg-slate-800 w-full"
       // w="100%"
       // h={"100vh"}
       // maxWidth="1866px"
     >
-      <HelmetHelper
-        title={
-          currentSongName
-            ? `${currentSongName} - Playlist Shuffle`
-            : "Paylist Shuffle | randomize your playlist"
-        }
-      />
-      <Navbar />
+      <div className="w-[95%] mx-auto">
+        <HelmetHelper
+          title={
+            currentSongName
+              ? `${currentSongName} - Playlist Shuffle`
+              : "Paylist Shuffle | randomize your playlist"
+          }
+        />
+        <Navbar />
 
-      <div
-      //  justify={["center", "center", "left", "left"]} mb={"1.5"}
-       >
-        <PlaylistInfo />
-      </div>
-
-      <div
-        className="div"
-        // w={["98%", "98%", "98%", "95%"]}
-        // m={"0 auto"}
-        // display={"flex"}
-        // justifyContent={"center"}
-      >
         <div
-          className="mainContent"
-          // h={["100%", "100%", "65vh", "65vh", "65vh", "65vh"]}
-          // maxH={"1900px"}
-          // flexDirection={["column", "column", "row"]}
-          // alignItems={["center", "center", "center", "inherit"]}
-          // w={"100%"}
+          className=" "
+          //  justify={["center", "center", "left", "left"]} mb={"1.5"}
+        >
+          <PlaylistInfo />
+        </div>
+
+        <div
+          className="div"
+          // w={["98%", "98%", "98%", "95%"]}
+          // m={"0 auto"}
+          // display={"flex"}
+          // justifyContent={"center"}
         >
           <div
+            className="mainContent"
+            // h={["100%", "100%", "65vh", "65vh", "65vh", "65vh"]}
+            // maxH={"1900px"}
+            // flexDirection={["column", "column", "row"]}
+            // alignItems={["center", "center", "center", "inherit"]}
+            // w={"100%"}
+          >
+            <div
             // w={["100%", "100%", "40%", "40%"]}
             // h={["30vh", "30vh", "100%", "100%"]}
             // maxH={"1900px"}
-          >
-            <Player />
-          </div>
-          <div
+            >
+              <Player />
+            </div>
+            <div
+            className=" h-3/5 mt-6 w-[97%] mx-auto"
             // mt={["10px", "10px", "0", "0"]}
             // w={["100%", "100%", "100%", "50%"]}
             // h={["100%", "100%", "100%", "100%"]}
             // maxH={"1900px"}
-          >
-            <VideoCard />
-          </div>
-        </div>
-        <div
-          className="bottomMedia"
-          // minW={"100%"}
-          // position={"fixed"}
-          // bottom={"0"}
-          // h={["18%", "14%"]}
-          // left={"0"}
-          // bg={"red.100"}
-          // display={"flex"}
-          // pt={["1", "1", "5"]}
-          // pb={[null, null, "2"]}
-          // flexDirection={["column", "column", "row", "row"]}
-          // justifyContent={["center"]}
-        >
-          <div  >
-            <PlayingRightNow />
+            >
+              <VideoCard />
+            </div>
           </div>
           <div
-            // justify={"center"}
-            // alignItems={"center"}
-            className="mediaButtonsContainer"
+            className="bottomMedia bg-[#bb86fc] fixed bottom-0 left-0 right-0"
+            // minW={"100%"}
+            // position={"fixed"}
+            // bottom={"0"}
+            // h={["18%", "14%"]}
+            // left={"0"}
+            // bg={"red.100"}
+            // display={"flex"}
+            // pt={["1", "1", "5"]}
+            // pb={[null, null, "2"]}
+            // flexDirection={["column", "column", "row", "row"]}
+            // justifyContent={["center"]}
           >
-            <MediaButtons />
+            <div>
+              <PlayingRightNow />
+            </div>
+            <div
+              // justify={"center"}
+              // alignItems={"center"}
+              className="mediaButtonsContainer flex justify-center"
+            >
+              <MediaButtons />
+            </div>
           </div>
         </div>
       </div>
