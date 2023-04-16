@@ -1,7 +1,6 @@
 import React, { useEffect, useState, memo, useMemo } from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
-import { Flex, Heading, Image } from "@chakra-ui/react";
 
 const PlaylistInfo = memo(function ({ playlistDetails })  {
   const { id } = useParams();
@@ -26,22 +25,27 @@ const PlaylistInfo = memo(function ({ playlistDetails })  {
   }, [info]);
 
   return (
-    <Flex alignItems={"center"}>
-      <Image
-        boxSize={["35px", "40px", "45px", "60px"]}
-        objectFit="cover"
-        borderRadius="lg"
+    <div
+    className="flex my-2"
+    //  alignItems={"center"}
+     >
+      <img
+        // boxSize={["35px", "40px", "45px", "60px"]}
+        // objectFit="cover"
+        // borderRadius="lg"
+        className="w-9 h-9 rounded-sm"
         src={playlistInfo.image}
         alt={playlistInfo.name}
       />
-      <Heading
-        ml={"1"}
-        noOfLines={["1", "1", "2", "2"]}
-        size={["sm", "sm", "md", "md"]}
+      <p
+      className="text-white"
+        // ml={"1"}
+        // noOfLines={["1", "1", "2", "2"]}
+        // size={["sm", "sm", "md", "md"]}
       >
         {playlistInfo.name}
-      </Heading>
-    </Flex>
+      </p>
+    </div>
   );
 });
 

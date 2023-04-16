@@ -1,8 +1,7 @@
 import React from "react";
-import { Spinner } from "@chakra-ui/react";
 
-function Loader({size }) {
-  return <Spinner size={size}   />;
+function Loader() {
+  return <div> Loader</div>
 }
 
 export default Loader;

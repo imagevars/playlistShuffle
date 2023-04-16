@@ -7,15 +7,7 @@ import {
 } from "../../constants/playerTypes";
 import { PLAYLISTSONGS_ADDSONGSBYPLAYLISTID } from "../../constants/playlistSongsByIdTypes";
 import MersenneTwister from "mersenne-twister";
-import {
-  Card as CardChakra,
-  Flex,
-  Image,
-  UnorderedList,
-  Box,
-  Heading,
-  Text,
-} from "@chakra-ui/react";
+
 const VideoCard = ({
   player,
   previousSong,
@@ -101,76 +93,87 @@ const VideoCard = ({
     (ele, i) =>
       ele.snippet.title !== "Private video" &&
       ele.snippet.title !== "Deleted video" ? (
-        <CardChakra
-          borderRadius="lg"
-          w={["95%", "90%"]}
-          cursor={"pointer"}
+        <div
+        className="mx-2 my-1 cursor-pointer"
+          // borderRadius="lg"
+          // w={["95%", "90%"]}
+          // cursor={"pointer"}
           title={ele.snippet.title}
-          m={"2"}
+          // m={"2"}
           ref={refs[ele.snippet.resourceId.videoId]}
           id={`${ele.snippet.resourceId.videoId}`}
           onClick={() => handleClick(ele.snippet.resourceId.videoId)}
           key={ele.snippet.resourceId.videoId + "index" + i}
         >
-          <CardChakra
-            borderRadius="lg"
-            bg={
-              player.currentSong === ele.snippet.resourceId.videoId
-                ? "var(--chakra-colors-red-600)"
-                : null
-            }
-            color={
-              player.currentSong === ele.snippet.resourceId.videoId
-                ? "white"
-                : ""
-            }
-            _hover={{
-              background: "var(--chakra-colors-red-600)",
-              color: "white",
-            }}
+          <div
+          className={`${player.currentSong === ele.snippet.resourceId.videoId
+                 ? "bg-[#bb86fc]"
+                 : null} truncate overflow-hidden hover:bg-[#bb86fc]`}
+            // borderRadius="lg"
+            // bg={
+            //   player.currentSong === ele.snippet.resourceId.videoId
+            //     ? "var(--chakra-colors-red-600)"
+            //     : null
+            // }
+            // color={
+            //   player.currentSong === ele.snippet.resourceId.videoId
+            //     ? "white"
+            //     : ""
+            // }
+            // _hover={{
+            //   background: "var(--chakra-colors-red-600)",
+            //   color: "white",
+            // }}
           >
-            <Flex>
-              <Image
-                loading="lazy"
-                borderRadius="lg"
+            <div className="flex">
+              <img
+              className="w-10 h-10"
+                // loading="lazy"
+                // borderRadius="lg"
                 src={ele.snippet.thumbnails.default?.url}
                 alt="song image"
-                boxSize={["40px", "40px", "65px"]}
-                objectFit="none"
+                // boxSize={["40px", "40px", "65px"]}
+                // objectFit="none"
               />
-              <Box ml={"1"} className="cardText">
-                <Heading size={["xs", "xs", "sm", "md"]}>
-                  <Text noOfLines={[1, 1, 2, 2]}>{ele.snippet.title}</Text>
-                </Heading>
+              <div 
+              // ml={"1"} 
+              className="cardText">
+                <p 
+                className="text-white"
+                // size={["xs", "xs", "sm", "md"]}>
+                //   <Text noOfLines={[1, 1, 2, 2]}
+                >
+                    {ele.snippet.title}
+                </p>
 
-                <Text noOfLines={"1"} className="cardArtist">
-                  {" "}
+                <p 
+                className="cardArtist text-white">
                   {ele.snippet.videoOwnerChannelTitle}
-                </Text>
-              </Box>
-            </Flex>
-          </CardChakra>
-        </CardChakra>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       ) : null
   );
   return (
-    <Box
+    <div
       passive="true"
-      className="cardContainer"
-      mt={["0", "4", "0", "0", "0"]}
-      overflowY={"scroll"}
-      h={["37vh", "37vh", "100%", "95%", "100%"]}
+      className="cardContainer h-[50vh]"
+      // mt={["0", "4", "0", "0", "0"]}
+      // overflowY={"scroll"}
+      // h={["37vh", "37vh", "100%", "95%", "100%"]}
     >
-      <UnorderedList
-        h={"100%"}
-        pt={"1"}
-        w={["95%", "95%", "95%", null, "100%"]}
-        margin={["0 auto", "0 auto", "0 auto", null]}
-        className="ulListCards"
+      <ul
+        // h={"100%"}
+        // pt={"1"}
+        // w={["95%", "95%", "95%", null, "100%"]}
+        // margin={["0 auto", "0 auto", "0 auto", null]}
+        className="ulListCards mt-1 h-full  overflow-y-auto "
       >
         {song}
-      </UnorderedList>
-    </Box>
+      </ul>
+    </div>
   );
 };
 

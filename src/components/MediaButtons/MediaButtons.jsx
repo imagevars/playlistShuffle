@@ -7,7 +7,6 @@ import {
   PLAYER_NEXTSONG,
   PLAYER_CURRENTSONG,
 } from "../../constants/playerTypes";
-import { Box, Flex, IconButton } from "@chakra-ui/react";
 import {
   BiPlayCircle,
   BiPauseCircle,
@@ -93,114 +92,76 @@ const MediaButtons = memo(
       }
     };
     return (
-      <Flex
-        flexDirection={"row"}
-        alignItems={"baseline"}
-        className="mediaButtons "
-        maxW={"100%"}
-      >
+      <div className=" text-white flex items-center ">
         {player.isLoopActive === true ? (
-          <Box passive="true" onClick={() => isLoopActive(false)}>
-            <IconButton
-              colorScheme="red"
-              size="2rem"
-              ml={"1.5"}
-              mr={"1.5"}
-              icon={<TbRepeatOnce size={45} />}
+          <div passive="true">
+            <TbRepeatOnce
+              className="cursor-pointer"
+              onClick={() => isLoopActive(false)}
+              size={45}
             />
-          </Box>
+          </div>
         ) : (
-          <Box>
-            <IconButton
-              colorScheme="red"
-              size="2rem"
-              ml={"1.5"}
-              passive="true"
+          <div>
+            <TbRepeatOff
+              className="cursor-pointer"
               onClick={() => isLoopActive(true)}
-              mr={"1.5"}
-              icon={<TbRepeatOff size={45} />}
+              size={45}
             />
-          </Box>
+          </div>
         )}
 
-        <Box>
-          <IconButton
-            passive="true"
-            onClick={handleClickPreviousButton}
-            colorScheme="red"
-            size="1.5rem"
-            ml={"1.5"}
-            mr={"1.5"}
-            icon={<BiSkipPreviousCircle size={45} />}
-          />
-        </Box>
+        <div>
+          {
+            <BiSkipPreviousCircle
+              className="cursor-pointer"
+              onClick={handleClickPreviousButton}
+              size={45}
+            />
+          }
+        </div>
         {player.isPlaying === true ? (
-          <Box>
-            <IconButton
-              passive="true"
-              colorScheme="red"
-              size="2rem"
-              ml={"1.5"}
-              mr={"1.5"}
+          <div>
+            <BiPauseCircle
+              className="cursor-pointer"
               onClick={() => isPlaying(false)}
-              icon={<BiPauseCircle size={55} />}
+              size={55}
             />
-          </Box>
+          </div>
         ) : (
-          <Box>
-            <IconButton
-              colorScheme="red"
-              size="2rem"
-              ml={"1.5"}
-              passive="true"
-              mr={"1.5"}
+          <div>
+            <BiPlayCircle
+              className="cursor-pointer"
               onClick={() => isPlaying(true)}
-              icon={<BiPlayCircle size={55} />}
+              size={55}
             />
-          </Box>
+          </div>
         )}
-        <Box>
-          <IconButton
+        <div>
+          <BiSkipNextCircle
+            className="cursor-pointer"
             onClick={handleClickNextButton}
-            colorScheme="red"
-            size="1.5rem"
-            passive="true"
-            ml={"1.5"}
-            mr={"1.5"}
-            icon={<BiSkipNextCircle size={45} />}
+            size={45}
           />
-        </Box>
+        </div>
         {player.isShuffleActive ? (
-          <Box>
-            <IconButton
+          <div>
+            <BiShuffle
+              className="cursor-pointer"
               onClick={handleClickShuffle}
-              bg={"red.800"}
-              color={"white"}
-              size="1.5rem"
-              passive="true"
-              ml={"1.5"}
-              mr={"1.5"}
-              _hover={{
-                background: "var(--chakra-colors-red-600)",
-                color: "white",
-              }}
-              icon={<BiShuffle size={45} />}
+              size={45}
             />
-          </Box>
+          </div>
         ) : (
-          <Box>
-            <IconButton
+          <div>
+            <BiShuffle
+              className="cursor-pointer"
               onClick={handleClickShuffle}
-              colorScheme="red"
-              size="1.5rem"
-              passive="true"
-              ml={"1.5"}
-              mr={"1.5"}
-              icon={<BiShuffle size={45} />}
+              size={45}
             />
-          </Box>
+          </div>
         )}
-      </Flex>
+      </div>
     );
   }
 );
