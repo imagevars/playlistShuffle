@@ -2,21 +2,19 @@ import React, { useEffect, useState, memo, useMemo } from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 
-const PlaylistInfo = memo(function ({ playlistDetails })  {
+const PlaylistInfo = memo(function ({ playlistDetails }) {
   const { id } = useParams();
   const [playlistInfo, setPlaylistInfo] = useState({
     name: "",
     image: "",
   });
 
-
-
   const info = useMemo(() => {
     return playlistDetails?.find((ele) => ele.playlistId === id);
   }, [playlistDetails, id]);
 
   useEffect(() => {
-    console.log("re render")
+    console.log("re render");
 
     setPlaylistInfo({
       name: info?.playlistName,
@@ -25,26 +23,13 @@ const PlaylistInfo = memo(function ({ playlistDetails })  {
   }, [info]);
 
   return (
-    <div
-    className="flex my-2"
-    //  alignItems={"center"}
-     >
+    <div className="flex my-2">
       <img
-        // boxSize={["35px", "40px", "45px", "60px"]}
-        // objectFit="cover"
-        // borderRadius="lg"
         className="w-9 h-9 rounded-sm"
         src={playlistInfo.image}
         alt={playlistInfo.name}
       />
-      <p
-      className="text-white"
-        // ml={"1"}
-        // noOfLines={["1", "1", "2", "2"]}
-        // size={["sm", "sm", "md", "md"]}
-      >
-        {playlistInfo.name}
-      </p>
+      <p className="text-white">{playlistInfo.name}</p>
     </div>
   );
 });

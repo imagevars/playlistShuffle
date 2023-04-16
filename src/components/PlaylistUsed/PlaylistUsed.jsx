@@ -37,14 +37,6 @@ const PlaylistUsed = ({
 
   const playlists = playlistDetails.map((element) => (
     <div
-      // w={"100%"}
-      // mt={2}
-      // display={"flex"}
-      // flexDirection={"row"}
-      // bg="red.500"
-      // borderRadius={"lg"}
-      // cursor={"pointer"}
-      // m={"16 0"}
       className="playlistUsedList cursor-pointer h-24 my-2 rounded-sm bg-[#bb86fc] flex justify-between w-full"
       key={element.playlistId}
     >
@@ -53,27 +45,15 @@ const PlaylistUsed = ({
         onClick={() => handleClickPlaylist(element.playlistId)}
       >
         <img
-          // borderRadius="5% 0 0 5%"
-          // alt={element.playlistName}
-          // boxSize={["75px", "85px", "120px"]}
-          // objectFit="cover"
           className="object-cover w-24 h-24 rounded-l-sm"
           src={element.PlaylistImage}
         />
-        <p
-          // mt={"1.5"}
-          // size={["md", "md", "lg"]}
-          // noOfLines={"2"}
-          className="usedPlaylistName  text-lg font-semibold text-white"
-        >
+        <p className="usedPlaylistName  text-lg font-semibold text-white">
           {element.playlistName}
         </p>
       </div>
 
       <button
-        // ml={["5px", "5px", "15px", "15px"]}
-        // colorScheme="whiteAlpha"
-        // color={"white"}
         className="playlistUsedButton mx-1 text-lg text-white font-medium  self-baseline"
         onClick={() => handleDeleteFromPlaylist(element.playlistId)}
       >

@@ -9,19 +9,11 @@ const HomePage = () => {
     return navigate("/");
   };
   return (
-    <div
-      // h="calc(100vh)" w="100%" maxWidth="2266px"
-      className="min-h-screen bg-slate-800"
-    >
-      <div className=" align-middle  w-10/12 flex  mx-auto" >
-        <div
-        className="w-full"
-        //  w="85%" m={"0 auto"}
-        >
+    <div className="min-h-screen bg-slate-800">
+      <div className=" align-middle  w-10/12 flex  mx-auto">
+        <div className="w-full">
           <h1
             onClick={handleClick}
-            // cursor={"pointer"}
-            // color={"black"}
             className="text-4xl text-center text-white font-bold cursor-pointer"
           >
             Playlist Shuffle

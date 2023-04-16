@@ -122,19 +122,14 @@ const PlaylistPage = ({
     };
   }, [player]);
 
-  // const PlaylistInfo = lazy(() => import("../PlaylistInfo/PlaylistInfo"))
-
   return (
     <div
       ref={ref}
+      tabIndex={0}
       passive="true"
-      // tabIndex={0}
       className="min-h-screen bg-slate-800 w-full"
-      // w="100%"
-      // h={"100vh"}
-      // maxWidth="1866px"
     >
-      <div className="w-[95%] mx-auto">
+      <div className="w-[95%] lg:max-w-[2200px] mx-auto">
         <HelmetHelper
           title={
             currentSongName
@@ -144,68 +139,24 @@ const PlaylistPage = ({
         />
         <Navbar />
 
-        <div
-          className=" "
-          //  justify={["center", "center", "left", "left"]} mb={"1.5"}
-        >
+        <div className=" ">
           <PlaylistInfo />
         </div>
 
-        <div
-          className="div"
-          // w={["98%", "98%", "98%", "95%"]}
-          // m={"0 auto"}
-          // display={"flex"}
-          // justifyContent={"center"}
-        >
-          <div
-            className="mainContent lg:flex"
-            // h={["100%", "100%", "65vh", "65vh", "65vh", "65vh"]}
-            // maxH={"1900px"}
-            // flexDirection={["column", "column", "row"]}
-            // alignItems={["center", "center", "center", "inherit"]}
-            // w={"100%"}
-          >
-            <div
-            // w={["100%", "100%", "40%", "40%"]}
-            // h={["30vh", "30vh", "100%", "100%"]}
-            // maxH={"1900px"}
-            className="lg:w-2/5"
-            >
+        <div className="div">
+          <div className="mainContent lg:flex">
+            <div className="lg:w-2/5">
               <Player />
             </div>
-            <div
-            className=" h-3/5 mt-6 w-[97%]  lg:mt-0 mx-auto lg:w-[55%]"
-            // mt={["10px", "10px", "0", "0"]}
-            // w={["100%", "100%", "100%", "50%"]}
-            // h={["100%", "100%", "100%", "100%"]}
-            // maxH={"1900px"}
-            >
+            <div className=" h-3/5 mt-6 w-[97%]  lg:mt-0 mx-auto lg:w-[55%]">
               <VideoCard />
             </div>
           </div>
-          <div
-            className="bottomMedia bg-[#bb86fc] fixed bottom-0 left-0 right-0"
-            // minW={"100%"}
-            // position={"fixed"}
-            // bottom={"0"}
-            // h={["18%", "14%"]}
-            // left={"0"}
-            // bg={"red.100"}
-            // display={"flex"}
-            // pt={["1", "1", "5"]}
-            // pb={[null, null, "2"]}
-            // flexDirection={["column", "column", "row", "row"]}
-            // justifyContent={["center"]}
-          >
+          <div className="bottomMedia bg-[#bb86fc] fixed bottom-0 left-0 right-0">
             <div>
               <PlayingRightNow />
             </div>
-            <div
-              // justify={"center"}
-              // alignItems={"center"}
-              className="mediaButtonsContainer flex justify-center"
-            >
+            <div className="mediaButtonsContainer flex justify-center">
               <MediaButtons />
             </div>
           </div>

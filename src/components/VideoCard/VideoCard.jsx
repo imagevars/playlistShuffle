@@ -24,7 +24,6 @@ const VideoCard = ({
     {}
   );
 
-
   useEffect(() => {
     refs[player.currentSong].current.scrollIntoView({
       block: "start",
@@ -94,60 +93,32 @@ const VideoCard = ({
       ele.snippet.title !== "Private video" &&
       ele.snippet.title !== "Deleted video" ? (
         <div
-        className="mx-2 my-1 cursor-pointer  "
-          // borderRadius="lg"
-          // w={["95%", "90%"]}
-          // cursor={"pointer"}
+          className="mx-2 my-1 cursor-pointer  "
           title={ele.snippet.title}
-          // m={"2"}
           ref={refs[ele.snippet.resourceId.videoId]}
           id={`${ele.snippet.resourceId.videoId}`}
           onClick={() => handleClick(ele.snippet.resourceId.videoId)}
           key={ele.snippet.resourceId.videoId + "index" + i}
         >
           <div
-          className={`${player.currentSong === ele.snippet.resourceId.videoId
-                 ? "bg-[#bb86fc]"
-                 : null}  overflow-hidden hover:bg-[#bb86fc] h-11 lg:h-14 rounded-sm`}
-            // borderRadius="lg"
-            // bg={
-            //   player.currentSong === ele.snippet.resourceId.videoId
-            //     ? "var(--chakra-colors-red-600)"
-            //     : null
-            // }
-            // color={
-            //   player.currentSong === ele.snippet.resourceId.videoId
-            //     ? "white"
-            //     : ""
-            // }
-            // _hover={{
-            //   background: "var(--chakra-colors-red-600)",
-            //   color: "white",
-            // }}
+            className={`${
+              player.currentSong === ele.snippet.resourceId.videoId
+                ? "bg-[#bb86fc]"
+                : null
+            }  overflow-hidden hover:bg-[#bb86fc] h-11 lg:h-14 rounded-sm`}
           >
             <div className="flex h-full">
               <img
-              className="w-10  h-full object-cover rounded-l-sm"
-                // loading="lazy"
-                // borderRadius="lg"
+                className="w-10  h-full object-cover rounded-l-sm"
                 src={ele.snippet.thumbnails.default?.url}
                 alt="song image"
-                // boxSize={["40px", "40px", "65px"]}
-                // objectFit="none"
               />
-              <div 
-              // ml={"1"} 
-              className="cardText">
-                <p 
-                className="text-white truncate w-full xl:text-lg"
-                // size={["xs", "xs", "sm", "md"]}>
-                //   <Text noOfLines={[1, 1, 2, 2]}
-                >
-                    {ele.snippet.title}
+              <div className="cardText">
+                <p className="text-white truncate w-full xl:text-lg">
+                  {ele.snippet.title}
                 </p>
 
-                <p 
-                className="cardArtist text-white truncate xl:text-lg">
+                <p className="cardArtist text-white truncate xl:text-lg">
                   {ele.snippet.videoOwnerChannelTitle}
                 </p>
               </div>
@@ -157,22 +128,8 @@ const VideoCard = ({
       ) : null
   );
   return (
-    <div
-      passive="true"
-      className="cardContainer h-[50vh]"
-      // mt={["0", "4", "0", "0", "0"]}
-      // overflowY={"scroll"}
-      // h={["37vh", "37vh", "100%", "95%", "100%"]}
-    >
-      <ul
-        // h={"100%"}
-        // pt={"1"}
-        // w={["95%", "95%", "95%", null, "100%"]}
-        // margin={["0 auto", "0 auto", "0 auto", null]}
-        className="ulListCards mt-1 h-full  overflow-y-auto "
-      >
-        {song}
-      </ul>
+    <div passive="true" className="cardContainer h-[50vh]">
+      <ul className="ulListCards mt-1 h-full  overflow-y-auto ">{song}</ul>
     </div>
   );
 };

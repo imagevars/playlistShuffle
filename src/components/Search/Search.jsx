@@ -15,7 +15,6 @@ import {
 } from "../../constants/playlistDetailsTypes";
 import fetchPlaylistData from "../utils/fetchPlaylistData";
 
-
 const Search = ({
   playlistDetails,
   currentSong,
@@ -30,7 +29,6 @@ const Search = ({
   const [isloadingButton, setisLoadingButton] = useState(false);
   const [isIdInvalid, setIsIdInvalid] = useState(false);
   const navigate = useNavigate();
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -88,34 +86,29 @@ const Search = ({
     setPlaylistId(e.target.value);
   };
   return (
-    <div   className="searchContainer w-11/12 mx-auto ">
-      <form  className=""
-      //  isInvalid={isIdInvalid} 
-        onSubmit={(e) => handleSubmit(e)}>
-          <div className="w-full flex h-12 justify-between">
-            <input
-
-              // variant="outline"
-              // size="lg"
-              className="inputSearch h-full rounded-sm w-5/6  "
-              pattern="^(?=.*.{24,})(?=.*PL).*"
-              type="text"
-              required
-              onChange={(e) => handleChange(e)}
-              value={playlistId}
-            />
-            <button
-              // isLoading={isloadingButton ? true : false}
-              // colorScheme="red"
-              // ml={"1.5"}
-              // size="lg"
-              className="submitBtn w-[13%] h-full bg-[#bb86fc] font-medium text-white  rounded-sm "
-              type="submit"
-            >
-              Play
-            </button>
-          </div>
-          {/* {isIdInvalid ? (
+    <div className="searchContainer w-11/12 mx-auto ">
+      <form
+        className=""
+        //  isInvalid={isIdInvalid}
+        onSubmit={(e) => handleSubmit(e)}
+      >
+        <div className="w-full flex h-12 justify-between">
+          <input
+            className="inputSearch h-full rounded-sm w-5/6  "
+            pattern="^(?=.*.{24,})(?=.*PL).*"
+            type="text"
+            required
+            onChange={(e) => handleChange(e)}
+            value={playlistId}
+          />
+          <button
+            className="submitBtn w-[13%] h-full bg-[#bb86fc] font-medium text-white  rounded-sm "
+            type="submit"
+          >
+            Play
+          </button>
+        </div>
+        {/* {isIdInvalid ? (
             <FormErrorMessage>
               THE ID OR URL IS NOT A VALID ONE{" "}
             </FormErrorMessage>

@@ -1,5 +1,4 @@
 import React, { memo } from "react";
-// import Search from '../Search/Search'
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import {
@@ -10,7 +9,8 @@ import {
   PLAYER_PREVIOUSSONG,
   PLAYER_SETCURRENTACTIVEPLAYLIST,
 } from "../../constants/playerTypes";
-const Navbar = ({isPlaying,
+const Navbar = ({
+  isPlaying,
   previousSong,
   currentSong,
   nextSong,
@@ -31,11 +31,9 @@ const Navbar = ({isPlaying,
   return (
     <div className="navbar">
       <h1
-      className="text-4xl text-center text-white font-bold cursor-pointer"
+        className="text-4xl text-center text-white font-bold cursor-pointer"
         cursor={"pointer"}
         onClick={handleClick}
-        // m={"0 auto"}
-        // color={"black"}
       >
         Playlist Shuffle{" "}
       </h1>

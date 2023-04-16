@@ -96,14 +96,7 @@ const Player = ({
   };
 
   return (
-    <div
-      // w={"100%"}
-      // h={["100%"]}
-      // passive="true"
-      // _before={{ pb: "0" }}
-      // ratio={1}
-      className="player aspect-auto lg:w-full lg:h-full	"
-    >
+    <div className="player aspect-auto lg:w-full lg:h-full	">
       <ReactPlayer
         passive="true"
         onError={() => handleError()}
