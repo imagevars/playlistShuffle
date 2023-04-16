@@ -87,14 +87,15 @@ const Search = ({
   };
   return (
     <div className="searchContainer w-11/12 mx-auto ">
-      <form
-        className=""
-        //  isInvalid={isIdInvalid}
-        onSubmit={(e) => handleSubmit(e)}
-      >
+      <form className="" onSubmit={(e) => handleSubmit(e)}>
+        <label className="text-white">{`${
+          isIdInvalid ? "Invalid playlist" : "Enter a playlist:"
+        }`}</label>
         <div className="w-full flex h-12 justify-between">
           <input
-            className="inputSearch h-full rounded-sm w-5/6  "
+            className={`inputSearch h-full rounded-sm w-5/6   ${
+              isIdInvalid ? "border border-red-500" : ""
+            }`}
             pattern="^(?=.*.{24,})(?=.*PL).*"
             type="text"
             required
