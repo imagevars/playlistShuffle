@@ -30,7 +30,7 @@ const PlayingRightNow = memo(({ player, playlistSongsById }) => {
           // textAlign={"center"}
           // width={"100%"}
           // color={"var(--chakra-colors-red-600)"}
-          className="songTitle text-white text-center truncate"
+          className="songTitle text-white text-center truncate mx-auto w-[95%]"
           // size={["sm", "sm", "md", "md", "md", "md"]}
           // maxW={["60", "60", "60", "60", "60"]}
         >

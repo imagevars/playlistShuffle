@@ -102,7 +102,7 @@ const Player = ({
       // passive="true"
       // _before={{ pb: "0" }}
       // ratio={1}
-      className="player"
+      className="player aspect-auto lg:w-full lg:h-full	"
     >
       <ReactPlayer
         passive="true"

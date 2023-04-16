@@ -94,7 +94,7 @@ const VideoCard = ({
       ele.snippet.title !== "Private video" &&
       ele.snippet.title !== "Deleted video" ? (
         <div
-        className="mx-2 my-1 cursor-pointer"
+        className="mx-2 my-1 cursor-pointer  "
           // borderRadius="lg"
           // w={["95%", "90%"]}
           // cursor={"pointer"}
@@ -108,7 +108,7 @@ const VideoCard = ({
           <div
           className={`${player.currentSong === ele.snippet.resourceId.videoId
                  ? "bg-[#bb86fc]"
-                 : null} truncate overflow-hidden hover:bg-[#bb86fc]`}
+                 : null}  overflow-hidden hover:bg-[#bb86fc] h-11 lg:h-14 rounded-sm`}
             // borderRadius="lg"
             // bg={
             //   player.currentSong === ele.snippet.resourceId.videoId
@@ -125,9 +125,9 @@ const VideoCard = ({
             //   color: "white",
             // }}
           >
-            <div className="flex">
+            <div className="flex h-full">
               <img
-              className="w-10 h-10"
+              className="w-10  h-full object-cover rounded-l-sm"
                 // loading="lazy"
                 // borderRadius="lg"
                 src={ele.snippet.thumbnails.default?.url}
@@ -139,7 +139,7 @@ const VideoCard = ({
               // ml={"1"} 
               className="cardText">
                 <p 
-                className="text-white"
+                className="text-white truncate w-full xl:text-lg"
                 // size={["xs", "xs", "sm", "md"]}>
                 //   <Text noOfLines={[1, 1, 2, 2]}
                 >
@@ -147,7 +147,7 @@ const VideoCard = ({
                 </p>
 
                 <p 
-                className="cardArtist text-white">
+                className="cardArtist text-white truncate xl:text-lg">
                   {ele.snippet.videoOwnerChannelTitle}
                 </p>
               </div>

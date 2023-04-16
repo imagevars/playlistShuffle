@@ -159,7 +159,7 @@ const PlaylistPage = ({
           // justifyContent={"center"}
         >
           <div
-            className="mainContent"
+            className="mainContent lg:flex"
             // h={["100%", "100%", "65vh", "65vh", "65vh", "65vh"]}
             // maxH={"1900px"}
             // flexDirection={["column", "column", "row"]}
@@ -170,11 +170,12 @@ const PlaylistPage = ({
             // w={["100%", "100%", "40%", "40%"]}
             // h={["30vh", "30vh", "100%", "100%"]}
             // maxH={"1900px"}
+            className="lg:w-2/5"
             >
               <Player />
             </div>
             <div
-            className=" h-3/5 mt-6 w-[97%] mx-auto"
+            className=" h-3/5 mt-6 w-[97%]  lg:mt-0 mx-auto lg:w-[55%]"
             // mt={["10px", "10px", "0", "0"]}
             // w={["100%", "100%", "100%", "50%"]}
             // h={["100%", "100%", "100%", "100%"]}
