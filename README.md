@@ -1,4 +1,4 @@
-live at https://jooonathann.github.io/playlistShuffle/
+live at https://playlist-shuffle.vercel.app/
 # Playlist Shuffle - A better algorithm than Youtube's
 
 Playlist Shuffle - A web application with a better algorithm than YouTube's for playlist shuffling. Shuffle your music and videos in a smarter way and enjoy an improved listening experience.
