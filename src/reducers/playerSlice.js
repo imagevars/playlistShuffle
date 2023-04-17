@@ -10,14 +10,14 @@ import {
 } from "../constants/playerTypes";
 
 const initialState = {
-  isPlaying: false,
+  isPlaying: true,
   previousSong: "",
   currentSong: "",
   nextSong: "",
   isShuffleActive: false,
   isLoopActive: false,
   currentActivePlaylistId: "",
-  isMutedActive: false,
+  isMutedActive: true,
 };
 
 export default function playerReducer(state = initialState, action) {
