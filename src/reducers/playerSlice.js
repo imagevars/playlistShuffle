@@ -17,7 +17,7 @@ const initialState = {
   isShuffleActive: false,
   isLoopActive: false,
   currentActivePlaylistId: "",
-  isMutedActive: true,
+  isMutedActive: false,
 };
 
 export default function playerReducer(state = initialState, action) {
