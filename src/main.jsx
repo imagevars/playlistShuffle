@@ -10,12 +10,12 @@ import "./app.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <HelmetProvider>
-    <BrowserRouter basename="/playlistShuffle">
-        <Provider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
-            <App />
-          </PersistGate>
-        </Provider>
+    <BrowserRouter>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <App />
+        </PersistGate>
+      </Provider>
     </BrowserRouter>
   </HelmetProvider>
 );

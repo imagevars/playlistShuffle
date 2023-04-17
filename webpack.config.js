@@ -17,7 +17,7 @@ module.exports = {
   mode: isDevelopment ? "development" : "production",
   entry: ["./src/main.jsx", "./src/app.css"],
   output: {
-    publicPath: "/playlistShuffle",
+    publicPath: "/",
     path: path.join(process.cwd(), "dist"),
     filename: "[name].bundle.js",
     chunkFilename: "[name].[contenthash].js",
@@ -90,7 +90,7 @@ module.exports = {
       },
     },
     historyApiFallback: {
-      index: "/playlistShuffle",
+      index: "/",
     },
 
     static: {
