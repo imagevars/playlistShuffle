@@ -92,7 +92,7 @@ const VideoCard = ({
     (ele, i) =>
       ele.snippet.title !== "Private video" &&
       ele.snippet.title !== "Deleted video" ? (
-        <div
+        <li
           className="mx-2 my-1 cursor-pointer  "
           title={ele.snippet.title}
           ref={refs[ele.snippet.resourceId.videoId]}
@@ -125,7 +125,7 @@ const VideoCard = ({
               </div>
             </div>
           </div>
-        </div>
+        </li>
       ) : null
   );
   return (
