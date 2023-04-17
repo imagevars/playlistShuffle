@@ -10,7 +10,7 @@ import {
 } from "../constants/playerTypes";
 
 const initialState = {
-  isPlaying: true,
+  isPlaying: false,
   previousSong: "",
   currentSong: "",
   nextSong: "",
