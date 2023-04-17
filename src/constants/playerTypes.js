@@ -11,3 +11,5 @@ export const PLAYER_CURRENTSONG = "player/currentSong";
 export const PLAYER_NEXTSONG = "player/nextSong";
 
 export const PLAYER_SETCURRENTACTIVEPLAYLIST = "player/setcurrentActivePlaylistId";
+
+export const PLAYER_ISMUTEDACTIVE = "player/isMutedActive";

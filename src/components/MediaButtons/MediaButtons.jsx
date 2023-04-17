@@ -6,6 +6,7 @@ import {
   PLAYER_PREVIOUSSONG,
   PLAYER_NEXTSONG,
   PLAYER_CURRENTSONG,
+  PLAYER_ISMUTEDACTIVE,
 } from "../../constants/playerTypes";
 import {
   BiPlayCircle,
@@ -13,6 +14,8 @@ import {
   BiShuffle,
   BiSkipPreviousCircle,
   BiSkipNextCircle,
+  BiVolumeMute,
+  BiVolumeFull,
 } from "react-icons/bi";
 import { TbRepeatOff, TbRepeatOnce } from "react-icons/tb";
 import { connect } from "react-redux";
@@ -27,6 +30,7 @@ const MediaButtons = memo(
     currentSong,
     nextSong,
     playlistSongsById,
+    isMutedActive,
   }) => {
     const playPauseButton = (e) => {
       isPlaying(e);
@@ -93,6 +97,16 @@ const MediaButtons = memo(
     };
     return (
       <div className=" text-white flex items-center ">
+        {player.isMutedActive === true ? (
+          <div>
+            <BiVolumeMute size={45} onClick={() => isMutedActive(false)} />
+          </div>
+        ) : (
+          <div className="cursor-pointer">
+            <BiVolumeFull size={45} onClick={() => isMutedActive(true)} />
+          </div>
+        )}
+
         {player.isLoopActive === true ? (
           <div passive="true">
             <TbRepeatOnce
@@ -183,6 +197,8 @@ const mapDispatchToProps = (dispatch) => {
     previousSong: (payload) => dispatch({ type: PLAYER_PREVIOUSSONG, payload }),
     currentSong: (payload) => dispatch({ type: PLAYER_CURRENTSONG, payload }),
     nextSong: (payload) => dispatch({ type: PLAYER_NEXTSONG, payload }),
+    isMutedActive: (payload) =>
+      dispatch({ type: PLAYER_ISMUTEDACTIVE, payload }),
   };
 };
 

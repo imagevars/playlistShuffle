@@ -6,6 +6,7 @@ import {
   PLAYER_CURRENTSONG,
   PLAYER_NEXTSONG,
   PLAYER_SETCURRENTACTIVEPLAYLIST,
+  PLAYER_ISMUTEDACTIVE,
 } from "../constants/playerTypes";
 
 const initialState = {
@@ -16,6 +17,7 @@ const initialState = {
   isShuffleActive: false,
   isLoopActive: false,
   currentActivePlaylistId: "",
+  isMutedActive: false,
 };
 
 export default function playerReducer(state = initialState, action) {
@@ -40,6 +42,9 @@ export default function playerReducer(state = initialState, action) {
     }
     case PLAYER_SETCURRENTACTIVEPLAYLIST: {
       return { ...state, currentActivePlaylistId: action.payload };
+    }
+    case PLAYER_ISMUTEDACTIVE: {
+      return { ...state, isMutedActive: action.payload };
     }
 
     default:

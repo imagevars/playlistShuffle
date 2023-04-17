@@ -1,6 +1,7 @@
 import React, { memo } from "react";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
+
 import {
   PLAYER_ISPLAYING,
   PLAYER_ISSHUFFLEACTIVE,
@@ -29,9 +30,9 @@ const Navbar = ({
     return navigate("/");
   };
   return (
-    <div className="navbar">
+    <div className="navbar flex justify-center">
       <h1
-        className="text-4xl text-center text-white font-bold cursor-pointer"
+        className="navbar text-4xl  text-white font-bold cursor-pointer"
         cursor={"pointer"}
         onClick={handleClick}
       >

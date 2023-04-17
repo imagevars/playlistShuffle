@@ -109,6 +109,7 @@ const VideoCard = ({
           >
             <div className="flex h-full">
               <img
+                loading="lazy"
                 className="w-10  h-full object-cover rounded-l-sm"
                 src={ele.snippet.thumbnails.default?.url}
                 alt="song image"
@@ -128,7 +129,7 @@ const VideoCard = ({
       ) : null
   );
   return (
-    <div passive="true" className="cardContainer h-[50vh]">
+    <div passive="true" className="cardContainer h-[46vh]">
       <ul className="ulListCards mt-1 h-full  overflow-y-auto ">{song}</ul>
     </div>
   );

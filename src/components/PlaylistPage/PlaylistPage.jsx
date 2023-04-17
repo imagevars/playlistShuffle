@@ -8,6 +8,7 @@ import {
   PLAYER_ISLOOPACTIVE,
   PLAYER_NEXTSONG,
   PLAYER_PREVIOUSSONG,
+  PLAYER_ISMUTEDACTIVE,
 } from "../../constants/playerTypes";
 import PlayingRightNow from "../PlayingRightNow/PlayingRightNow";
 import Navbar from "../Navbar/Navbar";
@@ -25,6 +26,7 @@ const PlaylistPage = ({
   previousSong,
   nextSong,
   playlistSongsById,
+  isMutedActive,
 }) => {
   const [currentSongName, setCurrentSongName] = useState("");
   const { id } = useParams();
@@ -54,6 +56,10 @@ const PlaylistPage = ({
         }
         case "KeyS": {
           isShuffleActive(player.isShuffleActive === true ? false : true);
+          break;
+        }
+        case "KeyM": {
+          isMutedActive(player.isMutedActive === true ? false : true);
           break;
         }
         case "ArrowLeft": {
@@ -127,9 +133,12 @@ const PlaylistPage = ({
       ref={ref}
       tabIndex={0}
       passive="true"
-      className="min-h-screen bg-slate-800 w-full"
+      className="min-h-screen bg-[#121212] w-full"
     >
-      <div className="w-[95%] lg:max-w-[2200px] mx-auto">
+      <div
+        className="w-[95%] lg:max-w-[2200px] mx-auto 
+      "
+      >
         <HelmetHelper
           title={
             currentSongName
@@ -175,6 +184,8 @@ const mapDispatchToProps = (dispatch) => {
     previousSong: (payload) => dispatch({ type: PLAYER_PREVIOUSSONG, payload }),
     currentSong: (payload) => dispatch({ type: PLAYER_CURRENTSONG, payload }),
     nextSong: (payload) => dispatch({ type: PLAYER_NEXTSONG, payload }),
+    isMutedActive: (payload) =>
+      dispatch({ type: PLAYER_ISMUTEDACTIVE, payload }),
   };
 };
 

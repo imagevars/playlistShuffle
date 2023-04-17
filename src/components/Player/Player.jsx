@@ -97,7 +97,13 @@ const Player = ({
 
   return (
     <div className="player aspect-auto lg:w-full lg:h-full	">
+      {/* https://img.youtube.com/vi/Eeb4aZObp-0/0.jpg
+DEFER LOADING UPPP */}
       <ReactPlayer
+        //not working yet
+        // fallback={`https://img.youtube.com/vi/${player.currentSong}.jpg`}
+        valume={null}
+        muted={player.isMutedActive}
         passive="true"
         onError={() => handleError()}
         onPlay={() => handlePlay()}
