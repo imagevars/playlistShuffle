@@ -16,7 +16,7 @@ const PlaylistInfo = memo(function ({ playlistDetails }) {
   useEffect(() => {
     setPlaylistInfo({
       name: info?.playlistName,
-      image: info?.PlaylistImage,
+      image: info?.playlistImage,
     });
   }, [info]);
 

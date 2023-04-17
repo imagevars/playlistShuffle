@@ -46,7 +46,8 @@ const PlaylistUsed = ({
       >
         <img
           className="object-cover w-24 h-24 rounded-l-sm"
-          src={element.PlaylistImage}
+          alt={`${element.playlistName} image`}
+          src={element.playlistImage}
         />
         <p className="usedPlaylistName  text-lg font-semibold text-white">
           {element.playlistName}

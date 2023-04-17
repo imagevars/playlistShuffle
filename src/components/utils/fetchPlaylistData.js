@@ -16,7 +16,7 @@ const fetchPlaylistData = async (id, etag) => {
     playlistDetailsObject = {
       playlistName: playlistDetailsQuery.data.items[0].snippet.title,
       playlistId: playlistDetailsQuery.data.items[0].id,
-      PlaylistImage:
+      playlistImage:
         playlistDetailsQuery.data.items[0].snippet.thumbnails.medium.url,
       playlistEtag: etag,
     };

@@ -98,6 +98,7 @@ const Search = ({
               isIdInvalid ? "border border-red-500" : ""
             }`}
             pattern="^(?=.*.{24,})(?=.*PL).*"
+            placeholder="ID or URL"
             type="text"
             required
             onChange={(e) => handleChange(e)}

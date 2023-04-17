@@ -98,78 +98,78 @@ const MediaButtons = memo(
     return (
       <div className=" text-white flex items-center ">
         {player.isMutedActive === true ? (
-          <div>
+          <div  className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
             <BiVolumeMute size={45} onClick={() => isMutedActive(false)} />
           </div>
         ) : (
-          <div className="cursor-pointer">
+          <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
             <BiVolumeFull size={45} onClick={() => isMutedActive(true)} />
           </div>
         )}
 
         {player.isLoopActive === true ? (
-          <div passive="true">
+          <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
             <TbRepeatOnce
-              className="cursor-pointer"
+              
               onClick={() => isLoopActive(false)}
               size={45}
             />
           </div>
         ) : (
-          <div>
+          <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
             <TbRepeatOff
-              className="cursor-pointer"
+              
               onClick={() => isLoopActive(true)}
               size={45}
             />
           </div>
         )}
 
-        <div>
+        <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
           {
             <BiSkipPreviousCircle
-              className="cursor-pointer"
+              
               onClick={handleClickPreviousButton}
               size={45}
             />
           }
         </div>
         {player.isPlaying === true ? (
-          <div>
+          <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
             <BiPauseCircle
-              className="cursor-pointer"
+              
               onClick={() => isPlaying(false)}
               size={55}
             />
           </div>
         ) : (
-          <div>
+          <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
             <BiPlayCircle
-              className="cursor-pointer"
+              
               onClick={() => isPlaying(true)}
               size={55}
             />
           </div>
         )}
-        <div>
+        <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
           <BiSkipNextCircle
-            className="cursor-pointer"
+            
             onClick={handleClickNextButton}
             size={45}
           />
         </div>
         {player.isShuffleActive ? (
-          <div>
+          <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
             <BiShuffle
-              className="cursor-pointer"
+              
               onClick={handleClickShuffle}
               size={45}
             />
           </div>
         ) : (
-          <div>
+          <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
             <BiShuffle
-              className="cursor-pointer"
+              
               onClick={handleClickShuffle}
               size={45}
             />

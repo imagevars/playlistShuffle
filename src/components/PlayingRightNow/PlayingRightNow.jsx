@@ -10,10 +10,9 @@ const PlayingRightNow = memo(({ player, playlistSongsById }) => {
   return (
     <div>
       <div>
-        <p className="songTitle text-white text-center truncate mx-auto w-[95%]">
+        <p className="songTitle text-white text-center lg:text-2xl truncate mx-auto w-[95%]">
           {
-            playlistSongsById[player.currentActivePlaylistId][currentIndex]
-              .snippet.title
+            playlistSongsById[player.currentActivePlaylistId][currentIndex].snippet.title
           }
         </p>
       </div>
