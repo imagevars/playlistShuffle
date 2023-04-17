@@ -115,7 +115,7 @@ DEFER LOADING UPPP */}
         controls={true}
         loop={player.isLoopActive}
         playing={player.isPlaying}
-        url={`https://www.youtube.com/watch?v=${player.currentSong}`}
+        url={`https://www.youtube.com/embed/${player.currentSong}`}
       />
     </div>
   );
