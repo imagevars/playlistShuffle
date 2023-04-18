@@ -1,11 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 import {
   PLAYLISTDETAILS_DELETEFROMPLAYLISTDETAILS,
   PLAYLISTDETAILS_ETAG,
   PLAYLISTDETAILS_ADDTOPLAYLISTDETAILS,
 } from "../../constants/playlistDetailsTypes";
 import fetchPlaylistVideos from "../utils/fetchPlaylistVideos";
+import fetchPlaylistData from "../utils/fetchPlaylistData";
 import {
   PLAYLISTSONGS_ADDSONGSBYPLAYLISTID,
   PLAYLISTSONGS_REMOVEPLAYLISTSONGSBYID,
@@ -16,15 +19,11 @@ import {
   PLAYER_CURRENTSONG,
   PLAYER_ISPLAYING,
 } from "../../constants/playerTypes";
-import fetchPlaylistData from "../utils/fetchPlaylistData";
-import { useNavigate } from "react-router-dom";
-
 const PlaylistUsed = ({
   playlistDetails,
   addToPlaylistDetails,
   nextSong,
   playlistSongsById,
-  player,
   isPlaying,
   deleteFromPlaylistDetails,
   addSongsByPlaylistID,
@@ -117,11 +116,30 @@ const PlaylistUsed = ({
     </div>
   );
 };
+
+PlaylistUsed.proptypes = {
+  playlistDetails: PropTypes.arrayOf(
+    PropTypes.shape({
+      playlistName: PropTypes.string.isRequired,
+      playlistId: PropTypes.string.isRequired,
+      playlistImage: PropTypes.string.isRequired,
+      playlistEtag: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  addToPlaylistDetails: PropTypes.func.isRequired,
+  nextSong: PropTypes.func,  playlistSongsById: PropTypes.object.isRequired,
+  isPlaying: PropTypes.func.isRequired,
+  deleteFromPlaylistDetails: PropTypes.func.isRequired,
+  addSongsByPlaylistID: PropTypes.func.isRequired,
+  setcurrentActivePlaylistId: PropTypes.func.isRequired,
+  removePlaylistSongsById: PropTypes.func.isRequired,
+  currentSong: PropTypes.func.isRequired,
+  modifyEtagInPlaylistDetailsById: PropTypes.func.isRequired,
+};
+
 const mapStateToProps = (state) => {
   return {
     playlistSongsById: state.playlistSongsById,
-    songs: state.songs,
-    player: state.player,
     playlistDetails: state.playlistDetails,
   };
 };

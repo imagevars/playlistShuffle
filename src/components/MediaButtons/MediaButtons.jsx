@@ -17,6 +17,7 @@ import {
   BiVolumeMute,
   BiVolumeFull,
 } from "react-icons/bi";
+import PropTypes from "prop-types";
 import { TbRepeatOff, TbRepeatOnce } from "react-icons/tb";
 import { connect } from "react-redux";
 
@@ -98,7 +99,7 @@ const MediaButtons = memo(
     return (
       <div className=" text-white flex items-center ">
         {player.isMutedActive === true ? (
-          <div  className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
+          <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
             <BiVolumeMute size={45} onClick={() => isMutedActive(false)} />
           </div>
         ) : (
@@ -109,26 +110,17 @@ const MediaButtons = memo(
 
         {player.isLoopActive === true ? (
           <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
-            <TbRepeatOnce
-              
-              onClick={() => isLoopActive(false)}
-              size={45}
-            />
+            <TbRepeatOnce onClick={() => isLoopActive(false)} size={45} />
           </div>
         ) : (
           <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
-            <TbRepeatOff
-              
-              onClick={() => isLoopActive(true)}
-              size={45}
-            />
+            <TbRepeatOff onClick={() => isLoopActive(true)} size={45} />
           </div>
         )}
 
         <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
           {
             <BiSkipPreviousCircle
-              
               onClick={handleClickPreviousButton}
               size={45}
             />
@@ -136,49 +128,50 @@ const MediaButtons = memo(
         </div>
         {player.isPlaying === true ? (
           <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
-            <BiPauseCircle
-              
-              onClick={() => isPlaying(false)}
-              size={55}
-            />
+            <BiPauseCircle onClick={() => isPlaying(false)} size={55} />
           </div>
         ) : (
           <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
-            <BiPlayCircle
-              
-              onClick={() => isPlaying(true)}
-              size={55}
-            />
+            <BiPlayCircle onClick={() => isPlaying(true)} size={55} />
           </div>
         )}
         <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
-          <BiSkipNextCircle
-            
-            onClick={handleClickNextButton}
-            size={45}
-          />
+          <BiSkipNextCircle onClick={handleClickNextButton} size={45} />
         </div>
         {player.isShuffleActive ? (
           <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
-            <BiShuffle
-              
-              onClick={handleClickShuffle}
-              size={45}
-            />
+            <BiShuffle onClick={handleClickShuffle} size={45} />
           </div>
         ) : (
           <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
-            <BiShuffle
-              
-              onClick={handleClickShuffle}
-              size={45}
-            />
+            <BiShuffle onClick={handleClickShuffle} size={45} />
           </div>
         )}
       </div>
     );
   }
 );
+
+MediaButtons.propTypes = {
+  player: PropTypes.shape({
+    isPlaying: PropTypes.bool.isRequired,
+    previousSong: PropTypes.string,
+    currentSong: PropTypes.string.isRequired,
+    nextSong: PropTypes.string,
+    isShuffleActive: PropTypes.bool.isRequired,
+    isLoopActive: PropTypes.bool.isRequired,
+    currentActivePlaylistId: PropTypes.string.isRequired,
+    isMutedActive: PropTypes.bool.isRequired,
+  }).isRequired,
+  isPlaying: PropTypes.func.isRequired,
+  isLoopActive: PropTypes.func.isRequired,
+  isShuffleActive: PropTypes.func.isRequired,
+  previousSong: PropTypes.func.isRequired,
+  currentSong: PropTypes.func.isRequired,
+  nextSong: PropTypes.func.isRequired,
+  playlistSongsById: PropTypes.object.isRequired,
+  isMutedActive: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = (state) => {
   return {

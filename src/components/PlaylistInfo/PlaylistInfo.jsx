@@ -1,8 +1,8 @@
 import React, { useEffect, useState, memo, useMemo } from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
-
-const PlaylistInfo = memo(function ({ playlistDetails }) {
+import PropTypes from "prop-types";
+const PlaylistInfo = ({ playlistDetails }) => {
   const { id } = useParams();
   const [playlistInfo, setPlaylistInfo] = useState({
     name: "",
@@ -30,7 +30,18 @@ const PlaylistInfo = memo(function ({ playlistDetails }) {
       <p className="text-white">{playlistInfo.name}</p>
     </div>
   );
-});
+};
+
+PlaylistInfo.propTypes = {
+  playlistDetails: PropTypes.arrayOf(
+    PropTypes.shape({
+      playlistName: PropTypes.string.isRequired,
+      playlistId: PropTypes.string.isRequired,
+      playlistImage: PropTypes.string.isRequired,
+      playlistEtag: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+};
 
 const mapStateToProps = (state) => {
   return {

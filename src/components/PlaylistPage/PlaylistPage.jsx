@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import VideoCard from "../VideoCard/VideoCard";
 import MediaButtons from "../MediaButtons/MediaButtons";
+import PropTypes from "prop-types";
 import {
   PLAYER_ISPLAYING,
   PLAYER_ISSHUFFLEACTIVE,
@@ -173,6 +174,27 @@ const PlaylistPage = ({
       </div>
     </div>
   );
+};
+
+PlaylistPage.proptypes = {
+  isPlaying: PropTypes.func.isRequired,
+  player: PropTypes.shape({
+    isPlaying: PropTypes.bool.isRequired,
+    previousSong: PropTypes.string,
+    currentSong: PropTypes.string.isRequired,
+    nextSong: PropTypes.string,
+    isShuffleActive: PropTypes.bool.isRequired,
+    isLoopActive: PropTypes.bool.isRequired,
+    currentActivePlaylistId: PropTypes.string.isRequired,
+    isMutedActive: PropTypes.bool.isRequired,
+  }).isRequired,
+  isLoopActive: PropTypes.func.isRequired,
+  isShuffleActive: PropTypes.func.isRequired,
+  currentSong: PropTypes.func.isRequired,
+  previousSong: PropTypes.func.isRequired,
+  nextSong: PropTypes.func,
+  playlistSongsById: PropTypes.object.isRequired,
+  isMutedActive: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => {

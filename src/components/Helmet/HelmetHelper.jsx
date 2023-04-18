@@ -1,6 +1,6 @@
-import React from "react";
+import React, { memo } from "react";
 import { Helmet } from "react-helmet-async";
-
+import PropTypes from "prop-types";
 const HelmetHelper = ({ title }) => {
   return (
     <Helmet
@@ -11,4 +11,8 @@ const HelmetHelper = ({ title }) => {
   );
 };
 
-export default HelmetHelper;
+HelmetHelper.propTypes = {
+  title: PropTypes.string,
+};
+
+export default memo(HelmetHelper);

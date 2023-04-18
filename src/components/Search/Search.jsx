@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import fetchPlaylistVideos from "../utils/fetchPlaylistVideos";
 import { PLAYLISTSONGS_ADDSONGSBYPLAYLISTID } from "../../constants/playlistSongsByIdTypes";
 import {
@@ -143,6 +144,24 @@ const Search = ({
       </form>
     </div>
   );
+};
+
+Search.propTypes = {
+  playlistDetails: PropTypes.arrayOf(
+    PropTypes.shape({
+      playlistName: PropTypes.string.isRequired,
+      playlistId: PropTypes.string.isRequired,
+      playlistImage: PropTypes.string.isRequired,
+      playlistEtag: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  currentSong: PropTypes.func.isRequired,
+  nextSong: PropTypes.func.isRequired,
+  addToPlaylistDetails: PropTypes.func.isRequired,
+  addSongsByPlaylistID: PropTypes.func.isRequired,
+  playlistSongsById: PropTypes.object.isRequired,
+  setcurrentActivePlaylistId: PropTypes.func.isRequired,
+  modifyEtagInPlaylistDetailsById: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

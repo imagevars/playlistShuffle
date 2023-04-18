@@ -7,6 +7,7 @@ import {
   PLAYER_NEXTSONG,
   PLAYER_PREVIOUSSONG,
 } from "../../constants/playerTypes";
+import PropTypes from "prop-types";
 
 const Player = ({
   player,
@@ -119,6 +120,24 @@ DEFER LOADING UPPP */}
       />
     </div>
   );
+};
+
+Player.propTypes = {
+  player: PropTypes.shape({
+    isPlaying: PropTypes.bool.isRequired,
+    previousSong: PropTypes.string,
+    currentSong: PropTypes.string.isRequired,
+    nextSong: PropTypes.string,
+    isShuffleActive: PropTypes.bool.isRequired,
+    isLoopActive: PropTypes.bool.isRequired,
+    currentActivePlaylistId: PropTypes.string.isRequired,
+    isMutedActive: PropTypes.bool.isRequired,
+  }).isRequired,
+  isPlaying: PropTypes.func.isRequired,
+  previousSong: PropTypes.func.isRequired,
+  currentSong: PropTypes.func.isRequired,
+  nextSong: PropTypes.func,
+  playlistSongsById: PropTypes.object.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => {

@@ -1,6 +1,7 @@
 import React, { memo } from "react";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 import {
   PLAYER_ISPLAYING,
@@ -41,6 +42,15 @@ const Navbar = ({
     </div>
   );
 };
+
+Navbar.propTypes = {
+  isPlaying: PropTypes.func.isRequired,
+  previousSong: PropTypes.func.isRequired,
+  currentSong: PropTypes.func.isRequired,
+  nextSong: PropTypes.func,  isShuffleActive: PropTypes.func.isRequired,
+  setcurrentActivePlaylistId: PropTypes.func.isRequired,
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     isPlaying: (payload) => dispatch({ type: PLAYER_ISPLAYING, payload }),
@@ -53,4 +63,4 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({ type: PLAYER_SETCURRENTACTIVEPLAYLIST, payload }),
   };
 };
-export default connect(null, mapDispatchToProps)(Navbar);
+export default connect(null, mapDispatchToProps)(memo(Navbar));
