@@ -48,7 +48,7 @@ const PlaylistUsed = ({
           alt={`${element.playlistName} image`}
           src={element.playlistImage}
         />
-        <p className="usedPlaylistName  text-lg font-semibold text-white">
+        <p className="usedPlaylistName  text-lg font-semibold truncate  text-white">
           {element.playlistName}
         </p>
       </div>
