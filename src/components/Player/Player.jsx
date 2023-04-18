@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import ReactPlayer from "react-player/youtube";
-import {
-  PLAYER_ISPLAYING,
-  PLAYER_CURRENTSONG,
-  PLAYER_NEXTSONG,
-  PLAYER_PREVIOUSSONG,
-} from "../../constants/playerTypes";
 import PropTypes from "prop-types";
+
+import {
+  isPlaying,
+  previousSong,
+  nextSong,
+  currentSong,
+} from "../../actions/playerActions";
 
 const Player = ({
   player,
@@ -81,7 +82,7 @@ const Player = ({
       playlistSongsById[player.currentActivePlaylistId].length - 1
     ) {
       console.log("Playlist Ended");
-      isPlaying(false);
+      isPlaisPlayingying(false);
     } else afterSongEnds();
   };
 
@@ -140,18 +141,15 @@ Player.propTypes = {
   playlistSongsById: PropTypes.object.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    isPlaying: (payload) => dispatch({ type: PLAYER_ISPLAYING, payload }),
-    previousSong: (payload) => dispatch({ type: PLAYER_PREVIOUSSONG, payload }),
-    currentSong: (payload) => dispatch({ type: PLAYER_CURRENTSONG, payload }),
-    nextSong: (payload) => dispatch({ type: PLAYER_NEXTSONG, payload }),
-  };
+const mapDispatchToProps = {
+  isPlaying: isPlaying,
+  previousSong: previousSong,
+  currentSong: currentSong,
+  nextSong: nextSong,
 };
 
 const mapStateToProps = (state) => {
   return {
-    songs: state.songs,
     player: state.player,
     playlistSongsById: state.playlistSongsById,
   };

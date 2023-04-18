@@ -37,7 +37,6 @@ PlayingRightNow.proptypes = {
 const mapStateToProps = (state) => {
   return {
     playlistSongsById: state.playlistSongsById,
-    songs: state.songs,
     player: state.player,
   };
 };

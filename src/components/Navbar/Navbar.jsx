@@ -4,20 +4,20 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 import {
-  PLAYER_ISPLAYING,
-  PLAYER_ISSHUFFLEACTIVE,
-  PLAYER_CURRENTSONG,
-  PLAYER_NEXTSONG,
-  PLAYER_PREVIOUSSONG,
-  PLAYER_SETCURRENTACTIVEPLAYLIST,
-} from "../../constants/playerTypes";
+  isPlaying,
+  currentSong,
+  nextSong,
+  previousSong,
+  isShuffleActive,
+  setcurrentActivePlaylistId,
+} from "../../actions/playerActions";
 const Navbar = ({
   isPlaying,
   previousSong,
   currentSong,
   nextSong,
-  isShuffleActive,
   setcurrentActivePlaylistId,
+  isShuffleActive,
 }) => {
   const navigate = useNavigate();
 
@@ -47,20 +47,17 @@ Navbar.propTypes = {
   isPlaying: PropTypes.func.isRequired,
   previousSong: PropTypes.func.isRequired,
   currentSong: PropTypes.func.isRequired,
-  nextSong: PropTypes.func,  isShuffleActive: PropTypes.func.isRequired,
+  nextSong: PropTypes.func,
+  isShuffleActive: PropTypes.func.isRequired,
   setcurrentActivePlaylistId: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    isPlaying: (payload) => dispatch({ type: PLAYER_ISPLAYING, payload }),
-    previousSong: (payload) => dispatch({ type: PLAYER_PREVIOUSSONG, payload }),
-    currentSong: (payload) => dispatch({ type: PLAYER_CURRENTSONG, payload }),
-    nextSong: (payload) => dispatch({ type: PLAYER_NEXTSONG, payload }),
-    isShuffleActive: (payload) =>
-      dispatch({ type: PLAYER_ISSHUFFLEACTIVE, payload }),
-    setcurrentActivePlaylistId: (payload) =>
-      dispatch({ type: PLAYER_SETCURRENTACTIVEPLAYLIST, payload }),
-  };
+const mapDispatchToProps = {
+  isPlaying: isPlaying,
+  previousSong: previousSong,
+  currentSong: currentSong,
+  nextSong: nextSong,
+  isShuffleActive: isShuffleActive,
+  setcurrentActivePlaylistId: setcurrentActivePlaylistId,
 };
 export default connect(null, mapDispatchToProps)(memo(Navbar));

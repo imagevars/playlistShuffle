@@ -4,17 +4,17 @@ import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import fetchPlaylistVideos from "../utils/fetchPlaylistVideos";
-import { PLAYLISTSONGS_ADDSONGSBYPLAYLISTID } from "../../constants/playlistSongsByIdTypes";
-import {
-  PLAYER_SETCURRENTACTIVEPLAYLIST,
-  PLAYER_NEXTSONG,
-  PLAYER_CURRENTSONG,
-} from "../../constants/playerTypes";
-import {
-  PLAYLISTDETAILS_ADDTOPLAYLISTDETAILS,
-  PLAYLISTDETAILS_ETAG,
-} from "../../constants/playlistDetailsTypes";
 import fetchPlaylistData from "../utils/fetchPlaylistData";
+import {
+  currentSong,
+  nextSong,
+  setcurrentActivePlaylistId,
+} from "../../actions/playerActions";
+import {
+  addToPlaylistDetails,
+  modifyEtagInPlaylistDetailsById,
+} from "../../actions/palylistDetailsActions";
+import { addSongsByPlaylistID } from "../../actions/palylistSongsByIdActions";
 
 const Search = ({
   playlistDetails,
@@ -170,19 +170,13 @@ const mapStateToProps = (state) => ({
   player: state.player,
 });
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    currentSong: (payload) => dispatch({ type: PLAYER_CURRENTSONG, payload }),
-    nextSong: (payload) => dispatch({ type: PLAYER_NEXTSONG, payload }),
-    addToPlaylistDetails: (payload) =>
-      dispatch({ type: PLAYLISTDETAILS_ADDTOPLAYLISTDETAILS, payload }),
-    addSongsByPlaylistID: (payload) =>
-      dispatch({ type: PLAYLISTSONGS_ADDSONGSBYPLAYLISTID, payload }),
-    setcurrentActivePlaylistId: (payload) =>
-      dispatch({ type: PLAYER_SETCURRENTACTIVEPLAYLIST, payload }),
-    modifyEtagInPlaylistDetailsById: (payload) =>
-      dispatch({ type: PLAYLISTDETAILS_ETAG, payload }),
-  };
+const mapDispatchToProps = {
+  currentSong: currentSong,
+  nextSong: nextSong,
+  addToPlaylistDetails: addToPlaylistDetails,
+  addSongsByPlaylistID: addSongsByPlaylistID,
+  setcurrentActivePlaylistId: setcurrentActivePlaylistId,
+  modifyEtagInPlaylistDetailsById: modifyEtagInPlaylistDetailsById,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);

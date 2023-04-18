@@ -1,13 +1,13 @@
 import React, { memo } from "react";
 import {
-  PLAYER_ISPLAYING,
-  PLAYER_ISLOOPACTIVE,
-  PLAYER_ISSHUFFLEACTIVE,
-  PLAYER_PREVIOUSSONG,
-  PLAYER_NEXTSONG,
-  PLAYER_CURRENTSONG,
-  PLAYER_ISMUTEDACTIVE,
-} from "../../constants/playerTypes";
+  isPlaying,
+  currentSong,
+  nextSong,
+  isLoopActive,
+  isMutedActive,
+  isShuffleActive,
+  previousSong,
+} from "../../actions/playerActions";
 import {
   BiPlayCircle,
   BiPauseCircle,
@@ -176,23 +176,18 @@ MediaButtons.propTypes = {
 const mapStateToProps = (state) => {
   return {
     player: state.player,
-    songs: state.songs,
     playlistSongsById: state.playlistSongsById,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    isPlaying: (payload) => dispatch({ type: PLAYER_ISPLAYING, payload }),
-    isLoopActive: (payload) => dispatch({ type: PLAYER_ISLOOPACTIVE, payload }),
-    isShuffleActive: (payload) =>
-      dispatch({ type: PLAYER_ISSHUFFLEACTIVE, payload }),
-    previousSong: (payload) => dispatch({ type: PLAYER_PREVIOUSSONG, payload }),
-    currentSong: (payload) => dispatch({ type: PLAYER_CURRENTSONG, payload }),
-    nextSong: (payload) => dispatch({ type: PLAYER_NEXTSONG, payload }),
-    isMutedActive: (payload) =>
-      dispatch({ type: PLAYER_ISMUTEDACTIVE, payload }),
-  };
+const mapDispatchToProps = {
+  isPlaying: isPlaying,
+  isLoopActive: isLoopActive,
+  isShuffleActive: isShuffleActive,
+  previousSong: previousSong,
+  currentSong: currentSong,
+  nextSong: nextSong,
+  isMutedActive: isMutedActive,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MediaButtons);

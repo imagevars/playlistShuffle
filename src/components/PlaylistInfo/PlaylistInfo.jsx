@@ -45,7 +45,6 @@ PlaylistInfo.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    songs: state.songs,
     player: state.player,
     playlistDetails: state.playlistDetails,
   };

@@ -3,19 +3,20 @@ import VideoCard from "../VideoCard/VideoCard";
 import MediaButtons from "../MediaButtons/MediaButtons";
 import PropTypes from "prop-types";
 import {
-  PLAYER_ISPLAYING,
-  PLAYER_ISSHUFFLEACTIVE,
-  PLAYER_CURRENTSONG,
-  PLAYER_ISLOOPACTIVE,
-  PLAYER_NEXTSONG,
-  PLAYER_PREVIOUSSONG,
-  PLAYER_ISMUTEDACTIVE,
-} from "../../constants/playerTypes";
+  isPlaying,
+  isLoopActive,
+  isShuffleActive,
+  previousSong,
+  currentSong,
+  nextSong,
+  isMutedActive,
+} from "../../actions/playerActions";
+
 import PlayingRightNow from "../PlayingRightNow/PlayingRightNow";
 import Navbar from "../Navbar/Navbar";
 import PlaylistInfo from "../PlaylistInfo/PlaylistInfo";
 import { connect } from "react-redux";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import HelmetHelper from "../Helmet/HelmetHelper";
 import Player from "../Player/Player";
 const PlaylistPage = ({
@@ -30,7 +31,7 @@ const PlaylistPage = ({
   isMutedActive,
 }) => {
   const [currentSongName, setCurrentSongName] = useState("");
-  const { id } = useParams();
+  // const { id } = useParams();
   const ref = useRef(null);
 
   useEffect(() => {
@@ -197,23 +198,18 @@ PlaylistPage.proptypes = {
   isMutedActive: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    isPlaying: (payload) => dispatch({ type: PLAYER_ISPLAYING, payload }),
-    isLoopActive: (payload) => dispatch({ type: PLAYER_ISLOOPACTIVE, payload }),
-    isShuffleActive: (payload) =>
-      dispatch({ type: PLAYER_ISSHUFFLEACTIVE, payload }),
-    previousSong: (payload) => dispatch({ type: PLAYER_PREVIOUSSONG, payload }),
-    currentSong: (payload) => dispatch({ type: PLAYER_CURRENTSONG, payload }),
-    nextSong: (payload) => dispatch({ type: PLAYER_NEXTSONG, payload }),
-    isMutedActive: (payload) =>
-      dispatch({ type: PLAYER_ISMUTEDACTIVE, payload }),
-  };
+const mapDispatchToProps = {
+  isPlaying: isPlaying,
+  isLoopActive: isLoopActive,
+  isShuffleActive: isShuffleActive,
+  previousSong: previousSong,
+  currentSong: currentSong,
+  nextSong: nextSong,
+  isMutedActive: isMutedActive,
 };
 
 const mapStateToProps = (state) => {
   return {
-    songs: state.songs,
     player: state.player,
     playlistSongsById: state.playlistSongsById,
   };

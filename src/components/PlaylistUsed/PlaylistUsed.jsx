@@ -3,22 +3,22 @@ import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import {
-  PLAYLISTDETAILS_DELETEFROMPLAYLISTDETAILS,
-  PLAYLISTDETAILS_ETAG,
-  PLAYLISTDETAILS_ADDTOPLAYLISTDETAILS,
-} from "../../constants/playlistDetailsTypes";
+  addToPlaylistDetails,
+  deleteFromPlaylistDetails,
+  modifyEtagInPlaylistDetailsById,
+} from "../../actions/palylistDetailsActions";
 import fetchPlaylistVideos from "../utils/fetchPlaylistVideos";
 import fetchPlaylistData from "../utils/fetchPlaylistData";
 import {
-  PLAYLISTSONGS_ADDSONGSBYPLAYLISTID,
-  PLAYLISTSONGS_REMOVEPLAYLISTSONGSBYID,
-} from "../../constants/playlistSongsByIdTypes";
+  addSongsByPlaylistID,
+  removePlaylistSongsById,
+} from "../../actions/palylistSongsByIdActions";
 import {
-  PLAYER_SETCURRENTACTIVEPLAYLIST,
-  PLAYER_NEXTSONG,
-  PLAYER_CURRENTSONG,
-  PLAYER_ISPLAYING,
-} from "../../constants/playerTypes";
+  setcurrentActivePlaylistId,
+  nextSong,
+  isPlaying,
+  currentSong,
+} from "../../actions/playerActions";
 const PlaylistUsed = ({
   playlistDetails,
   addToPlaylistDetails,
@@ -127,7 +127,8 @@ PlaylistUsed.proptypes = {
     })
   ).isRequired,
   addToPlaylistDetails: PropTypes.func.isRequired,
-  nextSong: PropTypes.func,  playlistSongsById: PropTypes.object.isRequired,
+  nextSong: PropTypes.func,
+  playlistSongsById: PropTypes.object.isRequired,
   isPlaying: PropTypes.func.isRequired,
   deleteFromPlaylistDetails: PropTypes.func.isRequired,
   addSongsByPlaylistID: PropTypes.func.isRequired,
@@ -144,24 +145,15 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    currentSong: (payload) => dispatch({ type: PLAYER_CURRENTSONG, payload }),
-    nextSong: (payload) => dispatch({ type: PLAYER_NEXTSONG, payload }),
-    addToPlaylistDetails: (payload) =>
-      dispatch({ type: PLAYLISTDETAILS_ADDTOPLAYLISTDETAILS, payload }),
-
-    deleteFromPlaylistDetails: (payload) =>
-      dispatch({ type: PLAYLISTDETAILS_DELETEFROMPLAYLISTDETAILS, payload }),
-    addSongsByPlaylistID: (payload) =>
-      dispatch({ type: PLAYLISTSONGS_ADDSONGSBYPLAYLISTID, payload }),
-    setcurrentActivePlaylistId: (payload) =>
-      dispatch({ type: PLAYER_SETCURRENTACTIVEPLAYLIST, payload }),
-    removePlaylistSongsById: (payload) =>
-      dispatch({ type: PLAYLISTSONGS_REMOVEPLAYLISTSONGSBYID, payload }),
-    modifyEtagInPlaylistDetailsById: (payload) =>
-      dispatch({ type: PLAYLISTDETAILS_ETAG, payload }),
-    isPlaying: (payload) => dispatch({ type: PLAYER_ISPLAYING, payload }),
-  };
+const mapDispatchToProps = {
+  currentSong: currentSong,
+  nextSong: nextSong,
+  isPlaying: isPlaying,
+  setcurrentActivePlaylistId: setcurrentActivePlaylistId,
+  modifyEtagInPlaylistDetailsById: modifyEtagInPlaylistDetailsById,
+  addToPlaylistDetails: addToPlaylistDetails,
+  deleteFromPlaylistDetails: deleteFromPlaylistDetails,
+  addSongsByPlaylistID: addSongsByPlaylistID,
+  removePlaylistSongsById: removePlaylistSongsById,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(PlaylistUsed);

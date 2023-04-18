@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import {
-  PLAYER_CURRENTSONG,
-  PLAYER_NEXTSONG,
-  PLAYER_PREVIOUSSONG,
-} from "../../constants/playerTypes";
-import { PLAYLISTSONGS_ADDSONGSBYPLAYLISTID } from "../../constants/playlistSongsByIdTypes";
 import MersenneTwister from "mersenne-twister";
+import {
+  currentSong,
+  nextSong,
+  previousSong,
+} from "../../actions/playerActions";
+import { addSongsByPlaylistID } from "../../actions/palylistSongsByIdActions";
 
 const VideoCard = ({
   player,
@@ -154,20 +154,16 @@ VideoCard.propTypes = {
   previousSong: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    previousSong: (payload) => dispatch({ type: PLAYER_PREVIOUSSONG, payload }),
-    currentSong: (payload) => dispatch({ type: PLAYER_CURRENTSONG, payload }),
-    nextSong: (payload) => dispatch({ type: PLAYER_NEXTSONG, payload }),
-    addSongsByPlaylistID: (payload) =>
-      dispatch({ type: PLAYLISTSONGS_ADDSONGSBYPLAYLISTID, payload }),
-  };
+const mapDispatchToProps = {
+  previousSong: previousSong,
+  currentSong: currentSong,
+  nextSong: nextSong,
+  addSongsByPlaylistID: addSongsByPlaylistID,
 };
 
 const mapStateToProps = (state) => {
   return {
     playlistSongsById: state.playlistSongsById,
-    songs: state.songs,
     player: state.player,
   };
 };

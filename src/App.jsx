@@ -10,16 +10,6 @@ function App() {
       <Routes>
         <Route exact path={`/`} element={<HomePage />} />
         <Route exact path={`playlist/:id`} element={<PlaylistPage />} />
-        <Route
-          path={`/*`}
-          element={
-            <div>
-              <div>
-                <h1>Error 404</h1>
-              </div>
-            </div>
-          }
-        />
       </Routes>
     </>
   );
