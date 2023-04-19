@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import ReactPlayer from "react-player/youtube";
 import PropTypes from "prop-types";
+import screenfull from "screenfull";
 
 import {
   isPlaying,
@@ -10,7 +11,8 @@ import {
   currentSong,
   setProgress,
   setVideoDuration,
-  setPercentage
+  isFullScreenActive,
+  setPercentage,
 } from "../../actions/playerActions";
 
 const Player = ({
@@ -22,8 +24,20 @@ const Player = ({
   playlistSongsById,
   setVideoDuration,
   setProgress,
-  setPercentage
+  setPercentage,
+  isFullScreenActive,
 }) => {
+  const playerRef = useRef(null);
+  useEffect(() => {
+    if(player.isFullScreenActive === true) {
+      if (screenfull.isEnabled) { 
+        screenfull.request(playerRef.current.wrapper)
+      } 
+      isFullScreenActive(false)
+
+        // screenfull.exit()
+    }
+  });
   useEffect(() => {
     if (playlistSongsById[player.currentActivePlaylistId]) {
       currentSong(
@@ -103,27 +117,25 @@ const Player = ({
     isPlaying(true);
   };
 
-
-
-
   const handleProgress = (e) => {
     setProgress(String(Math.floor(e.playedSeconds)));
-    getPercentage(String(e.playedSeconds), String(player.videoDuration))
+    getPercentage(String(e.playedSeconds), String(player.videoDuration));
   };
   const handleDuration = (e) => {
     setVideoDuration(String(e));
   };
 
   const getPercentage = (a, b) => {
-    const trimmedA = Math.floor(a)
-    const percentage = (trimmedA/ b) * 100;
-    setPercentage(String(Math.floor(percentage)))
+    const trimmedA = Math.floor(a);
+    const percentage = (trimmedA / b) * 100;
+    setPercentage(String(Math.floor(percentage)));
   };
   return (
     <div className="player aspect-auto lg:w-full lg:h-full	">
-      {/* https://img.youtube.com/vi/Eeb4aZObp-0/0.jpg
-DEFER LOADING UPPP */}
+      {/* https://img.youtube.com/vi/Eeb4aZObp-0/0.jpg*/}
       <ReactPlayer
+        className="aaaa"
+        ref={playerRef}
         //not working yet
         // fallback={`https://img.youtube.com/vi/${player.currentSong}.jpg`}
         valume={null}
@@ -164,6 +176,10 @@ Player.propTypes = {
   nextSong: PropTypes.func,
   setPercentage: PropTypes.func.isRequired,
   playlistSongsById: PropTypes.object.isRequired,
+  setProgress: PropTypes.func.isRequired,
+  setVideoDuration: PropTypes.func.isRequired,
+  setPercentage: PropTypes.func.isRequired,
+  isFullScreenActive: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = {
@@ -173,7 +189,8 @@ const mapDispatchToProps = {
   nextSong: nextSong,
   setProgress: setProgress,
   setVideoDuration: setVideoDuration,
-  setPercentage: setPercentage
+  setPercentage: setPercentage,
+  isFullScreenActive: isFullScreenActive
 };
 
 const mapStateToProps = (state) => {

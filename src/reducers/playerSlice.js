@@ -10,6 +10,7 @@ import {
   PLAYER_SETPROGRESS,
   PLAYER_VIDEODURATION,
   PLAYER_SETPERCENTAGE,
+  PLAYER_ISFULLSCREENACTIVE,
 } from "../constants/playerTypes";
 
 const initialState = {
@@ -23,7 +24,8 @@ const initialState = {
   isMutedActive: false,
   progress: "0",
   videoDuration: "0",
-  videoPercentage: "0"
+  videoPercentage: "0",
+  isFullScreenActive: false,
 };
 
 export default function playerReducer(state = initialState, action) {
@@ -60,6 +62,9 @@ export default function playerReducer(state = initialState, action) {
     }
     case PLAYER_SETPERCENTAGE: {
       return { ...state, videoPercentage: action.payload };
+    }
+    case PLAYER_ISFULLSCREENACTIVE: {
+      return { ...state, isFullScreenActive: action.payload };
     }
     default:
       return state;

@@ -7,6 +7,7 @@ import {
   isMutedActive,
   isShuffleActive,
   previousSong,
+  isFullScreenActive,
 } from "../../actions/playerActions";
 import {
   BiPlayCircle,
@@ -16,6 +17,8 @@ import {
   BiSkipNextCircle,
   BiVolumeMute,
   BiVolumeFull,
+  BiFullscreen,
+  BiExitFullscreen,
 } from "react-icons/bi";
 import PropTypes from "prop-types";
 import { TbRepeatOff, TbRepeatOnce } from "react-icons/tb";
@@ -32,6 +35,7 @@ const MediaButtons = memo(
     nextSong,
     playlistSongsById,
     isMutedActive,
+    isFullScreenActive,
   }) => {
     const playPauseButton = (e) => {
       isPlaying(e);
@@ -96,6 +100,9 @@ const MediaButtons = memo(
         isShuffleActive(false);
       }
     };
+    const handleClickFullScreen = () => {
+      isFullScreenActive(true);
+    };
     return (
       <div className=" text-[#624aa0] font-bold  flex items-center ">
         {player.isMutedActive === true ? (
@@ -147,6 +154,16 @@ const MediaButtons = memo(
             <BiShuffle onClick={handleClickShuffle} size={45} />
           </div>
         )}
+
+        {player.isFullScreenActive === true ? (
+          <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
+            <BiExitFullscreen onClick={handleClickFullScreen} size={45} />
+          </div>
+        ) : (
+          <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
+            <BiFullscreen onClick={handleClickFullScreen} size={45} />
+          </div>
+        )}
       </div>
     );
   }
@@ -171,6 +188,7 @@ MediaButtons.propTypes = {
   nextSong: PropTypes.func.isRequired,
   playlistSongsById: PropTypes.object.isRequired,
   isMutedActive: PropTypes.func.isRequired,
+  isFullScreenActive: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -188,6 +206,7 @@ const mapDispatchToProps = {
   currentSong: currentSong,
   nextSong: nextSong,
   isMutedActive: isMutedActive,
+  isFullScreenActive: isFullScreenActive,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MediaButtons);
