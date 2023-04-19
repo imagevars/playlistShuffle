@@ -28,16 +28,17 @@ const Player = ({
   isFullScreenActive,
 }) => {
   const playerRef = useRef(null);
-  useEffect(() => {
-    if(player.isFullScreenActive === true) {
-      if (screenfull.isEnabled) { 
-        screenfull.request(playerRef.current.wrapper)
-      } 
-      isFullScreenActive(false)
 
-        // screenfull.exit()
+  useEffect(() => {
+    if (player.isFullScreenActive === true) {
+      if (screenfull.isEnabled) {
+        screenfull.request(playerRef.current.wrapper.childNodes[0].children[0]);
+      }
+      isFullScreenActive(false);
+
+      // screenfull.exit()
     }
-  });
+  }, [player.isFullScreenActive]);
   useEffect(() => {
     if (playlistSongsById[player.currentActivePlaylistId]) {
       currentSong(
@@ -179,7 +180,7 @@ Player.propTypes = {
   setProgress: PropTypes.func.isRequired,
   setVideoDuration: PropTypes.func.isRequired,
   setPercentage: PropTypes.func.isRequired,
-  isFullScreenActive: PropTypes.func.isRequired
+  isFullScreenActive: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = {
@@ -190,7 +191,7 @@ const mapDispatchToProps = {
   setProgress: setProgress,
   setVideoDuration: setVideoDuration,
   setPercentage: setPercentage,
-  isFullScreenActive: isFullScreenActive
+  isFullScreenActive: isFullScreenActive,
 };
 
 const mapStateToProps = (state) => {

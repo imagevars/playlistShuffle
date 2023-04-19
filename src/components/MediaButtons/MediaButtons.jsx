@@ -154,11 +154,11 @@ const MediaButtons = memo(
         )}
 
         {player.isFullScreenActive === true ? (
-          <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
+          <div className="cursor-pointer  lg:hidden hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
             <BiExitFullscreen onClick={handleClickFullScreen} size={40} />
           </div>
         ) : (
-          <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
+          <div className="cursor-pointer  lg:hidden hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
             <BiFullscreen onClick={handleClickFullScreen} size={40} />
           </div>
         )}
