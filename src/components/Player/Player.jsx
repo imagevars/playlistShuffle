@@ -132,7 +132,7 @@ const Player = ({
     setPercentage(String(Math.floor(percentage)));
   };
   return (
-    <div className="player aspect-auto lg:w-full lg:h-full	">
+    <div className="player aspect-auto md:w-full md:h-full	">
       {/* https://img.youtube.com/vi/Eeb4aZObp-0/0.jpg*/}
       <ReactPlayer
         className="aaaa"

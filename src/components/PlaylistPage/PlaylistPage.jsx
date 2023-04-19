@@ -139,7 +139,7 @@ const PlaylistPage = ({
       className="min-h-screen bg-[#121212] w-full"
     >
       <div
-        className="w-[95%] lg:max-w-[2200px] mx-auto 
+        className="w-[95%] md:max-w-[2200px] mx-auto 
       "
       >
         <HelmetHelper
@@ -156,11 +156,11 @@ const PlaylistPage = ({
         </div>
 
         <div className="div">
-          <div className="mainContent lg:flex">
-            <div className="lg:w-2/5">
+          <div className="mainContent md:flex">
+            <div className="md:w-2/5">
               <Player />
             </div>
-            <div className=" h-3/5 mt-6 w-[97%]  lg:mt-0 mx-auto lg:w-[55%]">
+            <div className=" h-3/5 mt-6 w-[97%]  md:mt-0 mx-auto md:w-[55%]">
               <VideoCard />
             </div>
           </div>
