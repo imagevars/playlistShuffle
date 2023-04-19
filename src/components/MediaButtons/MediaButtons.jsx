@@ -37,9 +37,7 @@ const MediaButtons = memo(
     isMutedActive,
     isFullScreenActive,
   }) => {
-    const playPauseButton = (e) => {
-      isPlaying(e);
-    };
+
 
     const handleClickPreviousButton = () => {
       const currIndex = playlistSongsById[
@@ -107,21 +105,21 @@ const MediaButtons = memo(
       <div className=" text-[#624aa0] font-bold  flex items-center ">
         {player.isMutedActive === true ? (
           <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
-            <BiVolumeMute size={45} onClick={() => isMutedActive(false)} />
+            <BiVolumeMute size={40} onClick={() => isMutedActive(false)} />
           </div>
         ) : (
           <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
-            <BiVolumeFull size={45} onClick={() => isMutedActive(true)} />
+            <BiVolumeFull size={40} onClick={() => isMutedActive(true)} />
           </div>
         )}
 
         {player.isLoopActive === true ? (
           <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
-            <TbRepeatOnce onClick={() => isLoopActive(false)} size={45} />
+            <TbRepeatOnce onClick={() => isLoopActive(false)} size={40} />
           </div>
         ) : (
           <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
-            <TbRepeatOff onClick={() => isLoopActive(true)} size={45} />
+            <TbRepeatOff onClick={() => isLoopActive(true)} size={40} />
           </div>
         )}
 
@@ -129,39 +127,39 @@ const MediaButtons = memo(
           {
             <BiSkipPreviousCircle
               onClick={handleClickPreviousButton}
-              size={45}
+              size={40}
             />
           }
         </div>
         {player.isPlaying === true ? (
           <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
-            <BiPauseCircle onClick={() => isPlaying(false)} size={55} />
+            <BiPauseCircle onClick={() => isPlaying(false)} size={50} />
           </div>
         ) : (
           <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
-            <BiPlayCircle onClick={() => isPlaying(true)} size={55} />
+            <BiPlayCircle onClick={() => isPlaying(true)} size={50} />
           </div>
         )}
         <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
-          <BiSkipNextCircle onClick={handleClickNextButton} size={45} />
+          <BiSkipNextCircle onClick={handleClickNextButton} size={40} />
         </div>
         {player.isShuffleActive ? (
           <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
-            <BiShuffle onClick={handleClickShuffle} size={45} />
+            <BiShuffle onClick={handleClickShuffle} size={40} />
           </div>
         ) : (
           <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
-            <BiShuffle onClick={handleClickShuffle} size={45} />
+            <BiShuffle onClick={handleClickShuffle} size={40} />
           </div>
         )}
 
         {player.isFullScreenActive === true ? (
           <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
-            <BiExitFullscreen onClick={handleClickFullScreen} size={45} />
+            <BiExitFullscreen onClick={handleClickFullScreen} size={40} />
           </div>
         ) : (
           <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
-            <BiFullscreen onClick={handleClickFullScreen} size={45} />
+            <BiFullscreen onClick={handleClickFullScreen} size={40} />
           </div>
         )}
       </div>
