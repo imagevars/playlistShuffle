@@ -19,6 +19,7 @@ import { connect } from "react-redux";
 // import { useParams } from "react-router-dom";
 import HelmetHelper from "../Helmet/HelmetHelper";
 import Player from "../Player/Player";
+import ProgressBar from "../ProgressBar/ProgressBar";
 const PlaylistPage = ({
   isPlaying,
   player,
@@ -166,6 +167,9 @@ const PlaylistPage = ({
           <div className="bottomMedia bg-[#bb86fc] fixed bottom-0 left-0 right-0">
             <div>
               <PlayingRightNow />
+            </div>
+            <div>
+              <ProgressBar />
             </div>
             <div className="mediaButtonsContainer flex justify-center">
               <MediaButtons />

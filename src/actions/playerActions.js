@@ -6,7 +6,10 @@ import {
   PLAYER_ISLOOPACTIVE,
   PLAYER_ISMUTEDACTIVE,
   PLAYER_ISSHUFFLEACTIVE,
-  PLAYER_SETCURRENTACTIVEPLAYLIST
+  PLAYER_SETCURRENTACTIVEPLAYLIST,
+  PLAYER_VIDEODURATION,
+  PLAYER_SETPROGRESS,
+  PLAYER_SETPERCENTAGE,
 } from "../constants/playerTypes";
 
 export const isPlaying = (payload) => ({ type: PLAYER_ISPLAYING, payload });
@@ -37,5 +40,20 @@ export const isMutedActive = (payload) => ({
 
 export const setcurrentActivePlaylistId = (payload) => ({
   type: PLAYER_SETCURRENTACTIVEPLAYLIST,
+  payload,
+});
+
+export const setVideoDuration = (payload) => ({
+  type: PLAYER_VIDEODURATION,
+  payload,
+});
+
+export const setProgress = (payload) => ({
+  type: PLAYER_SETPROGRESS,
+  payload,
+});
+
+export const setPercentage = (payload) => ({
+  type: PLAYER_SETPERCENTAGE,
   payload,
 });

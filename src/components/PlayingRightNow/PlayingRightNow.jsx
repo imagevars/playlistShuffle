@@ -10,7 +10,7 @@ const PlayingRightNow = ({ player, playlistSongsById }) => {
   return (
     <div>
       <div>
-        <p className="songTitle text-white text-center lg:text-2xl truncate mx-auto w-[95%]">
+        <p className="songTitle text-[#624aa0] font-bold text-center lg:text-2xl truncate mx-auto w-[95%]">
           {
             playlistSongsById[player.currentActivePlaylistId][currentIndex]
               .snippet.title

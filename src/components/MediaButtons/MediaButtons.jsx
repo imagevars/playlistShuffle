@@ -97,7 +97,7 @@ const MediaButtons = memo(
       }
     };
     return (
-      <div className=" text-white flex items-center ">
+      <div className=" text-[#624aa0] font-bold  flex items-center ">
         {player.isMutedActive === true ? (
           <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
             <BiVolumeMute size={45} onClick={() => isMutedActive(false)} />

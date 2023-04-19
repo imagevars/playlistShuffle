@@ -7,6 +7,9 @@ import {
   PLAYER_NEXTSONG,
   PLAYER_SETCURRENTACTIVEPLAYLIST,
   PLAYER_ISMUTEDACTIVE,
+  PLAYER_SETPROGRESS,
+  PLAYER_VIDEODURATION,
+  PLAYER_SETPERCENTAGE,
 } from "../constants/playerTypes";
 
 const initialState = {
@@ -18,6 +21,9 @@ const initialState = {
   isLoopActive: false,
   currentActivePlaylistId: "",
   isMutedActive: false,
+  progress: "0",
+  videoDuration: "0",
+  videoPercentage: "0"
 };
 
 export default function playerReducer(state = initialState, action) {
@@ -46,7 +52,15 @@ export default function playerReducer(state = initialState, action) {
     case PLAYER_ISMUTEDACTIVE: {
       return { ...state, isMutedActive: action.payload };
     }
-
+    case PLAYER_SETPROGRESS: {
+      return { ...state, progress: action.payload };
+    }
+    case PLAYER_VIDEODURATION: {
+      return { ...state, videoDuration: action.payload };
+    }
+    case PLAYER_SETPERCENTAGE: {
+      return { ...state, videoPercentage: action.payload };
+    }
     default:
       return state;
   }

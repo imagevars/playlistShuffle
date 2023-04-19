@@ -8,6 +8,9 @@ import {
   previousSong,
   nextSong,
   currentSong,
+  setProgress,
+  setVideoDuration,
+  setPercentage
 } from "../../actions/playerActions";
 
 const Player = ({
@@ -17,6 +20,9 @@ const Player = ({
   currentSong,
   nextSong,
   playlistSongsById,
+  setVideoDuration,
+  setProgress,
+  setPercentage
 }) => {
   useEffect(() => {
     if (playlistSongsById[player.currentActivePlaylistId]) {
@@ -97,6 +103,22 @@ const Player = ({
     isPlaying(true);
   };
 
+
+
+
+  const handleProgress = (e) => {
+    setProgress(String(Math.floor(e.playedSeconds)));
+    getPercentage(String(e.playedSeconds), String(player.videoDuration))
+  };
+  const handleDuration = (e) => {
+    setVideoDuration(String(e));
+  };
+
+  const getPercentage = (a, b) => {
+    const trimmedA = Math.floor(a)
+    const percentage = (trimmedA/ b) * 100;
+    setPercentage(String(Math.floor(percentage)))
+  };
   return (
     <div className="player aspect-auto lg:w-full lg:h-full	">
       {/* https://img.youtube.com/vi/Eeb4aZObp-0/0.jpg
@@ -107,6 +129,8 @@ DEFER LOADING UPPP */}
         valume={null}
         muted={player.isMutedActive}
         passive="true"
+        onProgress={(e) => handleProgress(e)}
+        onDuration={(e) => handleDuration(e)}
         onError={() => handleError()}
         onPlay={() => handlePlay()}
         onPause={() => handlePause()}
@@ -138,6 +162,7 @@ Player.propTypes = {
   previousSong: PropTypes.func.isRequired,
   currentSong: PropTypes.func.isRequired,
   nextSong: PropTypes.func,
+  setPercentage: PropTypes.func.isRequired,
   playlistSongsById: PropTypes.object.isRequired,
 };
 
@@ -146,6 +171,9 @@ const mapDispatchToProps = {
   previousSong: previousSong,
   currentSong: currentSong,
   nextSong: nextSong,
+  setProgress: setProgress,
+  setVideoDuration: setVideoDuration,
+  setPercentage: setPercentage
 };
 
 const mapStateToProps = (state) => {
