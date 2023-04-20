@@ -9,6 +9,7 @@ import {
   currentSong,
   nextSong,
   setcurrentActivePlaylistId,
+  isShuffleActive,
 } from "../../actions/playerActions";
 import {
   addToPlaylistDetails,
@@ -25,6 +26,7 @@ const Search = ({
   playlistSongsById,
   setcurrentActivePlaylistId,
   modifyEtagInPlaylistDetailsById,
+  isShuffleActive,
 }) => {
   const [playlistId, setPlaylistId] = useState("");
   const [isloadingButton, setisLoadingButton] = useState(false);
@@ -34,6 +36,7 @@ const Search = ({
   const handleSubmit = async (e) => {
     e.preventDefault();
     setisLoadingButton(true);
+    isShuffleActive(false)
     const regex = /PL(.*)/;
     const match = playlistId.match(regex);
     const id = "PL" + match[1];
@@ -162,6 +165,7 @@ Search.propTypes = {
   playlistSongsById: PropTypes.object.isRequired,
   setcurrentActivePlaylistId: PropTypes.func.isRequired,
   modifyEtagInPlaylistDetailsById: PropTypes.func.isRequired,
+  isShuffleActive: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -177,6 +181,7 @@ const mapDispatchToProps = {
   addSongsByPlaylistID: addSongsByPlaylistID,
   setcurrentActivePlaylistId: setcurrentActivePlaylistId,
   modifyEtagInPlaylistDetailsById: modifyEtagInPlaylistDetailsById,
+  isShuffleActive: isShuffleActive,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);

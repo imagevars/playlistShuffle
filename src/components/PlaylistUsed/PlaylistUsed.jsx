@@ -18,6 +18,7 @@ import {
   nextSong,
   isPlaying,
   currentSong,
+  isShuffleActive,
 } from "../../actions/playerActions";
 const PlaylistUsed = ({
   playlistDetails,
@@ -31,6 +32,7 @@ const PlaylistUsed = ({
   removePlaylistSongsById,
   currentSong,
   modifyEtagInPlaylistDetailsById,
+  isShuffleActive,
 }) => {
   const navigate = useNavigate();
 
@@ -63,7 +65,8 @@ const PlaylistUsed = ({
   ));
 
   const handleClickPlaylist = async (id) => {
-    await setcurrentActivePlaylistId(id);
+    isShuffleActive(false);
+    setcurrentActivePlaylistId(id);
     const currentPlaylistInfo = playlistDetails.filter((element) => {
       return element.playlistId === id;
     });
@@ -75,11 +78,11 @@ const PlaylistUsed = ({
 
     // if playlistDataInfo is 304 it means that the playlist hasn't change so we can use the one in localstorage, that way we save api quota
     if (data === 304) {
-      await currentSong(
+      currentSong(
         playlistSongsById[currentPlaylistInfo[0].playlistId][0].snippet
           .resourceId.videoId
       );
-      await nextSong(
+      nextSong(
         playlistSongsById[currentPlaylistInfo[0].playlistId][1].snippet
           .resourceId.videoId
       );
@@ -95,8 +98,8 @@ const PlaylistUsed = ({
         playlistId: id,
         etag: data.playlistEtag,
       };
-      await addToPlaylistDetails(playlistDataInfo);
-      await modifyEtagInPlaylistDetailsById(playlistEtagAndId);
+      addToPlaylistDetails(playlistDataInfo);
+      modifyEtagInPlaylistDetailsById(playlistEtagAndId);
       addSongsByPlaylistID(playlistObject);
       currentSong(data.currentSong);
       nextSong(data.nextSong);
@@ -136,6 +139,7 @@ PlaylistUsed.proptypes = {
   removePlaylistSongsById: PropTypes.func.isRequired,
   currentSong: PropTypes.func.isRequired,
   modifyEtagInPlaylistDetailsById: PropTypes.func.isRequired,
+  isShuffleActive: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -155,5 +159,6 @@ const mapDispatchToProps = {
   deleteFromPlaylistDetails: deleteFromPlaylistDetails,
   addSongsByPlaylistID: addSongsByPlaylistID,
   removePlaylistSongsById: removePlaylistSongsById,
+  isShuffleActive: isShuffleActive,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(PlaylistUsed);

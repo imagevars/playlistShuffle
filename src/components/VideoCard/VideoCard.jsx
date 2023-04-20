@@ -6,6 +6,7 @@ import {
   currentSong,
   nextSong,
   previousSong,
+  isShuffleActive
 } from "../../actions/playerActions";
 import { addSongsByPlaylistID } from "../../actions/palylistSongsByIdActions";
 
@@ -16,6 +17,7 @@ const VideoCard = ({
   nextSong,
   playlistSongsById,
   addSongsByPlaylistID,
+  isShuffleActive
 }) => {
   const refs = playlistSongsById[player.currentActivePlaylistId]?.reduce(
     (acc, value) => {
@@ -30,13 +32,32 @@ const VideoCard = ({
       block: "start",
     });
   }, [player.currentSong]);
+  useEffect(() => {
+  
+    let unShuffleArr = [];
+    unShuffleArr.push(...playlistSongsById[player.currentActivePlaylistId]);
+    unShuffleArr.sort(function (a, b) {
+      return a.snippet.position - b.snippet.position;
+    });
+    const playlistObject = {
+      id: player.currentActivePlaylistId,
+      songs: unShuffleArr,
+    };
+    addSongsByPlaylistID(playlistObject);
+    currentSong(unShuffleArr[0].snippet.resourceId.videoId);
+    nextSong(unShuffleArr[1].snippet.resourceId.videoId);
+  
+  },[])
 
   useEffect(() => {
-    shuffleisActive();
+    if (player.isShuffleActive === true) {
+      shuffleisActive();
+
+    }
   }, [player.isShuffleActive]);
 
   const shuffleisActive = () => {
-    if (player.isShuffleActive === true) {
+    // if (player.isShuffleActive === true) {
       const generator = new MersenneTwister();
       let shuffleArr = [];
       shuffleArr.push(...playlistSongsById[player.currentActivePlaylistId]);
@@ -53,20 +74,22 @@ const VideoCard = ({
 
       currentSong(shuffleArr[0].snippet.resourceId.videoId);
       nextSong(shuffleArr[1].snippet.resourceId.videoId);
-    } else {
-      let unShuffleArr = [];
-      unShuffleArr.push(...playlistSongsById[player.currentActivePlaylistId]);
-      unShuffleArr.sort(function (a, b) {
-        return a.snippet.position - b.snippet.position;
-      });
-      const playlistObject = {
-        id: player.currentActivePlaylistId,
-        songs: unShuffleArr,
-      };
-      addSongsByPlaylistID(playlistObject);
-      currentSong(unShuffleArr[0].snippet.resourceId.videoId);
-      nextSong(unShuffleArr[1].snippet.resourceId.videoId);
-    }
+      isShuffleActive(false)
+    // } 
+    // else {
+      // let unShuffleArr = [];
+      // unShuffleArr.push(...playlistSongsById[player.currentActivePlaylistId]);
+      // unShuffleArr.sort(function (a, b) {
+      //   return a.snippet.position - b.snippet.position;
+      // });
+      // const playlistObject = {
+      //   id: player.currentActivePlaylistId,
+      //   songs: unShuffleArr,
+      // };
+      // addSongsByPlaylistID(playlistObject);
+      // currentSong(unShuffleArr[0].snippet.resourceId.videoId);
+      // nextSong(unShuffleArr[1].snippet.resourceId.videoId);
+    // }
   };
 
   const handleClick = (id) => {
@@ -152,6 +175,7 @@ VideoCard.propTypes = {
   playlistSongsById: PropTypes.object.isRequired,
   addSongsByPlaylistID: PropTypes.func.isRequired,
   previousSong: PropTypes.func.isRequired,
+  isShuffleActive: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = {
@@ -159,6 +183,7 @@ const mapDispatchToProps = {
   currentSong: currentSong,
   nextSong: nextSong,
   addSongsByPlaylistID: addSongsByPlaylistID,
+  isShuffleActive: isShuffleActive
 };
 
 const mapStateToProps = (state) => {

@@ -37,8 +37,6 @@ const MediaButtons = memo(
     isMutedActive,
     isFullScreenActive,
   }) => {
-
-
     const handleClickPreviousButton = () => {
       const currIndex = playlistSongsById[
         player.currentActivePlaylistId
@@ -92,11 +90,11 @@ const MediaButtons = memo(
     };
 
     const handleClickShuffle = () => {
-      if (player.isShuffleActive === false) {
-        isShuffleActive(true);
-      } else {
-        isShuffleActive(false);
-      }
+      // if (player.isShuffleActive === false) {
+      isShuffleActive(true);
+      // } else {
+      //   isShuffleActive(false);
+      // }
     };
     const handleClickFullScreen = () => {
       isFullScreenActive(true);
@@ -143,15 +141,9 @@ const MediaButtons = memo(
         <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
           <BiSkipNextCircle onClick={handleClickNextButton} size={40} />
         </div>
-        {player.isShuffleActive ? (
-          <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
-            <BiShuffle onClick={handleClickShuffle} size={40} />
-          </div>
-        ) : (
-          <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
-            <BiShuffle onClick={handleClickShuffle} size={40} />
-          </div>
-        )}
+        <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
+          <BiShuffle onClick={handleClickShuffle} size={40} />
+        </div>
 
         {player.isFullScreenActive === true ? (
           <div className="cursor-pointer  md:hidden hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
