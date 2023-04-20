@@ -130,8 +130,8 @@ const VideoCard = ({
       ) : null
   );
   return (
-    <div passive="true" className="cardContainer h-[46vh]">
-      <ul className="ulListCards mt-1 h-full  overflow-y-auto ">{song}</ul>
+    <div passive="true" className="cardContainer h-[46vh] md:h-full">
+      <ul className="ulListCards mt-1 h-full md:mt-0  overflow-y-auto ">{song}</ul>
     </div>
   );
 };

@@ -156,11 +156,11 @@ const PlaylistPage = ({
         </div>
 
         <div className="div">
-          <div className="mainContent md:flex">
+          <div className="mainContent md:flex md:h-[65vh]">
             <div className="md:w-2/5">
               <Player />
             </div>
-            <div className=" h-3/5 mt-6 w-[97%]  md:mt-0 mx-auto md:w-[55%]">
+            <div className=" h-3/5 md:h-full mt-6 w-[97%]  md:mt-0 mx-auto md:w-[55%]">
               <VideoCard />
             </div>
           </div>
