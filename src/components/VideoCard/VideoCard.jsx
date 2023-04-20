@@ -6,7 +6,7 @@ import {
   currentSong,
   nextSong,
   previousSong,
-  isShuffleActive
+  isShuffleActive,
 } from "../../actions/playerActions";
 import { addSongsByPlaylistID } from "../../actions/palylistSongsByIdActions";
 
@@ -17,7 +17,7 @@ const VideoCard = ({
   nextSong,
   playlistSongsById,
   addSongsByPlaylistID,
-  isShuffleActive
+  isShuffleActive,
 }) => {
   const refs = playlistSongsById[player.currentActivePlaylistId]?.reduce(
     (acc, value) => {
@@ -33,7 +33,6 @@ const VideoCard = ({
     });
   }, [player.currentSong]);
   useEffect(() => {
-  
     let unShuffleArr = [];
     unShuffleArr.push(...playlistSongsById[player.currentActivePlaylistId]);
     unShuffleArr.sort(function (a, b) {
@@ -46,50 +45,33 @@ const VideoCard = ({
     addSongsByPlaylistID(playlistObject);
     currentSong(unShuffleArr[0].snippet.resourceId.videoId);
     nextSong(unShuffleArr[1].snippet.resourceId.videoId);
-  
-  },[])
+  }, []);
 
   useEffect(() => {
     if (player.isShuffleActive === true) {
       shuffleisActive();
-
     }
   }, [player.isShuffleActive]);
 
   const shuffleisActive = () => {
     // if (player.isShuffleActive === true) {
-      const generator = new MersenneTwister();
-      let shuffleArr = [];
-      shuffleArr.push(...playlistSongsById[player.currentActivePlaylistId]);
+    const generator = new MersenneTwister();
+    let shuffleArr = [];
+    shuffleArr.push(...playlistSongsById[player.currentActivePlaylistId]);
 
-      for (let i = shuffleArr.length - 1; i > 0; i--) {
-        const j = Math.floor(generator.random() * (i + 1));
-        [shuffleArr[i], shuffleArr[j]] = [shuffleArr[j], shuffleArr[i]];
-      }
-      const playlistObject = {
-        id: player.currentActivePlaylistId,
-        songs: shuffleArr,
-      };
-      addSongsByPlaylistID(playlistObject);
+    for (let i = shuffleArr.length - 1; i > 0; i--) {
+      const j = Math.floor(generator.random() * (i + 1));
+      [shuffleArr[i], shuffleArr[j]] = [shuffleArr[j], shuffleArr[i]];
+    }
+    const playlistObject = {
+      id: player.currentActivePlaylistId,
+      songs: shuffleArr,
+    };
+    addSongsByPlaylistID(playlistObject);
 
-      currentSong(shuffleArr[0].snippet.resourceId.videoId);
-      nextSong(shuffleArr[1].snippet.resourceId.videoId);
-      isShuffleActive(false)
-    // } 
-    // else {
-      // let unShuffleArr = [];
-      // unShuffleArr.push(...playlistSongsById[player.currentActivePlaylistId]);
-      // unShuffleArr.sort(function (a, b) {
-      //   return a.snippet.position - b.snippet.position;
-      // });
-      // const playlistObject = {
-      //   id: player.currentActivePlaylistId,
-      //   songs: unShuffleArr,
-      // };
-      // addSongsByPlaylistID(playlistObject);
-      // currentSong(unShuffleArr[0].snippet.resourceId.videoId);
-      // nextSong(unShuffleArr[1].snippet.resourceId.videoId);
-    // }
+    currentSong(shuffleArr[0].snippet.resourceId.videoId);
+    nextSong(shuffleArr[1].snippet.resourceId.videoId);
+    isShuffleActive(false);
   };
 
   const handleClick = (id) => {
@@ -154,7 +136,9 @@ const VideoCard = ({
   );
   return (
     <div passive="true" className="cardContainer h-[46vh] md:h-full">
-      <ul className="ulListCards mt-1 h-full md:mt-0  overflow-y-auto ">{song}</ul>
+      <ul className="ulListCards mt-1 h-full md:mt-0  overflow-y-auto ">
+        {song}
+      </ul>
     </div>
   );
 };
@@ -183,7 +167,7 @@ const mapDispatchToProps = {
   currentSong: currentSong,
   nextSong: nextSong,
   addSongsByPlaylistID: addSongsByPlaylistID,
-  isShuffleActive: isShuffleActive
+  isShuffleActive: isShuffleActive,
 };
 
 const mapStateToProps = (state) => {
