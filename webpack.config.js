@@ -66,7 +66,7 @@ module.exports = {
       scriptLoading: "defer",
     }),
     new MiniCssExtractPlugin(),
-    new FaviconsWebpackPlugin("./src/icon.svg"),
+    new FaviconsWebpackPlugin("./src/favicon.png"),
     new WebpackManifestPlugin(),
     // new BundleAnalyzerPlugin(),
     new CompressionPlugin({
