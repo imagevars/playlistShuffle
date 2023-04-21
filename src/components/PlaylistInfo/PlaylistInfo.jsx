@@ -27,7 +27,7 @@ const PlaylistInfo = ({ playlistDetails }) => {
         src={playlistInfo.image}
         alt={playlistInfo.name}
       />
-      <p className="text-white">{playlistInfo.name}</p>
+      <p className="text-white ml-2"> <a href={`https://www.youtube.com/playlist?list=${id}`} target="_blank" rel="noopener noreferrer"> {playlistInfo.name}</a></p>
     </div>
   );
 };
