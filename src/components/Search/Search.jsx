@@ -10,12 +10,12 @@ import {
   nextSong,
   setcurrentActivePlaylistId,
   isShuffleActive,
-} from "../../actions/playerActions";
+} from "../../redux/actions/playerActions";
 import {
   addToPlaylistDetails,
   modifyEtagInPlaylistDetailsById,
-} from "../../actions/palylistDetailsActions";
-import { addSongsByPlaylistID } from "../../actions/palylistSongsByIdActions";
+} from "../../redux/actions/playlistDetailsActions";
+import { addSongsByPlaylistID } from "../../redux/actions/playlistSongsByIdActions";
 
 const Search = ({
   playlistDetails,

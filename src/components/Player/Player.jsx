@@ -13,7 +13,7 @@ import {
   setVideoDuration,
   isFullScreenActive,
   setPercentage,
-} from "../../actions/playerActions";
+} from "../../redux/actions/playerActions";
 
 const Player = ({
   player,

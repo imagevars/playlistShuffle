@@ -7,8 +7,8 @@ import {
   nextSong,
   previousSong,
   isShuffleActive,
-} from "../../actions/playerActions";
-import { addSongsByPlaylistID } from "../../actions/palylistSongsByIdActions";
+} from "../../redux/actions/playerActions";
+import { addSongsByPlaylistID } from "../../redux/actions/playlistSongsByIdActions";
 
 const VideoCard = ({
   player,

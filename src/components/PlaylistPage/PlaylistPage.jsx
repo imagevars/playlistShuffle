@@ -10,7 +10,7 @@ import {
   currentSong,
   nextSong,
   isMutedActive,
-} from "../../actions/playerActions";
+} from "../../redux/actions/playerActions";
 
 import PlayingRightNow from "../PlayingRightNow/PlayingRightNow";
 import Navbar from "../Navbar/Navbar";

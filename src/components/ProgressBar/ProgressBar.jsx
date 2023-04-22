@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import { connect } from "react-redux";
-import { setPercentage } from "../../actions/playerActions";
+import { setPercentage } from "../../redux/actions/playerActions";
 
 const ProgressBar = ({ player }) => {
 

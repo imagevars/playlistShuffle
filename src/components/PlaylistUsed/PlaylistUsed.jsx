@@ -6,20 +6,20 @@ import {
   addToPlaylistDetails,
   deleteFromPlaylistDetails,
   modifyEtagInPlaylistDetailsById,
-} from "../../actions/palylistDetailsActions";
+} from "../../redux/actions/playlistDetailsActions";
 import fetchPlaylistVideos from "../utils/fetchPlaylistVideos";
 import fetchPlaylistData from "../utils/fetchPlaylistData";
 import {
   addSongsByPlaylistID,
   removePlaylistSongsById,
-} from "../../actions/palylistSongsByIdActions";
+} from "../../redux/actions/playlistSongsByIdActions";
 import {
   setcurrentActivePlaylistId,
   nextSong,
   isPlaying,
   currentSong,
   isShuffleActive,
-} from "../../actions/playerActions";
+} from "../../redux/actions/playerActions";
 const PlaylistUsed = ({
   playlistDetails,
   addToPlaylistDetails,

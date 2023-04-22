@@ -8,7 +8,7 @@ import {
   isShuffleActive,
   previousSong,
   isFullScreenActive,
-} from "../../actions/playerActions";
+} from "../../redux/actions/playerActions";
 import {
   BiPlayCircle,
   BiPauseCircle,

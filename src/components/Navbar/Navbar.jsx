@@ -10,7 +10,7 @@ import {
   previousSong,
   isShuffleActive,
   setcurrentActivePlaylistId,
-} from "../../actions/playerActions";
+} from "../../redux/actions/playerActions";
 const Navbar = ({
   isPlaying,
   previousSong,
