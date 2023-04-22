@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
-import playerReducer from "./reducers/playerSlice";
-import playlistDetailsReducer from "./reducers/playlistDetailsSlice";
-import playlistSongsByIdReducer from "./reducers/playlistSongsByIdSlice";
-import hasPlaylistLoadedReducer from "./reducers/playlistloadedSlice";
+import playerReducer from "./redux/reducers/playerSlice";
+import playlistDetailsReducer from "./redux/reducers/playlistDetailsSlice";
+import playlistSongsByIdReducer from "./redux/reducers/playlistSongsByIdSlice";
+import hasPlaylistLoadedReducer from "./redux/reducers/playlistloadedSlice";
 const rootReducer = combineReducers({
   playlistSongsById: playlistSongsByIdReducer,
   player: playerReducer,
