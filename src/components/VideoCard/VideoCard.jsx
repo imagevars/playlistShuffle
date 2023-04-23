@@ -18,6 +18,7 @@ const VideoCard = ({
   playlistSongsById,
   addSongsByPlaylistID,
   isShuffleActive,
+  playlistDetails,
 }) => {
   const refs = playlistSongsById[player.currentActivePlaylistId]?.reduce(
     (acc, value) => {
@@ -33,18 +34,30 @@ const VideoCard = ({
     });
   }, [player.currentSong]);
   useEffect(() => {
-    let unShuffleArr = [];
-    unShuffleArr.push(...playlistSongsById[player.currentActivePlaylistId]);
-    unShuffleArr.sort(function (a, b) {
-      return a.snippet.position - b.snippet.position;
-    });
-    const playlistObject = {
-      id: player.currentActivePlaylistId,
-      songs: unShuffleArr,
-    };
-    addSongsByPlaylistID(playlistObject);
-    currentSong(unShuffleArr[0].snippet.resourceId.videoId);
-    nextSong(unShuffleArr[1].snippet.resourceId.videoId);
+    if (player.rememberLastVideo) {
+      const findPlaylistIndex = playlistDetails.findIndex((element) => {
+        return element.playlistId === player.currentActivePlaylistId;
+      });
+
+      currentSong(
+        playlistSongsById[player.currentActivePlaylistId][
+          playlistDetails[findPlaylistIndex].currentIndex
+        ].snippet.resourceId.videoId
+      );
+    } else {
+      let unShuffleArr = [];
+      unShuffleArr.push(...playlistSongsById[player.currentActivePlaylistId]);
+      unShuffleArr.sort(function (a, b) {
+        return a.snippet.position - b.snippet.position;
+      });
+      const playlistObject = {
+        id: player.currentActivePlaylistId,
+        songs: unShuffleArr,
+      };
+      addSongsByPlaylistID(playlistObject);
+      currentSong(unShuffleArr[0].snippet.resourceId.videoId);
+      nextSong(unShuffleArr[1].snippet.resourceId.videoId);
+    }
   }, []);
 
   useEffect(() => {
@@ -174,6 +187,7 @@ const mapStateToProps = (state) => {
   return {
     playlistSongsById: state.playlistSongsById,
     player: state.player,
+    playlistDetails: state.playlistDetails,
   };
 };
 

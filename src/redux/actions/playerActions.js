@@ -11,6 +11,7 @@ import {
   PLAYER_SETPROGRESS,
   PLAYER_SETPERCENTAGE,
   PLAYER_ISFULLSCREENACTIVE,
+  PLAYER_REMEMBERLASTVIDEO,
 } from "../constants/playerTypes";
 
 export const isPlaying = (payload) => ({ type: PLAYER_ISPLAYING, payload });
@@ -61,5 +62,10 @@ export const setPercentage = (payload) => ({
 
 export const isFullScreenActive = (payload) => ({
   type: PLAYER_ISFULLSCREENACTIVE,
+  payload,
+});
+
+export const rememberLastVideo = (payload) => ({
+  type: PLAYER_REMEMBERLASTVIDEO,
   payload,
 });

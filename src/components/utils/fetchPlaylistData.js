@@ -19,6 +19,7 @@ const fetchPlaylistData = async (id, etag) => {
       playlistImage:
         playlistDetailsQuery.data.items[0].snippet.thumbnails.medium.url,
       playlistEtag: etag,
+      currentIndex: 0,
     };
   } catch (error) {
     console.log("Error fetching data: ", error);

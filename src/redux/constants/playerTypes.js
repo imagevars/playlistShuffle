@@ -22,3 +22,5 @@ export const PLAYER_VIDEODURATION = "player/videoDuration";
 export const PLAYER_SETPERCENTAGE = "player/videopercentage";
 
 export const PLAYER_ISFULLSCREENACTIVE = "player/isFullScreenActive";
+
+export const PLAYER_REMEMBERLASTVIDEO = "player/rememberLastVideo";

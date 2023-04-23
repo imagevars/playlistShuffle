@@ -13,7 +13,9 @@ import {
   setVideoDuration,
   isFullScreenActive,
   setPercentage,
+  
 } from "../../redux/actions/playerActions";
+import { lastPlayedPlaylistDetails } from "../../redux/actions/playlistDetailsActions";
 
 const Player = ({
   player,
@@ -26,6 +28,8 @@ const Player = ({
   setProgress,
   setPercentage,
   isFullScreenActive,
+  lastPlayedPlaylistDetails,
+  playlistDetails
 }) => {
   const playerRef = useRef(null);
 
@@ -39,13 +43,37 @@ const Player = ({
       // screenfull.exit()
     }
   }, [player.isFullScreenActive]);
-  useEffect(() => {
-    if (playlistSongsById[player.currentActivePlaylistId]) {
-      currentSong(
-        playlistSongsById[player.currentActivePlaylistId][0]?.snippet.resourceId
-          .videoId
-      );
+
+  useEffect(()=>{
+    if(player.rememberLastVideo === true){
+
+      const findVideoIndex = playlistSongsById[player.currentActivePlaylistId].findIndex(element => {
+        return element.snippet.resourceId.videoId === player.currentSong
+      })
+
+
+      const lastPlayedObj = {
+        currentIndex: findVideoIndex,
+        playlistId: player.currentActivePlaylistId
+      };
+      lastPlayedPlaylistDetails(lastPlayedObj)
     }
+  },[player.currentSong])
+
+  useEffect(() => {
+    // if (playlistSongsById[player.currentActivePlaylistId]) {
+      if (player.rememberLastVideo) {
+        const findPlaylistIndex = playlistDetails.findIndex(element => {
+          return element.playlistId === player.currentActivePlaylistId
+        })
+        currentSong(playlistSongsById[player.currentActivePlaylistId][playlistDetails[findPlaylistIndex].currentIndex]?.snippet.resourceId.videoId)
+      } else {
+        currentSong(
+          playlistSongsById[player.currentActivePlaylistId][0]?.snippet
+            .resourceId.videoId
+        );
+      }
+    
   }, []);
 
   const afterSongEnds = () => {
@@ -181,6 +209,7 @@ Player.propTypes = {
   setVideoDuration: PropTypes.func.isRequired,
   setPercentage: PropTypes.func.isRequired,
   isFullScreenActive: PropTypes.func.isRequired,
+  lastPlayedPlaylistDetails: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = {
@@ -192,12 +221,14 @@ const mapDispatchToProps = {
   setVideoDuration: setVideoDuration,
   setPercentage: setPercentage,
   isFullScreenActive: isFullScreenActive,
+  lastPlayedPlaylistDetails:lastPlayedPlaylistDetails
 };
 
 const mapStateToProps = (state) => {
   return {
     player: state.player,
     playlistSongsById: state.playlistSongsById,
+    playlistDetails: state.playlistDetails
   };
 };
 

@@ -11,6 +11,7 @@ import {
   PLAYER_VIDEODURATION,
   PLAYER_SETPERCENTAGE,
   PLAYER_ISFULLSCREENACTIVE,
+  PLAYER_REMEMBERLASTVIDEO
 } from "../constants/playerTypes";
 
 const initialState = {
@@ -26,6 +27,7 @@ const initialState = {
   videoDuration: "0",
   videoPercentage: "0",
   isFullScreenActive: false,
+  rememberLastVideo: false
 };
 
 export default function playerReducer(state = initialState, action) {
@@ -65,6 +67,9 @@ export default function playerReducer(state = initialState, action) {
     }
     case PLAYER_ISFULLSCREENACTIVE: {
       return { ...state, isFullScreenActive: action.payload };
+    }
+    case PLAYER_REMEMBERLASTVIDEO: {
+      return { ...state, rememberLastVideo: action.payload };
     }
     default:
       return state;

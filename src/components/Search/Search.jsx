@@ -14,6 +14,7 @@ import {
 import {
   addToPlaylistDetails,
   modifyEtagInPlaylistDetailsById,
+  lastPlayedPlaylistDetails,
 } from "../../redux/actions/playlistDetailsActions";
 import { addSongsByPlaylistID } from "../../redux/actions/playlistSongsByIdActions";
 
@@ -27,6 +28,8 @@ const Search = ({
   setcurrentActivePlaylistId,
   modifyEtagInPlaylistDetailsById,
   isShuffleActive,
+  lastPlayedPlaylistDetails,
+  player,
 }) => {
   const [playlistId, setPlaylistId] = useState("");
   const [isloadingButton, setisLoadingButton] = useState(false);
@@ -36,7 +39,7 @@ const Search = ({
   const handleSubmit = async (e) => {
     e.preventDefault();
     setisLoadingButton(true);
-    isShuffleActive(false)
+    isShuffleActive(false);
     const regex = /PL(.*)/;
     const match = playlistId.match(regex);
     const id = "PL" + match[1];
@@ -52,14 +55,16 @@ const Search = ({
 
     // if playlistDataInfo is 304 it means that the playlist hasn't change so we can use the one in localstorage, that way we save api quota
     if (data === 304) {
-      currentSong(
-        playlistSongsById[currentPlaylistInfo[0].playlistId][0].snippet
-          .resourceId.videoId
-      );
-      nextSong(
-        playlistSongsById[currentPlaylistInfo[0].playlistId][1].snippet
-          .resourceId.videoId
-      );
+      if (player.rememberLastVideo) {
+        const findPlaylistIndex = playlistDetails.findIndex((element) => {
+          return element.playlistId === id;
+        });
+
+        currentSong(
+          playlistSongsById[id][playlistDetails[findPlaylistIndex].currentIndex]
+            .snippet.resourceId.videoId
+        );
+      }
       setisLoadingButton(false);
       navigate(`playlist/${id}`);
     } else if (data === 404) {
@@ -182,6 +187,7 @@ const mapDispatchToProps = {
   setcurrentActivePlaylistId: setcurrentActivePlaylistId,
   modifyEtagInPlaylistDetailsById: modifyEtagInPlaylistDetailsById,
   isShuffleActive: isShuffleActive,
+  lastPlayedPlaylistDetails: lastPlayedPlaylistDetails,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);

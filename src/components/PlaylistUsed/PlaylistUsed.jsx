@@ -6,6 +6,7 @@ import {
   addToPlaylistDetails,
   deleteFromPlaylistDetails,
   modifyEtagInPlaylistDetailsById,
+  lastPlayedPlaylistDetails,
 } from "../../redux/actions/playlistDetailsActions";
 import fetchPlaylistVideos from "../utils/fetchPlaylistVideos";
 import fetchPlaylistData from "../utils/fetchPlaylistData";
@@ -33,6 +34,8 @@ const PlaylistUsed = ({
   currentSong,
   modifyEtagInPlaylistDetailsById,
   isShuffleActive,
+  lastPlayedPlaylistDetails,
+  player,
 }) => {
   const navigate = useNavigate();
 
@@ -78,16 +81,28 @@ const PlaylistUsed = ({
 
     // if playlistDataInfo is 304 it means that the playlist hasn't change so we can use the one in localstorage, that way we save api quota
     if (data === 304) {
-      currentSong(
-        playlistSongsById[currentPlaylistInfo[0].playlistId][0].snippet
-          .resourceId.videoId
-      );
-      nextSong(
-        playlistSongsById[currentPlaylistInfo[0].playlistId][1].snippet
-          .resourceId.videoId
-      );
+      if (player.rememberLastVideo) {
+        const findPlaylistIndex = playlistDetails.findIndex((element) => {
+          return element.playlistId === id;
+        });
+
+        currentSong(
+          playlistSongsById[id][playlistDetails[findPlaylistIndex].currentIndex]
+            .snippet.resourceId.videoId
+        );
+      } else {
+        currentSong(
+          playlistSongsById[currentPlaylistInfo[0].playlistId][0].snippet
+            .resourceId.videoId
+        );
+        nextSong(
+          playlistSongsById[currentPlaylistInfo[0].playlistId][1].snippet
+            .resourceId.videoId
+        );
+      }
       isPlaying(true);
-    } else {
+    }
+     else {
       const playlistObject = {
         id: id,
         songs: data.responseArrToAdd,
@@ -146,6 +161,7 @@ const mapStateToProps = (state) => {
   return {
     playlistSongsById: state.playlistSongsById,
     playlistDetails: state.playlistDetails,
+    player: state.player,
   };
 };
 
@@ -160,5 +176,6 @@ const mapDispatchToProps = {
   addSongsByPlaylistID: addSongsByPlaylistID,
   removePlaylistSongsById: removePlaylistSongsById,
   isShuffleActive: isShuffleActive,
+  lastPlayedPlaylistDetails: lastPlayedPlaylistDetails,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(PlaylistUsed);
