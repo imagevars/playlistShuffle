@@ -106,7 +106,7 @@ const Search = ({
               isIdInvalid ? "border border-red-500" : ""
             }`}
             pattern="^(?=.*.{24,})(?=.*PL).*"
-            placeholder="ID or URL"
+            placeholder="ID or playlist URL. eg: 'www.youtube.com/playlist?list=PLi06ybkpczJBvFfOhfqDyKMl1Lp2tDkTb'"
             type="text"
             required
             onChange={(e) => handleChange(e)}
