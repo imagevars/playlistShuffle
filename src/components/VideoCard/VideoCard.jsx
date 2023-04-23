@@ -62,11 +62,11 @@ const VideoCard = ({
 
   useEffect(() => {
     if (player.isShuffleActive === true) {
-      shuffleisActive();
+      shuffleIsActive();
     }
   }, [player.isShuffleActive]);
 
-  const shuffleisActive = () => {
+  const shuffleIsActive = () => {
     // if (player.isShuffleActive === true) {
     const generator = new MersenneTwister();
     let shuffleArr = [];

@@ -131,7 +131,7 @@ const Player = ({
       playlistSongsById[player.currentActivePlaylistId].length - 1
     ) {
       console.log("Playlist Ended");
-      isPlaisPlayingying(false);
+      isPlaying(false);
     } else afterSongEnds();
   };
 
@@ -167,7 +167,7 @@ const Player = ({
         ref={playerRef}
         //not working yet
         // fallback={`https://img.youtube.com/vi/${player.currentSong}.jpg`}
-        valume={null}
+        volume={null}
         muted={player.isMutedActive}
         passive="true"
         onProgress={(e) => handleProgress(e)}

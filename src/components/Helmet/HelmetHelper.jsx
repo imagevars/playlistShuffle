@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const HelmetHelper = ({ title }) => {
   return (
     <Helmet
-      defaultTitle="Paylist Shuffle - The randomizer of your playlists"
+      defaultTitle="Playlist Shuffle - The randomizer of your playlists"
       title={title}
       defer={false}
     />

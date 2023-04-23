@@ -7,7 +7,7 @@ const rootReducer = combineReducers({
   playlistSongsById: playlistSongsByIdReducer,
   player: playerReducer,
   playlistDetails: playlistDetailsReducer,
-  hasplaylistloaded: hasPlaylistLoadedReducer,
+  hasPlaylistloaded: hasPlaylistLoadedReducer,
 });
 
 export default rootReducer;

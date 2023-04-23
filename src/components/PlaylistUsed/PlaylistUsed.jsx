@@ -135,7 +135,7 @@ const PlaylistUsed = ({
   );
 };
 
-PlaylistUsed.proptypes = {
+PlaylistUsed.propTypes = {
   playlistDetails: PropTypes.arrayOf(
     PropTypes.shape({
       playlistName: PropTypes.string.isRequired,

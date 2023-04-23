@@ -146,7 +146,7 @@ const PlaylistPage = ({
           title={
             currentSongName
               ? `${currentSongName} - Playlist Shuffle`
-              : "Paylist Shuffle | randomize your playlist"
+              : "Playlist Shuffle | randomize your playlist"
           }
         />
         <Navbar />
@@ -181,7 +181,7 @@ const PlaylistPage = ({
   );
 };
 
-PlaylistPage.proptypes = {
+PlaylistPage.propTypes = {
   isPlaying: PropTypes.func.isRequired,
   player: PropTypes.shape({
     isPlaying: PropTypes.bool.isRequired,

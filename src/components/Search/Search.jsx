@@ -32,13 +32,13 @@ const Search = ({
   player,
 }) => {
   const [playlistId, setPlaylistId] = useState("");
-  const [isloadingButton, setisLoadingButton] = useState(false);
+  const [isLoadingButton, setIsLoadingButton] = useState(false);
   const [isIdInvalid, setIsIdInvalid] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setisLoadingButton(true);
+    setIsLoadingButton(true);
     isShuffleActive(false);
     const regex = /PL(.*)/;
     const match = playlistId.match(regex);
@@ -53,7 +53,7 @@ const Search = ({
       currentPlaylistInfo.length > 0 ? currentPlaylistInfo[0].playlistEtag : "";
     const data = await fetchPlaylistVideos(id, currEtag);
 
-    // if playlistDataInfo is 304 it means that the playlist hasn't change so we can use the one in localstorage, that way we save api quota
+    // if playlistDataInfo is 304 it means that the playlist hasn't change so we can use the one in localStorage, that way we save api quota
     if (data === 304) {
       if (player.rememberLastVideo) {
         const findPlaylistIndex = playlistDetails.findIndex((element) => {
@@ -65,11 +65,11 @@ const Search = ({
             .snippet.resourceId.videoId
         );
       }
-      setisLoadingButton(false);
+      setIsLoadingButton(false);
       navigate(`playlist/${id}`);
     } else if (data === 404) {
       setIsIdInvalid(true);
-      setisLoadingButton(false);
+      setIsLoadingButton(false);
     } else {
       const playlistDataInfo = await fetchPlaylistData(id, data.playlistEtag);
       const playlistEtagAndId = {
@@ -83,7 +83,7 @@ const Search = ({
       };
 
       await modifyEtagInPlaylistDetailsById(playlistEtagAndId);
-      setisLoadingButton(false);
+      setIsLoadingButton(false);
       await addSongsByPlaylistID(playlistObject);
       await currentSong(data.currentSong);
       await nextSong(data.nextSong);
@@ -116,7 +116,7 @@ const Search = ({
             className="  w-[13%] h-full bg-[#bb86fc] font-medium text-white  rounded-sm flex items-center justify-center"
             type="submit"
           >
-            {isloadingButton === true ? (
+            {isLoadingButton === true ? (
               <svg
                 className="animate-spin mx-auto h-5 w-5 text-white"
                 xmlns="http://www.w3.org/2000/svg"

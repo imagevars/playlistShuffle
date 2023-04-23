@@ -21,7 +21,7 @@ const PlayingRightNow = ({ player, playlistSongsById }) => {
   );
 };
 
-PlayingRightNow.proptypes = {
+PlayingRightNow.propTypes = {
   player: PropTypes.shape({
     isPlaying: PropTypes.bool.isRequired,
     previousSong: PropTypes.string,
@@ -32,7 +32,7 @@ PlayingRightNow.proptypes = {
     currentActivePlaylistId: PropTypes.string.isRequired,
     isMutedActive: PropTypes.bool.isRequired,
   }).isRequired,
-  playlistSongsById: PropTypes.string.isRequired,
+  playlistSongsById: PropTypes.object.isRequired,
 };
 const mapStateToProps = (state) => {
   return {

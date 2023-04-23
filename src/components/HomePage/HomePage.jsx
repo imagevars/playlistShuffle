@@ -19,7 +19,7 @@ const  handleChange = () => {
   return (
     <div className="min-h-screen bg-[#121212]">
       <HelmetHelper
-        title={"Paylist Shuffle - The randomizer of your playlists"}
+        title={"Playlist Shuffle - The randomizer of your playlists"}
       />
       <div className=" align-middle  w-10/12 flex  mx-auto">
         <div className="w-full">
@@ -40,7 +40,7 @@ const  handleChange = () => {
   );
 };
 
-HomePage.proptypes = {
+HomePage.propTypes = {
   player: PropTypes.shape({
     isPlaying: PropTypes.bool.isRequired,
     previousSong: PropTypes.string,
