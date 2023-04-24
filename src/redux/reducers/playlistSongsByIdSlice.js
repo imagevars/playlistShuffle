@@ -1,19 +1,19 @@
 import { cloneDeep } from 'lodash';
 import {
-  PLAYLISTSONGS_ADDSONGSBYPLAYLISTID,
-  PLAYLISTSONGS_REMOVEPLAYLISTSONGSBYID,
+  PLAYLIST_SONGS_ADD_SONGS_BY_PLAYLIST_ID,
+  PLAYLIST_SONGS_REMOVE_PLAYLIST_SONGS_BY_ID,
 } from '../constants/playlistSongsByIdTypes';
 
 const initialState = {};
 
 export default function playlistSongsByIdReducer(state = initialState, action) {
   switch (action.type) {
-    case PLAYLISTSONGS_ADDSONGSBYPLAYLISTID: {
+    case PLAYLIST_SONGS_ADD_SONGS_BY_PLAYLIST_ID: {
       const newState = { ...state, [action.payload.id]: action.payload.songs };
       return newState;
     }
 
-    case PLAYLISTSONGS_REMOVEPLAYLISTSONGSBYID: {
+    case PLAYLIST_SONGS_REMOVE_PLAYLIST_SONGS_BY_ID: {
       const updatedState = cloneDeep(state);
       delete updatedState[action.payload];
       return updatedState;

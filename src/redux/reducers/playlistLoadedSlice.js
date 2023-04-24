@@ -1,4 +1,4 @@
-import HAS_PLAYLIST_LOADED from '../constants/hasPlaylistLoaded';
+import HAS_PLAYLIST_LOADED from '../constants/hasPlaylistLoadedTypes';
 
 const initialState = {
   HAS_PLAYLIST_LOADED: false,
