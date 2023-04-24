@@ -1,26 +1,25 @@
-export const PLAYER_ISPLAYING = "player/isPlaying";
+export const PLAYER_IS_PLAYING = 'player/isPlaying';
 
-export const PLAYER_ISLOOPACTIVE = "player/isLoopActive";
+export const PLAYER_IS_LOOP_ACTIVE = 'player/isLoopActive';
 
-export const PLAYER_ISSHUFFLEACTIVE = "player/isShuffleActive";
+export const PLAYER_IS_SHUFFLE_ACTIVE = 'player/isShuffleActive';
 
-export const PLAYER_PREVIOUSSONG = "player/previousSong";
+export const PLAYER_PREVIOUS_SONG = 'player/previousSong';
 
-export const PLAYER_CURRENTSONG = "player/currentSong";
+export const PLAYER_CURRENT_SONG = 'player/currentSong';
 
-export const PLAYER_NEXTSONG = "player/nextSong";
+export const PLAYER_NEXT_SONG = 'player/nextSong';
 
-export const PLAYER_SETCURRENTACTIVEPLAYLIST =
-  "player/setcurrentActivePlaylistId";
+export const PLAYER_SET_CURRENT_ACTIVE_PLAYLIST = 'player/setCurrentActivePlaylistId';
 
-export const PLAYER_ISMUTEDACTIVE = "player/isMutedActive";
+export const PLAYER_IS_MUTED_ACTIVE = 'player/isMutedActive';
 
-export const PLAYER_SETPROGRESS = "player/setProgress";
+export const PLAYER_SET_PROGRESS = 'player/setProgress';
 
-export const PLAYER_VIDEODURATION = "player/videoDuration";
+export const PLAYER_VIDEO_DURATION = 'player/videoDuration';
 
-export const PLAYER_SETPERCENTAGE = "player/videopercentage";
+export const PLAYER_SET_PERCENTAGE = 'player/videoPercentage';
 
-export const PLAYER_ISFULLSCREENACTIVE = "player/isFullScreenActive";
+export const PLAYER_IS_FULL_SCREEN_ACTIVE = 'player/isFullScreenActive';
 
-export const PLAYER_REMEMBERLASTVIDEO = "player/rememberLastVideo";
+export const PLAYER_REMEMBER_LAST_VIDEO = 'player/rememberLastVideo';

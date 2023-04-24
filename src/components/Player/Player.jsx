@@ -1,8 +1,8 @@
-import React, { useEffect, useRef } from "react";
-import { connect } from "react-redux";
-import ReactPlayer from "react-player/youtube";
-import PropTypes from "prop-types";
-import screenfull from "screenfull";
+import React, { useEffect, useRef } from 'react';
+import { connect } from 'react-redux';
+import ReactPlayer from 'react-player/youtube';
+import PropTypes from 'prop-types';
+import screenfull from 'screenfull';
 
 import {
   isPlaying,
@@ -13,11 +13,11 @@ import {
   setVideoDuration,
   isFullScreenActive,
   setPercentage,
-  
-} from "../../redux/actions/playerActions";
-import { lastPlayedPlaylistDetails } from "../../redux/actions/playlistDetailsActions";
 
-const Player = ({
+} from '../../redux/actions/playerActions';
+import { lastPlayedPlaylistDetails } from '../../redux/actions/playlistDetailsActions';
+
+function Player({
   player,
   isPlaying,
   previousSong,
@@ -29,8 +29,8 @@ const Player = ({
   setPercentage,
   isFullScreenActive,
   lastPlayedPlaylistDetails,
-  playlistDetails
-}) => {
+  playlistDetails,
+}) {
   const playerRef = useRef(null);
 
   useEffect(() => {
@@ -44,93 +44,96 @@ const Player = ({
     }
   }, [player.isFullScreenActive]);
 
-  useEffect(()=>{
-    if(player.rememberLastVideo === true){
-
-      const findVideoIndex = playlistSongsById[player.currentActivePlaylistId].findIndex(element => {
-        return element.snippet.resourceId.videoId === player.currentSong
-      })
-
-
+  useEffect(() => {
+    if (player.rememberLastVideo === true) {
+      const findVideoIndex = playlistSongsById[
+        player.currentActivePlaylistId
+      ].findIndex(
+        (element) => element.snippet.resourceId.videoId === player.currentSong,
+      );
       const lastPlayedObj = {
         currentIndex: findVideoIndex,
-        playlistId: player.currentActivePlaylistId
+        playlistId: player.currentActivePlaylistId,
       };
-      lastPlayedPlaylistDetails(lastPlayedObj)
+      lastPlayedPlaylistDetails(lastPlayedObj);
     }
-  },[player.currentSong])
+  }, [player.currentSong]);
 
   useEffect(() => {
     // if (playlistSongsById[player.currentActivePlaylistId]) {
-      if (player.rememberLastVideo) {
-        const findPlaylistIndex = playlistDetails.findIndex(element => {
-          return element.playlistId === player.currentActivePlaylistId
-        })
-        currentSong(playlistSongsById[player.currentActivePlaylistId][playlistDetails[findPlaylistIndex].currentIndex]?.snippet.resourceId.videoId)
-      } else {
-        currentSong(
-          playlistSongsById[player.currentActivePlaylistId][0]?.snippet
-            .resourceId.videoId
-        );
-      }
-    
+    if (player.rememberLastVideo) {
+      const findPlaylistIndex = playlistDetails.findIndex(
+        (element) => element.playlistId === player.currentActivePlaylistId,
+      );
+      currentSong(
+        playlistSongsById[player.currentActivePlaylistId][
+          playlistDetails[findPlaylistIndex].currentIndex
+        ]?.snippet.resourceId.videoId,
+      );
+    } else {
+      currentSong(
+        playlistSongsById[player.currentActivePlaylistId][0]?.snippet
+          .resourceId.videoId,
+      );
+    }
   }, []);
 
   const afterSongEnds = () => {
     const currIndex = playlistSongsById[
       player.currentActivePlaylistId
-    ].findIndex((ele) => {
-      return ele.snippet?.resourceId.videoId === player.currentSong;
-    });
+    ].findIndex((ele) => ele.snippet?.resourceId.videoId === player.currentSong);
     if (
-      currIndex <
-      playlistSongsById[player.currentActivePlaylistId].length - 1
+      currIndex
+      < playlistSongsById[player.currentActivePlaylistId].length - 1
     ) {
       previousSong(
         playlistSongsById[player.currentActivePlaylistId][currIndex]?.snippet
-          .resourceId.videoId
+          .resourceId.videoId,
       );
       currentSong(
         playlistSongsById[player.currentActivePlaylistId][currIndex + 1]
-          ?.snippet.resourceId.videoId
+          ?.snippet.resourceId.videoId,
       );
       nextSong(
         playlistSongsById[player.currentActivePlaylistId][currIndex + 2]
-          ?.snippet.resourceId.videoId
+          ?.snippet.resourceId.videoId,
       );
     } else {
       previousSong(
         playlistSongsById[player.currentActivePlaylistId][currIndex]?.snippet
-          .resourceId.videoId
+          .resourceId.videoId,
       );
       currentSong(
         playlistSongsById[player.currentActivePlaylistId][currIndex + 1]
-          ?.snippet.resourceId.videoId
+          ?.snippet.resourceId.videoId,
       );
-      nextSong("");
+      nextSong('');
     }
   };
 
   const handleEnd = () => {
     if (
       playlistSongsById[player.currentActivePlaylistId].findIndex(
-        (ele) => ele.snippet.resourceId.videoId === player.currentSong
-      ) ===
-      playlistSongsById[player.currentActivePlaylistId].length - 1
+        (ele) => ele.snippet.resourceId.videoId === player.currentSong,
+      )
+      === playlistSongsById[player.currentActivePlaylistId].length - 1
     ) {
-      console.log("Playlist Ended");
+      // eslint-disable-next-line
+      console.log('Playlist Ended');
       isPlaying(false);
     } else afterSongEnds();
   };
-  // When some songs can't be played outside of youtube this function will trigger and playlist the next song, or if it is the last the playlist will end
+  // When some songs can't be played outside of youtube this function will trigger
+  // and playlist the next song, or if it is the last the playlist will end
   const handleError = () => {
     if (
       playlistSongsById[player.currentActivePlaylistId].findIndex(
-        (ele) => ele.snippet.resourceId.videoId === player.currentSong
-      ) ===
-      playlistSongsById[player.currentActivePlaylistId].length - 1
+        (ele) => ele.snippet.resourceId.videoId === player.currentSong,
+      )
+      === playlistSongsById[player.currentActivePlaylistId].length - 1
     ) {
-      console.log("Playlist Ended");
+      // eslint-disable-next-line
+      console.log('Playlist Ended');
       isPlaying(false);
     } else afterSongEnds();
   };
@@ -145,6 +148,11 @@ const Player = ({
   const handleReady = () => {
     isPlaying(true);
   };
+  const getPercentage = (a, b) => {
+    const trimmedA = Math.floor(a);
+    const percentage = (trimmedA / b) * 100;
+    setPercentage(String(Math.floor(percentage)));
+  };
 
   const handleProgress = (e) => {
     setProgress(String(Math.floor(e.playedSeconds)));
@@ -154,18 +162,13 @@ const Player = ({
     setVideoDuration(String(e));
   };
 
-  const getPercentage = (a, b) => {
-    const trimmedA = Math.floor(a);
-    const percentage = (trimmedA / b) * 100;
-    setPercentage(String(Math.floor(percentage)));
-  };
   return (
-    <div className="player aspect-auto md:w-full md:h-full	">
-      {/* https://img.youtube.com/vi/Eeb4aZObp-0/0.jpg*/}
+    <div className="player aspect-auto md:w-full md:h-full">
+      {/* https://img.youtube.com/vi/Eeb4aZObp-0/0.jpg */}
       <ReactPlayer
         className="aaaa"
         ref={playerRef}
-        //not working yet
+        // not working yet
         // fallback={`https://img.youtube.com/vi/${player.currentSong}.jpg`}
         volume={null}
         muted={player.isMutedActive}
@@ -177,16 +180,16 @@ const Player = ({
         onPause={() => handlePause()}
         onReady={() => handleReady()}
         onEnded={() => handleEnd()}
-        width={"100%"}
-        height={"100%"}
-        controls={true}
+        width="100%"
+        height="100%"
+        controls
         loop={player.isLoopActive}
         playing={player.isPlaying}
         url={`https://www.youtube.com/embed/${player.currentSong}`}
       />
     </div>
   );
-};
+}
 
 Player.propTypes = {
   player: PropTypes.shape({
@@ -198,38 +201,48 @@ Player.propTypes = {
     isLoopActive: PropTypes.bool.isRequired,
     currentActivePlaylistId: PropTypes.string.isRequired,
     isMutedActive: PropTypes.bool.isRequired,
+    rememberLastVideo: PropTypes.bool.isRequired,
+    isFullScreenActive: PropTypes.bool.isRequired,
+    videoDuration: PropTypes.string.isRequired,
+
   }).isRequired,
+  playlistDetails: PropTypes.arrayOf(PropTypes.shape({
+    playlistName: PropTypes.string.isRequired,
+    playlistId: PropTypes.string.isRequired,
+    playlistImage: PropTypes.string.isRequired,
+    playlistEtag: PropTypes.string.isRequired,
+    currentIndex: PropTypes.number.isRequired,
+
+  })).isRequired,
   isPlaying: PropTypes.func.isRequired,
   previousSong: PropTypes.func.isRequired,
   currentSong: PropTypes.func.isRequired,
-  nextSong: PropTypes.func,
+  nextSong: PropTypes.func.isRequired,
   setPercentage: PropTypes.func.isRequired,
-  playlistSongsById: PropTypes.object.isRequired,
+  playlistSongsById: PropTypes.objectOf(PropTypes.arrayOf).isRequired,
   setProgress: PropTypes.func.isRequired,
   setVideoDuration: PropTypes.func.isRequired,
-  setPercentage: PropTypes.func.isRequired,
   isFullScreenActive: PropTypes.func.isRequired,
-  lastPlayedPlaylistDetails: PropTypes.func.isRequired
+  lastPlayedPlaylistDetails: PropTypes.func.isRequired,
+
 };
 
 const mapDispatchToProps = {
-  isPlaying: isPlaying,
-  previousSong: previousSong,
-  currentSong: currentSong,
-  nextSong: nextSong,
-  setProgress: setProgress,
-  setVideoDuration: setVideoDuration,
-  setPercentage: setPercentage,
-  isFullScreenActive: isFullScreenActive,
-  lastPlayedPlaylistDetails:lastPlayedPlaylistDetails
+  isPlaying,
+  previousSong,
+  currentSong,
+  nextSong,
+  setProgress,
+  setVideoDuration,
+  setPercentage,
+  isFullScreenActive,
+  lastPlayedPlaylistDetails,
 };
 
-const mapStateToProps = (state) => {
-  return {
-    player: state.player,
-    playlistSongsById: state.playlistSongsById,
-    playlistDetails: state.playlistDetails
-  };
-};
+const mapStateToProps = (state) => ({
+  player: state.player,
+  playlistSongsById: state.playlistSongsById,
+  playlistDetails: state.playlistDetails,
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Player);

@@ -1,12 +1,11 @@
-import React, { memo } from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-const PlayingRightNow = ({ player, playlistSongsById }) => {
+import React, { memo } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
+function PlayingRightNow({ player, playlistSongsById }) {
   const currentIndex = playlistSongsById[
     player.currentActivePlaylistId
-  ]?.findIndex((ele) => {
-    return ele.snippet.resourceId.videoId === player.currentSong;
-  });
+  ]?.findIndex((ele) => ele.snippet.resourceId.videoId === player.currentSong);
   return (
     <div>
       <div>
@@ -19,7 +18,7 @@ const PlayingRightNow = ({ player, playlistSongsById }) => {
       </div>
     </div>
   );
-};
+}
 
 PlayingRightNow.propTypes = {
   player: PropTypes.shape({
@@ -28,17 +27,15 @@ PlayingRightNow.propTypes = {
     currentSong: PropTypes.string.isRequired,
     nextSong: PropTypes.string,
     isShuffleActive: PropTypes.bool.isRequired,
-    isLoopActive:PropTypes.bool.isRequired,
+    isLoopActive: PropTypes.bool.isRequired,
     currentActivePlaylistId: PropTypes.string.isRequired,
     isMutedActive: PropTypes.bool.isRequired,
   }).isRequired,
-  playlistSongsById: PropTypes.object.isRequired,
+  playlistSongsById: PropTypes.objectOf(PropTypes.arrayOf).isRequired,
 };
-const mapStateToProps = (state) => {
-  return {
-    playlistSongsById: state.playlistSongsById,
-    player: state.player,
-  };
-};
+const mapStateToProps = (state) => ({
+  playlistSongsById: state.playlistSongsById,
+  player: state.player,
+});
 
 export default connect(mapStateToProps, null)(memo(PlayingRightNow));

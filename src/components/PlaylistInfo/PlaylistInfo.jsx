@@ -1,17 +1,21 @@
-import React, { useEffect, useState, memo, useMemo } from "react";
-import { connect } from "react-redux";
-import { useParams } from "react-router-dom";
-import PropTypes from "prop-types";
-const PlaylistInfo = ({ playlistDetails }) => {
+import React, {
+  useEffect, useState, memo, useMemo,
+} from 'react';
+import { connect } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
+function PlaylistInfo({ playlistDetails }) {
   const { id } = useParams();
   const [playlistInfo, setPlaylistInfo] = useState({
-    name: "",
-    image: "",
+    name: '',
+    image: '',
   });
 
-  const info = useMemo(() => {
-    return playlistDetails?.find((ele) => ele.playlistId === id);
-  }, [playlistDetails, id]);
+  const info = useMemo(
+    () => playlistDetails?.find((ele) => ele.playlistId === id),
+    [playlistDetails, id],
+  );
 
   useEffect(() => {
     setPlaylistInfo({
@@ -27,10 +31,16 @@ const PlaylistInfo = ({ playlistDetails }) => {
         src={playlistInfo.image}
         alt={playlistInfo.name}
       />
-      <p className="text-white ml-2"> <a href={`https://www.youtube.com/playlist?list=${id}`} target="_blank" rel="noopener noreferrer"> {playlistInfo.name}</a></p>
+      <p className="text-white ml-2">
+        {' '}
+        <a href={`https://www.youtube.com/playlist?list=${id}`} target="_blank" rel="noopener noreferrer">
+          {' '}
+          {playlistInfo.name}
+        </a>
+      </p>
     </div>
   );
-};
+}
 
 PlaylistInfo.propTypes = {
   playlistDetails: PropTypes.arrayOf(
@@ -39,15 +49,13 @@ PlaylistInfo.propTypes = {
       playlistId: PropTypes.string.isRequired,
       playlistImage: PropTypes.string.isRequired,
       playlistEtag: PropTypes.string.isRequired,
-    })
+    }),
   ).isRequired,
 };
 
-const mapStateToProps = (state) => {
-  return {
-    player: state.player,
-    playlistDetails: state.playlistDetails,
-  };
-};
+const mapStateToProps = (state) => ({
+  player: state.player,
+  playlistDetails: state.playlistDetails,
+});
 
 export default connect(mapStateToProps, null)(memo(PlaylistInfo));

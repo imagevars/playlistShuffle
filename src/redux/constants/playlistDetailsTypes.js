@@ -1,11 +1,9 @@
-export const PLAYLISTDETAILS_ADDTOPLAYLISTDETAILS =
-  "playlistDetails/addToPlaylistDetails";
+export const PLAYLIST_DETAILS_ADD_TO_PLAYLIST_DETAILS = 'playlistDetails/addToPlaylistDetails';
 
-export const PLAYLISTDETAILS_DELETEFROMPLAYLISTDETAILS =
-  "playlistDetails/deleteFromPlaylistDetails";
+export const PLAYLIST_DETAILS_DELETE_FROM_PLAYLIST_DETAILS = 'playlistDetails/deleteFromPlaylistDetails';
 
-export const PLAYLISTDETAILS_ETAG = "playlistDetails/Etag";
+export const PLAYLIST_DETAILS_ETAG = 'playlistDetails/Etag';
 
-export const PLAYLISTDETAILS_LASTPLAYED = "playlistDetails/lastPlayed"
+export const PLAYLIST_DETAILS_LAST_PLAYED = 'playlistDetails/lastPlayed';
 
-export const PLAYLISTDETAILS_LASTPLAYEDALL = "playlistDetails/lastPlayedAll"
+export const PLAYLIST_DETAILS_LAST_PLAYED_ALL = 'playlistDetails/lastPlayedAll';

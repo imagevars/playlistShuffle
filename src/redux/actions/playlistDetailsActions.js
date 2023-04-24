@@ -1,32 +1,32 @@
 import {
-  PLAYLISTDETAILS_ADDTOPLAYLISTDETAILS,
-  PLAYLISTDETAILS_DELETEFROMPLAYLISTDETAILS,
-  PLAYLISTDETAILS_ETAG,
-  PLAYLISTDETAILS_LASTPLAYED,
-  PLAYLISTDETAILS_LASTPLAYEDALL,
+  PLAYLIST_DETAILS_ADD_TO_PLAYLIST_DETAILS,
+  PLAYLIST_DETAILS_DELETE_FROM_PLAYLIST_DETAILS,
+  PLAYLIST_DETAILS_ETAG,
+  PLAYLIST_DETAILS_LAST_PLAYED,
+  PLAYLIST_DETAILS_LAST_PLAYED_ALL,
 
-} from "../constants/playlistDetailsTypes";
+} from '../constants/playlistDetailsTypes';
 
 export const addToPlaylistDetails = (payload) => ({
-  type: PLAYLISTDETAILS_ADDTOPLAYLISTDETAILS,
+  type: PLAYLIST_DETAILS_ADD_TO_PLAYLIST_DETAILS,
   payload,
 });
 
 export const deleteFromPlaylistDetails = (payload) => ({
-  type: PLAYLISTDETAILS_DELETEFROMPLAYLISTDETAILS,
+  type: PLAYLIST_DETAILS_DELETE_FROM_PLAYLIST_DETAILS,
   payload,
 });
 
 export const modifyEtagInPlaylistDetailsById = (payload) => ({
-  type: PLAYLISTDETAILS_ETAG,
+  type: PLAYLIST_DETAILS_ETAG,
   payload,
 });
 
 export const lastPlayedPlaylistDetails = (payload) => ({
-  type: PLAYLISTDETAILS_LASTPLAYED,
+  type: PLAYLIST_DETAILS_LAST_PLAYED,
   payload,
 });
 
 export const lastPlayedPlaylistDetailsAll = () => ({
-  type: PLAYLISTDETAILS_LASTPLAYEDALL,
+  type: PLAYLIST_DETAILS_LAST_PLAYED_ALL,
 });

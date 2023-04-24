@@ -1,14 +1,4 @@
-import React, { memo } from "react";
-import {
-  isPlaying,
-  currentSong,
-  nextSong,
-  isLoopActive,
-  isMutedActive,
-  isShuffleActive,
-  previousSong,
-  isFullScreenActive,
-} from "../../redux/actions/playerActions";
+import React, { memo } from 'react';
 import {
   BiPlayCircle,
   BiPauseCircle,
@@ -19,10 +9,20 @@ import {
   BiVolumeFull,
   BiFullscreen,
   BiExitFullscreen,
-} from "react-icons/bi";
-import PropTypes from "prop-types";
-import { TbRepeatOff, TbRepeatOnce } from "react-icons/tb";
-import { connect } from "react-redux";
+} from 'react-icons/bi';
+import PropTypes from 'prop-types';
+import { TbRepeatOff, TbRepeatOnce } from 'react-icons/tb';
+import { connect } from 'react-redux';
+import {
+  isPlaying,
+  currentSong,
+  nextSong,
+  isLoopActive,
+  isMutedActive,
+  isShuffleActive,
+  previousSong,
+  isFullScreenActive,
+} from '../../redux/actions/playerActions';
 
 const MediaButtons = memo(
   ({
@@ -40,61 +40,54 @@ const MediaButtons = memo(
     const handleClickPreviousButton = () => {
       const currIndex = playlistSongsById[
         player.currentActivePlaylistId
-      ].findIndex((song) => {
-        return song.snippet.resourceId.videoId === player.currentSong;
-      });
+      ].findIndex((song) => song.snippet.resourceId.videoId === player.currentSong);
       if (currIndex !== 0) {
         previousSong(
           playlistSongsById[player.currentActivePlaylistId][currIndex - 2]
-            ?.snippet.resourceId.videoId
+            ?.snippet.resourceId.videoId,
         );
         currentSong(
           playlistSongsById[player.currentActivePlaylistId][currIndex - 1]
-            ?.snippet.resourceId.videoId
+            ?.snippet.resourceId.videoId,
         );
         nextSong(
           playlistSongsById[player.currentActivePlaylistId][currIndex]?.snippet
-            .resourceId.videoId
+            .resourceId.videoId,
         );
       }
     };
     const handleClickNextButton = () => {
       const currIndex = playlistSongsById[
         player.currentActivePlaylistId
-      ].findIndex((ele) => {
-        return ele.snippet?.resourceId.videoId === player.currentSong;
-      });
+      ].findIndex((ele) => ele.snippet?.resourceId.videoId === player.currentSong);
 
       if (
-        currIndex <
-        playlistSongsById[player.currentActivePlaylistId].length - 1
+        currIndex
+        < playlistSongsById[player.currentActivePlaylistId].length - 1
       ) {
         previousSong(
           playlistSongsById[player.currentActivePlaylistId][currIndex]?.snippet
-            .resourceId.videoId
+            .resourceId.videoId,
         );
         currentSong(
           playlistSongsById[player.currentActivePlaylistId][currIndex + 1]
-            ?.snippet.resourceId.videoId
+            ?.snippet.resourceId.videoId,
         );
         nextSong(
           playlistSongsById[player.currentActivePlaylistId][currIndex + 2]
-            ?.snippet.resourceId.videoId
+            ?.snippet.resourceId.videoId,
         );
       } else if (
-        currIndex ===
-        playlistSongsById[player.currentActivePlaylistId].length - 1
+        currIndex
+        === playlistSongsById[player.currentActivePlaylistId].length - 1
       ) {
-        console.log("No more songs left");
+        // eslint-disable-next-line
+        console.log('No more songs left');
       }
     };
 
     const handleClickShuffle = () => {
-      // if (player.isShuffleActive === false) {
       isShuffleActive(true);
-      // } else {
-      //   isShuffleActive(false);
-      // }
     };
     const handleClickFullScreen = () => {
       isFullScreenActive(true);
@@ -102,61 +95,59 @@ const MediaButtons = memo(
     return (
       <div className=" text-[#624aa0] font-bold  flex items-center ">
         {player.isMutedActive === true ? (
-          <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
+          <button type="button" className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
             <BiVolumeMute size={40} onClick={() => isMutedActive(false)} />
-          </div>
+          </button>
         ) : (
-          <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
+          <button type="button" className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
             <BiVolumeFull size={40} onClick={() => isMutedActive(true)} />
-          </div>
+          </button>
         )}
 
         {player.isLoopActive === true ? (
-          <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
+          <button type="button" className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
             <TbRepeatOnce onClick={() => isLoopActive(false)} size={40} />
-          </div>
+          </button>
         ) : (
-          <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
+          <button type="button" className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
             <TbRepeatOff onClick={() => isLoopActive(true)} size={40} />
-          </div>
+          </button>
         )}
 
-        <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
-          {
-            <BiSkipPreviousCircle
-              onClick={handleClickPreviousButton}
-              size={40}
-            />
-          }
-        </div>
+        <button type="button" className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
+          <BiSkipPreviousCircle
+            onClick={handleClickPreviousButton}
+            size={40}
+          />
+        </button>
         {player.isPlaying === true ? (
-          <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
+          <button type="button" className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
             <BiPauseCircle onClick={() => isPlaying(false)} size={50} />
-          </div>
+          </button>
         ) : (
-          <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
+          <button type="button" className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
             <BiPlayCircle onClick={() => isPlaying(true)} size={50} />
-          </div>
+          </button>
         )}
-        <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
+        <button type="button" className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
           <BiSkipNextCircle onClick={handleClickNextButton} size={40} />
-        </div>
-        <div className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
+        </button>
+        <button type="button" className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
           <BiShuffle onClick={handleClickShuffle} size={40} />
-        </div>
+        </button>
 
         {player.isFullScreenActive === true ? (
-          <div className="cursor-pointer  md:hidden hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
+          <button type="button" className="cursor-pointer  md:hidden hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
             <BiExitFullscreen onClick={handleClickFullScreen} size={40} />
-          </div>
+          </button>
         ) : (
-          <div className="cursor-pointer  md:hidden hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
+          <button type="button" className="cursor-pointer  md:hidden hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
             <BiFullscreen onClick={handleClickFullScreen} size={40} />
-          </div>
+          </button>
         )}
       </div>
     );
-  }
+  },
 );
 
 MediaButtons.propTypes = {
@@ -169,6 +160,7 @@ MediaButtons.propTypes = {
     isLoopActive: PropTypes.bool.isRequired,
     currentActivePlaylistId: PropTypes.string.isRequired,
     isMutedActive: PropTypes.bool.isRequired,
+    isFullScreenActive: PropTypes.bool.isRequired,
   }).isRequired,
   isPlaying: PropTypes.func.isRequired,
   isLoopActive: PropTypes.func.isRequired,
@@ -176,27 +168,25 @@ MediaButtons.propTypes = {
   previousSong: PropTypes.func.isRequired,
   currentSong: PropTypes.func.isRequired,
   nextSong: PropTypes.func.isRequired,
-  playlistSongsById: PropTypes.object.isRequired,
+  playlistSongsById: PropTypes.objectOf(PropTypes.arrayOf).isRequired,
   isMutedActive: PropTypes.func.isRequired,
   isFullScreenActive: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => {
-  return {
-    player: state.player,
-    playlistSongsById: state.playlistSongsById,
-  };
-};
+const mapStateToProps = (state) => ({
+  player: state.player,
+  playlistSongsById: state.playlistSongsById,
+});
 
 const mapDispatchToProps = {
-  isPlaying: isPlaying,
-  isLoopActive: isLoopActive,
-  isShuffleActive: isShuffleActive,
-  previousSong: previousSong,
-  currentSong: currentSong,
-  nextSong: nextSong,
-  isMutedActive: isMutedActive,
-  isFullScreenActive: isFullScreenActive,
+  isPlaying,
+  isLoopActive,
+  isShuffleActive,
+  previousSong,
+  currentSong,
+  nextSong,
+  isMutedActive,
+  isFullScreenActive,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MediaButtons);

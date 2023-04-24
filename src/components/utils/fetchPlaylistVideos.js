@@ -1,52 +1,52 @@
-import axios from "axios";
+import axios from 'axios';
+
 const fetchPlaylistVideos = async (id, etag) => {
-  let responseArr = [];
-  const baseApiUrl = "https://www.googleapis.com/youtube/v3";
-  const apiKey = "AIzaSyA8JtiLpC8D9nhMK44CRTciv64H1MNFNDw";
-  let responseEtag = "";
+  const responseArr = [];
+  const baseApiUrl = 'https://www.googleapis.com/youtube/v3';
+  const apiKey = 'AIzaSyA8JtiLpC8D9nhMK44CRTciv64H1MNFNDw';
+  let responseEtag = '';
   try {
-    let nextToken = "";
+    let nextToken = '';
 
     do {
+      /* eslint-disable no-await-in-loop */
       const responseListItems = await axios.get(`${baseApiUrl}/playlistItems`, {
         headers: {
-          "If-None-Match": etag,
+          'If-None-Match': etag,
         },
         params: {
-          part: "snippet",
+          part: 'snippet',
           maxResults: 50,
           key: apiKey,
           pageToken: nextToken,
           playlistId: id,
           fields:
-            "etag,nextPageToken,items(snippet(title,videoOwnerChannelTitle,position, thumbnails(default(url)), resourceId(videoId))),pageInfo",
+            'etag,nextPageToken,items(snippet(title,videoOwnerChannelTitle,position, thumbnails(default(url)), resourceId(videoId))),pageInfo',
         },
       });
 
       responseArr.push(...responseListItems.data.items);
-      if (responseEtag === "") {
+      if (responseEtag === '') {
         responseEtag = responseListItems.data.etag;
       }
       if (responseListItems.data.nextPageToken) {
         nextToken = responseListItems.data.nextPageToken;
-      } else nextToken = "";
+        /* eslint-enable no-await-in-loop */
+      } else nextToken = '';
     } while (nextToken);
   } catch (error) {
     if (error.response.status === 304) {
       return error.response.status;
-
-    } else if (error.response.status === 404) {
+    } if (error.response.status === 404) {
       return error.response.status;
-
-    }     else if (error.response.status === 500) {
-      console.log("Server Error")
+    } if (error.response.status === 500) {
+      // eslint-disable-next-line
+      console.log('Server Error');
       return 404;
-
-    } else {
-      console.log("Error ", error.response)
-      return 404
     }
-
+    // eslint-disable-next-line
+    console.log('Error ', error.response);
+    return 404;
   }
   const dataReturned = {
     playlistEtag: responseEtag,

@@ -1,71 +1,71 @@
 import {
-  PLAYER_ISPLAYING,
-  PLAYER_PREVIOUSSONG,
-  PLAYER_CURRENTSONG,
-  PLAYER_NEXTSONG,
-  PLAYER_ISLOOPACTIVE,
-  PLAYER_ISMUTEDACTIVE,
-  PLAYER_ISSHUFFLEACTIVE,
-  PLAYER_SETCURRENTACTIVEPLAYLIST,
-  PLAYER_VIDEODURATION,
-  PLAYER_SETPROGRESS,
-  PLAYER_SETPERCENTAGE,
-  PLAYER_ISFULLSCREENACTIVE,
-  PLAYER_REMEMBERLASTVIDEO,
-} from "../constants/playerTypes";
+  PLAYER_IS_PLAYING,
+  PLAYER_PREVIOUS_SONG,
+  PLAYER_CURRENT_SONG,
+  PLAYER_NEXT_SONG,
+  PLAYER_IS_LOOP_ACTIVE,
+  PLAYER_IS_MUTED_ACTIVE,
+  PLAYER_IS_SHUFFLE_ACTIVE,
+  PLAYER_SET_CURRENT_ACTIVE_PLAYLIST,
+  PLAYER_VIDEO_DURATION,
+  PLAYER_SET_PROGRESS,
+  PLAYER_SET_PERCENTAGE,
+  PLAYER_IS_FULL_SCREEN_ACTIVE,
+  PLAYER_REMEMBER_LAST_VIDEO,
+} from '../constants/playerTypes';
 
-export const isPlaying = (payload) => ({ type: PLAYER_ISPLAYING, payload });
+export const isPlaying = (payload) => ({ type: PLAYER_IS_PLAYING, payload });
 
 export const previousSong = (payload) => ({
-  type: PLAYER_PREVIOUSSONG,
+  type: PLAYER_PREVIOUS_SONG,
   payload,
 });
 
-export const currentSong = (payload) => ({ type: PLAYER_CURRENTSONG, payload });
+export const currentSong = (payload) => ({ type: PLAYER_CURRENT_SONG, payload });
 
-export const nextSong = (payload) => ({ type: PLAYER_NEXTSONG, payload });
+export const nextSong = (payload) => ({ type: PLAYER_NEXT_SONG, payload });
 
 export const isLoopActive = (payload) => ({
-  type: PLAYER_ISLOOPACTIVE,
+  type: PLAYER_IS_LOOP_ACTIVE,
   payload,
 });
 
 export const isShuffleActive = (payload) => ({
-  type: PLAYER_ISSHUFFLEACTIVE,
+  type: PLAYER_IS_SHUFFLE_ACTIVE,
   payload,
 });
 
 export const isMutedActive = (payload) => ({
-  type: PLAYER_ISMUTEDACTIVE,
+  type: PLAYER_IS_MUTED_ACTIVE,
   payload,
 });
 
-export const setcurrentActivePlaylistId = (payload) => ({
-  type: PLAYER_SETCURRENTACTIVEPLAYLIST,
+export const setCurrentActivePlaylistId = (payload) => ({
+  type: PLAYER_SET_CURRENT_ACTIVE_PLAYLIST,
   payload,
 });
 
 export const setVideoDuration = (payload) => ({
-  type: PLAYER_VIDEODURATION,
+  type: PLAYER_VIDEO_DURATION,
   payload,
 });
 
 export const setProgress = (payload) => ({
-  type: PLAYER_SETPROGRESS,
+  type: PLAYER_SET_PROGRESS,
   payload,
 });
 
 export const setPercentage = (payload) => ({
-  type: PLAYER_SETPERCENTAGE,
+  type: PLAYER_SET_PERCENTAGE,
   payload,
 });
 
 export const isFullScreenActive = (payload) => ({
-  type: PLAYER_ISFULLSCREENACTIVE,
+  type: PLAYER_IS_FULL_SCREEN_ACTIVE,
   payload,
 });
 
 export const rememberLastVideo = (payload) => ({
-  type: PLAYER_REMEMBERLASTVIDEO,
+  type: PLAYER_REMEMBER_LAST_VIDEO,
   payload,
 });

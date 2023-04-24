@@ -1,7 +1,7 @@
-import React, { memo } from "react";
-import { useNavigate } from "react-router-dom";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
+import React, { memo } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import {
   isPlaying,
@@ -9,55 +9,58 @@ import {
   nextSong,
   previousSong,
   isShuffleActive,
-  setcurrentActivePlaylistId,
-} from "../../redux/actions/playerActions";
-const Navbar = ({
+  setCurrentActivePlaylistId,
+} from '../../redux/actions/playerActions';
+
+function Navbar({
   isPlaying,
   previousSong,
   currentSong,
   nextSong,
-  setcurrentActivePlaylistId,
+  setCurrentActivePlaylistId,
   isShuffleActive,
-}) => {
+}) {
   const navigate = useNavigate();
 
   const handleClick = () => {
     isPlaying(true);
-    previousSong("");
-    currentSong("");
-    nextSong("");
+    previousSong('');
+    currentSong('');
+    nextSong('');
     isShuffleActive(false);
-    setcurrentActivePlaylistId("");
-    return navigate("/");
+    setCurrentActivePlaylistId('');
+    return navigate('/');
   };
   return (
     <div className="navbar flex justify-center">
+      {/* eslint-disable-next-line */}
       <h1
         className="navbar text-4xl  text-white font-bold cursor-pointer"
-        cursor={"pointer"}
+        cursor="pointer"
         onClick={handleClick}
       >
-        Playlist Shuffle{" "}
+        Playlist Shuffle
+        {' '}
       </h1>
     </div>
   );
-};
+}
 
 Navbar.propTypes = {
   isPlaying: PropTypes.func.isRequired,
   previousSong: PropTypes.func.isRequired,
   currentSong: PropTypes.func.isRequired,
-  nextSong: PropTypes.func,
+  nextSong: PropTypes.func.isRequired,
   isShuffleActive: PropTypes.func.isRequired,
-  setcurrentActivePlaylistId: PropTypes.func.isRequired,
+  setCurrentActivePlaylistId: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = {
-  isPlaying: isPlaying,
-  previousSong: previousSong,
-  currentSong: currentSong,
-  nextSong: nextSong,
-  isShuffleActive: isShuffleActive,
-  setcurrentActivePlaylistId: setcurrentActivePlaylistId,
+  isPlaying,
+  previousSong,
+  currentSong,
+  nextSong,
+  isShuffleActive,
+  setCurrentActivePlaylistId,
 };
 export default connect(null, mapDispatchToProps)(memo(Navbar));

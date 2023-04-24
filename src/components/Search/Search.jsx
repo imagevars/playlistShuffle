@@ -1,37 +1,35 @@
-import React from "react";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import fetchPlaylistVideos from "../utils/fetchPlaylistVideos";
-import fetchPlaylistData from "../utils/fetchPlaylistData";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import fetchPlaylistVideos from '../utils/fetchPlaylistVideos';
+import fetchPlaylistData from '../utils/fetchPlaylistData';
 import {
   currentSong,
   nextSong,
-  setcurrentActivePlaylistId,
+  setCurrentActivePlaylistId,
   isShuffleActive,
-} from "../../redux/actions/playerActions";
+} from '../../redux/actions/playerActions';
 import {
   addToPlaylistDetails,
   modifyEtagInPlaylistDetailsById,
   lastPlayedPlaylistDetails,
-} from "../../redux/actions/playlistDetailsActions";
-import { addSongsByPlaylistID } from "../../redux/actions/playlistSongsByIdActions";
+} from '../../redux/actions/playlistDetailsActions';
+import { addSongsByPlaylistID } from '../../redux/actions/playlistSongsByIdActions';
 
-const Search = ({
+function Search({
   playlistDetails,
   currentSong,
   nextSong,
   addToPlaylistDetails,
   addSongsByPlaylistID,
   playlistSongsById,
-  setcurrentActivePlaylistId,
+  setCurrentActivePlaylistId,
   modifyEtagInPlaylistDetailsById,
   isShuffleActive,
-  lastPlayedPlaylistDetails,
   player,
-}) => {
-  const [playlistId, setPlaylistId] = useState("");
+}) {
+  const [playlistId, setPlaylistId] = useState('');
   const [isLoadingButton, setIsLoadingButton] = useState(false);
   const [isIdInvalid, setIsIdInvalid] = useState(false);
   const navigate = useNavigate();
@@ -42,27 +40,25 @@ const Search = ({
     isShuffleActive(false);
     const regex = /PL(.*)/;
     const match = playlistId.match(regex);
-    const id = "PL" + match[1];
+    const id = `PL${match[1]}`;
     const currentPlaylistInfo = playlistDetails.filter(
-      (element) => element.playlistId === id
+      (element) => element.playlistId === id,
     );
 
-    setcurrentActivePlaylistId(id);
+    setCurrentActivePlaylistId(id);
 
-    const currEtag =
-      currentPlaylistInfo.length > 0 ? currentPlaylistInfo[0].playlistEtag : "";
+    const currEtag = currentPlaylistInfo.length > 0 ? currentPlaylistInfo[0].playlistEtag : '';
     const data = await fetchPlaylistVideos(id, currEtag);
 
-    // if playlistDataInfo is 304 it means that the playlist hasn't change so we can use the one in localStorage, that way we save api quota
+    // if playlistDataInfo is 304 it means that the playlist hasn't change so
+    // we can use the one in localStorage, that way we save api quota
     if (data === 304) {
       if (player.rememberLastVideo) {
-        const findPlaylistIndex = playlistDetails.findIndex((element) => {
-          return element.playlistId === id;
-        });
+        const findPlaylistIndex = playlistDetails.findIndex((element) => element.playlistId === id);
 
         currentSong(
           playlistSongsById[id][playlistDetails[findPlaylistIndex].currentIndex]
-            .snippet.resourceId.videoId
+            .snippet.resourceId.videoId,
         );
       }
       setIsLoadingButton(false);
@@ -78,7 +74,7 @@ const Search = ({
       };
       await addToPlaylistDetails(playlistDataInfo);
       const playlistObject = {
-        id: id,
+        id,
         songs: data.responseArrToAdd,
       };
 
@@ -97,13 +93,15 @@ const Search = ({
   return (
     <div className="searchContainer w-11/12 mx-auto ">
       <form className="" onSubmit={(e) => handleSubmit(e)}>
-        <label className="text-white">{`${
-          isIdInvalid ? "Invalid playlist" : "Enter a playlist:"
-        }`}</label>
+        <label htmlFor="searchInput" className="text-white">
+          {`${
+            isIdInvalid ? 'Invalid playlist' : 'Enter a playlist:'
+          }`}
+        </label>
         <div className="w-full flex h-12 justify-between">
           <input
             className={`inputSearch h-full shadow appearance-none rounded-sm w-5/6 py-2 px-3 leading-tight focus:outline-none focus:shadow-outline  ${
-              isIdInvalid ? "border border-red-500" : ""
+              isIdInvalid ? 'border border-red-500' : ''
             }`}
             pattern="^(?=.*.{24,})(?=.*PL).*"
             placeholder="ID or playlist URL. eg: 'www.youtube.com/playlist?list=PLi06ybkpczJBvFfOhfqDyKMl1Lp2tDkTb'"
@@ -130,15 +128,15 @@ const Search = ({
                   r="10"
                   stroke="currentColor"
                   strokeWidth="4"
-                ></circle>
+                />
                 <path
                   className="opacity-75"
                   fill="currentColor"
                   d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                ></path>
+                />
               </svg>
             ) : (
-              "Play"
+              'Play'
             )}
           </button>
         </div>
@@ -152,7 +150,7 @@ const Search = ({
       </form>
     </div>
   );
-};
+}
 
 Search.propTypes = {
   playlistDetails: PropTypes.arrayOf(
@@ -161,14 +159,18 @@ Search.propTypes = {
       playlistId: PropTypes.string.isRequired,
       playlistImage: PropTypes.string.isRequired,
       playlistEtag: PropTypes.string.isRequired,
-    })
+      currentIndex: PropTypes.number.isRequired,
+    }),
   ).isRequired,
+  player: PropTypes.shape({
+    rememberLastVideo: PropTypes.bool.isRequired,
+  }).isRequired,
   currentSong: PropTypes.func.isRequired,
   nextSong: PropTypes.func.isRequired,
   addToPlaylistDetails: PropTypes.func.isRequired,
   addSongsByPlaylistID: PropTypes.func.isRequired,
-  playlistSongsById: PropTypes.object.isRequired,
-  setcurrentActivePlaylistId: PropTypes.func.isRequired,
+  playlistSongsById: PropTypes.objectOf(PropTypes.arrayOf).isRequired,
+  setCurrentActivePlaylistId: PropTypes.func.isRequired,
   modifyEtagInPlaylistDetailsById: PropTypes.func.isRequired,
   isShuffleActive: PropTypes.func.isRequired,
 };
@@ -180,14 +182,14 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  currentSong: currentSong,
-  nextSong: nextSong,
-  addToPlaylistDetails: addToPlaylistDetails,
-  addSongsByPlaylistID: addSongsByPlaylistID,
-  setcurrentActivePlaylistId: setcurrentActivePlaylistId,
-  modifyEtagInPlaylistDetailsById: modifyEtagInPlaylistDetailsById,
-  isShuffleActive: isShuffleActive,
-  lastPlayedPlaylistDetails: lastPlayedPlaylistDetails,
+  currentSong,
+  nextSong,
+  addToPlaylistDetails,
+  addSongsByPlaylistID,
+  setCurrentActivePlaylistId,
+  modifyEtagInPlaylistDetailsById,
+  isShuffleActive,
+  lastPlayedPlaylistDetails,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);

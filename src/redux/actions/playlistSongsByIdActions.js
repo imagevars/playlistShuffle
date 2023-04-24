@@ -1,7 +1,7 @@
 import {
   PLAYLISTSONGS_ADDSONGSBYPLAYLISTID,
   PLAYLISTSONGS_REMOVEPLAYLISTSONGSBYID,
-} from "../constants/playlistSongsByIdTypes";
+} from '../constants/playlistSongsByIdTypes';
 
 export const addSongsByPlaylistID = (payload) => ({
   type: PLAYLISTSONGS_ADDSONGSBYPLAYLISTID,

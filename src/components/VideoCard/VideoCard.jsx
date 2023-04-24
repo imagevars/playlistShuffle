@@ -1,16 +1,16 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import MersenneTwister from "mersenne-twister";
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import MersenneTwister from 'mersenne-twister';
 import {
   currentSong,
   nextSong,
   previousSong,
   isShuffleActive,
-} from "../../redux/actions/playerActions";
-import { addSongsByPlaylistID } from "../../redux/actions/playlistSongsByIdActions";
+} from '../../redux/actions/playerActions';
+import { addSongsByPlaylistID } from '../../redux/actions/playlistSongsByIdActions';
 
-const VideoCard = ({
+function VideoCard({
   player,
   previousSong,
   currentSong,
@@ -19,36 +19,37 @@ const VideoCard = ({
   addSongsByPlaylistID,
   isShuffleActive,
   playlistDetails,
-}) => {
+}) {
   const refs = playlistSongsById[player.currentActivePlaylistId]?.reduce(
     (acc, value) => {
       acc[value.snippet.resourceId.videoId] = React.createRef();
       return acc;
     },
-    {}
+    {},
   );
 
   useEffect(() => {
     refs[player.currentSong].current.scrollIntoView({
-      block: "start",
+      block: 'start',
     });
   }, [player.currentSong]);
   useEffect(() => {
     if (player.rememberLastVideo) {
       const findPlaylistIndex = playlistDetails.findIndex((element) => {
-        return element.playlistId === player.currentActivePlaylistId;
+        const index = element.playlistId === player.currentActivePlaylistId;
+        return index;
       });
-
       currentSong(
         playlistSongsById[player.currentActivePlaylistId][
           playlistDetails[findPlaylistIndex].currentIndex
-        ].snippet.resourceId.videoId
+        ].snippet.resourceId.videoId,
       );
     } else {
-      let unShuffleArr = [];
+      const unShuffleArr = [];
       unShuffleArr.push(...playlistSongsById[player.currentActivePlaylistId]);
-      unShuffleArr.sort(function (a, b) {
-        return a.snippet.position - b.snippet.position;
+      unShuffleArr.sort((a, b) => {
+        const result = a.snippet.position - b.snippet.position;
+        return result;
       });
       const playlistObject = {
         id: player.currentActivePlaylistId,
@@ -60,19 +61,12 @@ const VideoCard = ({
     }
   }, []);
 
-  useEffect(() => {
-    if (player.isShuffleActive === true) {
-      shuffleIsActive();
-    }
-  }, [player.isShuffleActive]);
-
   const shuffleIsActive = () => {
-    // if (player.isShuffleActive === true) {
     const generator = new MersenneTwister();
-    let shuffleArr = [];
+    const shuffleArr = [];
     shuffleArr.push(...playlistSongsById[player.currentActivePlaylistId]);
 
-    for (let i = shuffleArr.length - 1; i > 0; i--) {
+    for (let i = shuffleArr.length - 1; i > 0; i -= 1) {
       const j = Math.floor(generator.random() * (i + 1));
       [shuffleArr[i], shuffleArr[j]] = [shuffleArr[j], shuffleArr[i]];
     }
@@ -87,54 +81,61 @@ const VideoCard = ({
     isShuffleActive(false);
   };
 
+  useEffect(() => {
+    if (player.isShuffleActive === true) {
+      shuffleIsActive();
+    }
+  }, [player.isShuffleActive]);
+
   const handleClick = (id) => {
     const currIndex = playlistSongsById[
       player.currentActivePlaylistId
     ].findIndex((ele) => {
-      return ele.snippet?.resourceId.videoId === id;
+      const index = ele.snippet?.resourceId.videoId === id;
+      return index;
     });
     previousSong(
       playlistSongsById[player.currentActivePlaylistId][currIndex - 1]?.snippet
-        .resourceId.videoId
+        .resourceId.videoId,
     );
     currentSong(
       playlistSongsById[player.currentActivePlaylistId][currIndex]?.snippet
-        .resourceId.videoId
+        .resourceId.videoId,
     );
     nextSong(
       playlistSongsById[player.currentActivePlaylistId][currIndex + 1]?.snippet
-        .resourceId.videoId
+        .resourceId.videoId,
     );
   };
 
   const song = playlistSongsById[player.currentActivePlaylistId]?.map(
-    (ele, i) =>
-      ele.snippet.title !== "Private video" &&
-      ele.snippet.title !== "Deleted video" ? (
-        <li
-          className="mx-2 my-1 cursor-pointer  "
+    (ele) => (ele.snippet.title !== 'Private video'
+      && ele.snippet.title !== 'Deleted video' ? (
+        <button
+          type="button"
+          className="mx-2 my-1 cursor-pointer w-[97%] "
           title={ele.snippet.title}
           ref={refs[ele.snippet.resourceId.videoId]}
           id={`${ele.snippet.resourceId.videoId}`}
           onClick={() => handleClick(ele.snippet.resourceId.videoId)}
-          key={ele.snippet.resourceId.videoId + "index" + i}
+          key={`${ele.snippet.resourceId.videoId}a${ele.snippet.title}`}
         >
           <div
             className={`${
               player.currentSong === ele.snippet.resourceId.videoId
-                ? "bg-[#bb86fc]"
+                ? 'bg-[#bb86fc]'
                 : null
             }  overflow-hidden hover:bg-[#bb86fc] h-11 lg:h-14 rounded-sm`}
           >
             <div className="flex h-full">
               <img
                 loading="lazy"
-                className="w-10  h-full object-cover rounded-l-sm"
+                className="w-10  h-full object-cover rounded-l-sm "
                 src={ele.snippet.thumbnails.default?.url}
-                alt="song image"
+                alt={`${ele.snippet.title}`}
               />
-              <div className="cardText">
-                <p className="text-white truncate w-full xl:text-lg">
+              <div className="cardText flex flex-col items-baseline ml-1 ">
+                <p className="text-white truncate  xl:text-lg  ">
                   {ele.snippet.title}
                 </p>
 
@@ -144,19 +145,30 @@ const VideoCard = ({
               </div>
             </div>
           </div>
-        </li>
-      ) : null
+        </button>
+      ) : null),
   );
   return (
-    <div passive="true" className="cardContainer h-[46vh] md:h-full">
+    <div
+      className="cardContainer h-[46vh] md:h-full"
+    >
       <ul className="ulListCards mt-1 h-full md:mt-0  overflow-y-auto ">
         {song}
       </ul>
     </div>
   );
-};
+}
 
 VideoCard.propTypes = {
+  playlistDetails: PropTypes.arrayOf(
+    PropTypes.shape({
+      playlistName: PropTypes.string.isRequired,
+      playlistId: PropTypes.string.isRequired,
+      playlistImage: PropTypes.string.isRequired,
+      playlistEtag: PropTypes.string.isRequired,
+      currentIndex: PropTypes.number.isRequired,
+    }),
+  ).isRequired,
   player: PropTypes.shape({
     isPlaying: PropTypes.bool.isRequired,
     previousSong: PropTypes.string,
@@ -166,29 +178,28 @@ VideoCard.propTypes = {
     isLoopActive: PropTypes.bool.isRequired,
     currentActivePlaylistId: PropTypes.string.isRequired,
     isMutedActive: PropTypes.bool.isRequired,
+    rememberLastVideo: PropTypes.bool.isRequired,
   }).isRequired,
   currentSong: PropTypes.func.isRequired,
   nextSong: PropTypes.func.isRequired,
-  playlistSongsById: PropTypes.object.isRequired,
+  playlistSongsById: PropTypes.objectOf(PropTypes.arrayOf).isRequired,
   addSongsByPlaylistID: PropTypes.func.isRequired,
   previousSong: PropTypes.func.isRequired,
   isShuffleActive: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = {
-  previousSong: previousSong,
-  currentSong: currentSong,
-  nextSong: nextSong,
-  addSongsByPlaylistID: addSongsByPlaylistID,
-  isShuffleActive: isShuffleActive,
+  previousSong,
+  currentSong,
+  nextSong,
+  addSongsByPlaylistID,
+  isShuffleActive,
 };
 
-const mapStateToProps = (state) => {
-  return {
-    playlistSongsById: state.playlistSongsById,
-    player: state.player,
-    playlistDetails: state.playlistDetails,
-  };
-};
+const mapStateToProps = (state) => ({
+  playlistSongsById: state.playlistSongsById,
+  player: state.player,
+  playlistDetails: state.playlistDetails,
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(VideoCard);

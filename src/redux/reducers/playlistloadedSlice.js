@@ -1,4 +1,4 @@
-import { HASPLAYLISTLOADED } from "../constants/hasplaylistLoaded";
+import HASPLAYLISTLOADED from '../constants/hasPlaylistLoadedTypes';
 
 const initialState = {
   hasPlaylistLoaded: false,
