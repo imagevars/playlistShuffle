@@ -22,7 +22,7 @@ const initialState = {
   isShuffleActive: false,
   isLoopActive: false,
   currentActivePlaylistId: '',
-  isMutedActive: false,
+  isMutedActive: true,
   progress: '0',
   videoDuration: '0',
   videoPercentage: '0',
