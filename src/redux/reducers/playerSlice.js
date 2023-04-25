@@ -27,7 +27,7 @@ const initialState = {
   videoDuration: '0',
   videoPercentage: '0',
   isFullScreenActive: false,
-  rememberLastVideo: false,
+  rememberLastVideo: true,
 };
 
 export default function playerReducer(state = initialState, action) {
