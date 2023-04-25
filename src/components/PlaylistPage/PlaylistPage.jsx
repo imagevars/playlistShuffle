@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Navigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import VideoCard from '../VideoCard/VideoCard';
@@ -32,8 +33,10 @@ function PlaylistPage({
   playlistSongsById,
   isMutedActive,
 }) {
+  if (player.currentActivePlaylistId === '') {
+    return <Navigate to="/error" />;
+  }
   const [currentSongName, setCurrentSongName] = useState('');
-  // const { id } = useParams();
   const ref = useRef(null);
 
   useEffect(() => {
@@ -137,8 +140,7 @@ function PlaylistPage({
       className="min-h-screen bg-[#121212] w-full"
     >
       <div
-        className="w-[95%] md:max-w-[2200px] mx-auto
-      "
+        className="w-[95%] md:max-w-[2200px] mx-auto"
       >
         <HelmetHelper
           title={

@@ -1,8 +1,14 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { useParams } from 'react-router-dom';
 
 function PlayingRightNow({ player, playlistSongsById }) {
+  const id = useParams();
+
+  useEffect(() => {
+    console.log('idddddd', id);
+  }, []);
   const currentIndex = playlistSongsById[
     player.currentActivePlaylistId
   ]?.findIndex((ele) => ele.snippet.resourceId.videoId === player.currentSong);

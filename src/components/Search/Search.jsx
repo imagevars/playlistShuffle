@@ -62,7 +62,7 @@ function Search({
         );
       }
       setIsLoadingButton(false);
-      navigate(`playlist/${id}`);
+      navigate(`/${id}`);
     } else if (data === 404) {
       setIsIdInvalid(true);
       setIsLoadingButton(false);
@@ -83,7 +83,7 @@ function Search({
       await addSongsByPlaylistID(playlistObject);
       await currentSong(data.currentSong);
       await nextSong(data.nextSong);
-      navigate(`playlist/${id}`);
+      navigate(`/${id}`);
     }
   };
   const handleChange = (e) => {

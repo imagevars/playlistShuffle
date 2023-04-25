@@ -35,7 +35,7 @@ function Navbar({
     <div className="navbar flex justify-center">
       {/* eslint-disable-next-line */}
       <h1
-        className="navbar text-4xl  text-white font-bold cursor-pointer"
+        className="navbar text-4xl underline text-white font-bold cursor-pointer"
         cursor="pointer"
         onClick={handleClick}
       >

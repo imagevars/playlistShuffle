@@ -88,7 +88,7 @@ function PlaylistUsed({
       nextSong(data.nextSong);
     }
 
-    navigate(`playlist/${id}`);
+    navigate(`/${id}`);
   };
 
   const handleDeleteFromPlaylist = (id) => {
