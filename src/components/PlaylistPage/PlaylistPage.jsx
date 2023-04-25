@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import VideoCard from '../VideoCard/VideoCard';
@@ -33,7 +33,9 @@ function PlaylistPage({
   playlistSongsById,
   isMutedActive,
 }) {
-  if (player.currentActivePlaylistId === '') {
+  const { id } = useParams();
+
+  if (player.currentActivePlaylistId !== id) {
     return <Navigate to="/error" />;
   }
   const [currentSongName, setCurrentSongName] = useState('');
