@@ -4,6 +4,7 @@ import {
   PLAYLIST_DETAILS_ETAG,
   PLAYLIST_DETAILS_LAST_PLAYED,
   PLAYLIST_DETAILS_LAST_PLAYED_ALL,
+  PLAYLIST_DETAILS_LENGTH,
 
 } from '../constants/playlistDetailsTypes';
 
@@ -29,4 +30,9 @@ export const lastPlayedPlaylistDetails = (payload) => ({
 
 export const lastPlayedPlaylistDetailsAll = () => ({
   type: PLAYLIST_DETAILS_LAST_PLAYED_ALL,
+});
+
+export const playlistLength = (payload) => ({
+  type: PLAYLIST_DETAILS_LENGTH,
+  payload,
 });

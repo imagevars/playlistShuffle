@@ -23,6 +23,7 @@ import {
   previousSong,
   isFullScreenActive,
 } from '../../redux/actions/playerActions';
+import { lastPlayedPlaylistDetails } from '../../redux/actions/playlistDetailsActions';
 
 const MediaButtons = memo(
   ({
@@ -36,12 +37,21 @@ const MediaButtons = memo(
     playlistSongsById,
     isMutedActive,
     isFullScreenActive,
+    playlistDetails,
+    lastPlayedPlaylistDetails,
   }) => {
+    const findPlaylistIndex = playlistDetails.findIndex(
+      (element) => element.playlistId === player.currentActivePlaylistId,
+    );
+    const currIndex = playlistDetails[findPlaylistIndex].currentIndex;
+
     const handleClickPreviousButton = () => {
-      const currIndex = playlistSongsById[
-        player.currentActivePlaylistId
-      ].findIndex((song) => song.snippet.resourceId.videoId === player.currentSong);
-      if (currIndex !== 0) {
+      if (currIndex > 0) {
+        const lastPlayedObj = {
+          currentIndex: playlistDetails[findPlaylistIndex].currentIndex - 1,
+          playlistId: player.currentActivePlaylistId,
+        };
+        lastPlayedPlaylistDetails(lastPlayedObj);
         previousSong(
           playlistSongsById[player.currentActivePlaylistId][currIndex - 2]
             ?.snippet.resourceId.videoId,
@@ -56,15 +66,16 @@ const MediaButtons = memo(
         );
       }
     };
-    const handleClickNextButton = () => {
-      const currIndex = playlistSongsById[
-        player.currentActivePlaylistId
-      ].findIndex((ele) => ele.snippet?.resourceId.videoId === player.currentSong);
 
+    const handleClickNextButton = () => {
       if (
-        currIndex
-        < playlistSongsById[player.currentActivePlaylistId].length - 1
+        currIndex < playlistSongsById[player.currentActivePlaylistId].length - 1
       ) {
+        const lastPlayedObj = {
+          currentIndex: playlistDetails[findPlaylistIndex].currentIndex + 1,
+          playlistId: player.currentActivePlaylistId,
+        };
+        lastPlayedPlaylistDetails(lastPlayedObj);
         previousSong(
           playlistSongsById[player.currentActivePlaylistId][currIndex]?.snippet
             .resourceId.videoId,
@@ -171,11 +182,21 @@ MediaButtons.propTypes = {
   playlistSongsById: PropTypes.objectOf(PropTypes.arrayOf).isRequired,
   isMutedActive: PropTypes.func.isRequired,
   isFullScreenActive: PropTypes.func.isRequired,
+  playlistDetails: PropTypes.arrayOf(PropTypes.shape({
+    playlistName: PropTypes.string.isRequired,
+    playlistId: PropTypes.string.isRequired,
+    playlistImage: PropTypes.string.isRequired,
+    playlistEtag: PropTypes.string.isRequired,
+    currentIndex: PropTypes.number.isRequired,
+
+  })).isRequired,
+  lastPlayedPlaylistDetails: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   player: state.player,
   playlistSongsById: state.playlistSongsById,
+  playlistDetails: state.playlistDetails,
 });
 
 const mapDispatchToProps = {
@@ -187,6 +208,7 @@ const mapDispatchToProps = {
   nextSong,
   isMutedActive,
   isFullScreenActive,
+  lastPlayedPlaylistDetails,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MediaButtons);

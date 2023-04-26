@@ -8,6 +8,7 @@ import {
   previousSong,
   isShuffleActive,
 } from '../../redux/actions/playerActions';
+import { lastPlayedPlaylistDetails, playlistLength } from '../../redux/actions/playlistDetailsActions';
 import { addSongsByPlaylistID } from '../../redux/actions/playlistSongsByIdActions';
 
 function VideoCard({
@@ -19,6 +20,8 @@ function VideoCard({
   addSongsByPlaylistID,
   isShuffleActive,
   playlistDetails,
+  lastPlayedPlaylistDetails,
+  playlistLength,
 }) {
   const refs = playlistSongsById[player.currentActivePlaylistId]?.reduce(
     (acc, value) => {
@@ -87,29 +90,28 @@ function VideoCard({
     }
   }, [player.isShuffleActive]);
 
-  const handleClick = (id) => {
-    const currIndex = playlistSongsById[
-      player.currentActivePlaylistId
-    ].findIndex((ele) => {
-      const index = ele.snippet?.resourceId.videoId === id;
-      return index;
-    });
+  const handleClick = (index) => {
+    const lastPlayedObj = {
+      currentIndex: index,
+      playlistId: player.currentActivePlaylistId,
+    };
+    lastPlayedPlaylistDetails(lastPlayedObj);
     previousSong(
-      playlistSongsById[player.currentActivePlaylistId][currIndex - 1]?.snippet
+      playlistSongsById[player.currentActivePlaylistId][index - 1]?.snippet
         .resourceId.videoId,
     );
     currentSong(
-      playlistSongsById[player.currentActivePlaylistId][currIndex]?.snippet
+      playlistSongsById[player.currentActivePlaylistId][index]?.snippet
         .resourceId.videoId,
     );
     nextSong(
-      playlistSongsById[player.currentActivePlaylistId][currIndex + 1]?.snippet
+      playlistSongsById[player.currentActivePlaylistId][index + 1]?.snippet
         .resourceId.videoId,
     );
   };
 
-  const song = playlistSongsById[player.currentActivePlaylistId]?.map(
-    (ele) => (ele.snippet.title !== 'Private video'
+  const videoList = playlistSongsById[player.currentActivePlaylistId]?.map(
+    (ele, i) => (ele.snippet.title !== 'Private video'
       && ele.snippet.title !== 'Deleted video' ? (
         <button
           type="button"
@@ -117,15 +119,16 @@ function VideoCard({
           title={ele.snippet.title}
           ref={refs[ele.snippet.resourceId.videoId]}
           id={`${ele.snippet.resourceId.videoId}`}
-          onClick={() => handleClick(ele.snippet.resourceId.videoId)}
-          key={`${ele.snippet.resourceId.videoId}a${ele.snippet.title}`}
+          onClick={() => handleClick(i)}
+          // eslint-disable-next-line
+          key={`${ele.snippet.resourceId.videoId}i${i}`}
         >
           <div
             className={`${
               player.currentSong === ele.snippet.resourceId.videoId
                 ? 'bg-[#bb86fc]'
                 : null
-            }  overflow-hidden hover:bg-[#bb86fc] h-11 lg:h-14 rounded-sm`}
+            }  overflow-hidden hover:bg-[#cca2ff] h-11 lg:h-14 rounded-sm`}
           >
             <div className="flex h-full">
               {/* <img
@@ -136,7 +139,7 @@ function VideoCard({
               /> */}
               <div className="cardText flex flex-col items-baseline ml-1 ">
                 <p className="text-white truncate  xl:text-lg  ">
-                  {ele.snippet.title}
+                  {`${i + 1} - ${ele.snippet.title}`}
                 </p>
 
                 <p className="cardArtist text-white truncate xl:text-lg">
@@ -148,12 +151,20 @@ function VideoCard({
         </button>
       ) : null),
   );
+
+  useEffect(() => {
+    const playlistLengthObj = {
+      playlistLength: videoList.length - 1,
+      playlistId: player.currentActivePlaylistId,
+    };
+    playlistLength(playlistLengthObj);
+  }, [playlistSongsById[player.currentActivePlaylistId]]);
   return (
     <div
       className="cardContainer h-[46vh] md:h-full"
     >
       <ul className="ulListCards mt-1 h-full md:mt-0  overflow-y-auto ">
-        {song}
+        {videoList}
       </ul>
     </div>
   );
@@ -186,6 +197,8 @@ VideoCard.propTypes = {
   addSongsByPlaylistID: PropTypes.func.isRequired,
   previousSong: PropTypes.func.isRequired,
   isShuffleActive: PropTypes.func.isRequired,
+  lastPlayedPlaylistDetails: PropTypes.func.isRequired,
+  playlistLength: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = {
@@ -194,6 +207,8 @@ const mapDispatchToProps = {
   nextSong,
   addSongsByPlaylistID,
   isShuffleActive,
+  lastPlayedPlaylistDetails,
+  playlistLength,
 };
 
 const mapStateToProps = (state) => ({

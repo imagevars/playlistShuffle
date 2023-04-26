@@ -4,6 +4,7 @@ import {
   PLAYLIST_DETAILS_ETAG,
   PLAYLIST_DETAILS_LAST_PLAYED,
   PLAYLIST_DETAILS_LAST_PLAYED_ALL,
+  PLAYLIST_DETAILS_LENGTH,
 } from '../constants/playlistDetailsTypes';
 
 const initialState = [];
@@ -54,6 +55,17 @@ export default function playlistDetailsReducer(state = initialState, action) {
         ...ele,
         currentIndex: 0,
       }));
+    }
+    case PLAYLIST_DETAILS_LENGTH: {
+      return state.map((ele) => {
+        if (ele.playlistId === action.payload.playlistId) {
+          return {
+            ...ele,
+            playlistLength: action.payload.playlistLength,
+          };
+        }
+        return ele;
+      });
     }
     default:
       return state;

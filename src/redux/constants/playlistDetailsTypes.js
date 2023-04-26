@@ -7,3 +7,5 @@ export const PLAYLIST_DETAILS_ETAG = 'playlistDetails/Etag';
 export const PLAYLIST_DETAILS_LAST_PLAYED = 'playlistDetails/lastPlayed';
 
 export const PLAYLIST_DETAILS_LAST_PLAYED_ALL = 'playlistDetails/lastPlayedAll';
+
+export const PLAYLIST_DETAILS_LENGTH = 'playlistDetails/playlistLength';

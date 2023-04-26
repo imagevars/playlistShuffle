@@ -33,6 +33,10 @@ function Player({
 }) {
   const playerRef = useRef(null);
 
+  const findPlaylistIndex = playlistDetails.findIndex(
+    (element) => element.playlistId === player.currentActivePlaylistId,
+  );
+
   useEffect(() => {
     if (player.isFullScreenActive === true) {
       if (screenfull.isEnabled) {
@@ -45,26 +49,8 @@ function Player({
   }, [player.isFullScreenActive]);
 
   useEffect(() => {
-    if (player.rememberLastVideo === true) {
-      const findVideoIndex = playlistSongsById[
-        player.currentActivePlaylistId
-      ].findIndex(
-        (element) => element.snippet.resourceId.videoId === player.currentSong,
-      );
-      const lastPlayedObj = {
-        currentIndex: findVideoIndex,
-        playlistId: player.currentActivePlaylistId,
-      };
-      lastPlayedPlaylistDetails(lastPlayedObj);
-    }
-  }, [player.currentSong]);
-
-  useEffect(() => {
     // if (playlistSongsById[player.currentActivePlaylistId]) {
     if (player.rememberLastVideo) {
-      const findPlaylistIndex = playlistDetails.findIndex(
-        (element) => element.playlistId === player.currentActivePlaylistId,
-      );
       currentSong(
         playlistSongsById[player.currentActivePlaylistId][
           playlistDetails[findPlaylistIndex].currentIndex
@@ -79,13 +65,18 @@ function Player({
   }, []);
 
   const afterSongEnds = () => {
-    const currIndex = playlistSongsById[
-      player.currentActivePlaylistId
-    ].findIndex((ele) => ele.snippet?.resourceId.videoId === player.currentSong);
+    const currIndex = playlistDetails[findPlaylistIndex].currentIndex;
     if (
-      currIndex
+      playlistDetails[findPlaylistIndex].currentIndex
       < playlistSongsById[player.currentActivePlaylistId].length - 1
     ) {
+      if (player.rememberLastVideo === true) {
+        const lastPlayedObj = {
+          currentIndex: playlistDetails[findPlaylistIndex].currentIndex + 1,
+          playlistId: player.currentActivePlaylistId,
+        };
+        lastPlayedPlaylistDetails(lastPlayedObj);
+      }
       previousSong(
         playlistSongsById[player.currentActivePlaylistId][currIndex]?.snippet
           .resourceId.videoId,
@@ -98,39 +89,35 @@ function Player({
         playlistSongsById[player.currentActivePlaylistId][currIndex + 2]
           ?.snippet.resourceId.videoId,
       );
-    } else {
-      previousSong(
-        playlistSongsById[player.currentActivePlaylistId][currIndex]?.snippet
-          .resourceId.videoId,
-      );
-      currentSong(
-        playlistSongsById[player.currentActivePlaylistId][currIndex + 1]
-          ?.snippet.resourceId.videoId,
-      );
-      nextSong('');
+    } else if (playlistDetails[findPlaylistIndex].currentIndex
+      === playlistSongsById[player.currentActivePlaylistId].length - 1) {
+      // eslint-disable-next-line
+      console.log('No more songs left');
     }
   };
 
   const handleEnd = () => {
     if (
-      playlistSongsById[player.currentActivePlaylistId].findIndex(
-        (ele) => ele.snippet.resourceId.videoId === player.currentSong,
-      )
-      === playlistSongsById[player.currentActivePlaylistId].length - 1
+      playlistDetails[findPlaylistIndex].currentIndex
+      === playlistSongsById[player.currentActivePlaylistId].length
     ) {
       // eslint-disable-next-line
       console.log('Playlist Ended');
       isPlaying(false);
-    } else afterSongEnds();
+    } else {
+      afterSongEnds();
+    }
   };
   // When some songs can't be played outside of youtube this function will trigger
   // and playlist the next song, or if it is the last the playlist will end
   const handleError = () => {
+    // const currIndex = playlistDetails[findPlaylistIndex].currentIndex;
+    // eslint-disable-next-line
     if (
-      playlistSongsById[player.currentActivePlaylistId].findIndex(
-        (ele) => ele.snippet.resourceId.videoId === player.currentSong,
-      )
-      === playlistSongsById[player.currentActivePlaylistId].length - 1
+      playlistDetails[findPlaylistIndex].currentIndex
+      === playlistDetails[findPlaylistIndex].playlistLength
+      || playlistDetails[findPlaylistIndex].currentIndex + 1
+      === playlistDetails[findPlaylistIndex].playlistLength
     ) {
       // eslint-disable-next-line
       console.log('Playlist Ended');
@@ -212,6 +199,7 @@ Player.propTypes = {
     playlistImage: PropTypes.string.isRequired,
     playlistEtag: PropTypes.string.isRequired,
     currentIndex: PropTypes.number.isRequired,
+    playlistLength: PropTypes.number.isRequired,
 
   })).isRequired,
   isPlaying: PropTypes.func.isRequired,
