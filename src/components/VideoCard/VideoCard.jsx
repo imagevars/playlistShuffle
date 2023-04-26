@@ -81,6 +81,11 @@ function VideoCard({
 
     currentSong(shuffleArr[0].snippet.resourceId.videoId);
     nextSong(shuffleArr[1].snippet.resourceId.videoId);
+    const lastPlayedObj = {
+      currentIndex: 0,
+      playlistId: player.currentActivePlaylistId,
+    };
+    lastPlayedPlaylistDetails(lastPlayedObj);
     isShuffleActive(false);
   };
 
