@@ -120,7 +120,7 @@ function VideoCard({
       && ele.snippet.title !== 'Deleted video' ? (
         <button
           type="button"
-          className="mx-2 my-1 cursor-pointer w-[96%] "
+          className="mx-2 my-1 cursor-pointer w-[94%]  "
           title={ele.snippet.title}
           ref={refs[ele.snippet.resourceId.videoId]}
           id={`${ele.snippet.resourceId.videoId}`}
@@ -131,7 +131,7 @@ function VideoCard({
           <div
             className={`${
               player.currentSong === ele.snippet.resourceId.videoId
-                ? 'bg-[#bb86fc]'
+                ? ' text-[#624aa0] bg-[#bb86fc]'
                 : null
             }  overflow-hidden hover:bg-[#cca2ff] h-11 lg:h-14 rounded-sm`}
           >
@@ -142,12 +142,19 @@ function VideoCard({
                 src={ele.snippet.thumbnails.default?.url}
                 alt={`${ele.snippet.title}`}
               /> */}
-              <div className="cardText flex flex-col items-baseline ml-1 ">
-                <p className="text-white truncate  xl:text-lg  ">
+              <div
+              // className="cardText  flex flex-col items-baseline ml-1 truncate ">
+                className={`${
+                  player.currentSong === ele.snippet.resourceId.videoId
+                    ? ' text-[#624aa0] '
+                    : 'text-white'
+                }  cardText  flex flex-col  hover:text-[#624aa0] items-baseline ml-1 truncate `}
+              >
+                <p className="  truncate  w-[100%] xl:text-lg  ">
                   {`${i + 1} - ${ele.snippet.title}`}
                 </p>
 
-                <p className="cardArtist text-white truncate xl:text-lg">
+                <p className="cardArtist   truncate  w-[100%] text-justify xl:text-lg">
                   {ele.snippet.videoOwnerChannelTitle}
                 </p>
               </div>
