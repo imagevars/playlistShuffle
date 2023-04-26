@@ -128,12 +128,12 @@ function VideoCard({
             }  overflow-hidden hover:bg-[#bb86fc] h-11 lg:h-14 rounded-sm`}
           >
             <div className="flex h-full">
-              <img
+              {/* <img
                 loading="lazy"
                 className="w-10  h-full object-cover rounded-l-sm "
                 src={ele.snippet.thumbnails.default?.url}
                 alt={`${ele.snippet.title}`}
-              />
+              /> */}
               <div className="cardText flex flex-col items-baseline ml-1 ">
                 <p className="text-white truncate  xl:text-lg  ">
                   {ele.snippet.title}
