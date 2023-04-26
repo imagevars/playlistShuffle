@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import HelmetHelper from '../Helmet/HelmetHelper';
 import VideoCard from '../VideoCard/VideoCard';
 import MediaButtons from '../MediaButtons/MediaButtons';
 import {
@@ -13,12 +14,10 @@ import {
   nextSong,
   isMutedActive,
 } from '../../redux/actions/playerActions';
-
+import { lastPlayedPlaylistDetails } from '../../redux/actions/playlistDetailsActions';
 import PlayingRightNow from '../PlayingRightNow/PlayingRightNow';
 import Navbar from '../Navbar/Navbar';
 import PlaylistInfo from '../PlaylistInfo/PlaylistInfo';
-// import { useParams } from "react-router-dom";
-import HelmetHelper from '../Helmet/HelmetHelper';
 import Player from '../Player/Player';
 import ProgressBar from '../ProgressBar/ProgressBar';
 
@@ -32,6 +31,8 @@ function PlaylistPage({
   nextSong,
   playlistSongsById,
   isMutedActive,
+  playlistDetails,
+  lastPlayedPlaylistDetails,
 }) {
   const { id } = useParams();
 
@@ -42,15 +43,20 @@ function PlaylistPage({
   const ref = useRef(null);
 
   useEffect(() => {
-    const songIndex = playlistSongsById[
-      player.currentActivePlaylistId
-    ].findIndex((song) => song.snippet.resourceId.videoId === player.currentSong);
+    const findPlaylistIndex = playlistDetails.findIndex((element) => element.playlistId
+    === player.currentActivePlaylistId);
+
     setCurrentSongName(
-      playlistSongsById[player.currentActivePlaylistId][songIndex].snippet.title,
+      playlistSongsById[player.currentActivePlaylistId][
+        playlistDetails[findPlaylistIndex].currentIndex
+      ].snippet.title,
     );
   }, [player.currentSong]);
 
   useEffect(() => {
+    const findPlaylistIndex = playlistDetails.findIndex((element) => element.playlistId
+    === player.currentActivePlaylistId);
+    const currIndex = playlistDetails[findPlaylistIndex].currentIndex;
     const handleClick = (e) => {
       switch (e.code) {
         case 'Space': {
@@ -70,38 +76,39 @@ function PlaylistPage({
           break;
         }
         case 'ArrowLeft': {
-          const currIndex = playlistSongsById[
-            player.currentActivePlaylistId
-          ].findIndex((song) => song.snippet.resourceId.videoId === player.currentSong);
-          if (currIndex !== 0) {
+          if (currIndex > 0) {
+            const lastPlayedObj = {
+              currentIndex: playlistDetails[findPlaylistIndex].currentIndex - 1,
+              playlistId: player.currentActivePlaylistId,
+            };
+            lastPlayedPlaylistDetails(lastPlayedObj);
             previousSong(
               playlistSongsById[player.currentActivePlaylistId][currIndex - 2]
-                ?.snippet.resourceId.videoId,
-            );
-
-            nextSong(
-              playlistSongsById[player.currentActivePlaylistId][currIndex]
                 ?.snippet.resourceId.videoId,
             );
             currentSong(
               playlistSongsById[player.currentActivePlaylistId][currIndex - 1]
                 ?.snippet.resourceId.videoId,
             );
+            nextSong(
+              playlistSongsById[player.currentActivePlaylistId][currIndex]?.snippet
+                .resourceId.videoId,
+            );
           }
           break;
         }
         case 'ArrowRight': {
-          const currIndex = playlistSongsById[
-            player.currentActivePlaylistId
-          ].findIndex((ele) => ele.snippet?.resourceId.videoId === player.currentSong);
-
           if (
-            currIndex
-            < playlistSongsById[player.currentActivePlaylistId].length - 1
+            currIndex < playlistSongsById[player.currentActivePlaylistId].length - 1
           ) {
+            const lastPlayedObj = {
+              currentIndex: playlistDetails[findPlaylistIndex].currentIndex + 1,
+              playlistId: player.currentActivePlaylistId,
+            };
+            lastPlayedPlaylistDetails(lastPlayedObj);
             previousSong(
-              playlistSongsById[player.currentActivePlaylistId][currIndex]
-                ?.snippet.resourceId.videoId,
+              playlistSongsById[player.currentActivePlaylistId][currIndex]?.snippet
+                .resourceId.videoId,
             );
             currentSong(
               playlistSongsById[player.currentActivePlaylistId][currIndex + 1]
@@ -112,7 +119,7 @@ function PlaylistPage({
                 ?.snippet.resourceId.videoId,
             );
           } else if (
-            currIndex
+            playlistDetails[findPlaylistIndex].currentIndex
             === playlistSongsById[player.currentActivePlaylistId].length - 1
           ) {
           // eslint-disable-next-line
@@ -159,10 +166,10 @@ function PlaylistPage({
 
         <div className="div">
           <div className="mainContent md:flex md:h-[65vh]">
-            <div className="md:w-2/5">
+            <div className="md:w-3/5">
               <Player />
             </div>
-            <div className=" h-3/5 md:h-full mt-6 w-[97%]  md:mt-0 mx-auto md:w-[55%]">
+            <div className=" h-3/5 md:h-full mt-6 w-[97%]  md:mt-0 mx-auto md:w-2/5">
               <VideoCard />
             </div>
           </div>
@@ -202,6 +209,15 @@ PlaylistPage.propTypes = {
   nextSong: PropTypes.func.isRequired,
   playlistSongsById: PropTypes.objectOf(PropTypes.arrayOf).isRequired,
   isMutedActive: PropTypes.func.isRequired,
+  playlistDetails: PropTypes.arrayOf(PropTypes.shape({
+    playlistName: PropTypes.string.isRequired,
+    playlistId: PropTypes.string.isRequired,
+    playlistImage: PropTypes.string.isRequired,
+    playlistEtag: PropTypes.string.isRequired,
+    currentIndex: PropTypes.number.isRequired,
+  })).isRequired,
+  lastPlayedPlaylistDetails: PropTypes.func.isRequired,
+
 };
 
 const mapDispatchToProps = {
@@ -212,11 +228,13 @@ const mapDispatchToProps = {
   currentSong,
   nextSong,
   isMutedActive,
+  lastPlayedPlaylistDetails,
 };
 
 const mapStateToProps = (state) => ({
   player: state.player,
   playlistSongsById: state.playlistSongsById,
+  playlistDetails: state.playlistDetails,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlaylistPage);

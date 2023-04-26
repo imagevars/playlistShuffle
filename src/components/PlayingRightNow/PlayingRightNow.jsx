@@ -2,18 +2,18 @@ import React, { memo } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-function PlayingRightNow({ player, playlistSongsById }) {
-  const currentIndex = playlistSongsById[
-    player.currentActivePlaylistId
-  ]?.findIndex((ele) => ele.snippet.resourceId.videoId === player.currentSong);
+function PlayingRightNow({ player, playlistSongsById, playlistDetails }) {
+  const findPlaylistIndex = playlistDetails.findIndex((element) => element.playlistId
+  === player.currentActivePlaylistId);
+
   return (
     <div>
       <div>
         <p className="songTitle text-[#624aa0] font-bold text-center lg:text-2xl truncate mx-auto w-[95%]">
-          {
-            playlistSongsById[player.currentActivePlaylistId][currentIndex]
-              .snippet.title
-          }
+          {playlistDetails[findPlaylistIndex].currentIndex + 1}
+          {' - '}
+          {playlistSongsById[player.currentActivePlaylistId][playlistDetails[findPlaylistIndex]
+            .currentIndex].snippet.title}
         </p>
       </div>
     </div>
@@ -31,11 +31,20 @@ PlayingRightNow.propTypes = {
     currentActivePlaylistId: PropTypes.string.isRequired,
     isMutedActive: PropTypes.bool.isRequired,
   }).isRequired,
+  playlistDetails: PropTypes.arrayOf(PropTypes.shape({
+    playlistName: PropTypes.string.isRequired,
+    playlistId: PropTypes.string.isRequired,
+    playlistImage: PropTypes.string.isRequired,
+    playlistEtag: PropTypes.string.isRequired,
+    currentIndex: PropTypes.number.isRequired,
+
+  })).isRequired,
   playlistSongsById: PropTypes.objectOf(PropTypes.arrayOf).isRequired,
 };
 const mapStateToProps = (state) => ({
   playlistSongsById: state.playlistSongsById,
   player: state.player,
+  playlistDetails: state.playlistDetails,
 });
 
 export default connect(mapStateToProps, null)(memo(PlayingRightNow));

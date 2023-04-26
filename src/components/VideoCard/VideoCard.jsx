@@ -120,7 +120,7 @@ function VideoCard({
       && ele.snippet.title !== 'Deleted video' ? (
         <button
           type="button"
-          className="mx-2 my-1 cursor-pointer w-[97%] "
+          className="mx-2 my-1 cursor-pointer w-[96%] "
           title={ele.snippet.title}
           ref={refs[ele.snippet.resourceId.videoId]}
           id={`${ele.snippet.resourceId.videoId}`}
@@ -168,7 +168,7 @@ function VideoCard({
     <div
       className="cardContainer h-[46vh] md:h-full"
     >
-      <ul className="ulListCards mt-1 h-full md:mt-0  overflow-y-auto ">
+      <ul className="ulListCards mt-1 h-full md:mt-0  overflow-y-auto  ">
         {videoList}
       </ul>
     </div>
