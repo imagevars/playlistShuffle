@@ -111,12 +111,10 @@ function Player({
   // When some songs can't be played outside of youtube this function will trigger
   // and playlist the next song, or if it is the last the playlist will end
   const handleError = () => {
-    // const currIndex = playlistDetails[findPlaylistIndex].currentIndex;
+    const currIndex = playlistDetails[findPlaylistIndex].currentIndex;
     // eslint-disable-next-line
     if (
-      playlistDetails[findPlaylistIndex].currentIndex
-      === playlistDetails[findPlaylistIndex].playlistLength
-      || playlistDetails[findPlaylistIndex].currentIndex + 1
+      currIndex
       === playlistDetails[findPlaylistIndex].playlistLength
     ) {
       // eslint-disable-next-line

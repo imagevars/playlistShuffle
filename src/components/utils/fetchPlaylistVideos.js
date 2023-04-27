@@ -24,7 +24,6 @@ const fetchPlaylistVideos = async (id, etag) => {
             'etag,nextPageToken,items(snippet(title,videoOwnerChannelTitle,position, thumbnails(default(url)), resourceId(videoId))),pageInfo',
         },
       });
-
       responseArr.push(...responseListItems.data.items);
       if (responseEtag === '') {
         responseEtag = responseListItems.data.etag;

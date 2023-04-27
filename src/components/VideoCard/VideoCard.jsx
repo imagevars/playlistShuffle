@@ -116,52 +116,51 @@ function VideoCard({
   };
 
   const videoList = playlistSongsById[player.currentActivePlaylistId]?.map(
-    (ele, i) => (ele.snippet.title !== 'Private video'
-      && ele.snippet.title !== 'Deleted video' ? (
-        <button
-          type="button"
-          className="mx-2 my-1 cursor-pointer w-[94%]  "
-          title={ele.snippet.title}
-          ref={refs[ele.snippet.resourceId.videoId]}
-          id={`${ele.snippet.resourceId.videoId}`}
-          onClick={() => handleClick(i)}
-          // eslint-disable-next-line
-          key={`${ele.snippet.resourceId.videoId}i${i}`}
+    (ele, i) => (
+      <button
+        type="button"
+        className="mx-2 my-1 cursor-pointer w-[94%]  "
+        title={ele.snippet.title}
+        ref={refs[ele.snippet.resourceId.videoId]}
+        id={`${ele.snippet.resourceId.videoId}`}
+        onClick={() => handleClick(i)}
+        // eslint-disable-next-line
+        key={`${ele.snippet.resourceId.videoId}i${i}`}
+      >
+        <div
+          className={`${
+            player.currentSong === ele.snippet.resourceId.videoId
+              ? ' text-[#624aa0] bg-[#bb86fc]'
+              : null
+          }  overflow-hidden hover:bg-[#cca2ff] h-11 lg:h-14 rounded-sm`}
         >
-          <div
-            className={`${
-              player.currentSong === ele.snippet.resourceId.videoId
-                ? ' text-[#624aa0] bg-[#bb86fc]'
-                : null
-            }  overflow-hidden hover:bg-[#cca2ff] h-11 lg:h-14 rounded-sm`}
-          >
-            <div className="flex h-full">
-              {/* <img
-                loading="lazy"
-                className="w-10  h-full object-cover rounded-l-sm "
-                src={ele.snippet.thumbnails.default?.url}
-                alt={`${ele.snippet.title}`}
+          <div className="flex h-full">
+            {/* <img
+              loading="lazy"
+              className="w-10  h-full object-cover rounded-l-sm "
+              src={ele.snippet.thumbnails.default?.url}
+              alt={`${ele.snippet.title}`}
               /> */}
-              <div
-              // className="cardText  flex flex-col items-baseline ml-1 truncate ">
-                className={`${
-                  player.currentSong === ele.snippet.resourceId.videoId
-                    ? ' text-[#624aa0] '
-                    : 'text-white'
-                }  cardText  flex flex-col  hover:text-[#624aa0] items-baseline ml-1 truncate `}
-              >
-                <p className="  truncate  w-[100%] xl:text-lg  ">
-                  {`${i + 1} - ${ele.snippet.title}`}
-                </p>
+            <div
+            // className="cardText  flex flex-col items-baseline ml-1 truncate ">
+              className={`${
+                player.currentSong === ele.snippet.resourceId.videoId
+                  ? ' text-[#624aa0] '
+                  : 'text-white'
+              }  cardText  flex flex-col  hover:text-[#624aa0] items-baseline ml-1 truncate `}
+            >
+              <p className="  truncate  text-justify  w-[100%] xl:text-lg  ">
+                {`${i + 1} - ${ele.snippet.title}`}
+              </p>
 
-                <p className="cardArtist   truncate  w-[100%] text-justify xl:text-lg">
-                  {ele.snippet.videoOwnerChannelTitle}
-                </p>
-              </div>
+              <p className="cardArtist   truncate  w-[100%] text-justify xl:text-lg">
+                {ele.snippet.videoOwnerChannelTitle}
+              </p>
             </div>
           </div>
-        </button>
-      ) : null),
+        </div>
+      </button>
+    ),
   );
 
   useEffect(() => {
