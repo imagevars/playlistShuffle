@@ -35,11 +35,11 @@ function Navbar({
     <div className="navbar flex justify-center">
       {/* eslint-disable-next-line */}
       <h1
-        className="navbar text-4xl underline text-black font-bold cursor-pointer"
+        className="navbar text-2xl underline text-black font-bold cursor-pointer"
         cursor="pointer"
         onClick={handleClick}
       >
-        Playlist Shuffle
+        Shuffle Playlist
         {' '}
       </h1>
     </div>
