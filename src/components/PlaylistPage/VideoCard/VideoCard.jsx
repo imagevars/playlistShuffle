@@ -149,11 +149,11 @@ function VideoCard({
                   : ''
               }  cardText  flex flex-col  hover:text-[#fff] items-baseline ml-1 truncate `}
             >
-              <p className="  truncate  text-justify  w-[100%] xl:text-lg  ">
+              <p className="tracking-wide truncate font-medium text-justify leading-5  w-[100%] xl:text-lg  ">
                 {`${i + 1} - ${ele.snippet.title}`}
               </p>
 
-              <p className="cardArtist   truncate  w-[100%] text-justify xl:text-lg">
+              <p className="cardArtist font-light  truncate  w-[100%] text-justify xl:text-lg">
                 {ele.snippet.videoOwnerChannelTitle}
               </p>
             </div>
