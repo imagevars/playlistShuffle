@@ -173,7 +173,7 @@ function PlaylistPage({
               <VideoCard />
             </div>
           </div>
-          <div className="bottomMedia bg-[#23036a] absolute bottom-0 left-0 right-0">
+          <div className="bottomMedia bg-[#23036a] fixed bottom-0 left-0 right-0">
             <div className="md:flex md:justify-between py-2">
 
               <div className="md:w-1/4">
