@@ -1,4 +1,4 @@
-Live at: https://playlist-shuffle.vercel.app/
+Live at: https://shuffle-playlist.vercel.app/
 # Playlist Shuffle - A web application to Shuffle your Youtube Playlist
 
 
