@@ -2,3 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .truncate-unset {
+    overflow: unset;
+    text-overflow: unset;
+    white-space: unset;  }
+}

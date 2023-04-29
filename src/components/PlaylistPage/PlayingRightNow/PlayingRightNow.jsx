@@ -10,7 +10,7 @@ function PlayingRightNow({ player, playlistSongsById, playlistDetails }) {
     <div className="md:flex md:self-center">
 
       <div className="md:text-clip md:w-full">
-        <p className="songTitle text-[#ffff]  font-bold text-center md:text-left md:text-clip lg:text-md   mx-auto w-[95%]">
+        <p className="songTitle text-[#ffff]  font-bold text-center md:text-left  lg:text-md truncate md:truncate-unset  mx-auto w-[95%]">
           {playlistDetails[findPlaylistIndex].currentIndex + 1}
           {' - '}
           {playlistSongsById[player.currentActivePlaylistId][playlistDetails[findPlaylistIndex]
