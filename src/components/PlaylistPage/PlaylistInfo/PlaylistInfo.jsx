@@ -31,7 +31,7 @@ function PlaylistInfo({ playlistDetails }) {
         src={playlistInfo.image}
         alt={playlistInfo.name}
       />
-      <p className="text-white ml-2">
+      <p className="text-black ml-2">
         {' '}
         <a href={`https://www.youtube.com/playlist?list=${id}`} target="_blank" rel="noopener noreferrer">
           {' '}

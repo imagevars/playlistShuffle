@@ -7,20 +7,20 @@ import {
   deleteFromPlaylistDetails,
   modifyEtagInPlaylistDetailsById,
   lastPlayedPlaylistDetails,
-} from '../../redux/actions/playlistDetailsActions';
-import fetchPlaylistVideos from '../utils/fetchPlaylistVideos';
-import fetchPlaylistData from '../utils/fetchPlaylistData';
+} from '../../../redux/actions/playlistDetailsActions';
+import fetchPlaylistVideos from '../../utils/fetchPlaylistVideos';
+import fetchPlaylistData from '../../utils/fetchPlaylistData';
 import {
   addSongsByPlaylistID,
   removePlaylistSongsById,
-} from '../../redux/actions/playlistSongsByIdActions';
+} from '../../../redux/actions/playlistSongsByIdActions';
 import {
   setCurrentActivePlaylistId,
   nextSong,
   isPlaying,
   currentSong,
   isShuffleActive,
-} from '../../redux/actions/playerActions';
+} from '../../../redux/actions/playerActions';
 
 function PlaylistUsed({
   playlistDetails,
@@ -98,7 +98,7 @@ function PlaylistUsed({
 
   const playlists = playlistDetails.map((element) => (
     <div
-      className="playlistUsedList cursor-pointer h-24 my-2 rounded-sm bg-[#bb86fc] flex justify-between w-full"
+      className="playlistUsedList cursor-pointer h-24 my-2 rounded-sm bg-[#23036a] flex justify-between w-full"
       key={element.playlistId}
     >
       <button

@@ -7,9 +7,9 @@ import {
   nextSong,
   previousSong,
   isShuffleActive,
-} from '../../redux/actions/playerActions';
-import { lastPlayedPlaylistDetails, playlistLength } from '../../redux/actions/playlistDetailsActions';
-import { addSongsByPlaylistID } from '../../redux/actions/playlistSongsByIdActions';
+} from '../../../redux/actions/playerActions';
+import { lastPlayedPlaylistDetails, playlistLength } from '../../../redux/actions/playlistDetailsActions';
+import { addSongsByPlaylistID } from '../../../redux/actions/playlistSongsByIdActions';
 
 function VideoCard({
   player,
@@ -130,11 +130,11 @@ function VideoCard({
         <div
           className={`${
             player.currentSong === ele.snippet.resourceId.videoId
-              ? ' text-[#624aa0] bg-[#bb86fc]'
+              ? ' bg-[#23036a]'
               : null
-          }  overflow-hidden hover:bg-[#cca2ff] h-11 lg:h-14 rounded-sm`}
+          }  overflow-hidden hover:bg-[#24036ae5] hover:text-[#fff] h-11 lg:h-14 rounded-sm`}
         >
-          <div className="flex h-full">
+          <div className="flex h-full hover:text-white">
             {/* <img
               loading="lazy"
               className="w-10  h-full object-cover rounded-l-sm "
@@ -145,9 +145,9 @@ function VideoCard({
             // className="cardText  flex flex-col items-baseline ml-1 truncate ">
               className={`${
                 player.currentSong === ele.snippet.resourceId.videoId
-                  ? ' text-[#624aa0] '
-                  : 'text-white'
-              }  cardText  flex flex-col  hover:text-[#624aa0] items-baseline ml-1 truncate `}
+                  ? ' text-[#ffff] '
+                  : ''
+              }  cardText  flex flex-col  hover:text-[#fff] items-baseline ml-1 truncate `}
             >
               <p className="  truncate  text-justify  w-[100%] xl:text-lg  ">
                 {`${i + 1} - ${ele.snippet.title}`}

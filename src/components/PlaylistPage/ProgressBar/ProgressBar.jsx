@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { setPercentage } from '../../redux/actions/playerActions';
+import { setPercentage } from '../../../redux/actions/playerActions';
 
 function ProgressBar({ player }) {
   const secondsToTime = (e) => {
@@ -19,16 +19,18 @@ function ProgressBar({ player }) {
   };
 
   return (
-    <div>
-      <div className="w-[65%] bg-gray-200 mx-auto rounded-full h-1.5 mb-4 dark:bg-[#e6dfeb]">
+    <div className="flex justify-center">
+      <div className="text-[#ffff] font-bold ">
+        {secondsToTime(player.progress)}
+      </div>
+      <div className="w-2/3 md:w-4/5 bg-gray-500 rounded-full h-1.5  my-auto mx-1">
         <div
           style={{ width: `${player.videoPercentage}%`, maxWidth: '100%' }}
-          className="bg-[#624aa0] h-1.5 rounded-full dark:bg-[#624aa0] "
+          className="bg-[#ffff] h-1.5 rounded-full  "
         />
-        <div className="flex justify-between">
-          <div className="text-[#624aa0] font-bold ">{secondsToTime(player.progress)}</div>
-          <div className="text-[#624aa0] font-bold ">{secondsToTime(player.videoDuration)}</div>
-        </div>
+      </div>
+      <div className="text-[#ffff] font-bold ">
+        {secondsToTime(player.videoDuration)}
       </div>
     </div>
   );

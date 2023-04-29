@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import PlaylistUsed from '../PlaylistUsed/PlaylistUsed';
-import Search from '../Search/Search';
+import PlaylistUsed from './PlaylistUsed/PlaylistUsed';
+import Search from './Search/Search';
 import Navbar from '../Navbar/Navbar';
 import HelmetHelper from '../Helmet/HelmetHelper';
 import { rememberLastVideo } from '../../redux/actions/playerActions';
@@ -18,7 +18,7 @@ function HomePage({ rememberLastVideo, player, lastPlayedPlaylistDetailsAll }) {
     }
   };
   return (
-    <div className="min-h-screen bg-[#121212]">
+    <div className="min-h-screen  bg-[#f2e7fe] ">
       <HelmetHelper
         title="Playlist Shuffle - The randomizer of your playlists"
       />
@@ -29,7 +29,7 @@ function HomePage({ rememberLastVideo, player, lastPlayedPlaylistDetailsAll }) {
             <Search />
           </div>
           <div className="w-11/12 mx-auto">
-            <label htmlFor="checkBox_" className="text-white text-lg ml-1">
+            <label htmlFor="checkBox_" className="text-black text-lg ml-1">
               <input
                 type="checkbox"
                 id="checkBox_"

@@ -2,20 +2,20 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import fetchPlaylistVideos from '../utils/fetchPlaylistVideos';
-import fetchPlaylistData from '../utils/fetchPlaylistData';
+import fetchPlaylistVideos from '../../utils/fetchPlaylistVideos';
+import fetchPlaylistData from '../../utils/fetchPlaylistData';
 import {
   currentSong,
   nextSong,
   setCurrentActivePlaylistId,
   isShuffleActive,
-} from '../../redux/actions/playerActions';
+} from '../../../redux/actions/playerActions';
 import {
   addToPlaylistDetails,
   modifyEtagInPlaylistDetailsById,
   lastPlayedPlaylistDetails,
-} from '../../redux/actions/playlistDetailsActions';
-import { addSongsByPlaylistID } from '../../redux/actions/playlistSongsByIdActions';
+} from '../../../redux/actions/playlistDetailsActions';
+import { addSongsByPlaylistID } from '../../../redux/actions/playlistSongsByIdActions';
 
 function Search({
   playlistDetails,
@@ -93,7 +93,7 @@ function Search({
   return (
     <div className="searchContainer w-11/12 mx-auto ">
       <form className="" onSubmit={(e) => handleSubmit(e)}>
-        <label htmlFor="searchInput" className="text-white">
+        <label htmlFor="searchInput" className="text-black">
           {`${
             isIdInvalid ? 'Invalid playlist' : 'Enter a playlist:'
           }`}
@@ -111,7 +111,7 @@ function Search({
             value={playlistId}
           />
           <button
-            className="  w-[13%] h-full bg-[#bb86fc] font-medium text-white  rounded-sm flex items-center justify-center"
+            className="  w-[13%] h-full bg-[#23036a] font-medium text-white  rounded-sm flex items-center justify-center"
             type="submit"
           >
             {isLoadingButton === true ? (

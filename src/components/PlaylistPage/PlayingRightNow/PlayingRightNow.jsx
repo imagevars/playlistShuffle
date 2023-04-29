@@ -7,14 +7,16 @@ function PlayingRightNow({ player, playlistSongsById, playlistDetails }) {
   === player.currentActivePlaylistId);
 
   return (
-    <div>
-      <div>
-        <p className="songTitle text-[#624aa0] font-bold text-center lg:text-2xl truncate mx-auto w-[95%]">
+    <div className="md:flex md:self-center">
+
+      <div className="md:text-clip md:w-full">
+        <p className="songTitle text-[#ffff]  font-bold text-center md:text-left md:text-clip lg:text-md   mx-auto w-[95%]">
           {playlistDetails[findPlaylistIndex].currentIndex + 1}
           {' - '}
           {playlistSongsById[player.currentActivePlaylistId][playlistDetails[findPlaylistIndex]
             .currentIndex].snippet.title}
         </p>
+
       </div>
     </div>
   );

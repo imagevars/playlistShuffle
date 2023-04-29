@@ -1,10 +1,10 @@
 import React, { memo } from 'react';
 import {
-  BiPlayCircle,
-  BiPauseCircle,
+  BiPlay,
+  BiPause,
   BiShuffle,
-  BiSkipPreviousCircle,
-  BiSkipNextCircle,
+  BiSkipPrevious,
+  BiSkipNext,
   BiVolumeMute,
   BiVolumeFull,
   BiFullscreen,
@@ -22,8 +22,8 @@ import {
   isShuffleActive,
   previousSong,
   isFullScreenActive,
-} from '../../redux/actions/playerActions';
-import { lastPlayedPlaylistDetails } from '../../redux/actions/playlistDetailsActions';
+} from '../../../redux/actions/playerActions';
+import { lastPlayedPlaylistDetails } from '../../../redux/actions/playlistDetailsActions';
 
 const MediaButtons = memo(
   ({
@@ -104,55 +104,55 @@ const MediaButtons = memo(
       isFullScreenActive(true);
     };
     return (
-      <div className=" text-[#624aa0] font-bold  flex items-center ">
+      <div className=" text-[#ffff] font-bold  flex items-center ">
         {player.isMutedActive === true ? (
-          <button type="button" className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
+          <button type="button" aria-label="unmute video" className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
             <BiVolumeMute size={40} onClick={() => isMutedActive(false)} />
           </button>
         ) : (
-          <button type="button" className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
+          <button type="button" aria-label="mute video" className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
             <BiVolumeFull size={40} onClick={() => isMutedActive(true)} />
           </button>
         )}
 
         {player.isLoopActive === true ? (
-          <button type="button" className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
+          <button type="button" aria-label="no repeat video" className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
             <TbRepeatOnce onClick={() => isLoopActive(false)} size={40} />
           </button>
         ) : (
-          <button type="button" className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
+          <button type="button" aria-label="repeat video" className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
             <TbRepeatOff onClick={() => isLoopActive(true)} size={40} />
           </button>
         )}
 
-        <button type="button" className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
-          <BiSkipPreviousCircle
+        <button type="button" aria-label="previous video" className="cursor-pointer  hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
+          <BiSkipPrevious
             onClick={handleClickPreviousButton}
             size={40}
           />
         </button>
         {player.isPlaying === true ? (
-          <button type="button" className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
-            <BiPauseCircle onClick={() => isPlaying(false)} size={50} />
+          <button type="button" aria-label="pause video" className="cursor-pointer bg-white rounded-[9999px] ">
+            <BiPause fill="black" onClick={() => isPlaying(false)} size={50} />
           </button>
         ) : (
-          <button type="button" className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
-            <BiPlayCircle onClick={() => isPlaying(true)} size={50} />
+          <button type="button" aria-label="play video" className="bg-white cursor-pointer  rounded-[9999px] ">
+            <BiPlay fill="black" onClick={() => isPlaying(true)} size={50} />
           </button>
         )}
-        <button type="button" className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
-          <BiSkipNextCircle onClick={handleClickNextButton} size={40} />
+        <button type="button" aria-label="next video" className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
+          <BiSkipNext onClick={handleClickNextButton} size={40} />
         </button>
-        <button type="button" className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
+        <button type="button" aria-label="shuffle playlist" className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
           <BiShuffle onClick={handleClickShuffle} size={40} />
         </button>
 
         {player.isFullScreenActive === true ? (
-          <button type="button" className="cursor-pointer  md:hidden hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
+          <button type="button" aria-label="exit video full screen" className="cursor-pointer  md:hidden hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
             <BiExitFullscreen onClick={handleClickFullScreen} size={40} />
           </button>
         ) : (
-          <button type="button" className="cursor-pointer  md:hidden hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
+          <button type="button" aria-label="enter video full screen" className="cursor-pointer  md:hidden hover:bg-[rgba(246,247,249,.05)] rounded-[9999px] p-[0.25rem] md:p-[0.50rem]">
             <BiFullscreen onClick={handleClickFullScreen} size={40} />
           </button>
         )}

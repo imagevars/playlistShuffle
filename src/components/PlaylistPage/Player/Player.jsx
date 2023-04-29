@@ -14,8 +14,8 @@ import {
   isFullScreenActive,
   setPercentage,
 
-} from '../../redux/actions/playerActions';
-import { lastPlayedPlaylistDetails } from '../../redux/actions/playlistDetailsActions';
+} from '../../../redux/actions/playerActions';
+import { lastPlayedPlaylistDetails } from '../../../redux/actions/playlistDetailsActions';
 
 function Player({
   player,

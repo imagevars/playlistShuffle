@@ -3,8 +3,8 @@ import { Navigate, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import HelmetHelper from '../Helmet/HelmetHelper';
-import VideoCard from '../VideoCard/VideoCard';
-import MediaButtons from '../MediaButtons/MediaButtons';
+import VideoCard from './VideoCard/VideoCard';
+import MediaButtons from './MediaButtons/MediaButtons';
 import {
   isPlaying,
   isLoopActive,
@@ -15,11 +15,11 @@ import {
   isMutedActive,
 } from '../../redux/actions/playerActions';
 import { lastPlayedPlaylistDetails } from '../../redux/actions/playlistDetailsActions';
-import PlayingRightNow from '../PlayingRightNow/PlayingRightNow';
+import PlayingRightNow from './PlayingRightNow/PlayingRightNow';
 import Navbar from '../Navbar/Navbar';
-import PlaylistInfo from '../PlaylistInfo/PlaylistInfo';
-import Player from '../Player/Player';
-import ProgressBar from '../ProgressBar/ProgressBar';
+import PlaylistInfo from './PlaylistInfo/PlaylistInfo';
+import Player from './Player/Player';
+import ProgressBar from './ProgressBar/ProgressBar';
 
 function PlaylistPage({
   isPlaying,
@@ -146,7 +146,7 @@ function PlaylistPage({
       // eslint-disable-next-line
       tabIndex={0}
       // passive="true"
-      className="min-h-screen bg-[#121212] w-full"
+      className="min-h-screen bg-[#f2e7fe] w-full"
     >
       <div
         className="w-[95%] md:max-w-[2200px] mx-auto"
@@ -173,15 +173,22 @@ function PlaylistPage({
               <VideoCard />
             </div>
           </div>
-          <div className="bottomMedia bg-[#bb86fc] fixed bottom-0 left-0 right-0">
-            <div>
-              <PlayingRightNow />
-            </div>
-            <div>
-              <ProgressBar />
-            </div>
-            <div className="mediaButtonsContainer flex justify-center">
-              <MediaButtons />
+          <div className="bottomMedia bg-[#23036a] absolute bottom-0 left-0 right-0">
+            <div className="md:flex md:justify-between py-2">
+
+              <div className="md:w-1/4">
+                <PlayingRightNow />
+              </div>
+              <div className="md:w-1/2">
+
+                <div>
+                  <div className="mediaButtonsContainer flex justify-center">
+                    <MediaButtons />
+                  </div>
+                </div>
+                <ProgressBar />
+              </div>
+              <div className="hidden md:flex md:w-1/4" />
             </div>
           </div>
         </div>
