@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -39,19 +39,14 @@ function PlaylistPage({
   if (player.currentActivePlaylistId !== id) {
     return <Navigate to="/error" />;
   }
-  const [currentSongName, setCurrentSongName] = useState('');
   const ref = useRef(null);
 
-  useEffect(() => {
-    const findPlaylistIndex = playlistDetails.findIndex((element) => element.playlistId
-    === player.currentActivePlaylistId);
+  const findPlaylistIndex = playlistDetails.findIndex((element) => element.playlistId
+  === player.currentActivePlaylistId);
 
-    setCurrentSongName(
-      playlistSongsById[player.currentActivePlaylistId][
-        playlistDetails[findPlaylistIndex].currentIndex
-      ].snippet.title,
-    );
-  }, [player.currentSong]);
+  const currentVideoName = playlistSongsById[player.currentActivePlaylistId][
+    playlistDetails[findPlaylistIndex].currentIndex
+  ].snippet.title;
 
   useEffect(() => {
     const findPlaylistIndex = playlistDetails.findIndex((element) => element.playlistId
@@ -153,8 +148,8 @@ function PlaylistPage({
       >
         <HelmetHelper
           title={
-            currentSongName
-              ? `${currentSongName} - Playlist Shuffle`
+            currentVideoName
+              ? `${currentVideoName} - Playlist Shuffle`
               : 'Playlist Shuffle | randomize your playlist'
           }
         />

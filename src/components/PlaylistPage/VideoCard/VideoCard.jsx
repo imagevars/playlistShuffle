@@ -36,6 +36,7 @@ function VideoCard({
       block: 'start',
     });
   }, [player.currentSong]);
+
   useEffect(() => {
     if (player.rememberLastVideo) {
       const findPlaylistIndex = playlistDetails.findIndex((element) => {
