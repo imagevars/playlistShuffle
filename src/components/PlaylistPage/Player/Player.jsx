@@ -151,7 +151,7 @@ function Player({
     <div className="player aspect-auto md:w-full md:h-full">
       {/* https://img.youtube.com/vi/Eeb4aZObp-0/0.jpg */}
       <ReactPlayer
-        className="aaaa"
+        playing={player.isPlaying}
         ref={playerRef}
         // not working yet
         // fallback={`https://img.youtube.com/vi/${player.currentSong}.jpg`}
@@ -169,7 +169,6 @@ function Player({
         height="100%"
         controls
         loop={player.isLoopActive}
-        playing={player.isPlaying}
         url={`https://www.youtube.com/embed/${player.currentSong}`}
       />
     </div>

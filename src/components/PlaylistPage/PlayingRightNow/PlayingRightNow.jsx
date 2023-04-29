@@ -6,15 +6,63 @@ function PlayingRightNow({ player, playlistSongsById, playlistDetails }) {
   const findPlaylistIndex = playlistDetails.findIndex((element) => element.playlistId
   === player.currentActivePlaylistId);
 
+  const getTitleAndArtist = (title, ownerTitle) => {
+    try {
+      const joinedTitleAndOwnerTitle = [title, ownerTitle];
+      // console.log('join ', joinedTitleAndOwnerTitle);
+      if (title === 'Private video') {
+        return title;
+      }
+      if (joinedTitleAndOwnerTitle[0].includes('-')) {
+        const regex = /^(.*?)-(.*)$/;
+        const match = joinedTitleAndOwnerTitle[0].match(regex);
+
+        const [, artist, title] = match;
+
+        return [title, artist];
+      }
+      if (joinedTitleAndOwnerTitle[0].includes('//')) {
+        const regex = /^(.*?)\s\/\/\s(.*)$/;
+        const match = joinedTitleAndOwnerTitle[0].match(regex);
+
+        const [, artist, title] = match;
+
+        return [title, artist];
+      }
+      if (joinedTitleAndOwnerTitle[1].includes(' - Topic')) {
+        const regex = /^(.*?)\s-\sTopic$/;
+        const match = joinedTitleAndOwnerTitle[1].match(regex);
+        const artist = match[1];
+        return [title, artist];
+      }
+      return [title, ownerTitle];
+    } catch (error) {
+      return title;
+    }
+  };
+
+  const [title, artist] = getTitleAndArtist(
+    playlistSongsById[player.currentActivePlaylistId][
+      playlistDetails[findPlaylistIndex].currentIndex
+    ].snippet.title,
+    playlistSongsById[player.currentActivePlaylistId][
+      playlistDetails[findPlaylistIndex].currentIndex
+    ].snippet.videoOwnerChannelTitle,
+  );
+
   return (
     <div className="md:flex md:self-center">
 
       <div className="md:text-clip md:w-full">
-        <p className="songTitle text-[#ffff]  font-bold text-center md:text-left  lg:text-md truncate md:truncate-unset  mx-auto w-[95%]">
+        <p className="songTitle text-[#ffff]  font-bold text-center md:text-left  lg:text-md truncate   mx-auto w-[95%]">
           {playlistDetails[findPlaylistIndex].currentIndex + 1}
-          {' - '}
-          {playlistSongsById[player.currentActivePlaylistId][playlistDetails[findPlaylistIndex]
-            .currentIndex].snippet.title}
+          {' '}
+          -
+          {' '}
+          {title}
+        </p>
+        <p className="songTitle text-[#ffff]  font-bold text-center md:text-left  lg:text-md truncate    mx-auto w-[95%]">
+          {artist}
         </p>
 
       </div>
