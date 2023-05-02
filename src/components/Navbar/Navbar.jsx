@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
+import { lastPlayedPlaylistDetailsAll } from '../../redux/actions/playlistDetailsActions';
 import {
   isPlaying,
   currentSong,
@@ -19,10 +19,15 @@ function Navbar({
   nextSong,
   setCurrentActivePlaylistId,
   isShuffleActive,
+  player,
+  lastPlayedPlaylistDetailsAll,
 }) {
   const navigate = useNavigate();
 
   const handleClick = () => {
+    if (player.rememberLastVideo === false) {
+      lastPlayedPlaylistDetailsAll();
+    }
     isPlaying(true);
     previousSong('');
     currentSong('');
@@ -47,12 +52,33 @@ function Navbar({
 }
 
 Navbar.propTypes = {
+  // playlistDetails: PropTypes.arrayOf(
+  //   PropTypes.shape({
+  //     playlistName: PropTypes.string.isRequired,
+  //     playlistId: PropTypes.string.isRequired,
+  //     playlistImage: PropTypes.string.isRequired,
+  //     playlistEtag: PropTypes.string.isRequired,
+  //     currentIndex: PropTypes.number.isRequired,
+  //   }),
+  // ).isRequired,
+  player: PropTypes.shape({
+    isPlaying: PropTypes.bool.isRequired,
+    previousSong: PropTypes.string,
+    currentSong: PropTypes.string.isRequired,
+    nextSong: PropTypes.string,
+    isShuffleActive: PropTypes.bool.isRequired,
+    isLoopActive: PropTypes.bool.isRequired,
+    currentActivePlaylistId: PropTypes.string.isRequired,
+    isMutedActive: PropTypes.bool.isRequired,
+    rememberLastVideo: PropTypes.bool.isRequired,
+  }).isRequired,
   isPlaying: PropTypes.func.isRequired,
   previousSong: PropTypes.func.isRequired,
   currentSong: PropTypes.func.isRequired,
   nextSong: PropTypes.func.isRequired,
   isShuffleActive: PropTypes.func.isRequired,
   setCurrentActivePlaylistId: PropTypes.func.isRequired,
+  lastPlayedPlaylistDetailsAll: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = {
@@ -62,5 +88,13 @@ const mapDispatchToProps = {
   nextSong,
   isShuffleActive,
   setCurrentActivePlaylistId,
+  lastPlayedPlaylistDetailsAll,
 };
-export default connect(null, mapDispatchToProps)(memo(Navbar));
+
+const mapStateToProps = (state) => ({
+  player: state.player,
+  playlistSongsById: state.playlistSongsById,
+  playlistDetails: state.playlistDetails,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(memo(Navbar));

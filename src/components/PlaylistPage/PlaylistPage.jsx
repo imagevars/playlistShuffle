@@ -14,7 +14,7 @@ import {
   nextSong,
   isMutedActive,
 } from '../../redux/actions/playerActions';
-import { lastPlayedPlaylistDetails } from '../../redux/actions/playlistDetailsActions';
+import { lastPlayedPlaylistDetails, lastPlayedPlaylistDetailsAll } from '../../redux/actions/playlistDetailsActions';
 import PlayingRightNow from './PlayingRightNow/PlayingRightNow';
 import Navbar from '../Navbar/Navbar';
 import PlaylistInfo from './PlaylistInfo/PlaylistInfo';
@@ -33,6 +33,7 @@ function PlaylistPage({
   isMutedActive,
   playlistDetails,
   lastPlayedPlaylistDetails,
+  lastPlayedPlaylistDetailsAll,
 }) {
   const { id } = useParams();
 
@@ -47,6 +48,12 @@ function PlaylistPage({
   const currentVideoName = playlistSongsById[player.currentActivePlaylistId][
     playlistDetails[findPlaylistIndex].currentIndex
   ].snippet.title;
+
+  useEffect(() => {
+    if (player.rememberLastVideo === false) {
+      lastPlayedPlaylistDetailsAll();
+    }
+  }, []);
 
   useEffect(() => {
     const findPlaylistIndex = playlistDetails.findIndex((element) => element.playlistId
@@ -203,6 +210,7 @@ PlaylistPage.propTypes = {
     isLoopActive: PropTypes.bool.isRequired,
     currentActivePlaylistId: PropTypes.string.isRequired,
     isMutedActive: PropTypes.bool.isRequired,
+    rememberLastVideo: PropTypes.bool.isRequired,
   }).isRequired,
   isLoopActive: PropTypes.func.isRequired,
   isShuffleActive: PropTypes.func.isRequired,
@@ -219,6 +227,7 @@ PlaylistPage.propTypes = {
     currentIndex: PropTypes.number.isRequired,
   })).isRequired,
   lastPlayedPlaylistDetails: PropTypes.func.isRequired,
+  lastPlayedPlaylistDetailsAll: PropTypes.func.isRequired,
 
 };
 
@@ -231,6 +240,7 @@ const mapDispatchToProps = {
   nextSong,
   isMutedActive,
   lastPlayedPlaylistDetails,
+  lastPlayedPlaylistDetailsAll,
 };
 
 const mapStateToProps = (state) => ({
