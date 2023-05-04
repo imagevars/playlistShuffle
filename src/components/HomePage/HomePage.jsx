@@ -22,9 +22,11 @@ function HomePage({ rememberLastVideo, player, lastPlayedPlaylistDetailsAll }) {
       <HelmetHelper
         title="Shuffle Youtube Playlists - Playlist Randomizer"
       />
+      <div className="w-[95%] md:max-w-[2200px] mx-auto">
+        <Navbar />
+      </div>
       <div className=" align-middle  w-10/12 flex  mx-auto">
         <div className="w-full">
-          <Navbar />
           <div className="mt-20 mb-10   ">
             <Search />
           </div>

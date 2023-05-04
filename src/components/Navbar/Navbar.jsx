@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { AiFillGithub } from 'react-icons/ai';
 import PropTypes from 'prop-types';
 import { lastPlayedPlaylistDetailsAll } from '../../redux/actions/playlistDetailsActions';
 import {
@@ -36,8 +37,12 @@ function Navbar({
     setCurrentActivePlaylistId('');
     return navigate('/');
   };
+
   return (
-    <div className="navbar flex justify-center">
+    <div className="navbar flex justify-between">
+      <a href="https://github.com/jooonathann/playlistShuffle">
+        <AiFillGithub fill="black" size={30} />
+      </a>
       {/* eslint-disable-next-line */}
       <h1
         className="navbar text-2xl underline text-black font-bold cursor-pointer"
@@ -47,20 +52,13 @@ function Navbar({
         Shuffle Playlist
         {' '}
       </h1>
+      <div />
+
     </div>
   );
 }
 
 Navbar.propTypes = {
-  // playlistDetails: PropTypes.arrayOf(
-  //   PropTypes.shape({
-  //     playlistName: PropTypes.string.isRequired,
-  //     playlistId: PropTypes.string.isRequired,
-  //     playlistImage: PropTypes.string.isRequired,
-  //     playlistEtag: PropTypes.string.isRequired,
-  //     currentIndex: PropTypes.number.isRequired,
-  //   }),
-  // ).isRequired,
   player: PropTypes.shape({
     isPlaying: PropTypes.bool.isRequired,
     previousSong: PropTypes.string,
