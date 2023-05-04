@@ -20,7 +20,7 @@ function HomePage({ rememberLastVideo, player, lastPlayedPlaylistDetailsAll }) {
   return (
     <div className="min-h-screen  bg-[#f2e7fe] ">
       <HelmetHelper
-        title="Playlist Shuffle - The randomizer of your playlists"
+        title="Shuffle Youtube Playlists - Playlist Randomizer"
       />
       <div className=" align-middle  w-10/12 flex  mx-auto">
         <div className="w-full">
