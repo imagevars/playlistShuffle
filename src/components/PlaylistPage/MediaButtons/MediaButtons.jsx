@@ -16,11 +16,9 @@ import { connect } from 'react-redux';
 import {
   isPlaying,
   currentSong,
-  nextSong,
   isLoopActive,
   isMutedActive,
   isShuffleActive,
-  previousSong,
   isFullScreenActive,
 } from '../../../redux/actions/playerActions';
 import { lastPlayedPlaylistDetails } from '../../../redux/actions/playlistDetailsActions';
@@ -31,9 +29,7 @@ const MediaButtons = memo(
     isPlaying,
     isLoopActive,
     isShuffleActive,
-    previousSong,
     currentSong,
-    nextSong,
     playlistSongsById,
     isMutedActive,
     isFullScreenActive,
@@ -52,17 +48,9 @@ const MediaButtons = memo(
           playlistId: player.currentActivePlaylistId,
         };
         lastPlayedPlaylistDetails(lastPlayedObj);
-        previousSong(
-          playlistSongsById[player.currentActivePlaylistId][currIndex - 2]
-            ?.snippet.resourceId.videoId,
-        );
         currentSong(
           playlistSongsById[player.currentActivePlaylistId][currIndex - 1]
             ?.snippet.resourceId.videoId,
-        );
-        nextSong(
-          playlistSongsById[player.currentActivePlaylistId][currIndex]?.snippet
-            .resourceId.videoId,
         );
       }
     };
@@ -76,16 +64,8 @@ const MediaButtons = memo(
           playlistId: player.currentActivePlaylistId,
         };
         lastPlayedPlaylistDetails(lastPlayedObj);
-        previousSong(
-          playlistSongsById[player.currentActivePlaylistId][currIndex]?.snippet
-            .resourceId.videoId,
-        );
         currentSong(
           playlistSongsById[player.currentActivePlaylistId][currIndex + 1]
-            ?.snippet.resourceId.videoId,
-        );
-        nextSong(
-          playlistSongsById[player.currentActivePlaylistId][currIndex + 2]
             ?.snippet.resourceId.videoId,
         );
       } else if (
@@ -164,9 +144,7 @@ const MediaButtons = memo(
 MediaButtons.propTypes = {
   player: PropTypes.shape({
     isPlaying: PropTypes.bool.isRequired,
-    previousSong: PropTypes.string,
     currentSong: PropTypes.string.isRequired,
-    nextSong: PropTypes.string,
     isShuffleActive: PropTypes.bool.isRequired,
     isLoopActive: PropTypes.bool.isRequired,
     currentActivePlaylistId: PropTypes.string.isRequired,
@@ -176,9 +154,7 @@ MediaButtons.propTypes = {
   isPlaying: PropTypes.func.isRequired,
   isLoopActive: PropTypes.func.isRequired,
   isShuffleActive: PropTypes.func.isRequired,
-  previousSong: PropTypes.func.isRequired,
   currentSong: PropTypes.func.isRequired,
-  nextSong: PropTypes.func.isRequired,
   playlistSongsById: PropTypes.objectOf(PropTypes.arrayOf).isRequired,
   isMutedActive: PropTypes.func.isRequired,
   isFullScreenActive: PropTypes.func.isRequired,
@@ -203,9 +179,7 @@ const mapDispatchToProps = {
   isPlaying,
   isLoopActive,
   isShuffleActive,
-  previousSong,
   currentSong,
-  nextSong,
   isMutedActive,
   isFullScreenActive,
   lastPlayedPlaylistDetails,

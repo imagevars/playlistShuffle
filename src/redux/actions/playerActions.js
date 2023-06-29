@@ -1,8 +1,6 @@
 import {
   PLAYER_IS_PLAYING,
-  PLAYER_PREVIOUS_SONG,
   PLAYER_CURRENT_SONG,
-  PLAYER_NEXT_SONG,
   PLAYER_IS_LOOP_ACTIVE,
   PLAYER_IS_MUTED_ACTIVE,
   PLAYER_IS_SHUFFLE_ACTIVE,
@@ -16,14 +14,7 @@ import {
 
 export const isPlaying = (payload) => ({ type: PLAYER_IS_PLAYING, payload });
 
-export const previousSong = (payload) => ({
-  type: PLAYER_PREVIOUS_SONG,
-  payload,
-});
-
 export const currentSong = (payload) => ({ type: PLAYER_CURRENT_SONG, payload });
-
-export const nextSong = (payload) => ({ type: PLAYER_NEXT_SONG, payload });
 
 export const isLoopActive = (payload) => ({
   type: PLAYER_IS_LOOP_ACTIVE,

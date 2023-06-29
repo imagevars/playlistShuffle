@@ -6,7 +6,6 @@ import fetchPlaylistVideos from '../../utils/fetchPlaylistVideos';
 import fetchPlaylistData from '../../utils/fetchPlaylistData';
 import {
   currentSong,
-  nextSong,
   setCurrentActivePlaylistId,
   isShuffleActive,
 } from '../../../redux/actions/playerActions';
@@ -20,7 +19,6 @@ import { addSongsByPlaylistID } from '../../../redux/actions/playlistSongsByIdAc
 function Search({
   playlistDetails,
   currentSong,
-  nextSong,
   addToPlaylistDetails,
   addSongsByPlaylistID,
   playlistSongsById,
@@ -38,9 +36,9 @@ function Search({
     e.preventDefault();
     setIsLoadingButton(true);
     isShuffleActive(false);
-    const regex = /PL(.*)/;
+    const regex = /PL[\w-]+(?=&|$)/;
     const match = playlistId.match(regex);
-    const id = `PL${match[1]}`;
+    const id = match[0];
     const currentPlaylistInfo = playlistDetails.filter(
       (element) => element.playlistId === id,
     );
@@ -82,7 +80,6 @@ function Search({
       setIsLoadingButton(false);
       await addSongsByPlaylistID(playlistObject);
       await currentSong(data.currentSong);
-      await nextSong(data.nextSong);
       navigate(`/${id}`);
     }
   };
@@ -166,7 +163,6 @@ Search.propTypes = {
     rememberLastVideo: PropTypes.bool.isRequired,
   }).isRequired,
   currentSong: PropTypes.func.isRequired,
-  nextSong: PropTypes.func.isRequired,
   addToPlaylistDetails: PropTypes.func.isRequired,
   addSongsByPlaylistID: PropTypes.func.isRequired,
   playlistSongsById: PropTypes.objectOf(PropTypes.arrayOf).isRequired,
@@ -183,7 +179,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   currentSong,
-  nextSong,
   addToPlaylistDetails,
   addSongsByPlaylistID,
   setCurrentActivePlaylistId,

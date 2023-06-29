@@ -51,7 +51,6 @@ const fetchPlaylistVideos = async (id, etag) => {
     playlistEtag: responseEtag,
     responseArrToAdd: responseArr,
     currentSong: responseArr[0].snippet.resourceId.videoId,
-    nextSong: responseArr[1].snippet.resourceId.videoId,
   };
 
   return dataReturned;

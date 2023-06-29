@@ -16,7 +16,6 @@ import {
 } from '../../../redux/actions/playlistSongsByIdActions';
 import {
   setCurrentActivePlaylistId,
-  nextSong,
   isPlaying,
   currentSong,
   isShuffleActive,
@@ -25,7 +24,6 @@ import {
 function PlaylistUsed({
   playlistDetails,
   addToPlaylistDetails,
-  nextSong,
   playlistSongsById,
   isPlaying,
   deleteFromPlaylistDetails,
@@ -64,10 +62,6 @@ function PlaylistUsed({
           playlistSongsById[currentPlaylistInfo[0].playlistId][0].snippet
             .resourceId.videoId,
         );
-        nextSong(
-          playlistSongsById[currentPlaylistInfo[0].playlistId][1].snippet
-            .resourceId.videoId,
-        );
       }
       isPlaying(true);
     } else {
@@ -85,7 +79,6 @@ function PlaylistUsed({
       modifyEtagInPlaylistDetailsById(playlistEtagAndId);
       addSongsByPlaylistID(playlistObject);
       currentSong(data.currentSong);
-      nextSong(data.nextSong);
     }
 
     navigate(`/${id}`);
@@ -148,7 +141,6 @@ PlaylistUsed.propTypes = {
     rememberLastVideo: PropTypes.bool.isRequired,
   }).isRequired,
   addToPlaylistDetails: PropTypes.func.isRequired,
-  nextSong: PropTypes.func.isRequired,
   playlistSongsById: PropTypes.objectOf(PropTypes.arrayOf).isRequired,
   isPlaying: PropTypes.func.isRequired,
   deleteFromPlaylistDetails: PropTypes.func.isRequired,
@@ -168,7 +160,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   currentSong,
-  nextSong,
   isPlaying,
   setCurrentActivePlaylistId,
   modifyEtagInPlaylistDetailsById,

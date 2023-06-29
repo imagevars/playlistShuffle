@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 import MersenneTwister from 'mersenne-twister';
 import {
   currentSong,
-  nextSong,
-  previousSong,
   isShuffleActive,
 } from '../../../redux/actions/playerActions';
 import { lastPlayedPlaylistDetails, playlistLength } from '../../../redux/actions/playlistDetailsActions';
@@ -13,9 +11,7 @@ import { addSongsByPlaylistID } from '../../../redux/actions/playlistSongsByIdAc
 
 function VideoCard({
   player,
-  previousSong,
   currentSong,
-  nextSong,
   playlistSongsById,
   addSongsByPlaylistID,
   isShuffleActive,
@@ -25,14 +21,16 @@ function VideoCard({
 }) {
   const refs = playlistSongsById[player.currentActivePlaylistId]?.reduce(
     (acc, value) => {
-      acc[value.snippet.resourceId.videoId] = React.createRef();
+      acc[value.snippet.position] = React.createRef();
       return acc;
     },
     {},
   );
 
   useEffect(() => {
-    refs[player.currentSong].current.scrollIntoView({
+    const findPlaylistIndex = playlistDetails.findIndex((element) => element.playlistId
+    === player.currentActivePlaylistId);
+    refs[playlistDetails[findPlaylistIndex].currentIndex].current.scrollIntoView({
       block: 'start',
     });
   }, [player.currentSong]);
@@ -61,7 +59,6 @@ function VideoCard({
       };
       addSongsByPlaylistID(playlistObject);
       currentSong(unShuffleArr[0].snippet.resourceId.videoId);
-      nextSong(unShuffleArr[1].snippet.resourceId.videoId);
     }
   }, []);
 
@@ -81,7 +78,6 @@ function VideoCard({
     addSongsByPlaylistID(playlistObject);
 
     currentSong(shuffleArr[0].snippet.resourceId.videoId);
-    nextSong(shuffleArr[1].snippet.resourceId.videoId);
     const lastPlayedObj = {
       currentIndex: 0,
       playlistId: player.currentActivePlaylistId,
@@ -102,16 +98,8 @@ function VideoCard({
       playlistId: player.currentActivePlaylistId,
     };
     lastPlayedPlaylistDetails(lastPlayedObj);
-    previousSong(
-      playlistSongsById[player.currentActivePlaylistId][index - 1]?.snippet
-        .resourceId.videoId,
-    );
     currentSong(
       playlistSongsById[player.currentActivePlaylistId][index]?.snippet
-        .resourceId.videoId,
-    );
-    nextSong(
-      playlistSongsById[player.currentActivePlaylistId][index + 1]?.snippet
         .resourceId.videoId,
     );
   };
@@ -122,7 +110,7 @@ function VideoCard({
         type="button"
         className="mx-2 my-1 cursor-pointer w-[94%]  "
         title={ele.snippet.title}
-        ref={refs[ele.snippet.resourceId.videoId]}
+        ref={refs[ele.snippet.position]}
         id={`${ele.snippet.resourceId.videoId}`}
         onClick={() => handleClick(i)}
         // eslint-disable-next-line
@@ -194,9 +182,7 @@ VideoCard.propTypes = {
   ).isRequired,
   player: PropTypes.shape({
     isPlaying: PropTypes.bool.isRequired,
-    previousSong: PropTypes.string,
     currentSong: PropTypes.string.isRequired,
-    nextSong: PropTypes.string,
     isShuffleActive: PropTypes.bool.isRequired,
     isLoopActive: PropTypes.bool.isRequired,
     currentActivePlaylistId: PropTypes.string.isRequired,
@@ -204,19 +190,15 @@ VideoCard.propTypes = {
     rememberLastVideo: PropTypes.bool.isRequired,
   }).isRequired,
   currentSong: PropTypes.func.isRequired,
-  nextSong: PropTypes.func.isRequired,
   playlistSongsById: PropTypes.objectOf(PropTypes.arrayOf).isRequired,
   addSongsByPlaylistID: PropTypes.func.isRequired,
-  previousSong: PropTypes.func.isRequired,
   isShuffleActive: PropTypes.func.isRequired,
   lastPlayedPlaylistDetails: PropTypes.func.isRequired,
   playlistLength: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = {
-  previousSong,
   currentSong,
-  nextSong,
   addSongsByPlaylistID,
   isShuffleActive,
   lastPlayedPlaylistDetails,

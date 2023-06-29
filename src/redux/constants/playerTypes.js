@@ -4,11 +4,7 @@ export const PLAYER_IS_LOOP_ACTIVE = 'player/isLoopActive';
 
 export const PLAYER_IS_SHUFFLE_ACTIVE = 'player/isShuffleActive';
 
-export const PLAYER_PREVIOUS_SONG = 'player/previousSong';
-
 export const PLAYER_CURRENT_SONG = 'player/currentSong';
-
-export const PLAYER_NEXT_SONG = 'player/nextSong';
 
 export const PLAYER_SET_CURRENT_ACTIVE_PLAYLIST = 'player/setCurrentActivePlaylistId';
 

@@ -53,9 +53,7 @@ function HomePage({ rememberLastVideo, player, lastPlayedPlaylistDetailsAll }) {
 HomePage.propTypes = {
   player: PropTypes.shape({
     isPlaying: PropTypes.bool.isRequired,
-    previousSong: PropTypes.string,
     currentSong: PropTypes.string.isRequired,
-    nextSong: PropTypes.string,
     isShuffleActive: PropTypes.bool.isRequired,
     isLoopActive: PropTypes.bool.isRequired,
     currentActivePlaylistId: PropTypes.string.isRequired,

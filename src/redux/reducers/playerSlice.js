@@ -2,9 +2,7 @@ import {
   PLAYER_IS_PLAYING,
   PLAYER_IS_LOOP_ACTIVE,
   PLAYER_IS_SHUFFLE_ACTIVE,
-  PLAYER_PREVIOUS_SONG,
   PLAYER_CURRENT_SONG,
-  PLAYER_NEXT_SONG,
   PLAYER_SET_CURRENT_ACTIVE_PLAYLIST,
   PLAYER_IS_MUTED_ACTIVE,
   PLAYER_SET_PROGRESS,
@@ -16,9 +14,7 @@ import {
 
 const initialState = {
   isPlaying: true,
-  previousSong: '',
   currentSong: '',
-  nextSong: '',
   isShuffleActive: false,
   isLoopActive: false,
   currentActivePlaylistId: '',
@@ -36,19 +32,11 @@ export default function playerReducer(state = initialState, action) {
       return { ...state, isPlaying: action.payload };
     case PLAYER_IS_LOOP_ACTIVE:
       return { ...state, isLoopActive: action.payload };
-
     case PLAYER_IS_SHUFFLE_ACTIVE: {
       return { ...state, isShuffleActive: action.payload };
     }
-
-    case PLAYER_PREVIOUS_SONG: {
-      return { ...state, previousSong: action.payload };
-    }
     case PLAYER_CURRENT_SONG: {
       return { ...state, currentSong: action.payload };
-    }
-    case PLAYER_NEXT_SONG: {
-      return { ...state, nextSong: action.payload };
     }
     case PLAYER_SET_CURRENT_ACTIVE_PLAYLIST: {
       return { ...state, currentActivePlaylistId: action.payload };
