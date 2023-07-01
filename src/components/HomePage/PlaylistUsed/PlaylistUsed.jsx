@@ -91,7 +91,7 @@ function PlaylistUsed({
 
   const playlists = playlistDetails.map((element) => (
     <div
-      className="playlistUsedList cursor-pointer h-24 my-2 rounded-sm bg-[#23036a] flex justify-between w-full"
+      className="playlistUsedList cursor-pointer h-16 my-2 rounded-sm bg-[#23036a] flex justify-between w-full"
       key={element.playlistId}
     >
       <button
@@ -100,7 +100,7 @@ function PlaylistUsed({
         onClick={() => handleClickPlaylist(element.playlistId)}
       >
         <img
-          className="object-cover w-24 h-24 rounded-l-sm"
+          className="object-cover w-24 h-16 rounded-l-sm"
           alt={`${element.playlistName}`}
           src={element.playlistImage}
         />
