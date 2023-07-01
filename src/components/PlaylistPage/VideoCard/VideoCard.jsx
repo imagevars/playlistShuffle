@@ -21,16 +21,14 @@ function VideoCard({
 }) {
   const refs = playlistSongsById[player.currentActivePlaylistId]?.reduce(
     (acc, value) => {
-      acc[value.snippet.position] = React.createRef();
+      acc[value.snippet.resourceId.videoId] = React.createRef();
       return acc;
     },
     {},
   );
 
   useEffect(() => {
-    const findPlaylistIndex = playlistDetails.findIndex((element) => element.playlistId
-    === player.currentActivePlaylistId);
-    refs[playlistDetails[findPlaylistIndex].currentIndex].current.scrollIntoView({
+    refs[player.currentSong].current.scrollIntoView({
       block: 'start',
     });
   }, [player.currentSong]);
@@ -103,14 +101,13 @@ function VideoCard({
         .resourceId.videoId,
     );
   };
-
   const videoList = playlistSongsById[player.currentActivePlaylistId]?.map(
     (ele, i) => (
       <button
         type="button"
         className="mx-2 my-1 cursor-pointer w-[94%]  "
         title={ele.snippet.title}
-        ref={refs[ele.snippet.position]}
+        ref={refs[ele.snippet.resourceId.videoId]}
         id={`${ele.snippet.resourceId.videoId}`}
         onClick={() => handleClick(i)}
         // eslint-disable-next-line
