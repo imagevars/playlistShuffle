@@ -10,6 +10,7 @@ import {
   currentSong,
   isShuffleActive,
   setCurrentActivePlaylistId,
+  isDarkModeActive,
 } from '../../redux/actions/playerActions';
 
 function Navbar({
@@ -19,10 +20,11 @@ function Navbar({
   isShuffleActive,
   player,
   lastPlayedPlaylistDetailsAll,
+  isDarkModeActive,
 }) {
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const handleClickHome = () => {
     if (player.rememberLastVideo === false) {
       lastPlayedPlaylistDetailsAll();
     }
@@ -31,6 +33,16 @@ function Navbar({
     isShuffleActive(false);
     setCurrentActivePlaylistId('');
     return navigate('/');
+  };
+
+  const handleClickDarkMode = () => {
+    if (player.darkMode === true) {
+      document.documentElement.classList.remove('dark');
+      isDarkModeActive(false);
+    } else {
+      document.documentElement.classList.add('dark');
+      isDarkModeActive(true);
+    }
   };
 
   return (
@@ -42,12 +54,14 @@ function Navbar({
       <h1
         className="navbar text-2xl underline text-black font-bold cursor-pointer"
         cursor="pointer"
-        onClick={handleClick}
+        onClick={handleClickHome}
       >
         Shuffle Playlist
         {' '}
       </h1>
-      <BsFillMoonFill className="cursor-pointer" aria-label="dark mode moon icon" size={30} />
+      {player.darkMode === true
+        ? <BsFillSunFill onClick={handleClickDarkMode} className="cursor-pointer mt-1" aria-label="dark mode moon icon" size={25} />
+        : <BsFillMoonFill onClick={handleClickDarkMode} className="cursor-pointer mt-1" aria-label="dark mode moon icon" size={25} />}
 
     </div>
   );
@@ -62,12 +76,14 @@ Navbar.propTypes = {
     currentActivePlaylistId: PropTypes.string.isRequired,
     isMutedActive: PropTypes.bool.isRequired,
     rememberLastVideo: PropTypes.bool.isRequired,
+    darkMode: PropTypes.bool.isRequired,
   }).isRequired,
   isPlaying: PropTypes.func.isRequired,
   currentSong: PropTypes.func.isRequired,
   isShuffleActive: PropTypes.func.isRequired,
   setCurrentActivePlaylistId: PropTypes.func.isRequired,
   lastPlayedPlaylistDetailsAll: PropTypes.func.isRequired,
+  isDarkModeActive: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = {
@@ -76,6 +92,7 @@ const mapDispatchToProps = {
   isShuffleActive,
   setCurrentActivePlaylistId,
   lastPlayedPlaylistDetailsAll,
+  isDarkModeActive,
 };
 
 const mapStateToProps = (state) => ({

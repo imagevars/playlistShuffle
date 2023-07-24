@@ -10,6 +10,7 @@ import {
   PLAYER_SET_PERCENTAGE,
   PLAYER_IS_FULL_SCREEN_ACTIVE,
   PLAYER_REMEMBER_LAST_VIDEO,
+  PLAYER_ISDARKMODEACTIVE,
 } from '../constants/playerTypes';
 
 export const isPlaying = (payload) => ({ type: PLAYER_IS_PLAYING, payload });
@@ -58,5 +59,10 @@ export const isFullScreenActive = (payload) => ({
 
 export const rememberLastVideo = (payload) => ({
   type: PLAYER_REMEMBER_LAST_VIDEO,
+  payload,
+});
+
+export const isDarkModeActive = (payload) => ({
+  type: PLAYER_ISDARKMODEACTIVE,
   payload,
 });
