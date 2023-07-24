@@ -2,6 +2,7 @@ import React, { memo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { AiFillGithub } from 'react-icons/ai';
+import { BsFillMoonFill, BsFillSunFill } from 'react-icons/bs';
 import PropTypes from 'prop-types';
 import { lastPlayedPlaylistDetailsAll } from '../../redux/actions/playlistDetailsActions';
 import {
@@ -46,7 +47,7 @@ function Navbar({
         Shuffle Playlist
         {' '}
       </h1>
-      <div />
+      <BsFillMoonFill className="cursor-pointer" aria-label="dark mode moon icon" size={30} />
 
     </div>
   );
