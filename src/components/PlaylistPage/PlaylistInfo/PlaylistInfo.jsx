@@ -18,7 +18,7 @@ function PlaylistInfo({ playlistDetails }) {
         src={info?.playlistImage}
         alt={info?.playlistName}
       />
-      <p className="text-black ml-2 tracking-wide font-semibold">
+      <p className="text-black dark:text-white ml-2 tracking-wide font-semibold">
         {' '}
         <a href={`https://www.youtube.com/playlist?list=${id}`} target="_blank" rel="noopener noreferrer">
           {' '}

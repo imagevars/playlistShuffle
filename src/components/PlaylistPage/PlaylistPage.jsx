@@ -128,7 +128,7 @@ function PlaylistPage({
       // eslint-disable-next-line
       tabIndex={0}
       // passive="true"
-      className="min-h-screen bg-[#f2e7fe] w-full"
+      className="min-h-screen bg-[#f2e7fe] dark:bg-black w-full"
     >
       <div
         className="w-[95%] md:max-w-[2200px] mx-auto"
@@ -155,7 +155,7 @@ function PlaylistPage({
               <VideoCard />
             </div>
           </div>
-          <div className="bottomMedia bg-[#23036a] fixed bottom-0 left-0 right-0">
+          <div className="bottomMedia bg-[#23036a] dark:bg-[#ca2c92] fixed bottom-0 left-0 right-0">
             <div className="md:flex md:justify-between py-2">
 
               <div className="md:w-1/4">

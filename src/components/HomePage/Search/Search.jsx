@@ -90,7 +90,7 @@ function Search({
   return (
     <div className="searchContainer w-11/12 mx-auto ">
       <form className="" onSubmit={(e) => handleSubmit(e)}>
-        <label htmlFor="searchInput" className="text-black">
+        <label htmlFor="searchInput" className="text-black dark:text-white">
           {`${
             isIdInvalid ? 'Invalid playlist' : 'Enter a playlist:'
           }`}
@@ -108,7 +108,7 @@ function Search({
             value={playlistId}
           />
           <button
-            className="  w-[13%] h-full bg-[#23036a] font-medium text-white  rounded-sm flex items-center justify-center"
+            className="  w-[13%] h-full bg-[#23036a] font-medium text-white dark:bg-[#ca2c92]  rounded-sm flex items-center justify-center"
             type="submit"
           >
             {isLoadingButton === true ? (

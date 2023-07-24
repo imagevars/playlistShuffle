@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { AiFillGithub } from 'react-icons/ai';
@@ -35,6 +35,14 @@ function Navbar({
     return navigate('/');
   };
 
+  useEffect(() => {
+    if (player.darkMode === true) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, []);
+
   const handleClickDarkMode = () => {
     if (player.darkMode === true) {
       document.documentElement.classList.remove('dark');
@@ -48,11 +56,14 @@ function Navbar({
   return (
     <div className="navbar flex justify-between">
       <a href="https://github.com/jooonathann/playlistShuffle" aria-label="github link">
-        <AiFillGithub fill="black" size={30} />
+        {player.darkMode === true
+          ? <AiFillGithub fill="white" size={30} />
+          : <AiFillGithub fill="black" size={30} />}
+
       </a>
       {/* eslint-disable-next-line */}
       <h1
-        className="navbar text-2xl underline text-black font-bold cursor-pointer"
+        className="navbar text-2xl underline text-black dark:text-white font-bold cursor-pointer"
         cursor="pointer"
         onClick={handleClickHome}
       >
@@ -60,7 +71,7 @@ function Navbar({
         {' '}
       </h1>
       {player.darkMode === true
-        ? <BsFillSunFill onClick={handleClickDarkMode} className="cursor-pointer mt-1" aria-label="dark mode moon icon" size={25} />
+        ? <BsFillSunFill fill="white" onClick={handleClickDarkMode} className="cursor-pointer mt-1" aria-label="sun icon" size={25} />
         : <BsFillMoonFill onClick={handleClickDarkMode} className="cursor-pointer mt-1" aria-label="dark mode moon icon" size={25} />}
 
     </div>

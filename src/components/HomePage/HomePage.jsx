@@ -19,7 +19,7 @@ function HomePage({ rememberLastVideo, player, lastPlayedPlaylistDetailsAll }) {
     }
   };
   return (
-    <div className="min-h-screen  bg-[#f2e7fe] ">
+    <div className="min-h-screen  bg-[#f2e7fe] dark:bg-black">
       <HelmetHelper
         title="Shuffle Youtube Playlists - Playlist Randomizer"
       />
@@ -32,7 +32,7 @@ function HomePage({ rememberLastVideo, player, lastPlayedPlaylistDetailsAll }) {
             <Search />
           </div>
           <div className="w-11/12 mx-auto">
-            <label htmlFor="checkBox_" className="text-black text-lg ml-1">
+            <label htmlFor="checkBox_" className="text-black dark:text-white text-lg ml-1">
               <input
                 type="checkbox"
                 id="checkBox_"

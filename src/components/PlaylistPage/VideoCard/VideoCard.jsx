@@ -116,17 +116,12 @@ function VideoCard({
         <div
           className={`${
             player.currentSong === ele.snippet.resourceId.videoId
-              ? ' bg-[#23036a]'
+              ? ' bg-[#23036a] dark:bg-[#ca2c92]'
               : null
-          }  overflow-hidden hover:bg-[#24036ae5] hover:text-[#fff] h-11 lg:h-14 rounded-sm`}
+          }  overflow-hidden hover:bg-[#24036ae5] dark:hover:bg-[#ca2c92] hover:text-[#fff] h-11 lg:h-14 rounded-sm`}
         >
-          <div className="flex h-full hover:text-white">
-            {/* <img
-              loading="lazy"
-              className="w-10  h-full object-cover rounded-l-sm "
-              src={ele.snippet.thumbnails.default?.url}
-              alt={`${ele.snippet.title}`}
-              /> */}
+          <div className="flex h-full  hover:text-white">
+
             <div
             // className="cardText  flex flex-col items-baseline ml-1 truncate ">
               className={`${
@@ -135,11 +130,11 @@ function VideoCard({
                   : ''
               }  cardText  flex flex-col  hover:text-[#fff] items-baseline ml-1 truncate `}
             >
-              <p className="tracking-wide truncate font-medium text-justify leading-5  w-[100%] xl:text-lg  ">
+              <p className="tracking-wide dark:text-white truncate font-medium text-justify leading-5  w-[100%] xl:text-lg  ">
                 {`${i + 1} - ${ele.snippet.title}`}
               </p>
 
-              <p className="cardArtist font-light  truncate  w-[100%] text-justify xl:text-lg">
+              <p className="cardArtist dark:text-white font-light  truncate  w-[100%] text-justify xl:text-lg">
                 {ele.snippet.videoOwnerChannelTitle}
               </p>
             </div>
