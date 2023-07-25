@@ -8,16 +8,16 @@ function ErrorPage() {
     navigate('/');
   };
   return (
-    <div className="min-h-screen bg-[#ffff] w-full">
+    <div className="min-h-screen bg-[#ffff] w-full  dark:bg-black ">
       <div className="w-[95%] md:max-w-[2200px] mx-auto my-0">
         <Navbar />
         <div className="flex flex-col items-center justify-center h-96 ">
-          <h1 className="text-black text-3xl ">An error has occurred</h1>
-          <p className="text-black text-xl">Go back home </p>
+          <h1 className="text-black text-3xl dark:text-white ">An error has occurred</h1>
+          <p className="text-black text-xl dark:text-white ">Go back home </p>
           <button
             type="button"
             onClick={handleClick}
-            className="text-black text-4xl hover:text-violet-200 underline"
+            className="text-black text-4xl dark:text-white  hover:text-violet-200 underline"
           >
             click here
           </button>
