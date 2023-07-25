@@ -74,7 +74,6 @@ function VideoCard({
       songs: shuffleArr,
     };
     addSongsByPlaylistID(playlistObject);
-
     currentSong(shuffleArr[0].snippet.resourceId.videoId);
     const lastPlayedObj = {
       currentIndex: 0,

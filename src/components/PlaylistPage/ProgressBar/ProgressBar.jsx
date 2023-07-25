@@ -27,7 +27,11 @@ function ProgressBar({ player }) {
         <div
           style={{ width: `${player.videoPercentage}%`, maxWidth: '100%' }}
           className="bg-[#ffff] h-1.5 rounded-full  "
-        />
+        >
+          <div className="clear-both flex justify-end">
+            <span className="w-3 h-3 mt-[-3px] -mr-2 float-right relative bg-white rounded-full" />
+          </div>
+        </div>
       </div>
       <div className="text-[#ffff] font-bold ">
         {secondsToTime(player.videoDuration)}
