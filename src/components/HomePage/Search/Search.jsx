@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import fetchPlaylistVideos from '../../utils/fetchPlaylistVideos';
 import fetchPlaylistData from '../../utils/fetchPlaylistData';
+import setIsHasPlaylistLoading from '../../../redux/actions/isPlaylistLoadingActions';
 import {
   currentSong,
   setCurrentActivePlaylistId,
@@ -26,15 +27,17 @@ function Search({
   modifyEtagInPlaylistDetailsById,
   isShuffleActive,
   player,
+  setIsHasPlaylistLoading,
+  isPlaylistLoading,
 }) {
   const [playlistId, setPlaylistId] = useState('');
-  const [isLoadingButton, setIsLoadingButton] = useState(false);
+  // const [isLoadingButton, setIsLoadingButton] = useState(false);
   const [isIdInvalid, setIsIdInvalid] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoadingButton(true);
+    setIsHasPlaylistLoading(true);
     isShuffleActive(false);
     const regex = /PL[\w-]+(?=&|$)/;
     const match = playlistId.match(regex);
@@ -59,11 +62,11 @@ function Search({
             .snippet.resourceId.videoId,
         );
       }
-      setIsLoadingButton(false);
+      setIsHasPlaylistLoading(false);
       navigate(`/${id}`);
     } else if (data === 404) {
       setIsIdInvalid(true);
-      setIsLoadingButton(false);
+      setIsHasPlaylistLoading(false);
     } else {
       const playlistDataInfo = await fetchPlaylistData(id, data.playlistEtag);
       const playlistEtagAndId = {
@@ -77,7 +80,7 @@ function Search({
       };
 
       await modifyEtagInPlaylistDetailsById(playlistEtagAndId);
-      setIsLoadingButton(false);
+      setIsHasPlaylistLoading(false);
       await addSongsByPlaylistID(playlistObject);
       await currentSong(data.currentSong);
       navigate(`/${id}`);
@@ -111,7 +114,7 @@ function Search({
             className="  w-[13%] h-full bg-[#23036a] font-medium text-white dark:bg-[#ca2c92]  rounded-sm flex items-center justify-center"
             type="submit"
           >
-            {isLoadingButton === true ? (
+            {isPlaylistLoading === true ? (
               <svg
                 className="animate-spin mx-auto h-5 w-5 text-white"
                 xmlns="http://www.w3.org/2000/svg"
@@ -162,6 +165,7 @@ Search.propTypes = {
   player: PropTypes.shape({
     rememberLastVideo: PropTypes.bool.isRequired,
   }).isRequired,
+  isPlaylistLoading: PropTypes.bool.isRequired,
   currentSong: PropTypes.func.isRequired,
   addToPlaylistDetails: PropTypes.func.isRequired,
   addSongsByPlaylistID: PropTypes.func.isRequired,
@@ -169,12 +173,14 @@ Search.propTypes = {
   setCurrentActivePlaylistId: PropTypes.func.isRequired,
   modifyEtagInPlaylistDetailsById: PropTypes.func.isRequired,
   isShuffleActive: PropTypes.func.isRequired,
+  setIsHasPlaylistLoading: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   playlistSongsById: state.playlistSongsById,
   playlistDetails: state.playlistDetails,
   player: state.player,
+  isPlaylistLoading: state.isPlaylistLoading,
 });
 
 const mapDispatchToProps = {
@@ -184,6 +190,7 @@ const mapDispatchToProps = {
   setCurrentActivePlaylistId,
   modifyEtagInPlaylistDetailsById,
   isShuffleActive,
+  setIsHasPlaylistLoading,
   lastPlayedPlaylistDetails,
 };
 

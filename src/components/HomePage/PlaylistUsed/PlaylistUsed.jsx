@@ -8,6 +8,7 @@ import {
   modifyEtagInPlaylistDetailsById,
   lastPlayedPlaylistDetails,
 } from '../../../redux/actions/playlistDetailsActions';
+import setIsHasPlaylistLoading from '../../../redux/actions/isPlaylistLoadingActions';
 import fetchPlaylistVideos from '../../utils/fetchPlaylistVideos';
 import fetchPlaylistData from '../../utils/fetchPlaylistData';
 import {
@@ -34,6 +35,7 @@ function PlaylistUsed({
   modifyEtagInPlaylistDetailsById,
   isShuffleActive,
   player,
+  setIsHasPlaylistLoading,
 }) {
   const navigate = useNavigate();
 
@@ -49,6 +51,7 @@ function PlaylistUsed({
 
     // if playlistDataInfo is 304 it means that the playlist hasn't change so we can use the one in
     //  localstorage, that way we save api quota
+    setIsHasPlaylistLoading(true);
     if (data === 304) {
       if (player.rememberLastVideo) {
         const findPlaylistIndex = playlistDetails.findIndex((element) => element.playlistId === id);
@@ -80,7 +83,7 @@ function PlaylistUsed({
       addSongsByPlaylistID(playlistObject);
       currentSong(data.currentSong);
     }
-
+    setIsHasPlaylistLoading(false);
     navigate(`/${id}`);
   };
 
@@ -150,6 +153,7 @@ PlaylistUsed.propTypes = {
   currentSong: PropTypes.func.isRequired,
   modifyEtagInPlaylistDetailsById: PropTypes.func.isRequired,
   isShuffleActive: PropTypes.func.isRequired,
+  setIsHasPlaylistLoading: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -169,5 +173,6 @@ const mapDispatchToProps = {
   removePlaylistSongsById,
   isShuffleActive,
   lastPlayedPlaylistDetails,
+  setIsHasPlaylistLoading,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(PlaylistUsed);
