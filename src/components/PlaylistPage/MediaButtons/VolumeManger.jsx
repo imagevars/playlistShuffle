@@ -24,8 +24,10 @@ function VolumeManger({ player, isMutedActive, setVolume }) {
 
   return (
     <div className="text-[#ffff] font-bold items-center hidden md:flex lg:flex md:w-1/4">
-      { parseFloat(player.volume) >= 0.50 && (<BiVolumeFull size={35} onClick={handleIconClick} />)}
-      { parseFloat(player.volume) < 0.50 && (<BiVolumeLow size={35} onClick={handleIconClick} />)}
+      { (parseFloat(player.volume) >= 0.50 && player.isMutedActive === false)
+      && (<BiVolumeFull size={35} onClick={handleIconClick} />)}
+      { (parseFloat(player.volume) < 0.50 && player.isMutedActive === false)
+      && (<BiVolumeLow size={35} onClick={handleIconClick} />)}
       { player.isMutedActive === true && (<BiVolumeMute size={35} onClick={handleIconClick} />)}
       <input
         type="range"
@@ -36,7 +38,7 @@ function VolumeManger({ player, isMutedActive, setVolume }) {
         min={0}
         onChange={(e) => handleChange(e)}
         max={1}
-        step="0.025"
+        step="any"
       />
     </div>
 
