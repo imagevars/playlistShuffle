@@ -143,7 +143,6 @@ function Player({
         ref={playerRef}
         // not working yet
         // fallback={`https://img.youtube.com/vi/${player.currentSong}.jpg`}
-        volume={null}
         muted={player.isMutedActive}
         passive="true"
         onProgress={(e) => handleProgress(e)}
@@ -153,6 +152,7 @@ function Player({
         onPause={() => handlePause()}
         onReady={() => handleReady()}
         onEnded={() => handleEnd()}
+        volume={player.volume}
         width="100%"
         height="100%"
         controls
@@ -174,6 +174,7 @@ Player.propTypes = {
     rememberLastVideo: PropTypes.bool.isRequired,
     isFullScreenActive: PropTypes.bool.isRequired,
     videoDuration: PropTypes.string.isRequired,
+    volume: PropTypes.string.isRequired,
 
   }).isRequired,
   playlistDetails: PropTypes.arrayOf(PropTypes.shape({

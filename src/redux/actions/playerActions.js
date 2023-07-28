@@ -11,6 +11,7 @@ import {
   PLAYER_IS_FULL_SCREEN_ACTIVE,
   PLAYER_REMEMBER_LAST_VIDEO,
   PLAYER_ISDARKMODEACTIVE,
+  PLAYER_VOLUME,
 } from '../constants/playerTypes';
 
 export const isPlaying = (payload) => ({ type: PLAYER_IS_PLAYING, payload });
@@ -64,5 +65,10 @@ export const rememberLastVideo = (payload) => ({
 
 export const isDarkModeActive = (payload) => ({
   type: PLAYER_ISDARKMODEACTIVE,
+  payload,
+});
+
+export const setVolume = (payload) => ({
+  type: PLAYER_VOLUME,
   payload,
 });

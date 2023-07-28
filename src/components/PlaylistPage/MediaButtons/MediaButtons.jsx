@@ -86,21 +86,29 @@ const MediaButtons = memo(
     return (
       <div className=" text-[#ffff] font-bold  flex items-center ">
         {player.isMutedActive === true ? (
-          <button type="button" aria-label="unmute video" className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-full p-[0.25rem] md:p-[0.50rem]">
+          <button
+            type="button"
+            aria-label="unmute video"
+            className="hover:drop-shadow-md md:hidden cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-full p-[0.25rem] md:p-[0.50rem]"
+          >
             <BiVolumeMute size={40} onClick={() => isMutedActive(false)} />
           </button>
         ) : (
-          <button type="button" aria-label="mute video" className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-full p-[0.25rem] md:p-[0.50rem]">
+          <button
+            type="button"
+            aria-label="mute video"
+            className="hover:drop-shadow-md md:hidden cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-full p-[0.25rem] md:p-[0.50rem]"
+          >
             <BiVolumeFull size={40} onClick={() => isMutedActive(true)} />
           </button>
         )}
 
         {player.isLoopActive === true ? (
-          <button type="button" aria-label="no repeat video" className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-full p-[0.25rem] md:p-[0.50rem]">
+          <button type="button" aria-label="no repeat video" className="hover:drop-shadow-2xl cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-full p-[0.25rem] md:p-[0.50rem]">
             <TbRepeatOnce onClick={() => isLoopActive(false)} size={40} />
           </button>
         ) : (
-          <button type="button" aria-label="repeat video" className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-full p-[0.25rem] md:p-[0.50rem]">
+          <button type="button" aria-label="repeat video" className=" hover:drop-shadow-2xl cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-full p-[0.25rem] md:p-[0.50rem]">
             <TbRepeatOff onClick={() => isLoopActive(true)} size={40} />
           </button>
         )}

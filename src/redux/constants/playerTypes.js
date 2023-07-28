@@ -21,3 +21,5 @@ export const PLAYER_IS_FULL_SCREEN_ACTIVE = 'player/isFullScreenActive';
 export const PLAYER_REMEMBER_LAST_VIDEO = 'player/rememberLastVideo';
 
 export const PLAYER_ISDARKMODEACTIVE = 'player/darkMode';
+
+export const PLAYER_VOLUME = 'player/volume';

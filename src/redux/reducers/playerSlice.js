@@ -11,6 +11,7 @@ import {
   PLAYER_IS_FULL_SCREEN_ACTIVE,
   PLAYER_REMEMBER_LAST_VIDEO,
   PLAYER_ISDARKMODEACTIVE,
+  PLAYER_VOLUME,
 } from '../constants/playerTypes';
 
 const initialState = {
@@ -26,6 +27,7 @@ const initialState = {
   videoPercentage: '0',
   isFullScreenActive: false,
   rememberLastVideo: true,
+  volume: '1',
 };
 
 export default function playerReducer(state = initialState, action) {
@@ -63,6 +65,9 @@ export default function playerReducer(state = initialState, action) {
     }
     case PLAYER_ISDARKMODEACTIVE: {
       return { ...state, darkMode: action.payload };
+    }
+    case PLAYER_VOLUME: {
+      return { ...state, volume: action.payload };
     }
     default:
       return state;
