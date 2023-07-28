@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
   BiVolumeMute,
+  BiVolumeLow,
   BiVolumeFull,
 } from 'react-icons/bi';
 import { isMutedActive, setVolume } from '../../../redux/actions/playerActions';
@@ -16,10 +17,6 @@ function VolumeManger({ player, isMutedActive, setVolume }) {
     }
   };
 
-  useEffect(() => {
-    console.log(typeof (1.000));
-    console.log(1.000);
-  });
   const handleChange = (e) => {
     isMutedActive(false);
     setVolume(e.target.value);
@@ -27,11 +24,9 @@ function VolumeManger({ player, isMutedActive, setVolume }) {
 
   return (
     <div className="text-[#ffff] font-bold items-center hidden md:flex lg:flex md:w-1/4">
-      {player.isMutedActive ? (
-        <BiVolumeMute size={35} onClick={handleIconClick} />
-      ) : (
-        <BiVolumeFull size={35} onClick={handleIconClick} />
-      )}
+      { parseFloat(player.volume) >= 0.50 && (<BiVolumeFull size={35} onClick={handleIconClick} />)}
+      { parseFloat(player.volume) < 0.50 && (<BiVolumeLow size={35} onClick={handleIconClick} />)}
+      { player.isMutedActive === true && (<BiVolumeMute size={35} onClick={handleIconClick} />)}
       <input
         type="range"
         className="w-3/4 "
