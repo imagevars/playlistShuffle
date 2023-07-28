@@ -39,6 +39,20 @@ function VolumeManger({ player, isMutedActive, setVolume }) {
         onChange={(e) => handleChange(e)}
         max={1}
         step="any"
+        // appearance-none rounded-3xl
+        // [&::-webkit-slider-runnable-track]:appearance-none
+        // [&::-webkit-slider-runnable-track]:bg-red-400
+        // [&::-webkit-slider-runnable-track]
+        // [&::-moz-range-progress]:bg-black
+
+        // [&::-webkit-background-slider]:bg-black
+
+        // [&::-webkit-slider-runnable-track]:rounded-lg
+        // [&::-webkit-slider-thumb]:appearance-none
+        // [&::-webkit-slider-thumb]:h-2
+        // [&::-webkit-slider-thumb]:w-3
+        // [&::-webkit-slider-thumb]:rounded-full
+        // [&::-webkit-slider-thumb]:bg-white"
       />
     </div>
 

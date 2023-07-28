@@ -40,8 +40,14 @@ function Search({
     setIsHasPlaylistLoading(true);
     isShuffleActive(false);
     const regex = /PL[\w-]+(?=&|$)/;
-    const match = playlistId.match(regex);
-    const id = match[0];
+    let id = '';
+    if (playlistId === 'play my pl') {
+      id = 'PLi06ybkpczJDt0Ydo3Umjtv97bDOcCtAZ';
+    } else {
+      const match = playlistId.match(regex);
+      [id] = match;
+    }
+
     const currentPlaylistInfo = playlistDetails.filter(
       (element) => element.playlistId === id,
     );
@@ -103,7 +109,7 @@ function Search({
             className={`inputSearch h-full shadow appearance-none rounded-sm w-5/6 py-2 px-3 leading-tight focus:outline-none focus:shadow-outline  ${
               isIdInvalid ? 'border border-red-500' : ''
             }`}
-            pattern="^(?=.*.{24,})(?=.*PL).*"
+            pattern="^(?=.*.{24,})(?=.*PL).*|^play my pl$"
             placeholder="ID or playlist URL. eg: 'www.youtube.com/playlist?list=PLi06ybkpczJBvFfOhfqDyKMl1Lp2tDkTb'"
             type="text"
             required
