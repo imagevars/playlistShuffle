@@ -11,7 +11,7 @@ import {
   setVideoDuration,
   isFullScreenActive,
   setPercentage,
-
+  setSeeking,
 } from '../../../redux/actions/playerActions';
 import { lastPlayedPlaylistDetails } from '../../../redux/actions/playlistDetailsActions';
 
@@ -111,6 +111,13 @@ function Player({
     } else afterSongEnds();
   };
 
+  useEffect(() => {
+    if (player.seeking === true) {
+      playerRef.current.seekTo(player.seekTo);
+      setSeeking(false);
+    }
+  }, [player.seekTo]);
+
   const handlePlay = () => {
     isPlaying(true);
   };
@@ -119,6 +126,8 @@ function Player({
   };
 
   const handleReady = () => {
+    setVideoDuration(String(playerRef.current.getDuration()));
+    // setSeekTo('0');
     isPlaying(true);
   };
   const getPercentage = (a, b) => {
@@ -130,9 +139,6 @@ function Player({
   const handleProgress = (e) => {
     setProgress(String(Math.floor(e.playedSeconds)));
     getPercentage(String(e.playedSeconds), String(player.videoDuration));
-  };
-  const handleDuration = (e) => {
-    setVideoDuration(String(e));
   };
 
   return (
@@ -146,7 +152,6 @@ function Player({
         muted={player.isMutedActive}
         passive="true"
         onProgress={(e) => handleProgress(e)}
-        onDuration={(e) => handleDuration(e)}
         onError={() => handleError()}
         onPlay={() => handlePlay()}
         onPause={() => handlePause()}
@@ -175,6 +180,8 @@ Player.propTypes = {
     isFullScreenActive: PropTypes.bool.isRequired,
     videoDuration: PropTypes.string.isRequired,
     volume: PropTypes.string.isRequired,
+    seeking: PropTypes.bool.isRequired,
+    seekTo: PropTypes.string.isRequired,
 
   }).isRequired,
   playlistDetails: PropTypes.arrayOf(PropTypes.shape({

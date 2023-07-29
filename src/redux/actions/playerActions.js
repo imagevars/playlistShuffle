@@ -12,6 +12,8 @@ import {
   PLAYER_REMEMBER_LAST_VIDEO,
   PLAYER_ISDARKMODEACTIVE,
   PLAYER_VOLUME,
+  PLAYER_SEEKTO,
+  PLAYER_SEEKING,
 } from '../constants/playerTypes';
 
 export const isPlaying = (payload) => ({ type: PLAYER_IS_PLAYING, payload });
@@ -70,5 +72,15 @@ export const isDarkModeActive = (payload) => ({
 
 export const setVolume = (payload) => ({
   type: PLAYER_VOLUME,
+  payload,
+});
+
+export const setSeeking = (payload) => ({
+  type: PLAYER_SEEKING,
+  payload,
+});
+
+export const setSeekTo = (payload) => ({
+  type: PLAYER_SEEKTO,
   payload,
 });

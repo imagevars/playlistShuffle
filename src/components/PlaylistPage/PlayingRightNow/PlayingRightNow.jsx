@@ -9,7 +9,6 @@ function PlayingRightNow({ player, playlistSongsById, playlistDetails }) {
   const getTitleAndArtist = (title, ownerTitle) => {
     try {
       const joinedTitleAndOwnerTitle = [title, ownerTitle];
-      // console.log('join ', joinedTitleAndOwnerTitle);
       if (title === 'Private video') {
         return title;
       }

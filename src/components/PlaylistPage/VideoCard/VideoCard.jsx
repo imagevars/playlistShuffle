@@ -5,6 +5,7 @@ import MersenneTwister from 'mersenne-twister';
 import {
   currentSong,
   isShuffleActive,
+  setVideoDuration,
 } from '../../../redux/actions/playerActions';
 import { lastPlayedPlaylistDetails, playlistLength } from '../../../redux/actions/playlistDetailsActions';
 import { addSongsByPlaylistID } from '../../../redux/actions/playlistSongsByIdActions';
@@ -18,6 +19,7 @@ function VideoCard({
   playlistDetails,
   lastPlayedPlaylistDetails,
   playlistLength,
+  setVideoDuration,
 }) {
   const refs = playlistSongsById[player.currentActivePlaylistId]?.reduce(
     (acc, value) => {
@@ -61,6 +63,7 @@ function VideoCard({
   }, []);
 
   const shuffleIsActive = () => {
+    setVideoDuration('0');
     const generator = new MersenneTwister();
     const shuffleArr = [];
     shuffleArr.push(...playlistSongsById[player.currentActivePlaylistId]);
@@ -186,6 +189,7 @@ VideoCard.propTypes = {
   isShuffleActive: PropTypes.func.isRequired,
   lastPlayedPlaylistDetails: PropTypes.func.isRequired,
   playlistLength: PropTypes.func.isRequired,
+  setVideoDuration: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = {
@@ -194,6 +198,7 @@ const mapDispatchToProps = {
   isShuffleActive,
   lastPlayedPlaylistDetails,
   playlistLength,
+  setVideoDuration,
 };
 
 const mapStateToProps = (state) => ({

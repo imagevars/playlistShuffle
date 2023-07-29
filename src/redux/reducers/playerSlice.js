@@ -12,6 +12,8 @@ import {
   PLAYER_REMEMBER_LAST_VIDEO,
   PLAYER_ISDARKMODEACTIVE,
   PLAYER_VOLUME,
+  PLAYER_SEEKTO,
+  PLAYER_SEEKING,
 } from '../constants/playerTypes';
 
 const initialState = {
@@ -28,6 +30,8 @@ const initialState = {
   isFullScreenActive: false,
   rememberLastVideo: true,
   volume: '1',
+  seeking: false,
+  seekTo: '0',
 };
 
 export default function playerReducer(state = initialState, action) {
@@ -68,6 +72,12 @@ export default function playerReducer(state = initialState, action) {
     }
     case PLAYER_VOLUME: {
       return { ...state, volume: action.payload };
+    }
+    case PLAYER_SEEKING: {
+      return { ...state, seeking: action.payload };
+    }
+    case PLAYER_SEEKTO: {
+      return { ...state, seekTo: action.payload };
     }
     default:
       return state;
