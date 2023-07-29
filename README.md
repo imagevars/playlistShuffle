@@ -9,11 +9,14 @@ Playlist Shuffle - A web application with a better algorithm than YouTube's for 
 ## Key bindings
 
 - "S" toggle to activate and deactivate shuffle on a playlist.
-- "R" toggle to repeat a video until is deactivated again.
+- "R" toggle to repeat the video until is deactivated again.
 - "M" toggle to mute and unmute the video
-- "Space" to pause and play a video.
+- "Space" to pause and play the video.
 - "ArrowLeft" to play the previous video.
 - "ArrowRight" to play the next video.
+- "ArrowUp" to turn the volume up by a 1/20 (like youtube)
+- "ArrowDown" to turn the volume down by a 1/20 (like youtube)
+
 
 In the future will add more...
 

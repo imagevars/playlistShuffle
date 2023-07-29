@@ -19,7 +19,7 @@ function VolumeManager({ player, isMutedActive, setVolume }) {
 
   const handleChange = (e) => {
     isMutedActive(false);
-    setVolume(e.target.value);
+    setVolume(parseFloat(e.target.value));
   };
 
   return (

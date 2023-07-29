@@ -11,6 +11,7 @@ import {
   isShuffleActive,
   currentSong,
   isMutedActive,
+  setVolume,
 } from '../../redux/actions/playerActions';
 import { lastPlayedPlaylistDetails, lastPlayedPlaylistDetailsAll } from '../../redux/actions/playlistDetailsActions';
 import PlayingRightNow from './PlayingRightNow/PlayingRightNow';
@@ -18,7 +19,7 @@ import Navbar from '../Navbar/Navbar';
 import PlaylistInfo from './PlaylistInfo/PlaylistInfo';
 import Player from './Player/Player';
 import ProgressBar from './ProgressBar/ProgressBar';
-import VolumeManager from './MediaButtons/VolumeManager';
+import VolumeManger from './MediaButtons/VolumeManager';
 
 function PlaylistPage({
   isPlaying,
@@ -31,6 +32,7 @@ function PlaylistPage({
   playlistDetails,
   lastPlayedPlaylistDetails,
   lastPlayedPlaylistDetailsAll,
+  setVolume,
 }) {
   const { id } = useParams();
 
@@ -72,6 +74,22 @@ function PlaylistPage({
         }
         case 'KeyM': {
           isMutedActive(player.isMutedActive !== true);
+          break;
+        }
+        case 'ArrowUp': {
+          if (player.volume + 0.05 <= 1) {
+            setVolume(player.volume + 0.05);
+          } else {
+            setVolume(1);
+          }
+          break;
+        }
+        case 'ArrowDown': {
+          if (player.volume - 0.05 >= 0) {
+            setVolume(player.volume - 0.05);
+          } else {
+            setVolume(0);
+          }
           break;
         }
         case 'ArrowLeft': {
@@ -172,7 +190,7 @@ function PlaylistPage({
                 <ProgressBar />
               </div>
               <div className="hidden md:flex " />
-              <VolumeManager />
+              <VolumeManger />
             </div>
           </div>
         </div>
@@ -191,6 +209,7 @@ PlaylistPage.propTypes = {
     currentActivePlaylistId: PropTypes.string.isRequired,
     isMutedActive: PropTypes.bool.isRequired,
     rememberLastVideo: PropTypes.bool.isRequired,
+    volume: PropTypes.number.isRequired,
   }).isRequired,
   isLoopActive: PropTypes.func.isRequired,
   isShuffleActive: PropTypes.func.isRequired,
@@ -206,6 +225,7 @@ PlaylistPage.propTypes = {
   })).isRequired,
   lastPlayedPlaylistDetails: PropTypes.func.isRequired,
   lastPlayedPlaylistDetailsAll: PropTypes.func.isRequired,
+  setVolume: PropTypes.func.isRequired,
 
 };
 
@@ -217,6 +237,7 @@ const mapDispatchToProps = {
   isMutedActive,
   lastPlayedPlaylistDetails,
   lastPlayedPlaylistDetailsAll,
+  setVolume,
 };
 
 const mapStateToProps = (state) => ({
