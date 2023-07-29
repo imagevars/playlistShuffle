@@ -1,9 +1,13 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { setPercentage, setSeekTo, setSeeking } from '../../../redux/actions/playerActions';
+import {
+  setPercentage, setSeekTo, setSeeking, setProgress,
+} from '../../../redux/actions/playerActions';
 
-function ProgressBar({ player, setSeekTo, setSeeking }) {
+function ProgressBar({
+  player, setSeekTo, setSeeking, setProgress, setPercentage,
+}) {
   const secondsToTime = (e) => {
     const h = Math.floor(e / 3600)
       .toString()
@@ -19,7 +23,9 @@ function ProgressBar({ player, setSeekTo, setSeeking }) {
   };
 
   const handleChange = (e) => {
-    setSeekTo(String(e.target.value));
+    setProgress(Math.floor(e.target.value * player.videoDuration));
+    setSeekTo(parseFloat(e.target.value));
+    setPercentage((Math.floor(e.target.value * player.videoDuration) / player.videoDuration) * 100);
   };
 
   const handleMouseDown = () => {
@@ -27,7 +33,7 @@ function ProgressBar({ player, setSeekTo, setSeeking }) {
   };
 
   const handleMouseUp = (e) => {
-    setSeekTo(String(e.target.value));
+    setSeekTo(parseFloat(e.target.value));
     setSeeking(false);
   };
 
@@ -41,11 +47,11 @@ function ProgressBar({ player, setSeekTo, setSeeking }) {
         className="w-3/4 "
         name="volume"
         id="volume"
-        value={String(player.videoPercentage / 100)}
+        value={player.videoPercentage / 100}
         min={0}
         onChange={(e) => handleChange(e)}
         max={0.99}
-        step="any"
+        step="0.01"
         onMouseDown={handleMouseDown}
         onTouchStart={handleMouseDown}
         onMouseUp={handleMouseUp}
@@ -81,12 +87,14 @@ function ProgressBar({ player, setSeekTo, setSeeking }) {
 
 ProgressBar.propTypes = {
   player: PropTypes.shape({
-    videoPercentage: PropTypes.string.isRequired,
-    progress: PropTypes.string.isRequired,
-    videoDuration: PropTypes.string.isRequired,
+    videoPercentage: PropTypes.number.isRequired,
+    progress: PropTypes.number.isRequired,
+    videoDuration: PropTypes.number.isRequired,
   }).isRequired,
   setSeekTo: PropTypes.func.isRequired,
   setSeeking: PropTypes.func.isRequired,
+  setProgress: PropTypes.func.isRequired,
+  setPercentage: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -96,6 +104,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   setPercentage,
   setSeekTo,
+  setProgress,
   setSeeking,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(memo(ProgressBar));

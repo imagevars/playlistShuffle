@@ -63,7 +63,7 @@ function VideoCard({
   }, []);
 
   const shuffleIsActive = () => {
-    setVideoDuration('0');
+    setVideoDuration(0);
     const generator = new MersenneTwister();
     const shuffleArr = [];
     shuffleArr.push(...playlistSongsById[player.currentActivePlaylistId]);

@@ -8,7 +8,7 @@ import {
 } from 'react-icons/bi';
 import { isMutedActive, setVolume } from '../../../redux/actions/playerActions';
 
-function VolumeManger({ player, isMutedActive, setVolume }) {
+function VolumeManager({ player, isMutedActive, setVolume }) {
   const handleIconClick = () => {
     if (player.isMutedActive === true) {
       isMutedActive(false);
@@ -24,9 +24,9 @@ function VolumeManger({ player, isMutedActive, setVolume }) {
 
   return (
     <div className="text-[#ffff] font-bold items-center hidden md:flex lg:flex md:w-1/4">
-      { (parseFloat(player.volume) >= 0.50 && player.isMutedActive === false)
+      { (player.volume >= 0.50 && player.isMutedActive === false)
       && (<BiVolumeFull size={35} onClick={handleIconClick} />)}
-      { (parseFloat(player.volume) < 0.50 && player.isMutedActive === false)
+      { (player.volume < 0.50 && player.isMutedActive === false)
       && (<BiVolumeLow size={35} onClick={handleIconClick} />)}
       { player.isMutedActive === true && (<BiVolumeMute size={35} onClick={handleIconClick} />)}
       <input
@@ -59,7 +59,7 @@ function VolumeManger({ player, isMutedActive, setVolume }) {
   );
 }
 
-VolumeManger.propTypes = {
+VolumeManager.propTypes = {
   player: PropTypes.shape({
     isPlaying: PropTypes.bool.isRequired,
     currentSong: PropTypes.string.isRequired,
@@ -68,7 +68,7 @@ VolumeManger.propTypes = {
     currentActivePlaylistId: PropTypes.string.isRequired,
     isMutedActive: PropTypes.bool.isRequired,
     rememberLastVideo: PropTypes.bool.isRequired,
-    volume: PropTypes.string.isRequired,
+    volume: PropTypes.number.isRequired,
   }).isRequired,
   isMutedActive: PropTypes.func.isRequired,
   setVolume: PropTypes.func.isRequired,
@@ -86,4 +86,4 @@ const mapStateToProps = (state) => ({
   playlistDetails: state.playlistDetails,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(VolumeManger);
+export default connect(mapStateToProps, mapDispatchToProps)(VolumeManager);

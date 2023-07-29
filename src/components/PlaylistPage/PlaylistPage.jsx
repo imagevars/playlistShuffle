@@ -18,7 +18,7 @@ import Navbar from '../Navbar/Navbar';
 import PlaylistInfo from './PlaylistInfo/PlaylistInfo';
 import Player from './Player/Player';
 import ProgressBar from './ProgressBar/ProgressBar';
-import VolumeManger from './MediaButtons/VolumeManger';
+import VolumeManager from './MediaButtons/VolumeManager';
 
 function PlaylistPage({
   isPlaying,
@@ -172,7 +172,7 @@ function PlaylistPage({
                 <ProgressBar />
               </div>
               <div className="hidden md:flex " />
-              <VolumeManger />
+              <VolumeManager />
             </div>
           </div>
         </div>

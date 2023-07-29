@@ -126,19 +126,19 @@ function Player({
   };
 
   const handleReady = () => {
-    setVideoDuration(String(playerRef.current.getDuration()));
-    // setSeekTo('0');
+    setProgress(0);
+    setVideoDuration(playerRef.current.getDuration());
     isPlaying(true);
   };
   const getPercentage = (a, b) => {
     const trimmedA = Math.floor(a);
     const percentage = (trimmedA / b) * 100;
-    setPercentage(String(Math.floor(percentage)));
+    setPercentage(Math.floor(percentage));
   };
 
   const handleProgress = (e) => {
-    setProgress(String(Math.floor(e.playedSeconds)));
-    getPercentage(String(e.playedSeconds), String(player.videoDuration));
+    setProgress(Math.floor(e.playedSeconds));
+    getPercentage(e.playedSeconds, player.videoDuration);
   };
 
   return (
@@ -178,10 +178,10 @@ Player.propTypes = {
     isMutedActive: PropTypes.bool.isRequired,
     rememberLastVideo: PropTypes.bool.isRequired,
     isFullScreenActive: PropTypes.bool.isRequired,
-    videoDuration: PropTypes.string.isRequired,
-    volume: PropTypes.string.isRequired,
+    videoDuration: PropTypes.number.isRequired,
+    volume: PropTypes.number.isRequired,
     seeking: PropTypes.bool.isRequired,
-    seekTo: PropTypes.string.isRequired,
+    seekTo: PropTypes.number.isRequired,
 
   }).isRequired,
   playlistDetails: PropTypes.arrayOf(PropTypes.shape({

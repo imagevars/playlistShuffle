@@ -24,14 +24,14 @@ const initialState = {
   isLoopActive: false,
   currentActivePlaylistId: '',
   isMutedActive: false,
-  progress: '0',
-  videoDuration: '0',
-  videoPercentage: '0',
+  progress: 0,
+  videoDuration: 0,
+  videoPercentage: 0,
   isFullScreenActive: false,
   rememberLastVideo: true,
-  volume: '1',
+  volume: 1,
   seeking: false,
-  seekTo: '0',
+  seekTo: 0,
 };
 
 export default function playerReducer(state = initialState, action) {
