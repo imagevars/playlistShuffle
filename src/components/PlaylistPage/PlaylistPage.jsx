@@ -82,6 +82,7 @@ function PlaylistPage({
           } else {
             setVolume(1);
           }
+          isMutedActive(false);
           break;
         }
         case 'ArrowDown': {
@@ -90,6 +91,7 @@ function PlaylistPage({
           } else {
             setVolume(0);
           }
+          isMutedActive(false);
           break;
         }
         case 'ArrowLeft': {
@@ -174,8 +176,8 @@ function PlaylistPage({
               <VideoCard />
             </div>
           </div>
-          <div className="bottomMedia bg-[#23036a] dark:bg-[#ca2c92] fixed bottom-0 left-0 right-0">
-            <div className="md:flex md:justify-between py-2">
+          <div className="hidden md:flex bg-[#23036a] dark:bg-[#ca2c92] fixed bottom-0 left-0 right-0">
+            <div className="md:flex md:justify-between py-2 w-full">
 
               <div className="md:w-1/4">
                 <PlayingRightNow />
@@ -191,6 +193,25 @@ function PlaylistPage({
               </div>
               <div className="hidden md:flex " />
               <VolumeManger />
+            </div>
+          </div>
+
+          <div className="md:hidden smartphone bg-[#23036a] dark:bg-[#ca2c92] fixed bottom-0 left-0 right-0">
+            <div className="py-0.5">
+              <ProgressBar />
+              <div className="">
+                <div>
+                  <PlayingRightNow />
+                </div>
+                <div className="mediaButtonsContainer flex justify-center">
+                  <MediaButtons />
+                </div>
+              </div>
+              <div className="flex justify-center">
+                <div className="w-1/2 ">
+                  <VolumeManger />
+                </div>
+              </div>
             </div>
           </div>
         </div>

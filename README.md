@@ -14,8 +14,8 @@ Playlist Shuffle - A web application with a better algorithm than YouTube's for 
 - "Space" to pause and play the video.
 - "ArrowLeft" to play the previous video.
 - "ArrowRight" to play the next video.
-- "ArrowUp" to turn the volume up by a 1/20 (like youtube)
-- "ArrowDown" to turn the volume down by a 1/20 (like youtube)
+- "ArrowUp" to turn the volume up by a 1/20
+- "ArrowDown" to turn the volume down by a 1/20
 
 
 In the future will add more...

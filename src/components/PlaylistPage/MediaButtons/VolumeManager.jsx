@@ -23,7 +23,7 @@ function VolumeManager({ player, isMutedActive, setVolume }) {
   };
 
   return (
-    <div className="text-[#ffff] font-bold items-center hidden md:flex lg:flex md:w-1/4">
+    <div className="text-[#ffff] w-full font-bold items-center  flex lg:flex md:w-1/4">
       { (player.volume >= 0.50 && player.isMutedActive === false)
       && (<BiVolumeFull size={35} onClick={handleIconClick} />)}
       { (player.volume < 0.50 && player.isMutedActive === false)
@@ -31,7 +31,7 @@ function VolumeManager({ player, isMutedActive, setVolume }) {
       { player.isMutedActive === true && (<BiVolumeMute size={35} onClick={handleIconClick} />)}
       <input
         type="range"
-        className="w-3/4 "
+        className="w-full md:w-3/4"
         name="volume"
         id="volume"
         value={player.volume}
@@ -39,20 +39,6 @@ function VolumeManager({ player, isMutedActive, setVolume }) {
         onChange={(e) => handleChange(e)}
         max={1}
         step="any"
-        // appearance-none rounded-3xl
-        // [&::-webkit-slider-runnable-track]:appearance-none
-        // [&::-webkit-slider-runnable-track]:bg-red-400
-        // [&::-webkit-slider-runnable-track]
-        // [&::-moz-range-progress]:bg-black
-
-        // [&::-webkit-background-slider]:bg-black
-
-        // [&::-webkit-slider-runnable-track]:rounded-lg
-        // [&::-webkit-slider-thumb]:appearance-none
-        // [&::-webkit-slider-thumb]:h-2
-        // [&::-webkit-slider-thumb]:w-3
-        // [&::-webkit-slider-thumb]:rounded-full
-        // [&::-webkit-slider-thumb]:bg-white"
       />
     </div>
 
