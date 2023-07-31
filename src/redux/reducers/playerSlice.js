@@ -8,7 +8,6 @@ import {
   PLAYER_SET_PROGRESS,
   PLAYER_VIDEO_DURATION,
   PLAYER_SET_PERCENTAGE,
-  PLAYER_IS_FULL_SCREEN_ACTIVE,
   PLAYER_REMEMBER_LAST_VIDEO,
   PLAYER_ISDARKMODEACTIVE,
   PLAYER_VOLUME,
@@ -27,7 +26,6 @@ const initialState = {
   progress: 0,
   videoDuration: 0,
   videoPercentage: 0,
-  isFullScreenActive: false,
   rememberLastVideo: true,
   volume: 1,
   seeking: false,
@@ -60,9 +58,6 @@ export default function playerReducer(state = initialState, action) {
     }
     case PLAYER_SET_PERCENTAGE: {
       return { ...state, videoPercentage: action.payload };
-    }
-    case PLAYER_IS_FULL_SCREEN_ACTIVE: {
-      return { ...state, isFullScreenActive: action.payload };
     }
     case PLAYER_REMEMBER_LAST_VIDEO: {
       return { ...state, rememberLastVideo: action.payload };

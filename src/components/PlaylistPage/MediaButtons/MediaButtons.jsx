@@ -5,10 +5,6 @@ import {
   BiShuffle,
   BiSkipPrevious,
   BiSkipNext,
-  BiVolumeMute,
-  BiVolumeFull,
-  BiFullscreen,
-  BiExitFullscreen,
 } from 'react-icons/bi';
 import PropTypes from 'prop-types';
 import { TbRepeatOff, TbRepeatOnce } from 'react-icons/tb';
@@ -19,7 +15,6 @@ import {
   isLoopActive,
   isMutedActive,
   isShuffleActive,
-  isFullScreenActive,
 } from '../../../redux/actions/playerActions';
 import { lastPlayedPlaylistDetails } from '../../../redux/actions/playlistDetailsActions';
 
@@ -31,8 +26,6 @@ const MediaButtons = memo(
     isShuffleActive,
     currentSong,
     playlistSongsById,
-    isMutedActive,
-    isFullScreenActive,
     playlistDetails,
     lastPlayedPlaylistDetails,
   }) => {
@@ -80,28 +73,9 @@ const MediaButtons = memo(
     const handleClickShuffle = () => {
       isShuffleActive(true);
     };
-    const handleClickFullScreen = () => {
-      isFullScreenActive(true);
-    };
+
     return (
       <div className=" text-[#ffff] font-bold  flex items-center ">
-        {player.isMutedActive === true ? (
-          <button
-            type="button"
-            aria-label="unmute video"
-            className="hover:drop-shadow-md md:hidden cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-full p-[0.25rem] md:p-[0.50rem]"
-          >
-            <BiVolumeMute size={40} onClick={() => isMutedActive(false)} />
-          </button>
-        ) : (
-          <button
-            type="button"
-            aria-label="mute video"
-            className="hover:drop-shadow-md md:hidden cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-full p-[0.25rem] md:p-[0.50rem]"
-          >
-            <BiVolumeFull size={40} onClick={() => isMutedActive(true)} />
-          </button>
-        )}
 
         {player.isLoopActive === true ? (
           <button type="button" aria-label="no repeat video" className="hover:drop-shadow-2xl cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-full p-[0.25rem] md:p-[0.50rem]">
@@ -135,15 +109,6 @@ const MediaButtons = memo(
           <BiShuffle onClick={handleClickShuffle} size={40} />
         </button>
 
-        {player.isFullScreenActive === true ? (
-          <button type="button" aria-label="exit video full screen" className="cursor-pointer  md:hidden hover:bg-[rgba(246,247,249,.05)] rounded-full p-[0.25rem] md:p-[0.50rem]">
-            <BiExitFullscreen onClick={handleClickFullScreen} size={40} />
-          </button>
-        ) : (
-          <button type="button" aria-label="enter video full screen" className="cursor-pointer  md:hidden hover:bg-[rgba(246,247,249,.05)] rounded-full p-[0.25rem] md:p-[0.50rem]">
-            <BiFullscreen onClick={handleClickFullScreen} size={40} />
-          </button>
-        )}
       </div>
     );
   },
@@ -157,15 +122,12 @@ MediaButtons.propTypes = {
     isLoopActive: PropTypes.bool.isRequired,
     currentActivePlaylistId: PropTypes.string.isRequired,
     isMutedActive: PropTypes.bool.isRequired,
-    isFullScreenActive: PropTypes.bool.isRequired,
   }).isRequired,
   isPlaying: PropTypes.func.isRequired,
   isLoopActive: PropTypes.func.isRequired,
   isShuffleActive: PropTypes.func.isRequired,
   currentSong: PropTypes.func.isRequired,
   playlistSongsById: PropTypes.objectOf(PropTypes.arrayOf).isRequired,
-  isMutedActive: PropTypes.func.isRequired,
-  isFullScreenActive: PropTypes.func.isRequired,
   playlistDetails: PropTypes.arrayOf(PropTypes.shape({
     playlistName: PropTypes.string.isRequired,
     playlistId: PropTypes.string.isRequired,
@@ -189,7 +151,6 @@ const mapDispatchToProps = {
   isShuffleActive,
   currentSong,
   isMutedActive,
-  isFullScreenActive,
   lastPlayedPlaylistDetails,
 };
 

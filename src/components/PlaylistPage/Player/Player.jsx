@@ -2,14 +2,11 @@ import React, { useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import ReactPlayer from 'react-player/youtube';
 import PropTypes from 'prop-types';
-import screenfull from 'screenfull';
-
 import {
   isPlaying,
   currentSong,
   setProgress,
   setVideoDuration,
-  isFullScreenActive,
   setPercentage,
   setSeeking,
 } from '../../../redux/actions/playerActions';
@@ -23,7 +20,6 @@ function Player({
   setVideoDuration,
   setProgress,
   setPercentage,
-  isFullScreenActive,
   lastPlayedPlaylistDetails,
   playlistDetails,
 }) {
@@ -32,17 +28,6 @@ function Player({
   const findPlaylistIndex = playlistDetails.findIndex(
     (element) => element.playlistId === player.currentActivePlaylistId,
   );
-
-  useEffect(() => {
-    if (player.isFullScreenActive === true) {
-      if (screenfull.isEnabled) {
-        screenfull.request(playerRef.current.wrapper.childNodes[0].children[0]);
-      }
-      isFullScreenActive(false);
-
-      // screenfull.exit()
-    }
-  }, [player.isFullScreenActive]);
 
   useEffect(() => {
     // if (playlistSongsById[player.currentActivePlaylistId]) {
@@ -177,7 +162,6 @@ Player.propTypes = {
     currentActivePlaylistId: PropTypes.string.isRequired,
     isMutedActive: PropTypes.bool.isRequired,
     rememberLastVideo: PropTypes.bool.isRequired,
-    isFullScreenActive: PropTypes.bool.isRequired,
     videoDuration: PropTypes.number.isRequired,
     volume: PropTypes.number.isRequired,
     seeking: PropTypes.bool.isRequired,
@@ -199,7 +183,6 @@ Player.propTypes = {
   playlistSongsById: PropTypes.objectOf(PropTypes.arrayOf).isRequired,
   setProgress: PropTypes.func.isRequired,
   setVideoDuration: PropTypes.func.isRequired,
-  isFullScreenActive: PropTypes.func.isRequired,
   lastPlayedPlaylistDetails: PropTypes.func.isRequired,
 
 };
@@ -210,7 +193,6 @@ const mapDispatchToProps = {
   setProgress,
   setVideoDuration,
   setPercentage,
-  isFullScreenActive,
   lastPlayedPlaylistDetails,
 };
 
