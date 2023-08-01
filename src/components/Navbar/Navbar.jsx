@@ -55,7 +55,7 @@ function Navbar({
 
   return (
     <div className="navbar flex justify-between">
-      <a href="https://github.com/jooonathann/playlistShuffle" aria-label="github link">
+      <a href="https://github.com/jooonathann/playlistShuffle" target="_blank" rel="noopener noreferrer" aria-label="github link">
         {player.darkMode === true
           ? <AiFillGithub fill="white" size={30} />
           : <AiFillGithub fill="black" size={30} />}
