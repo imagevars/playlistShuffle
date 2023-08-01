@@ -25,10 +25,28 @@ function VolumeManager({ player, isMutedActive, setVolume }) {
   return (
     <div className="text-[#ffff] w-full font-bold items-center  flex lg:flex md:w-1/4">
       { (player.volume >= 0.50 && player.isMutedActive === false)
-      && (<BiVolumeFull size={35} onClick={handleIconClick} />)}
+      && (
+      <BiVolumeFull
+        className="hover:drop-shadow-3xl"
+        size={35}
+        onClick={handleIconClick}
+      />
+      )}
       { (player.volume < 0.50 && player.isMutedActive === false)
-      && (<BiVolumeLow size={35} onClick={handleIconClick} />)}
-      { player.isMutedActive === true && (<BiVolumeMute size={35} onClick={handleIconClick} />)}
+      && (
+      <BiVolumeLow
+        className="hover:drop-shadow-3xl"
+        size={35}
+        onClick={handleIconClick}
+      />
+      )}
+      { player.isMutedActive === true && (
+      <BiVolumeMute
+        className="hover:drop-shadow-3xl"
+        size={35}
+        onClick={handleIconClick}
+      />
+      )}
       <input
         type="range"
         className="w-full md:w-3/4"

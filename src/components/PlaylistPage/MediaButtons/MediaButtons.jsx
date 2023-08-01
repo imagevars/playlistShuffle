@@ -75,39 +75,97 @@ const MediaButtons = memo(
     };
 
     return (
-      <div className=" text-[#ffff] font-bold  flex items-center ">
+      <div
+        className="text-[#ffff] font-bold  flex items-center "
+      >
 
         {player.isLoopActive === true ? (
-          <button type="button" aria-label="no repeat video" className="hover:drop-shadow-2xl cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-full p-[0.25rem] md:p-[0.50rem]">
-            <TbRepeatOnce onClick={() => isLoopActive(false)} size={40} />
+          <button
+            type="button"
+            aria-label="no repeat video"
+            className=" p-[0.25rem] md:p-[0.50rem]"
+          >
+            <TbRepeatOnce
+              className="hover:drop-shadow-3xl"
+              onClick={() => isLoopActive(false)}
+              size={40}
+            />
           </button>
         ) : (
-          <button type="button" aria-label="repeat video" className=" hover:drop-shadow-2xl cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-full p-[0.25rem] md:p-[0.50rem]">
-            <TbRepeatOff onClick={() => isLoopActive(true)} size={40} />
+          <button
+            type="button"
+            aria-label="repeat video"
+            className="hover:drop-shadow-2xl  p-[0.25rem] md:p-[0.50rem]"
+          >
+            <TbRepeatOff
+              className="hover:drop-shadow-3xl"
+              onClick={() => isLoopActive(true)}
+              size={40}
+            />
           </button>
         )}
-        <div className="flex items-center">
-          <button type="button" aria-label="previous video" className="cursor-pointer  hover:bg-[rgba(246,247,249,.05)] rounded-full p-[0.25rem] md:p-[0.50rem]">
+        <div
+          className="flex items-center"
+        >
+          <button
+            type="button"
+            aria-label="previous video"
+            className=" p-[0.25rem] md:p-[0.50rem]"
+          >
             <BiSkipPrevious
+              className="hover:drop-shadow-3xl"
               onClick={handleClickPreviousButton}
               size={40}
             />
           </button>
           {player.isPlaying === true ? (
-            <button type="button" aria-label="pause video" className="cursor-pointer bg-white rounded-full">
-              <BiPause fill="black" onClick={() => isPlaying(false)} size={50} />
+            <button
+              type="button"
+              aria-label="pause video"
+              className="
+              bg-white rounded-full"
+            >
+              <BiPause
+                fill="black"
+                onClick={() => isPlaying(false)}
+                size={50}
+              />
             </button>
           ) : (
-            <button type="button" aria-label="play video" className="bg-white cursor-pointer  rounded-full ">
-              <BiPlay fill="black" onClick={() => isPlaying(true)} size={50} />
+            <button
+              type="button"
+              aria-label="play video"
+              className="bg-white   rounded-full"
+            >
+              <BiPlay
+                fill="black"
+                onClick={() => isPlaying(true)}
+                size={50}
+              />
             </button>
           )}
-          <button type="button" aria-label="next video" className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-full p-[0.25rem] md:p-[0.50rem]">
-            <BiSkipNext onClick={handleClickNextButton} size={40} />
+          <button
+            type="button"
+            aria-label="next video"
+            className=" p-[0.25rem] md:p-[0.50rem]"
+          >
+            <BiSkipNext
+              className="hover:drop-shadow-3xl"
+              onClick={handleClickNextButton}
+              size={40}
+            />
           </button>
         </div>
-        <button type="button" aria-label="shuffle playlist" className="cursor-pointer hover:bg-[rgba(246,247,249,.05)] rounded-full p-[0.25rem] md:p-[0.50rem]">
-          <BiShuffle onClick={handleClickShuffle} size={40} />
+        <button
+          type="button"
+          aria-label="shuffle playlist"
+          className=" p-[0.25rem] md:p-[0.50rem]"
+        >
+          <BiShuffle
+            className="hover:drop-shadow-3xl"
+            onClick={handleClickShuffle}
+            size={40}
+          />
         </button>
 
       </div>
