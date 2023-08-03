@@ -76,7 +76,7 @@ const MediaButtons = memo(
 
     return (
       <div
-        className="text-[#ffff] font-bold  flex items-center "
+        className=" font-bold  flex items-center "
       >
 
         {player.isLoopActive === true ? (
@@ -86,7 +86,7 @@ const MediaButtons = memo(
             className=" p-[0.25rem] md:p-[0.50rem]"
           >
             <TbRepeatOnce
-              className="hover:drop-shadow-3xl"
+              className="hover:drop-shadow-3xl text-slate-200 hover:text-white"
               onClick={() => isLoopActive(false)}
               size={40}
             />
@@ -98,7 +98,7 @@ const MediaButtons = memo(
             className="hover:drop-shadow-2xl  p-[0.25rem] md:p-[0.50rem]"
           >
             <TbRepeatOff
-              className="hover:drop-shadow-3xl"
+              className="hover:drop-shadow-3xl text-slate-200 hover:text-white"
               onClick={() => isLoopActive(true)}
               size={40}
             />
@@ -110,10 +110,10 @@ const MediaButtons = memo(
           <button
             type="button"
             aria-label="previous video"
-            className=" p-[0.25rem] md:p-[0.50rem]"
+            className=" p-[0.25rem] md:p-[0.50rem] text-slate-200 hover:text-white"
           >
             <BiSkipPrevious
-              className="hover:drop-shadow-3xl"
+              className="hover:drop-shadow-3xl text-slate-200 hover:text-white"
               onClick={handleClickPreviousButton}
               size={40}
             />
@@ -123,7 +123,7 @@ const MediaButtons = memo(
               type="button"
               aria-label="pause video"
               className="
-              bg-white rounded-full"
+              bg-white rounded-full "
             >
               <BiPause
                 fill="black"
@@ -147,10 +147,10 @@ const MediaButtons = memo(
           <button
             type="button"
             aria-label="next video"
-            className=" p-[0.25rem] md:p-[0.50rem]"
+            className=" p-[0.25rem] md:p-[0.50rem] text-slate-200 hover:text-white"
           >
             <BiSkipNext
-              className="hover:drop-shadow-3xl"
+              className="hover:drop-shadow-3xl text-slate-200 hover:text-white"
               onClick={handleClickNextButton}
               size={40}
             />
@@ -159,10 +159,10 @@ const MediaButtons = memo(
         <button
           type="button"
           aria-label="shuffle playlist"
-          className=" p-[0.25rem] md:p-[0.50rem]"
+          className=" p-[0.25rem] md:p-[0.50rem] text-slate-200 hover:text-white"
         >
           <BiShuffle
-            className="hover:drop-shadow-3xl"
+            className="hover:drop-shadow-3xl text-slate-200 hover:text-white"
             onClick={handleClickShuffle}
             size={40}
           />

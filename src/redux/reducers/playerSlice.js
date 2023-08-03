@@ -16,13 +16,13 @@ import {
 } from '../constants/playerTypes';
 
 const initialState = {
-  isPlaying: true,
+  isPlaying: false,
   darkMode: false,
   currentSong: '',
   isShuffleActive: false,
   isLoopActive: false,
   currentActivePlaylistId: '',
-  isMutedActive: false,
+  isMutedActive: true,
   progress: 0,
   videoDuration: 0,
   videoPercentage: 0,
