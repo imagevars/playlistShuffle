@@ -54,17 +54,33 @@ function PlayingRightNow({ player, playlistSongsById, playlistDetails }) {
 
       <div className="md:text-clip md:w-full">
         <p className="songTitle text-[#ffff]  font-semibold text-center md:text-left  lg:text-md truncate tracking-wide  mx-auto w-[95%]">
-          {playlistDetails[findPlaylistIndex].currentIndex + 1}
-          {' '}
-          -
-          {' '}
-          {title}
+          {
+          artist
+            ? (
+              <a
+                href={`https://www.google.com/search?q=${title} ${artist} lyrics`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {playlistDetails[findPlaylistIndex].currentIndex + 1}
+                {' '}
+                -
+                {' '}
+                {title}
+              </a>
+            ) : (''
+            )
+          }
         </p>
         <p className="songTitle text-[#ffff]  font-normal tracking-wide text-center md:text-left  lg:text-md truncate    mx-auto w-[95%]">
           {
           artist
             ? (
-              <a href={`https://www.youtube.com/results?search_query=${artist}`} target="_blank" rel="noopener noreferrer">
+              <a
+                href={`https://www.youtube.com/results?search_query=${artist}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 {artist}
               </a>
             ) : (''
