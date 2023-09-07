@@ -56,36 +56,15 @@ function ProgressBar({
         onTouchEnd={handleMouseUp}
       />
       <div className="flex font-medium justify-between">
-        <div className="font-nunito">
+        <div className="font-nunito text-bgBlack dark:text-bgWhite">
           {secondsToTime(player.progress)}
         </div>
-        <div className="font-nunito">
+        <div className="font-nunito text-bgBlack dark:text-bgWhite">
           {secondsToTime(player.videoDuration)}
         </div>
       </div>
     </div>
   );
-
-  //   <div className="flex justify-center">
-  //    // <div className="text-[#ffff] font-bold ">
-  //    //   {secondsToTime(player.progress)}
-  //    // </div>
-  //     <div className="w-2/3 md:w-4/5 bg-gray-500 rounded-full h-1.5  my-auto mx-1">
-  //       <div
-  //         style={{ width: `${player.videoPercentage}%`, maxWidth: '100%' }}
-  //         className="bg-[#ffff] h-1.5 rounded-full  "
-  //       >
-  //         <div className="clear-both flex justify-end">
-  //           <span className
-  // ="w-3 h-3 mt-[-3px] -mr-2 float-right relative bg-white rounded-full" />
-  //         </div>
-  //       </div>
-  //     </div>
-  //     <div className="text-[#ffff] font-bold ">
-  //       {secondsToTime(player.videoDuration)}
-  //     </div>
-  //   </div>
-  // );
 }
 
 ProgressBar.propTypes = {
