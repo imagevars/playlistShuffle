@@ -1,7 +1,7 @@
 import React, { memo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { BsFillMoonFill, BsFillSunFill } from 'react-icons/bs';
+import { BsFillMoonFill, BsFillSunFill, BsTwitter } from 'react-icons/bs';
 import PropTypes from 'prop-types';
 import {
   isPlaying,
@@ -51,9 +51,11 @@ function Navbar({
 
   return (
     <div className="NAVBAR1 w-full flex justify-between px-1 ">
-      <div className="flex justify-between w-full md:max-w-[1600px]">
-        <div className=" w-24 px-1 py-0.5 my-1 h-8 rounded-lg ml-1 " />
-
+      <div className="flex justify-between w-full mx-2 md:max-w-[1600px]">
+        {/* eslint-disable-next-line */}
+        <a href="https://twitter.com/Jonathhn1" target="_blank" rel="noopener noreferrer" aria-label="github link">
+          <BsTwitter size={25} fill="#1DA1F2" />
+        </a>
         {/* eslint-disable-next-line */}
         <h1
           className="navbar text-xl font-open text-center text-bgBlack dark:text-bgWhite font-bold cursor-pointer"
