@@ -1,10 +1,8 @@
 import React, { memo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { AiFillGithub } from 'react-icons/ai';
 import { BsFillMoonFill, BsFillSunFill } from 'react-icons/bs';
 import PropTypes from 'prop-types';
-import { lastPlayedPlaylistDetailsAll } from '../../redux/actions/playlistDetailsActions';
 import {
   isPlaying,
   currentSong,
@@ -19,15 +17,11 @@ function Navbar({
   setCurrentActivePlaylistId,
   isShuffleActive,
   player,
-  lastPlayedPlaylistDetailsAll,
   isDarkModeActive,
 }) {
   const navigate = useNavigate();
 
   const handleClickHome = () => {
-    if (player.rememberLastVideo === false) {
-      lastPlayedPlaylistDetailsAll();
-    }
     isPlaying(true);
     currentSong('');
     isShuffleActive(false);
@@ -53,27 +47,34 @@ function Navbar({
     }
   };
 
+  const style = { color: 'bgBlack' };
+
   return (
-    <div className="navbar flex justify-between">
-      <a href="https://github.com/jooonathann/playlistShuffle" target="_blank" rel="noopener noreferrer" aria-label="github link">
+    <div className="NAVBAR1 w-full flex justify-between px-1 ">
+      <div className="flex justify-between w-full md:max-w-[1600px]">
+        <div className=" w-24 px-1 py-0.5 my-1 h-8 rounded-lg ml-1 " />
+
+        {/* eslint-disable-next-line */}
+        <h1
+          className="navbar text-xl font-open text-center text-bgBlack dark:text-bgWhite font-bold cursor-pointer"
+          cursor="pointer"
+          onClick={handleClickHome}
+        >
+          Shuffle Playlist
+          {' '}
+        </h1>
         {player.darkMode === true
-          ? <AiFillGithub fill="white" size={30} />
-          : <AiFillGithub fill="black" size={30} />}
-
-      </a>
-      {/* eslint-disable-next-line */}
-      <h1
-        className="navbar text-2xl underline text-black dark:text-white font-bold cursor-pointer"
-        cursor="pointer"
-        onClick={handleClickHome}
-      >
-        Shuffle Playlist
-        {' '}
-      </h1>
-      {player.darkMode === true
-        ? <BsFillSunFill fill="white" onClick={handleClickDarkMode} className="cursor-pointer mt-1" aria-label="sun icon" size={25} />
-        : <BsFillMoonFill onClick={handleClickDarkMode} className="cursor-pointer mt-1" aria-label="dark mode moon icon" size={25} />}
-
+          ? (
+            <div className="w-24 flex justify-end">
+              <BsFillSunFill fill="white" onClick={handleClickDarkMode} className="cursor-pointer mt-1" aria-label="sun icon" size={25} />
+            </div>
+          )
+          : (
+            <div className="w-24 flex justify-end">
+              <BsFillMoonFill style={style} onClick={handleClickDarkMode} className="cursor-pointer mt-1" aria-label="dark mode moon icon" size={25} />
+            </div>
+          )}
+      </div>
     </div>
   );
 }
@@ -86,14 +87,12 @@ Navbar.propTypes = {
     isLoopActive: PropTypes.bool.isRequired,
     currentActivePlaylistId: PropTypes.string.isRequired,
     isMutedActive: PropTypes.bool.isRequired,
-    rememberLastVideo: PropTypes.bool.isRequired,
     darkMode: PropTypes.bool.isRequired,
   }).isRequired,
   isPlaying: PropTypes.func.isRequired,
   currentSong: PropTypes.func.isRequired,
   isShuffleActive: PropTypes.func.isRequired,
   setCurrentActivePlaylistId: PropTypes.func.isRequired,
-  lastPlayedPlaylistDetailsAll: PropTypes.func.isRequired,
   isDarkModeActive: PropTypes.func.isRequired,
 };
 
@@ -102,7 +101,6 @@ const mapDispatchToProps = {
   currentSong,
   isShuffleActive,
   setCurrentActivePlaylistId,
-  lastPlayedPlaylistDetailsAll,
   isDarkModeActive,
 };
 

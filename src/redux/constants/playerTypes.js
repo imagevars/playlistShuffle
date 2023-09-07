@@ -16,8 +16,6 @@ export const PLAYER_VIDEO_DURATION = 'player/videoDuration';
 
 export const PLAYER_SET_PERCENTAGE = 'player/videoPercentage';
 
-export const PLAYER_REMEMBER_LAST_VIDEO = 'player/rememberLastVideo';
-
 export const PLAYER_ISDARKMODEACTIVE = 'player/darkMode';
 
 export const PLAYER_VOLUME = 'player/volume';
@@ -25,3 +23,7 @@ export const PLAYER_VOLUME = 'player/volume';
 export const PLAYER_SEEKING = 'player/seeking';
 
 export const PLAYER_SEEKTO = 'player/seek';
+
+export const PLAYER_TITLE = 'player/title';
+
+export const PLAYER_ARTIST = 'player/artist';

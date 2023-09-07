@@ -2,86 +2,36 @@ import React, { memo } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-function PlayingRightNow({ player, playlistSongsById, playlistDetails }) {
-  const findPlaylistIndex = playlistDetails.findIndex((element) => element.playlistId
-  === player.currentActivePlaylistId);
-
-  const getTitleAndArtist = (title, ownerTitle) => {
-    try {
-      const joinedTitleAndOwnerTitle = [title, ownerTitle];
-      if (title === 'Private video') {
-        return title;
-      }
-      if (joinedTitleAndOwnerTitle[0].includes('-')) {
-        const regex = /^(.*?)-(.*)$/;
-        const match = joinedTitleAndOwnerTitle[0].match(regex);
-
-        const [, artist, title] = match;
-
-        return [title, artist];
-      }
-      if (joinedTitleAndOwnerTitle[0].includes('//')) {
-        const regex = /^(.*?)\s\/\/\s(.*)$/;
-        const match = joinedTitleAndOwnerTitle[0].match(regex);
-
-        const [, artist, title] = match;
-
-        return [title, artist];
-      }
-      if (joinedTitleAndOwnerTitle[1].includes(' - Topic')) {
-        const regex = /^(.*?)\s-\sTopic$/;
-        const match = joinedTitleAndOwnerTitle[1].match(regex);
-        const artist = match[1];
-        return [title, artist];
-      }
-      return [title, ownerTitle];
-    } catch (error) {
-      return title;
-    }
-  };
-
-  const [title, artist] = getTitleAndArtist(
-    playlistSongsById[player.currentActivePlaylistId][
-      playlistDetails[findPlaylistIndex].currentIndex
-    ].snippet.title,
-    playlistSongsById[player.currentActivePlaylistId][
-      playlistDetails[findPlaylistIndex].currentIndex
-    ].snippet.videoOwnerChannelTitle,
-  );
-
+function PlayingRightNow({ player }) {
   return (
-    <div className="md:flex md:self-center">
+    <div className="md:flex  md:w-1/5 ">
 
       <div className="md:text-clip md:w-full">
-        <p className="songTitle text-[#ffff]  font-semibold text-center md:text-left  lg:text-md truncate tracking-wide  mx-auto w-[95%]">
+        <p className="songTitle text-bgBlack dark:text-bgWhite text-center md:text-left text-base lg:text-md truncate tracking-wide  mx-auto w-[95%] mt-2 md:mt-0 font-open">
           {
-          artist
+          player.artist
             ? (
               <a
-                href={`https://www.google.com/search?q=${title} ${artist} lyrics`}
+                href={`https://www.google.com/search?q=${player.title} ${player.artist} lyrics`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {playlistDetails[findPlaylistIndex].currentIndex + 1}
-                {' '}
-                -
-                {' '}
-                {title}
+                {player.title}
               </a>
             ) : (''
             )
           }
         </p>
-        <p className="songTitle text-[#ffff]  font-normal tracking-wide text-center md:text-left  lg:text-md truncate    mx-auto w-[95%]">
+        <p className="songTitle text-gray dark:text-clearGray font-normal tracking-wide text-center md:text-left  lg:text-md truncate font-open mx-auto w-[95%]">
           {
-          artist
+          player.artist
             ? (
               <a
-                href={`https://www.youtube.com/results?search_query=${artist}`}
+                href={`https://www.youtube.com/results?search_query=${player.artist}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {artist}
+                {player.artist}
               </a>
             ) : (''
             )
@@ -101,16 +51,9 @@ PlayingRightNow.propTypes = {
     isLoopActive: PropTypes.bool.isRequired,
     currentActivePlaylistId: PropTypes.string.isRequired,
     isMutedActive: PropTypes.bool.isRequired,
+    title: PropTypes.string.isRequired,
+    artist: PropTypes.string.isRequired,
   }).isRequired,
-  playlistDetails: PropTypes.arrayOf(PropTypes.shape({
-    playlistName: PropTypes.string.isRequired,
-    playlistId: PropTypes.string.isRequired,
-    playlistImage: PropTypes.string.isRequired,
-    playlistEtag: PropTypes.string.isRequired,
-    currentIndex: PropTypes.number.isRequired,
-
-  })).isRequired,
-  playlistSongsById: PropTypes.objectOf(PropTypes.arrayOf).isRequired,
 };
 const mapStateToProps = (state) => ({
   playlistSongsById: state.playlistSongsById,

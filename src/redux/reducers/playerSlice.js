@@ -8,11 +8,12 @@ import {
   PLAYER_SET_PROGRESS,
   PLAYER_VIDEO_DURATION,
   PLAYER_SET_PERCENTAGE,
-  PLAYER_REMEMBER_LAST_VIDEO,
   PLAYER_ISDARKMODEACTIVE,
   PLAYER_VOLUME,
   PLAYER_SEEKTO,
   PLAYER_SEEKING,
+  PLAYER_ARTIST,
+  PLAYER_TITLE,
 } from '../constants/playerTypes';
 
 const initialState = {
@@ -22,14 +23,15 @@ const initialState = {
   isShuffleActive: false,
   isLoopActive: false,
   currentActivePlaylistId: '',
-  isMutedActive: true,
+  isMutedActive: false,
   progress: 0,
   videoDuration: 0,
   videoPercentage: 0,
-  rememberLastVideo: true,
   volume: 1,
   seeking: false,
   seekTo: 0,
+  title: '',
+  artist: '',
 };
 
 export default function playerReducer(state = initialState, action) {
@@ -59,9 +61,6 @@ export default function playerReducer(state = initialState, action) {
     case PLAYER_SET_PERCENTAGE: {
       return { ...state, videoPercentage: action.payload };
     }
-    case PLAYER_REMEMBER_LAST_VIDEO: {
-      return { ...state, rememberLastVideo: action.payload };
-    }
     case PLAYER_ISDARKMODEACTIVE: {
       return { ...state, darkMode: action.payload };
     }
@@ -73,6 +72,12 @@ export default function playerReducer(state = initialState, action) {
     }
     case PLAYER_SEEKTO: {
       return { ...state, seekTo: action.payload };
+    }
+    case PLAYER_ARTIST: {
+      return { ...state, artist: action.payload };
+    }
+    case PLAYER_TITLE: {
+      return { ...state, title: action.payload };
     }
     default:
       return state;

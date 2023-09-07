@@ -13,7 +13,7 @@ import {
   isMutedActive,
   setVolume,
 } from '../../redux/actions/playerActions';
-import { lastPlayedPlaylistDetails, lastPlayedPlaylistDetailsAll } from '../../redux/actions/playlistDetailsActions';
+import { lastPlayedIndexPlaylistDetails } from '../../redux/actions/playlistDetailsActions';
 import PlayingRightNow from './PlayingRightNow/PlayingRightNow';
 import Navbar from '../Navbar/Navbar';
 import PlaylistInfo from './PlaylistInfo/PlaylistInfo';
@@ -30,8 +30,7 @@ function PlaylistPage({
   playlistSongsById,
   isMutedActive,
   playlistDetails,
-  lastPlayedPlaylistDetails,
-  lastPlayedPlaylistDetailsAll,
+  lastPlayedIndexPlaylistDetails,
   setVolume,
 }) {
   const { id } = useParams();
@@ -47,12 +46,6 @@ function PlaylistPage({
   const currentVideoName = playlistSongsById[player.currentActivePlaylistId][
     playlistDetails[findPlaylistIndex].currentIndex
   ].snippet.title;
-
-  useEffect(() => {
-    if (player.rememberLastVideo === false) {
-      lastPlayedPlaylistDetailsAll();
-    }
-  }, []);
 
   useEffect(() => {
     const findPlaylistIndex = playlistDetails.findIndex((element) => element.playlistId
@@ -100,7 +93,7 @@ function PlaylistPage({
               currentIndex: playlistDetails[findPlaylistIndex].currentIndex - 1,
               playlistId: player.currentActivePlaylistId,
             };
-            lastPlayedPlaylistDetails(lastPlayedObj);
+            lastPlayedIndexPlaylistDetails(lastPlayedObj);
             currentSong(
               playlistSongsById[player.currentActivePlaylistId][currIndex - 1]
                 ?.snippet.resourceId.videoId,
@@ -116,7 +109,7 @@ function PlaylistPage({
               currentIndex: playlistDetails[findPlaylistIndex].currentIndex + 1,
               playlistId: player.currentActivePlaylistId,
             };
-            lastPlayedPlaylistDetails(lastPlayedObj);
+            lastPlayedIndexPlaylistDetails(lastPlayedObj);
             currentSong(
               playlistSongsById[player.currentActivePlaylistId][currIndex + 1]
                 ?.snippet.resourceId.videoId,
@@ -149,10 +142,10 @@ function PlaylistPage({
       // eslint-disable-next-line
       tabIndex={0}
       // passive="true"
-      className="min-h-screen bg-[#f2e7fe] dark:bg-black w-full"
+      className="h-screen min-h-screen bg-backgroundWhite dark:bg-bgBlack w-full"
     >
       <div
-        className="w-[95%] md:max-w-[2200px] mx-auto"
+        className=" h-full flex flex-col  md:block  md:max-w-[2200px] items-center"
       >
         <HelmetHelper
           title={
@@ -163,57 +156,20 @@ function PlaylistPage({
         />
         <Navbar />
 
-        <div className=" ">
+        <div className="h-1/5 mb-2 w-full  md:float-left md:w-3/5 md:h-[70%] md:flex-shrink">
           <PlaylistInfo />
+          <Player />
         </div>
-
-        <div className="div">
-          <div className="mainContent md:flex md:h-[65vh]">
-            <div className="md:w-3/5">
-              <Player />
-            </div>
-            <div className=" h-3/5 md:h-full mt-6 w-[97%]  md:mt-0 mx-auto md:w-2/5">
-              <VideoCard />
-            </div>
+        <div className="w-10/12 overflow-auto mt-9 md:float-right md:w-2/5  md:h-[70%] md:flex-shrink">
+          <VideoCard />
+        </div>
+        <div className="w-11/12  md:w-full md:clear-both md:absolute md:bottom-0 md:flex">
+          <PlayingRightNow />
+          <div className="md:w-3/5">
+            <ProgressBar />
+            <MediaButtons />
           </div>
-          <div className="hidden md:flex bg-[#23036a] dark:bg-[#ca2c92] fixed bottom-0 left-0 right-0">
-            <div className="md:flex md:justify-between py-2 w-full">
-
-              <div className="md:w-1/4">
-                <PlayingRightNow />
-              </div>
-              <div className="md:w-1/2">
-
-                <div>
-                  <div className="mediaButtonsContainer flex justify-center">
-                    <MediaButtons />
-                  </div>
-                </div>
-                <ProgressBar />
-              </div>
-              <div className="hidden md:flex " />
-              <VolumeManger />
-            </div>
-          </div>
-
-          <div className="md:hidden smartphone bg-[#23036a] dark:bg-[#ca2c92] fixed bottom-0 left-0 right-0">
-            <div className="py-0.5">
-              <ProgressBar />
-              <div className="">
-                <div>
-                  <PlayingRightNow />
-                </div>
-                <div className="mediaButtonsContainer flex justify-center">
-                  <MediaButtons />
-                </div>
-              </div>
-              <div className="flex justify-center">
-                <div className="w-1/2 ">
-                  <VolumeManger />
-                </div>
-              </div>
-            </div>
-          </div>
+          <VolumeManger />
         </div>
       </div>
     </div>
@@ -229,7 +185,6 @@ PlaylistPage.propTypes = {
     isLoopActive: PropTypes.bool.isRequired,
     currentActivePlaylistId: PropTypes.string.isRequired,
     isMutedActive: PropTypes.bool.isRequired,
-    rememberLastVideo: PropTypes.bool.isRequired,
     volume: PropTypes.number.isRequired,
   }).isRequired,
   isLoopActive: PropTypes.func.isRequired,
@@ -244,8 +199,7 @@ PlaylistPage.propTypes = {
     playlistEtag: PropTypes.string.isRequired,
     currentIndex: PropTypes.number.isRequired,
   })).isRequired,
-  lastPlayedPlaylistDetails: PropTypes.func.isRequired,
-  lastPlayedPlaylistDetailsAll: PropTypes.func.isRequired,
+  lastPlayedIndexPlaylistDetails: PropTypes.func.isRequired,
   setVolume: PropTypes.func.isRequired,
 
 };
@@ -256,8 +210,7 @@ const mapDispatchToProps = {
   isShuffleActive,
   currentSong,
   isMutedActive,
-  lastPlayedPlaylistDetails,
-  lastPlayedPlaylistDetailsAll,
+  lastPlayedIndexPlaylistDetails,
   setVolume,
 };
 

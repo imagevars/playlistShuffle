@@ -8,11 +8,12 @@ import {
   PLAYER_VIDEO_DURATION,
   PLAYER_SET_PROGRESS,
   PLAYER_SET_PERCENTAGE,
-  PLAYER_REMEMBER_LAST_VIDEO,
   PLAYER_ISDARKMODEACTIVE,
   PLAYER_VOLUME,
   PLAYER_SEEKTO,
   PLAYER_SEEKING,
+  PLAYER_ARTIST,
+  PLAYER_TITLE,
 } from '../constants/playerTypes';
 
 export const isPlaying = (payload) => ({ type: PLAYER_IS_PLAYING, payload });
@@ -54,11 +55,6 @@ export const setPercentage = (payload) => ({
   payload,
 });
 
-export const rememberLastVideo = (payload) => ({
-  type: PLAYER_REMEMBER_LAST_VIDEO,
-  payload,
-});
-
 export const isDarkModeActive = (payload) => ({
   type: PLAYER_ISDARKMODEACTIVE,
   payload,
@@ -76,5 +72,15 @@ export const setSeeking = (payload) => ({
 
 export const setSeekTo = (payload) => ({
   type: PLAYER_SEEKTO,
+  payload,
+});
+
+export const setTitle = (payload) => ({
+  type: PLAYER_TITLE,
+  payload,
+});
+
+export const setArtist = (payload) => ({
+  type: PLAYER_ARTIST,
   payload,
 });

@@ -12,13 +12,8 @@ function PlaylistInfo({ playlistDetails }) {
   );
 
   return (
-    <div className="flex my-2">
-      <img
-        className="w-9 h-9 rounded-sm"
-        src={info?.playlistImage}
-        alt={info?.playlistName}
-      />
-      <p className="text-black dark:text-white ml-2 tracking-wide font-semibold">
+    <div className="flex my-1 justify-center md:justify-start">
+      <p className="text-bgBlack dark:text-bgWhite   dark:text-white ml-2 tracking-tight font-open font-semibold">
         {' '}
         <a href={`https://www.youtube.com/playlist?list=${id}`} target="_blank" rel="noopener noreferrer">
           {' '}

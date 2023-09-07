@@ -13,7 +13,7 @@ import {
 import {
   addToPlaylistDetails,
   modifyEtagInPlaylistDetailsById,
-  lastPlayedPlaylistDetails,
+  lastPlayedIndexPlaylistDetails,
 } from '../../../redux/actions/playlistDetailsActions';
 import { addSongsByPlaylistID } from '../../../redux/actions/playlistSongsByIdActions';
 
@@ -26,7 +26,6 @@ function Search({
   setCurrentActivePlaylistId,
   modifyEtagInPlaylistDetailsById,
   isShuffleActive,
-  player,
   setIsHasPlaylistLoading,
   isPlaylistLoading,
 }) {
@@ -60,14 +59,12 @@ function Search({
     // if playlistDataInfo is 304 it means that the playlist hasn't change so
     // we can use the one in localStorage, that way we save api quota
     if (data === 304) {
-      if (player.rememberLastVideo) {
-        const findPlaylistIndex = playlistDetails.findIndex((element) => element.playlistId === id);
+      const findPlaylistIndex = playlistDetails.findIndex((element) => element.playlistId === id);
 
-        currentSong(
-          playlistSongsById[id][playlistDetails[findPlaylistIndex].currentIndex]
-            .snippet.resourceId.videoId,
-        );
-      }
+      currentSong(
+        playlistSongsById[id][playlistDetails[findPlaylistIndex].currentIndex]
+          .snippet.resourceId.videoId,
+      );
       setIsHasPlaylistLoading(false);
       navigate(`/${id}`);
     } else if (data === 404) {
@@ -97,16 +94,16 @@ function Search({
     setPlaylistId(e.target.value);
   };
   return (
-    <div className="searchContainer w-11/12 mx-auto ">
+    <div className="searchContainer w-full my-4 mx-auto ">
       <form className="" onSubmit={(e) => handleSubmit(e)}>
-        <label htmlFor="searchInput" className="text-black dark:text-white">
+        <label htmlFor="searchInput" className="text-bgBlack dark:text-bgWhite font-open">
           {`${
             isIdInvalid ? 'Invalid playlist' : 'Enter a playlist:'
           }`}
         </label>
-        <div className="w-full flex h-12 justify-between">
+        <div className="w-full flex my-2 justify-between">
           <input
-            className={`inputSearch h-full shadow appearance-none rounded-sm w-5/6 py-2 px-3 leading-tight focus:outline-none focus:shadow-outline  ${
+            className={`inputSearch w-full mr-2 py-2 rounded-md font-open shadow-2xl focus:outline-none focus:shadow-outline  ${
               isIdInvalid ? 'border border-red-500' : ''
             }`}
             pattern="^(?=.*.{24,})(?=.*PL).*|^play my pl$"
@@ -117,7 +114,7 @@ function Search({
             value={playlistId}
           />
           <button
-            className="  w-[13%] h-full bg-[#23036a] font-medium text-white dark:bg-[#ca2c92]  rounded-sm flex items-center justify-center"
+            className=" rounded-md px-4   bg-primaryColor dark:bg-primaryColorDarkMode font-open text-bgWhite dark:text-bgBlack shadow-shadowBox hover:shadow-none dark:shadow-shadowBoxDarkMode dark:hover:shadow-none flex items-center justify-center"
             type="submit"
           >
             {isPlaylistLoading === true ? (
@@ -197,7 +194,7 @@ const mapDispatchToProps = {
   modifyEtagInPlaylistDetailsById,
   isShuffleActive,
   setIsHasPlaylistLoading,
-  lastPlayedPlaylistDetails,
+  lastPlayedIndexPlaylistDetails,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);

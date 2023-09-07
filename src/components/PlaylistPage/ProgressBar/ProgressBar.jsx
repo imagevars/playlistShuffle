@@ -38,13 +38,11 @@ function ProgressBar({
   };
 
   return (
-    <div className="flex justify-center">
-      <div className="text-[#ffff] font-bold ">
-        {secondsToTime(player.progress)}
-      </div>
+    <div className="flex flex-col justify-center w-full md:mb-[-24px]">
       <input
+        aria-label="progress bar"
         type="range"
-        className="w-3/4 "
+        className="w-full"
         name="volume"
         id="volume"
         value={player.videoPercentage / 100}
@@ -57,8 +55,13 @@ function ProgressBar({
         onMouseUp={handleMouseUp}
         onTouchEnd={handleMouseUp}
       />
-      <div className="text-[#ffff] font-bold ">
-        {secondsToTime(player.videoDuration)}
+      <div className="flex font-medium justify-between">
+        <div className="font-nunito">
+          {secondsToTime(player.progress)}
+        </div>
+        <div className="font-nunito">
+          {secondsToTime(player.videoDuration)}
+        </div>
       </div>
     </div>
   );

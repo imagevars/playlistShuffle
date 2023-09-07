@@ -7,7 +7,7 @@ import {
   isShuffleActive,
   setVideoDuration,
 } from '../../../redux/actions/playerActions';
-import { lastPlayedPlaylistDetails, playlistLength } from '../../../redux/actions/playlistDetailsActions';
+import { lastPlayedIndexPlaylistDetails, playlistLength } from '../../../redux/actions/playlistDetailsActions';
 import { addSongsByPlaylistID } from '../../../redux/actions/playlistSongsByIdActions';
 
 function VideoCard({
@@ -16,8 +16,7 @@ function VideoCard({
   playlistSongsById,
   addSongsByPlaylistID,
   isShuffleActive,
-  playlistDetails,
-  lastPlayedPlaylistDetails,
+  lastPlayedIndexPlaylistDetails,
   playlistLength,
   setVideoDuration,
 }) {
@@ -34,33 +33,6 @@ function VideoCard({
       block: 'start',
     });
   }, [player.currentSong]);
-
-  useEffect(() => {
-    if (player.rememberLastVideo) {
-      const findPlaylistIndex = playlistDetails.findIndex((element) => {
-        const index = element.playlistId === player.currentActivePlaylistId;
-        return index;
-      });
-      currentSong(
-        playlistSongsById[player.currentActivePlaylistId][
-          playlistDetails[findPlaylistIndex].currentIndex
-        ].snippet.resourceId.videoId,
-      );
-    } else {
-      const unShuffleArr = [];
-      unShuffleArr.push(...playlistSongsById[player.currentActivePlaylistId]);
-      unShuffleArr.sort((a, b) => {
-        const result = a.snippet.position - b.snippet.position;
-        return result;
-      });
-      const playlistObject = {
-        id: player.currentActivePlaylistId,
-        songs: unShuffleArr,
-      };
-      addSongsByPlaylistID(playlistObject);
-      currentSong(unShuffleArr[0].snippet.resourceId.videoId);
-    }
-  }, []);
 
   const shuffleIsActive = () => {
     setVideoDuration(0);
@@ -82,7 +54,7 @@ function VideoCard({
       currentIndex: 0,
       playlistId: player.currentActivePlaylistId,
     };
-    lastPlayedPlaylistDetails(lastPlayedObj);
+    lastPlayedIndexPlaylistDetails(lastPlayedObj);
     isShuffleActive(false);
   };
 
@@ -97,17 +69,18 @@ function VideoCard({
       currentIndex: index,
       playlistId: player.currentActivePlaylistId,
     };
-    lastPlayedPlaylistDetails(lastPlayedObj);
+    lastPlayedIndexPlaylistDetails(lastPlayedObj);
     currentSong(
       playlistSongsById[player.currentActivePlaylistId][index]?.snippet
         .resourceId.videoId,
     );
   };
+
   const videoList = playlistSongsById[player.currentActivePlaylistId]?.map(
     (ele, i) => (
       <button
         type="button"
-        className="mx-2 my-1 cursor-pointer w-[94%]  "
+        className="w-full my-1 "
         title={ele.snippet.title}
         ref={refs[ele.snippet.resourceId.videoId]}
         id={`${ele.snippet.resourceId.videoId}`}
@@ -118,29 +91,29 @@ function VideoCard({
         <div
           className={`${
             player.currentSong === ele.snippet.resourceId.videoId
-              ? ' bg-[#23036a] dark:bg-[#ca2c92]'
+              ? 'border-b-primaryColor '
               : null
-          }  overflow-hidden hover:bg-[#24036ae5] dark:hover:bg-[#ca2c92] hover:text-[#fff] h-11 lg:h-14 rounded-sm`}
+          }  text-center `}
         >
-          <div className="flex h-full  hover:text-white">
+          <div className=" flex justify-between hover:text-primaryColor ">
 
             <div
-            // className="cardText  flex flex-col items-baseline ml-1 truncate ">
               className={`${
                 player.currentSong === ele.snippet.resourceId.videoId
-                  ? ' text-[#ffff] '
-                  : ''
-              }  cardText  flex flex-col  hover:text-[#fff] items-baseline ml-1 truncate `}
+                  ? ' text-primaryColor dark:text-primaryColorDarkMode '
+                  : ' dark:text-bgWhite '
+              }  w-full text-center md:text-left md:mx-4 md:truncate font-open hover:text-primaryColor dark:hover:text-primaryColorDarkMode`}
             >
-              <p className="tracking-wide dark:text-white truncate font-medium text-justify leading-5  w-[100%] xl:text-lg  ">
+              <p className="truncate ">
                 {`${i + 1} - ${ele.snippet.title}`}
               </p>
 
-              <p className="cardArtist dark:text-white font-light  truncate  w-[100%] text-justify xl:text-lg">
+              <p className={`${player.currentSong === ele.snippet.resourceId.videoId ? ' text-primaryColor dark:text-primaryColorDarkMode  ' : 'text-gray dark:text-clearGray '}text-sm font-open`}>
                 {ele.snippet.videoOwnerChannelTitle}
               </p>
             </div>
           </div>
+          <div className={`${player.currentSong === ele.snippet.resourceId.videoId ? (' bg-primaryColor shadow-none dark:bg-primaryColorDarkMode ') : ('bg-clearGray shadow-shadowLine dark:shadow-shadowLineDarkMode  ')}w-[88%] h-0.5 mx-auto rounded-full `} />
         </div>
       </button>
     ),
@@ -155,9 +128,9 @@ function VideoCard({
   }, [playlistSongsById[player.currentActivePlaylistId]]);
   return (
     <div
-      className="cardContainer h-[46vh] md:h-full"
+      className="cardContainer "
     >
-      <ul className="ulListCards mt-1 h-full md:mt-0  overflow-y-auto  ">
+      <ul className="ulListCards ">
         {videoList}
       </ul>
     </div>
@@ -165,15 +138,15 @@ function VideoCard({
 }
 
 VideoCard.propTypes = {
-  playlistDetails: PropTypes.arrayOf(
-    PropTypes.shape({
-      playlistName: PropTypes.string.isRequired,
-      playlistId: PropTypes.string.isRequired,
-      playlistImage: PropTypes.string.isRequired,
-      playlistEtag: PropTypes.string.isRequired,
-      currentIndex: PropTypes.number.isRequired,
-    }),
-  ).isRequired,
+  // playlistDetails: PropTypes.arrayOf(
+  //   PropTypes.shape({
+  //     playlistName: PropTypes.string.isRequired,
+  //     playlistId: PropTypes.string.isRequired,
+  //     playlistImage: PropTypes.string.isRequired,
+  //     playlistEtag: PropTypes.string.isRequired,
+  //     currentIndex: PropTypes.number.isRequired,
+  //   }),
+  // ).isRequired,
   player: PropTypes.shape({
     isPlaying: PropTypes.bool.isRequired,
     currentSong: PropTypes.string.isRequired,
@@ -181,13 +154,12 @@ VideoCard.propTypes = {
     isLoopActive: PropTypes.bool.isRequired,
     currentActivePlaylistId: PropTypes.string.isRequired,
     isMutedActive: PropTypes.bool.isRequired,
-    rememberLastVideo: PropTypes.bool.isRequired,
   }).isRequired,
   currentSong: PropTypes.func.isRequired,
   playlistSongsById: PropTypes.objectOf(PropTypes.arrayOf).isRequired,
   addSongsByPlaylistID: PropTypes.func.isRequired,
   isShuffleActive: PropTypes.func.isRequired,
-  lastPlayedPlaylistDetails: PropTypes.func.isRequired,
+  lastPlayedIndexPlaylistDetails: PropTypes.func.isRequired,
   playlistLength: PropTypes.func.isRequired,
   setVideoDuration: PropTypes.func.isRequired,
 };
@@ -196,7 +168,7 @@ const mapDispatchToProps = {
   currentSong,
   addSongsByPlaylistID,
   isShuffleActive,
-  lastPlayedPlaylistDetails,
+  lastPlayedIndexPlaylistDetails,
   playlistLength,
   setVideoDuration,
 };

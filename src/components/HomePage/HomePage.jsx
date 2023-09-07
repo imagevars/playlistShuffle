@@ -7,18 +7,13 @@ import Navbar from '../Navbar/Navbar';
 import HelmetHelper from '../Helmet/HelmetHelper';
 import Footer from './Footer';
 import {
-  rememberLastVideo,
   setProgress,
   setPercentage,
   setSeekTo,
   setVideoDuration,
 } from '../../redux/actions/playerActions';
-import { lastPlayedPlaylistDetailsAll } from '../../redux/actions/playlistDetailsActions';
 
 function HomePage({
-  rememberLastVideo,
-  player,
-  lastPlayedPlaylistDetailsAll,
   setProgress,
   setPercentage,
   setSeekTo,
@@ -30,45 +25,19 @@ function HomePage({
     setSeekTo(0);
     setVideoDuration(0);
   }, []);
-  const handleChange = () => {
-    if (!player.rememberLastVideo) {
-      rememberLastVideo(true);
-    } else {
-      rememberLastVideo(false);
-      lastPlayedPlaylistDetailsAll();
-    }
-  };
 
   return (
-    <div className="min-h-screen  bg-[#f2e7fe] dark:bg-black">
+    <div className="h-screen min-h-screen bg-[#f2e7fe] dark:bg-bgBlack flex flex-col justify-between max-w-[2000px]">
       <HelmetHelper
         title="Shuffle Youtube Playlists - Playlist Randomizer"
       />
-      <div className="w-[95%] md:max-w-[2200px] mx-auto">
-        <Navbar />
+      <Navbar />
+      <div className="  w-11/12 h-1/5 flex-col flex  mx-auto md:max-w-[1600px]">
+        <Search />
       </div>
-      <div className=" align-middle  w-10/12 flex  mx-auto">
-        <div className="w-full">
-          <div className="mt-20 mb-10   ">
-            <Search />
-          </div>
-          <div className="w-11/12 mx-auto">
-            <label htmlFor="checkBox_" className="text-black dark:text-white text-lg ml-1">
-              <input
-                type="checkbox"
-                id="checkBox_"
-                checked={player.rememberLastVideo}
-                onChange={() => handleChange()}
-              />
-              Remember last video played
-            </label>
-          </div>
-          <div className="mb-5">
-            <PlaylistUsed />
-          </div>
-        </div>
-      </div>
+      <PlaylistUsed />
       <Footer />
+
     </div>
   );
 }
@@ -81,10 +50,7 @@ HomePage.propTypes = {
     isLoopActive: PropTypes.bool.isRequired,
     currentActivePlaylistId: PropTypes.string.isRequired,
     isMutedActive: PropTypes.bool.isRequired,
-    rememberLastVideo: PropTypes.bool.isRequired,
   }).isRequired,
-  rememberLastVideo: PropTypes.func.isRequired,
-  lastPlayedPlaylistDetailsAll: PropTypes.func.isRequired,
   setProgress: PropTypes.func.isRequired,
   setPercentage: PropTypes.func.isRequired,
   setSeekTo: PropTypes.func.isRequired,
@@ -92,8 +58,6 @@ HomePage.propTypes = {
 
 };
 const mapDispatchToProps = {
-  rememberLastVideo,
-  lastPlayedPlaylistDetailsAll,
   setProgress,
   setPercentage,
   setSeekTo,

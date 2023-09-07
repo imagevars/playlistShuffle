@@ -23,33 +23,34 @@ function VolumeManager({ player, isMutedActive, setVolume }) {
   };
 
   return (
-    <div className="text-[#ffff] w-full font-bold items-center  flex lg:flex md:w-1/4">
+    <div className="flex justify-center md:w-1/5 md:items-center">
       { (player.volume >= 0.50 && player.isMutedActive === false)
       && (
       <BiVolumeFull
-        className="hover:drop-shadow-3xl"
-        size={35}
+        className="text-primaryColor dark:text-primaryColorDarkMode  hover:drop-shadow-svgShadow hover:scale-110"
+        size={30}
         onClick={handleIconClick}
       />
       )}
       { (player.volume < 0.50 && player.isMutedActive === false)
       && (
       <BiVolumeLow
-        className="hover:drop-shadow-3xl"
-        size={35}
+        className="text-primaryColor dark:text-primaryColorDarkMode hover:drop-shadow-svgShadow hover:scale-110"
+        size={30}
         onClick={handleIconClick}
       />
       )}
       { player.isMutedActive === true && (
       <BiVolumeMute
-        className="hover:drop-shadow-3xl"
-        size={35}
+        className="text-primaryColor dark:text-primaryColorDarkMode  hover:drop-shadow-svgShadow hover:scale-110"
+        size={30}
         onClick={handleIconClick}
       />
       )}
       <input
+        aria-label="volume manager"
         type="range"
-        className="w-full md:w-3/4"
+        className="w-3/5"
         name="volume"
         id="volume"
         value={player.volume}
@@ -71,7 +72,6 @@ VolumeManager.propTypes = {
     isLoopActive: PropTypes.bool.isRequired,
     currentActivePlaylistId: PropTypes.string.isRequired,
     isMutedActive: PropTypes.bool.isRequired,
-    rememberLastVideo: PropTypes.bool.isRequired,
     volume: PropTypes.number.isRequired,
   }).isRequired,
   isMutedActive: PropTypes.func.isRequired,

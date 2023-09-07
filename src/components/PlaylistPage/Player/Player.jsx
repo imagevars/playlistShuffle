@@ -9,8 +9,10 @@ import {
   setVideoDuration,
   setPercentage,
   setSeeking,
+  setArtist,
+  setTitle,
 } from '../../../redux/actions/playerActions';
-import { lastPlayedPlaylistDetails } from '../../../redux/actions/playlistDetailsActions';
+import { lastPlayedIndexPlaylistDetails } from '../../../redux/actions/playlistDetailsActions';
 
 function Player({
   player,
@@ -20,8 +22,10 @@ function Player({
   setVideoDuration,
   setProgress,
   setPercentage,
-  lastPlayedPlaylistDetails,
   playlistDetails,
+  setArtist,
+  setTitle,
+  lastPlayedIndexPlaylistDetails,
 }) {
   const playerRef = useRef(null);
 
@@ -31,18 +35,6 @@ function Player({
 
   useEffect(() => {
     // if (playlistSongsById[player.currentActivePlaylistId]) {
-    if (player.rememberLastVideo) {
-      currentSong(
-        playlistSongsById[player.currentActivePlaylistId][
-          playlistDetails[findPlaylistIndex].currentIndex
-        ]?.snippet.resourceId.videoId,
-      );
-    } else {
-      currentSong(
-        playlistSongsById[player.currentActivePlaylistId][0]?.snippet
-          .resourceId.videoId,
-      );
-    }
   }, []);
 
   const afterSongEnds = () => {
@@ -51,13 +43,11 @@ function Player({
       playlistDetails[findPlaylistIndex].currentIndex
       < playlistSongsById[player.currentActivePlaylistId].length - 1
     ) {
-      if (player.rememberLastVideo === true) {
-        const lastPlayedObj = {
-          currentIndex: playlistDetails[findPlaylistIndex].currentIndex + 1,
-          playlistId: player.currentActivePlaylistId,
-        };
-        lastPlayedPlaylistDetails(lastPlayedObj);
-      }
+      const lastPlayedObj = {
+        currentIndex: playlistDetails[findPlaylistIndex].currentIndex + 1,
+        playlistId: player.currentActivePlaylistId,
+      };
+      lastPlayedIndexPlaylistDetails(lastPlayedObj);
       currentSong(
         playlistSongsById[player.currentActivePlaylistId][currIndex + 1]
           ?.snippet.resourceId.videoId,
@@ -110,7 +100,51 @@ function Player({
     isPlaying(false);
   };
 
+  const getTitleAndArtist = (title, ownerTitle) => {
+    try {
+      const joinedTitleAndOwnerTitle = [title, ownerTitle];
+      if (title === 'Private video') {
+        return title;
+      }
+      if (joinedTitleAndOwnerTitle[0].includes('-')) {
+        const regex = /^(.*?)-(.*)$/;
+        const match = joinedTitleAndOwnerTitle[0].match(regex);
+
+        const [, artist, title] = match;
+
+        return [title, artist];
+      }
+      if (joinedTitleAndOwnerTitle[0].includes('//')) {
+        const regex = /^(.*?)\s\/\/\s(.*)$/;
+        const match = joinedTitleAndOwnerTitle[0].match(regex);
+
+        const [, artist, title] = match;
+
+        return [title, artist];
+      }
+      if (joinedTitleAndOwnerTitle[1].includes(' - Topic')) {
+        const regex = /^(.*?)\s-\sTopic$/;
+        const match = joinedTitleAndOwnerTitle[1].match(regex);
+        const artist = match[1];
+        return [title, artist];
+      }
+      return [title, ownerTitle];
+    } catch (error) {
+      return title;
+    }
+  };
+
   const handleReady = () => {
+    const [title, artist] = getTitleAndArtist(
+      playlistSongsById[player.currentActivePlaylistId][
+        playlistDetails[findPlaylistIndex].currentIndex
+      ].snippet.title,
+      playlistSongsById[player.currentActivePlaylistId][
+        playlistDetails[findPlaylistIndex].currentIndex
+      ].snippet.videoOwnerChannelTitle,
+    );
+    setTitle(`${playlistDetails[findPlaylistIndex].currentIndex + 1} - ${title}`);
+    setArtist(artist);
     setProgress(0);
     setVideoDuration(playerRef.current.getDuration());
     isPlaying(true);
@@ -127,13 +161,11 @@ function Player({
   };
 
   return (
-    <div className="player aspect-auto md:w-full md:h-full">
+    <div className="player h-full aspect-auto md:w-full md:mx-2 md:h-full">
       {/* https://img.youtube.com/vi/Eeb4aZObp-0/0.jpg */}
       <ReactPlayer
         playing={player.isPlaying}
         ref={playerRef}
-        // not working yet
-        // fallback={`https://img.youtube.com/vi/${player.currentSong}.jpg`}
         muted={player.isMutedActive}
         passive="true"
         onProgress={(e) => handleProgress(e)}
@@ -161,7 +193,6 @@ Player.propTypes = {
     isLoopActive: PropTypes.bool.isRequired,
     currentActivePlaylistId: PropTypes.string.isRequired,
     isMutedActive: PropTypes.bool.isRequired,
-    rememberLastVideo: PropTypes.bool.isRequired,
     videoDuration: PropTypes.number.isRequired,
     volume: PropTypes.number.isRequired,
     seeking: PropTypes.bool.isRequired,
@@ -183,7 +214,9 @@ Player.propTypes = {
   playlistSongsById: PropTypes.objectOf(PropTypes.arrayOf).isRequired,
   setProgress: PropTypes.func.isRequired,
   setVideoDuration: PropTypes.func.isRequired,
-  lastPlayedPlaylistDetails: PropTypes.func.isRequired,
+  setTitle: PropTypes.func.isRequired,
+  setArtist: PropTypes.func.isRequired,
+  lastPlayedIndexPlaylistDetails: PropTypes.func.isRequired,
 
 };
 
@@ -193,7 +226,9 @@ const mapDispatchToProps = {
   setProgress,
   setVideoDuration,
   setPercentage,
-  lastPlayedPlaylistDetails,
+  lastPlayedIndexPlaylistDetails,
+  setTitle,
+  setArtist,
 };
 
 const mapStateToProps = (state) => ({

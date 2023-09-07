@@ -1,13 +1,13 @@
 import React, { memo } from 'react';
+import { AiFillPlayCircle, AiFillPauseCircle } from 'react-icons/ai';
 import {
-  BiPlay,
-  BiPause,
-  BiShuffle,
-  BiSkipPrevious,
-  BiSkipNext,
-} from 'react-icons/bi';
+  MdSkipPrevious,
+  MdSkipNext,
+  MdShuffle,
+  MdRepeat,
+  MdRepeatOne,
+} from 'react-icons/md';
 import PropTypes from 'prop-types';
-import { TbRepeatOff, TbRepeatOnce } from 'react-icons/tb';
 import { connect } from 'react-redux';
 import {
   isPlaying,
@@ -16,7 +16,7 @@ import {
   isMutedActive,
   isShuffleActive,
 } from '../../../redux/actions/playerActions';
-import { lastPlayedPlaylistDetails } from '../../../redux/actions/playlistDetailsActions';
+import { lastPlayedIndexPlaylistDetails } from '../../../redux/actions/playlistDetailsActions';
 
 const MediaButtons = memo(
   ({
@@ -27,7 +27,7 @@ const MediaButtons = memo(
     currentSong,
     playlistSongsById,
     playlistDetails,
-    lastPlayedPlaylistDetails,
+    lastPlayedIndexPlaylistDetails,
   }) => {
     const findPlaylistIndex = playlistDetails.findIndex(
       (element) => element.playlistId === player.currentActivePlaylistId,
@@ -40,7 +40,7 @@ const MediaButtons = memo(
           currentIndex: playlistDetails[findPlaylistIndex].currentIndex - 1,
           playlistId: player.currentActivePlaylistId,
         };
-        lastPlayedPlaylistDetails(lastPlayedObj);
+        lastPlayedIndexPlaylistDetails(lastPlayedObj);
         currentSong(
           playlistSongsById[player.currentActivePlaylistId][currIndex - 1]
             ?.snippet.resourceId.videoId,
@@ -56,7 +56,7 @@ const MediaButtons = memo(
           currentIndex: playlistDetails[findPlaylistIndex].currentIndex + 1,
           playlistId: player.currentActivePlaylistId,
         };
-        lastPlayedPlaylistDetails(lastPlayedObj);
+        lastPlayedIndexPlaylistDetails(lastPlayedObj);
         currentSong(
           playlistSongsById[player.currentActivePlaylistId][currIndex + 1]
             ?.snippet.resourceId.videoId,
@@ -76,17 +76,17 @@ const MediaButtons = memo(
 
     return (
       <div
-        className=" font-bold  flex items-center "
+        className="flex justify-center w-[95%]"
       >
 
         {player.isLoopActive === true ? (
           <button
             type="button"
             aria-label="no repeat video"
-            className=" p-[0.25rem] md:p-[0.50rem]"
+            className=" p-[0.25rem] md:p-[0.50rem] cursor-auto"
           >
-            <TbRepeatOnce
-              className="hover:drop-shadow-3xl text-slate-200 hover:text-white"
+            <MdRepeatOne
+              className="hover:drop-shadow-none dark:text-primaryColorDarkMode  text-primaryColor drop-shadow-svgShadow dark:drop-shadow-svgShadowDarkMode  hover:scale-110"
               onClick={() => isLoopActive(false)}
               size={40}
             />
@@ -95,10 +95,10 @@ const MediaButtons = memo(
           <button
             type="button"
             aria-label="repeat video"
-            className="hover:drop-shadow-2xl  p-[0.25rem] md:p-[0.50rem]"
+            className="hover:drop-shadow-2xl cursor-auto p-[0.25rem] md:p-[0.50rem]"
           >
-            <TbRepeatOff
-              className="hover:drop-shadow-3xl text-slate-200 hover:text-white"
+            <MdRepeat
+              className="hover:drop-shadow-none dark:text-primaryColorDarkMode  text-primaryColor drop-shadow-svgShadow dark:drop-shadow-svgShadowDarkMode  hover:scale-110"
               onClick={() => isLoopActive(true)}
               size={40}
             />
@@ -110,10 +110,10 @@ const MediaButtons = memo(
           <button
             type="button"
             aria-label="previous video"
-            className=" p-[0.25rem] md:p-[0.50rem] text-slate-200 hover:text-white"
+            className=" p-[0.25rem] md:p-[0.50rem]  cursor-auto "
           >
-            <BiSkipPrevious
-              className="hover:drop-shadow-3xl text-slate-200 hover:text-white"
+            <MdSkipPrevious
+              className="hover:drop-shadow-none dark:text-primaryColorDarkMode  text-primaryColor drop-shadow-svgShadow dark:drop-shadow-svgShadowDarkMode  hover:scale-110"
               onClick={handleClickPreviousButton}
               size={40}
             />
@@ -123,10 +123,10 @@ const MediaButtons = memo(
               type="button"
               aria-label="pause video"
               className="
-              bg-white rounded-full "
+              bg-white rounded-full cursor-auto"
             >
-              <BiPause
-                fill="black"
+              <AiFillPauseCircle
+                style={{ color: `${player.darkMode ? '#13c3ff' : '#660033'}` }}
                 onClick={() => isPlaying(false)}
                 size={50}
               />
@@ -135,10 +135,10 @@ const MediaButtons = memo(
             <button
               type="button"
               aria-label="play video"
-              className="bg-white   rounded-full"
+              className="bg-white cursor-auto  rounded-full"
             >
-              <BiPlay
-                fill="black"
+              <AiFillPlayCircle
+                style={{ color: `${player.darkMode ? '#13c3ff' : '#660033'}` }}
                 onClick={() => isPlaying(true)}
                 size={50}
               />
@@ -147,10 +147,10 @@ const MediaButtons = memo(
           <button
             type="button"
             aria-label="next video"
-            className=" p-[0.25rem] md:p-[0.50rem] text-slate-200 hover:text-white"
+            className=" p-[0.25rem] md:p-[0.50rem] cursor-auto"
           >
-            <BiSkipNext
-              className="hover:drop-shadow-3xl text-slate-200 hover:text-white"
+            <MdSkipNext
+              className="hover:drop-shadow-none dark:text-primaryColorDarkMode text-primaryColor drop-shadow-svgShadow dark:drop-shadow-svgShadowDarkMode  hover:scale-110"
               onClick={handleClickNextButton}
               size={40}
             />
@@ -159,15 +159,14 @@ const MediaButtons = memo(
         <button
           type="button"
           aria-label="shuffle playlist"
-          className=" p-[0.25rem] md:p-[0.50rem] text-slate-200 hover:text-white"
+          className=" p-[0.25rem] md:p-[0.50rem] cursor-auto "
         >
-          <BiShuffle
-            className="hover:drop-shadow-3xl text-slate-200 hover:text-white"
+          <MdShuffle
+            className="hover:drop-shadow-none text-primaryColor dark:text-primaryColorDarkMode drop-shadow-svgShadow dark:drop-shadow-svgShadowDarkMode  hover:scale-110"
             onClick={handleClickShuffle}
             size={40}
           />
         </button>
-
       </div>
     );
   },
@@ -181,6 +180,7 @@ MediaButtons.propTypes = {
     isLoopActive: PropTypes.bool.isRequired,
     currentActivePlaylistId: PropTypes.string.isRequired,
     isMutedActive: PropTypes.bool.isRequired,
+    darkMode: PropTypes.bool.isRequired,
   }).isRequired,
   isPlaying: PropTypes.func.isRequired,
   isLoopActive: PropTypes.func.isRequired,
@@ -195,7 +195,7 @@ MediaButtons.propTypes = {
     currentIndex: PropTypes.number.isRequired,
 
   })).isRequired,
-  lastPlayedPlaylistDetails: PropTypes.func.isRequired,
+  lastPlayedIndexPlaylistDetails: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -210,7 +210,7 @@ const mapDispatchToProps = {
   isShuffleActive,
   currentSong,
   isMutedActive,
-  lastPlayedPlaylistDetails,
+  lastPlayedIndexPlaylistDetails,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MediaButtons);
