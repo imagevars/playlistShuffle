@@ -53,7 +53,7 @@ function Navbar({
     <div className="NAVBAR1 w-full flex justify-between px-1 ">
       <div className="flex justify-between w-full mx-2 md:max-w-[1600px]">
         {/* eslint-disable-next-line */}
-        <a href="https://twitter.com/Jonathhn1" target="_blank" rel="noopener noreferrer" aria-label="github link">
+        <a href="https://twitter.com/Jonathhn1" className="w-24" target="_blank" rel="noopener noreferrer" aria-label="github link">
           <BsTwitter size={25} fill="#1DA1F2" />
         </a>
         {/* eslint-disable-next-line */}
