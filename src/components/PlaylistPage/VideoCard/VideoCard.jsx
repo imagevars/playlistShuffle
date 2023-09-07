@@ -100,15 +100,15 @@ function VideoCard({
             <div
               className={`${
                 player.currentSong === ele.snippet.resourceId.videoId
-                  ? ' text-primaryColor dark:text-primaryColorDarkMode '
+                  ? ' text-primaryColor  dark:text-primaryColorDarkMode font-semibold  dark:font-semibold '
                   : ' dark:text-bgWhite '
-              }  w-full text-center md:text-left md:mx-4 md:truncate font-open hover:text-primaryColor dark:hover:text-primaryColorDarkMode`}
+              } font-normal w-full text-center md:text-left md:mx-4 md:truncate font-open hover:text-primaryColor  dark:hover:text-primaryColorDarkMode`}
             >
               <p className="truncate ">
                 {`${i + 1} - ${ele.snippet.title}`}
               </p>
 
-              <p className={`${player.currentSong === ele.snippet.resourceId.videoId ? ' text-primaryColor dark:text-primaryColorDarkMode  ' : 'text-gray dark:text-clearGray '}text-sm font-open`}>
+              <p className={`${player.currentSong === ele.snippet.resourceId.videoId ? ' text-primaryColor dark:text-primaryColorDarkMode  ' : 'text-gray dark:text-clearGray '}text-sm font-open `}>
                 {ele.snippet.videoOwnerChannelTitle}
               </p>
             </div>
@@ -138,15 +138,6 @@ function VideoCard({
 }
 
 VideoCard.propTypes = {
-  // playlistDetails: PropTypes.arrayOf(
-  //   PropTypes.shape({
-  //     playlistName: PropTypes.string.isRequired,
-  //     playlistId: PropTypes.string.isRequired,
-  //     playlistImage: PropTypes.string.isRequired,
-  //     playlistEtag: PropTypes.string.isRequired,
-  //     currentIndex: PropTypes.number.isRequired,
-  //   }),
-  // ).isRequired,
   player: PropTypes.shape({
     isPlaying: PropTypes.bool.isRequired,
     currentSong: PropTypes.string.isRequired,
