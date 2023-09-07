@@ -31,7 +31,6 @@ function PlaylistPage({
   isMutedActive,
   playlistDetails,
   lastPlayedIndexPlaylistDetails,
-  setVolume,
 }) {
   const { id } = useParams();
 
@@ -142,7 +141,7 @@ function PlaylistPage({
       // eslint-disable-next-line
       tabIndex={0}
       // passive="true"
-      className="h-screen min-h-screen bg-backgroundWhite dark:bg-bgBlack w-full"
+      className="h-screen min-h-screen bg-bgWhite dark:bg-bgBlack w-full"
     >
       <div
         className=" h-full flex flex-col  md:block  md:max-w-[2200px] items-center"
@@ -165,7 +164,7 @@ function PlaylistPage({
         </div>
         <div className="w-11/12  md:w-full md:clear-both md:absolute md:bottom-0 md:flex">
           <PlayingRightNow />
-          <div className="md:w-3/5">
+          <div className="md:w-2/4">
             <ProgressBar />
             <MediaButtons />
           </div>
@@ -200,7 +199,6 @@ PlaylistPage.propTypes = {
     currentIndex: PropTypes.number.isRequired,
   })).isRequired,
   lastPlayedIndexPlaylistDetails: PropTypes.func.isRequired,
-  setVolume: PropTypes.func.isRequired,
 
 };
 

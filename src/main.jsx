@@ -8,8 +8,6 @@ import { store, persistor } from './store';
 import App from './App';
 import './app.css';
 
-document.getElementById('root').style.height = '100vh';
-
 ReactDOM.createRoot(document.getElementById('root')).render(
   <HelmetProvider>
     <BrowserRouter>

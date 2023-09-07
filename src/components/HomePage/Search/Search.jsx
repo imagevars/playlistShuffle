@@ -103,7 +103,7 @@ function Search({
         </label>
         <div className="w-full flex my-2 justify-between">
           <input
-            className={`inputSearch w-full mr-2 py-2 rounded-md font-open shadow-2xl focus:outline-none focus:shadow-outline  ${
+            className={`inputSearch w-5/6 md:w-11/12 mr-2 py-2 rounded-md font-open shadow-2xl focus:outline-none focus:shadow-outline  ${
               isIdInvalid ? 'border border-red-500' : ''
             }`}
             pattern="^(?=.*.{24,})(?=.*PL).*|^play my pl$"
@@ -114,7 +114,7 @@ function Search({
             value={playlistId}
           />
           <button
-            className=" rounded-md px-4   bg-primaryColor dark:bg-primaryColorDarkMode font-open text-bgWhite dark:text-bgBlack shadow-shadowBox hover:shadow-none dark:shadow-shadowBoxDarkMode dark:hover:shadow-none flex items-center justify-center"
+            className=" rounded-md px-4 w-2/12 md:w-1/12  bg-primaryColor dark:bg-primaryColorDarkMode font-open text-bgWhite dark:text-bgBlack shadow-shadowBox active:shadow-none dark:shadow-shadowBoxDarkMode dark:active:shadow-none flex items-center justify-center"
             type="submit"
           >
             {isPlaylistLoading === true ? (

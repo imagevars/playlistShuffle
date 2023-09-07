@@ -86,7 +86,7 @@ const MediaButtons = memo(
             className=" p-[0.25rem] md:p-[0.50rem] cursor-auto"
           >
             <MdRepeatOne
-              className="hover:drop-shadow-none dark:text-primaryColorDarkMode  text-primaryColor drop-shadow-svgShadow dark:drop-shadow-svgShadowDarkMode  hover:scale-110"
+              className="active:drop-shadow-none dark:text-primaryColorDarkMode  text-primaryColor drop-shadow-svgShadow dark:drop-shadow-svgShadowDarkMode  active:scale-110"
               onClick={() => isLoopActive(false)}
               size={40}
             />
@@ -95,10 +95,10 @@ const MediaButtons = memo(
           <button
             type="button"
             aria-label="repeat video"
-            className="hover:drop-shadow-2xl cursor-auto p-[0.25rem] md:p-[0.50rem]"
+            className="active:drop-shadow-2xl cursor-auto p-[0.25rem] md:p-[0.50rem]"
           >
             <MdRepeat
-              className="hover:drop-shadow-none dark:text-primaryColorDarkMode  text-primaryColor drop-shadow-svgShadow dark:drop-shadow-svgShadowDarkMode  hover:scale-110"
+              className="active:drop-shadow-none dark:text-primaryColorDarkMode  text-primaryColor drop-shadow-svgShadow dark:drop-shadow-svgShadowDarkMode  active:scale-110"
               onClick={() => isLoopActive(true)}
               size={40}
             />
@@ -113,7 +113,7 @@ const MediaButtons = memo(
             className=" p-[0.25rem] md:p-[0.50rem]  cursor-auto "
           >
             <MdSkipPrevious
-              className="hover:drop-shadow-none dark:text-primaryColorDarkMode  text-primaryColor drop-shadow-svgShadow dark:drop-shadow-svgShadowDarkMode  hover:scale-110"
+              className="active:drop-shadow-none dark:text-primaryColorDarkMode  text-primaryColor drop-shadow-svgShadow dark:drop-shadow-svgShadowDarkMode  active:scale-110"
               onClick={handleClickPreviousButton}
               size={40}
             />
@@ -126,6 +126,7 @@ const MediaButtons = memo(
               bg-white rounded-full cursor-auto"
             >
               <AiFillPauseCircle
+                className="active:scale-105"
                 style={{ color: `${player.darkMode ? '#13c3ff' : '#660033'}` }}
                 onClick={() => isPlaying(false)}
                 size={50}
@@ -138,6 +139,7 @@ const MediaButtons = memo(
               className="bg-white cursor-auto  rounded-full"
             >
               <AiFillPlayCircle
+                className="active:scale-105"
                 style={{ color: `${player.darkMode ? '#13c3ff' : '#660033'}` }}
                 onClick={() => isPlaying(true)}
                 size={50}
@@ -150,7 +152,7 @@ const MediaButtons = memo(
             className=" p-[0.25rem] md:p-[0.50rem] cursor-auto"
           >
             <MdSkipNext
-              className="hover:drop-shadow-none dark:text-primaryColorDarkMode text-primaryColor drop-shadow-svgShadow dark:drop-shadow-svgShadowDarkMode  hover:scale-110"
+              className="active:drop-shadow-none dark:text-primaryColorDarkMode text-primaryColor drop-shadow-svgShadow dark:drop-shadow-svgShadowDarkMode  active:scale-110"
               onClick={handleClickNextButton}
               size={40}
             />
@@ -162,7 +164,7 @@ const MediaButtons = memo(
           className=" p-[0.25rem] md:p-[0.50rem] cursor-auto "
         >
           <MdShuffle
-            className="hover:drop-shadow-none text-primaryColor dark:text-primaryColorDarkMode drop-shadow-svgShadow dark:drop-shadow-svgShadowDarkMode  hover:scale-110"
+            className="active:drop-shadow-none text-primaryColor dark:text-primaryColorDarkMode drop-shadow-svgShadow dark:drop-shadow-svgShadowDarkMode  active:scale-110"
             onClick={handleClickShuffle}
             size={40}
           />

@@ -33,10 +33,6 @@ function Player({
     (element) => element.playlistId === player.currentActivePlaylistId,
   );
 
-  useEffect(() => {
-    // if (playlistSongsById[player.currentActivePlaylistId]) {
-  }, []);
-
   const afterSongEnds = () => {
     const currIndex = playlistDetails[findPlaylistIndex].currentIndex;
     if (

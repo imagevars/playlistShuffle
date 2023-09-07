@@ -140,7 +140,7 @@ function PlaylistUsed({
       <div className="w-1/3 flex justify-end">
         <button
           type="button"
-          className="text-bgWhite dark:text-bgBlack mx-0.5 hover:scale-110"
+          className="text-bgWhite dark:text-bgBlack mx-0.5 active:scale-110"
           onClick={() => handleUpdate(element.playlistId)}
         >
           <MdUpdate size="24" />
@@ -148,13 +148,13 @@ function PlaylistUsed({
         <button
           type="button"
           onClick={() => handleSortClick(element.playlistId)}
-          className="text-bgWhite dark:text-bgBlack mx-0.5 hover:scale-110"
+          className="text-bgWhite dark:text-bgBlack mx-0.5 active:scale-110"
         >
           <TbArrowsSort size="24" />
         </button>
         <button
           type="button"
-          className=" text-bgWhite dark:text-bgBlack mx-0.5 hover:scale-110"
+          className=" text-bgWhite dark:text-bgBlack mx-0.5 active:scale-110"
           onClick={() => handleDeleteFromPlaylist(element.playlistId)}
         >
           <TiDeleteOutline size="24" />

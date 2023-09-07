@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 function PlayingRightNow({ player }) {
   return (
-    <div className="md:flex  md:w-1/5 ">
+    <div className="md:flex  md:w-1/4 ">
 
       <div className="md:text-clip md:w-full">
         <p className="songTitle text-bgBlack font-semibold dark:font-semibold dark:text-bgWhite text-center md:text-left text-base lg:text-md truncate tracking-wide  mx-auto w-[95%] mt-2 md:mt-0 font-open">

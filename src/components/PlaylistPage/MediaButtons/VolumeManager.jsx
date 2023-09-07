@@ -23,11 +23,11 @@ function VolumeManager({ player, isMutedActive, setVolume }) {
   };
 
   return (
-    <div className="flex justify-center md:w-1/5 md:items-center">
+    <div className="flex justify-center md:w-1/4 md:items-center">
       { (player.volume >= 0.50 && player.isMutedActive === false)
       && (
       <BiVolumeFull
-        className="text-primaryColor dark:text-primaryColorDarkMode  hover:drop-shadow-svgShadow hover:scale-110"
+        className="text-primaryColor dark:text-primaryColorDarkMode  active:drop-shadow-svgShadow active:scale-110"
         size={30}
         onClick={handleIconClick}
       />
@@ -35,14 +35,14 @@ function VolumeManager({ player, isMutedActive, setVolume }) {
       { (player.volume < 0.50 && player.isMutedActive === false)
       && (
       <BiVolumeLow
-        className="text-primaryColor dark:text-primaryColorDarkMode hover:drop-shadow-svgShadow hover:scale-110"
+        className="text-primaryColor dark:text-primaryColorDarkMode active:drop-shadow-svgShadow active:scale-110"
         size={30}
         onClick={handleIconClick}
       />
       )}
       { player.isMutedActive === true && (
       <BiVolumeMute
-        className="text-primaryColor dark:text-primaryColorDarkMode  hover:drop-shadow-svgShadow hover:scale-110"
+        className="text-primaryColor dark:text-primaryColorDarkMode  active:drop-shadow-svgShadow active:scale-110"
         size={30}
         onClick={handleIconClick}
       />

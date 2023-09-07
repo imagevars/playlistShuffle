@@ -27,7 +27,7 @@ function HomePage({
   }, []);
 
   return (
-    <div className="h-screen min-h-screen bg-[#f2e7fe] dark:bg-bgBlack flex flex-col justify-between max-w-[2000px]">
+    <div className="h-screen min-h-screen bg-bgWhite dark:bg-bgBlack flex flex-col justify-between max-w-[2000px]">
       <HelmetHelper
         title="Shuffle Youtube Playlists - Playlist Randomizer"
       />
