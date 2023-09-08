@@ -119,7 +119,7 @@ function PlaylistUsed({
 
   const playlists = playlistDetails.map((element) => (
     <div
-      className="playlistUsedList cursor-pointer  my-2 mx-2 rounded-lg bg-primaryColor dark:bg-primaryColorDarkMode flex   "
+      className="playlistUsedList flex justify-between cursor-pointer  my-2 mx-2 rounded-lg bg-primaryColor dark:bg-primaryColorDarkMode"
       key={element.playlistId}
     >
       <button
@@ -137,34 +137,44 @@ function PlaylistUsed({
           {element.playlistName}
         </p>
       </button>
-      <div className="w-1/3 flex justify-end">
-        <button
-          type="button"
-          className="text-bgWhite dark:text-bgBlack mx-0.5 active:scale-110"
-          onClick={() => handleUpdate(element.playlistId)}
-        >
-          <MdUpdate size="24" />
-        </button>
-        <button
-          type="button"
-          onClick={() => handleSortClick(element.playlistId)}
-          className="text-bgWhite dark:text-bgBlack mx-0.5 active:scale-110"
-        >
-          <TbArrowsSort size="24" />
-        </button>
-        <button
-          type="button"
-          className=" text-bgWhite dark:text-bgBlack mx-0.5 active:scale-110"
-          onClick={() => handleDeleteFromPlaylist(element.playlistId)}
-        >
-          <TiDeleteOutline size="24" />
-        </button>
+      <div className="w-1/4 flex justify-end">
+        <div className="group relative w-max my-auto">
+
+          <button
+            type="button"
+            className="text-bgWhite dark:text-bgBlack mx-0.5 active:scale-110"
+            onClick={() => handleUpdate(element.playlistId)}
+          >
+            <MdUpdate size="24" />
+          </button>
+          <span className="pointer-events-none absolute -translate-x-2/4  left-2/4  -bottom-full w-max rounded bg-bgBlack px-2 py-1 text-sm font-medium text-bgWhite opacity-0 shadow transition-opacity duration-250 ease-in group-hover:opacity-100"> Update </span>
+        </div>
+        <div className="group relative w-max my-auto">
+          <button
+            type="button"
+            onClick={() => handleSortClick(element.playlistId)}
+            className="text-bgWhite dark:text-bgBlack mx-0.5 active:scale-110"
+          >
+            <TbArrowsSort size="24" />
+          </button>
+          <span className="pointer-events-none absolute -translate-x-2/4  left-1/4  -bottom-full w-max rounded bg-bgBlack px-2 py-1 text-sm font-medium text-bgWhite opacity-0 shadow transition-opacity duration-250 ease-in group-hover:opacity-100">Sort by Default</span>
+        </div>
+        <div className="group relative w-max my-auto">
+          <button
+            type="button"
+            className=" text-bgWhite dark:text-bgBlack mx-0.5 active:scale-110"
+            onClick={() => handleDeleteFromPlaylist(element.playlistId)}
+          >
+            <TiDeleteOutline size="24" />
+          </button>
+          <span className="pointer-events-none absolute -translate-x-2/4  left-1/4  -bottom-full w-max rounded bg-bgBlack px-2 py-1 text-sm font-medium text-bgWhite opacity-0 shadow transition-opacity duration-250 ease-in group-hover:opacity-100">Delete</span>
+        </div>
       </div>
     </div>
   ));
 
   return (
-    <div className="playlistUsedContainer overflow-auto h-3/6 my-4 w-11/12 mx-auto md:max-w-[1600px]">
+    <div className="playlistUsedContainer overflow-x-hidden overflow-y-auto h-3/6 my-4 w-11/12 mx-auto md:max-w-[1600px]">
       {playlistDetails.length ? playlists : null}
     </div>
   );
