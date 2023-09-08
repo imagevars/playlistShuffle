@@ -21,7 +21,7 @@ const fetchPlaylistVideos = async (id, etag) => {
           pageToken: nextToken,
           playlistId: id,
           fields:
-            'etag,nextPageToken,items(snippet(title,videoOwnerChannelTitle,position, thumbnails(default(url)), resourceId(videoId))),pageInfo',
+            'etag,nextPageToken,items(snippet(title,videoOwnerChannelTitle,position, resourceId(videoId))),pageInfo',
         },
       });
       responseArr.push(...responseListItems.data.items);
