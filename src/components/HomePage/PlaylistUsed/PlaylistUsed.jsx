@@ -119,7 +119,7 @@ function PlaylistUsed({
 
   const playlists = playlistDetails.map((element) => (
     <div
-      className="playlistUsedList flex justify-between cursor-pointer  my-2 mx-2 rounded-lg bg-primaryColor dark:bg-primaryColorDarkMode"
+      className="playlistUsedList flex justify-between cursor-pointer  my-2 mx-2 rounded-lg text-bgWhite dark:bg-primaryColorDarkModeDarker dark:hover:bg-primaryColorDarkMode  bg-primaryColorMoreDarker hover:bg-primaryColor"
       key={element.playlistId}
     >
       <button

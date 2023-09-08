@@ -27,7 +27,7 @@ function VolumeManager({ player, isMutedActive, setVolume }) {
       { (player.volume >= 0.50 && player.isMutedActive === false)
       && (
       <BiVolumeFull
-        className="text-primaryColor dark:text-primaryColorDarkMode  active:drop-shadow-svgShadow active:scale-110"
+        className="  dark:text-primaryColorDarkModeDarker dark:hover:text-primaryColorDarkMode  text-primaryColorMoreDarker hover:text-primaryColor  active:drop-shadow-svgShadow active:scale-110"
         size={30}
         onClick={handleIconClick}
       />
@@ -35,14 +35,14 @@ function VolumeManager({ player, isMutedActive, setVolume }) {
       { (player.volume < 0.50 && player.isMutedActive === false)
       && (
       <BiVolumeLow
-        className="text-primaryColor dark:text-primaryColorDarkMode active:drop-shadow-svgShadow active:scale-110"
+        className=" dark:text-primaryColorDarkModeDarker dark:hover:text-primaryColorDarkMode  text-primaryColorMoreDarker hover:text-primaryColor  active:drop-shadow-svgShadow active:scale-110"
         size={30}
         onClick={handleIconClick}
       />
       )}
       { player.isMutedActive === true && (
       <BiVolumeMute
-        className="text-primaryColor dark:text-primaryColorDarkMode  active:drop-shadow-svgShadow active:scale-110"
+        className=" dark:text-primaryColorDarkModeDarker dark:hover:text-primaryColorDarkMode  text-primaryColorMoreDarker hover:text-primaryColor  active:drop-shadow-svgShadow active:scale-110"
         size={30}
         onClick={handleIconClick}
       />
@@ -50,7 +50,7 @@ function VolumeManager({ player, isMutedActive, setVolume }) {
       <input
         aria-label="volume manager"
         type="range"
-        className="w-full accent-primaryColor dark:accent-primaryColorDarkMode"
+        className="w-full  dark:accent-primaryColorDarkModeDarker dark:hover:accent-primaryColorDarkMode active:accent-primaryColorMoreDarker dark:active:accent-primaryColorDarkModeDarker accent-primaryColor hover:accent-primaryColor "
         name="volume"
         id="volume"
         value={player.volume}

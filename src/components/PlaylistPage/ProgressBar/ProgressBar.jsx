@@ -42,7 +42,7 @@ function ProgressBar({
       <input
         aria-label="progress bar"
         type="range"
-        className="w-full accent-primaryColor dark:accent-primaryColorDarkMode"
+        className="w-full   dark:accent-primaryColorDarkModeDarker dark:hover:accent-primaryColorDarkMode active:accent-primaryColorMoreDarker dark:active:accent-primaryColorDarkModeDarker accent-primaryColor hover:accent-primaryColor"
         name="volume"
         id="volume"
         value={player.videoPercentage / 100}

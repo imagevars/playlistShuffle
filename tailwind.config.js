@@ -22,8 +22,10 @@ module.exports = {
     },
     colors: {
       bgWhite: '#F2E7FE',
-      primaryColor: '#660033',
-      primaryColorDarkMode: '#13c3ff',
+      primaryColor: '#0c518a',
+      primaryColorMoreDarker: '#0b4677',
+      primaryColorDarkMode: '#00ace6',
+      primaryColorDarkModeDarker: '#0099cd',
       borderColor: '#C6C6C6',
       bgBlack: '#000000',
       gray: '#4F4F4F',
