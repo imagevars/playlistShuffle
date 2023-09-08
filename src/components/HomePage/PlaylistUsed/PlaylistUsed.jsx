@@ -133,7 +133,7 @@ function PlaylistUsed({
           alt={`${element.playlistName}`}
           src={element.playlistImage}
         />
-        <p className="usedPlaylistName ml-2 text-sm md:text-base font-open text-bgWhite dark:text-bgBlack font-medium truncate ">
+        <p className="usedPlaylistName ml-2 text-sm md:text-base font-open text-bgWhite dark:text-bgWhite font-medium truncate ">
           {element.playlistName}
         </p>
       </button>
@@ -142,7 +142,7 @@ function PlaylistUsed({
 
           <button
             type="button"
-            className="text-bgWhite dark:text-bgBlack mx-0.5 active:scale-110"
+            className="text-bgWhite dark:text-bgWhite mx-0.5 active:scale-110"
             onClick={() => handleUpdate(element.playlistId)}
           >
             <MdUpdate size="24" />
@@ -153,7 +153,7 @@ function PlaylistUsed({
           <button
             type="button"
             onClick={() => handleSortClick(element.playlistId)}
-            className="text-bgWhite dark:text-bgBlack mx-0.5 active:scale-110"
+            className="text-bgWhite dark:text-bgWhite mx-0.5 active:scale-110"
           >
             <TbArrowsSort size="24" />
           </button>
@@ -162,7 +162,7 @@ function PlaylistUsed({
         <div className="group relative w-max my-auto">
           <button
             type="button"
-            className=" text-bgWhite dark:text-bgBlack mx-0.5 active:scale-110"
+            className=" text-bgWhite dark:text-bgWhite mx-0.5 active:scale-110"
             onClick={() => handleDeleteFromPlaylist(element.playlistId)}
           >
             <TiDeleteOutline size="24" />
