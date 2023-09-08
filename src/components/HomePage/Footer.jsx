@@ -11,7 +11,7 @@ function Footer() {
   return (
     <div className="flex justify-center">
       <footer className="flex justify-center items-center">
-        <button type="button" onClick={handleClick} className="text-bgBlack text-center mx-2 font-open dark:text-bgWhite">about</button>
+        <button type="button" onClick={handleClick} className="text-bgBlack text-center mx-2 font-open dark:text-bgWhite text-lg">About</button>
       </footer>
     </div>
   );
