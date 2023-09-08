@@ -6,6 +6,7 @@ import HomePage from './components/HomePage/HomePage';
 import PlaylistPage from './components/PlaylistPage/PlaylistPage';
 import './app.css';
 import ErrorPage from './components/ErrorPage/ErrorPage';
+import AboutPage from './components/AboutPage/AboutPage';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route exact path="/" element={<HomePage />} />
         <Route exact path="/:id" element={<PlaylistPage />} />
         <Route path="/error" element={<ErrorPage />} />
+        <Route path="/about" element={<AboutPage />} />
       </Routes>
       <Analytics />
     </>

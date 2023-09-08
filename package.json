@@ -35,7 +35,8 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.2",
-    "screenfull": "^6.0.2"
+    "screenfull": "^6.0.2",
+    "webpack": "^5.88.2"
   },
   "devDependencies": {
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.10",

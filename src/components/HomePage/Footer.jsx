@@ -2,8 +2,13 @@ import React from 'react';
 import { AiFillGithub } from 'react-icons/ai';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 function Footer({ player }) {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate('/about');
+  };
   const style = { color: 'bgBlack' };
   return (
     <div className="flex justify-center">
@@ -14,10 +19,7 @@ function Footer({ player }) {
             : <AiFillGithub style={style} size={30} />}
 
         </a>
-        {/* <p className="text-center text-lg
-        dark:text-bgWhite"><a className="hover:text-[#607db7] hover:underline"
-        href="mailto:playlistShuffle@protonmail.com ">Suggestions?</a></p> */}
-        <p className="text-bgBlack text-center mx-2 font-open dark:text-bgWhite">about</p>
+        <button type="button" onClick={handleClick} className="text-bgBlack text-center mx-2 font-open dark:text-bgWhite">about</button>
       </footer>
     </div>
   );
