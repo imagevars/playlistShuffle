@@ -50,7 +50,7 @@ function VolumeManager({ player, isMutedActive, setVolume }) {
       <input
         aria-label="volume manager"
         type="range"
-        className="w-full"
+        className="w-full accent-primaryColor dark:accent-primaryColorDarkMode"
         name="volume"
         id="volume"
         value={player.volume}
