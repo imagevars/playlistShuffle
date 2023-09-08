@@ -23,7 +23,7 @@ function VolumeManager({ player, isMutedActive, setVolume }) {
   };
 
   return (
-    <div className="flex justify-center md:w-1/4 md:items-center">
+    <div className="flex justify-center w-1/2 mx-auto mb-2 md:mb-0  md:w-1/6   md:items-center">
       { (player.volume >= 0.50 && player.isMutedActive === false)
       && (
       <BiVolumeFull
@@ -50,7 +50,7 @@ function VolumeManager({ player, isMutedActive, setVolume }) {
       <input
         aria-label="volume manager"
         type="range"
-        className="w-3/5"
+        className="w-full"
         name="volume"
         id="volume"
         value={player.volume}
