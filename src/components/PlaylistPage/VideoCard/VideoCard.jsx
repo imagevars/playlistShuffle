@@ -100,20 +100,20 @@ function VideoCard({
             <div
               className={`${
                 player.currentSong === ele.snippet.resourceId.videoId
-                  ? ' text-primaryColor  dark:text-primaryColorDarkMode font-semibold  dark:font-semibold '
+                  ? ' text-primaryColor  dark:text-DarkPrimaryColor font-semibold  dark:font-semibold '
                   : ' dark:text-bgWhite '
-              } font-normal w-full text-center md:text-left md:mx-4 md:truncate font-open hover:text-primaryColor  dark:hover:text-primaryColorDarkMode`}
+              } font-normal w-full text-center md:text-left md:mx-4 md:truncate font-open hover:text-primaryColor  dark:hover:text-DarkPrimaryColor`}
             >
               <p className="truncate ">
                 {`${i + 1} - ${ele.snippet.title}`}
               </p>
 
-              <p className={`${player.currentSong === ele.snippet.resourceId.videoId ? ' text-primaryColor dark:text-primaryColorDarkMode  ' : 'text-gray dark:text-clearGray '}text-sm font-open `}>
+              <p className={`${player.currentSong === ele.snippet.resourceId.videoId ? ' text-primaryColor dark:text-DarkPrimaryColor  ' : 'text-gray dark:text-clearGray '}text-sm font-open `}>
                 {ele.snippet.videoOwnerChannelTitle}
               </p>
             </div>
           </div>
-          <div className={`${player.currentSong === ele.snippet.resourceId.videoId ? (' bg-primaryColor shadow-none dark:bg-primaryColorDarkMode ') : ('bg-clearGray shadow-shadowLine dark:shadow-shadowLineDarkMode  ')}w-[88%] h-0.5 mx-auto rounded-full `} />
+          <div className={`${player.currentSong === ele.snippet.resourceId.videoId ? (' bg-primaryColor shadow-none dark:bg-DarkPrimaryColor ') : ('bg-clearGray shadow-shadowLine dark:shadow-shadowLineDarkMode  ')}w-[88%] h-0.5 mx-auto rounded-full `} />
         </div>
       </button>
     ),

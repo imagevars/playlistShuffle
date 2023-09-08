@@ -114,7 +114,7 @@ function Search({
             value={playlistId}
           />
           <button
-            className=" rounded-md px-4 w-2/12 md:w-1/12 font-open shadow-shadowBox active:shadow-none dark:shadow-shadowBoxDarkMode dark:active:shadow-none flex items-center justify-center text-bgWhite dark:bg-primaryColorDarkModeDarker dark:hover:bg-primaryColorDarkMode  bg-primaryColorMoreDarker hover:bg-primaryColor"
+            className=" rounded-md px-4 w-2/12 md:w-1/12 font-open shadow-shadowBox active:shadow-none dark:shadow-shadowBoxDarkMode dark:active:shadow-none flex items-center justify-center text-bgWhite dark:bg-DarkPrimaryColorDarker dark:hover:bg-DarkPrimaryColor  bg-primaryColorDarker hover:bg-primaryColor"
             type="submit"
           >
             {isPlaylistLoading === true ? (
