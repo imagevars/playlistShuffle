@@ -1,26 +1,48 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { BiErrorCircle } from 'react-icons/bi';
 import Navbar from '../Navbar/Navbar';
 
 function ErrorPage() {
   const navigate = useNavigate();
-  const handleClick = () => {
+  const handleClickHome = () => {
     navigate('/');
   };
+
+  const handleClickAbout = () => {
+    navigate('/about');
+  };
   return (
-    <div className="min-h-screen bg-bgWhite  w-full  dark:bg-bgBlack ">
-      <div className="w-[95%] md:max-w-[2200px] mx-auto my-0">
-        <Navbar />
-        <div className="flex flex-col items-center justify-center h-96 ">
-          <h1 className="text-bgBlack text-3xl dark:text-bgWhite ">An error has occurred</h1>
-          <p className="text-bgBlack text-xl dark:text-bgWhite ">Go back home </p>
-          <button
-            type="button"
-            onClick={handleClick}
-            className="text-bgBlack text-4xl dark:text-white  hover:text-violet-200 underline"
-          >
-            click here
-          </button>
+    <div className="bg-bgWhite dark:bg-bgBlack h-screen min-h-screen">
+      <Navbar />
+      <div className="flex flex-col text-primaryColor dark:text-DarkPrimaryColor justify-center items-center bg-bgWhite dark:bg-bgBlack w-4/4 md:w-3/5 mt-12">
+        <BiErrorCircle fill="red" size={75} />
+        <h1 className="text-bgBlack text-center text-3xl font-semibold font-open dark:text-bgWhite ">An error has occurred</h1>
+        <div>
+          <p className="text-bgBlack dark:text-bgWhite my-1 font-open text-center">
+            To report the problem on github&nbsp;
+            <a className="text-primaryColor dark:text-DarkPrimaryColor font-semibold font-open hover:scale-110" href="https://github.com/jooonathann/playlistShuffle/issues" target="_blank" rel="noopener noreferrer" aria-label="github link">here</a>
+          </p>
+          <p className="text-bgBlack dark:text-bgWhite font-open text-center">
+            More info about the page&nbsp;
+            <button
+              onClick={handleClickAbout}
+              className="text-primaryColor dark:text-DarkPrimaryColor my-1 font-semibold font-open"
+              type="button"
+            >
+              here
+            </button>
+          </p>
+          <p className="text-bgBlack dark:text-bgWhite my-1 font-open text-center">
+            To go back home&nbsp;
+            <button
+              onClick={handleClickHome}
+              className="text-primaryColor dark:text-DarkPrimaryColor font-semibold font-open"
+              type="button"
+            >
+              here
+            </button>
+          </p>
         </div>
       </div>
     </div>
