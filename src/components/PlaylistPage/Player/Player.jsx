@@ -168,6 +168,14 @@ function Player({
         onError={() => handleError()}
         onPlay={() => handlePlay()}
         onPause={() => handlePause()}
+        config={{
+          youtube: {
+            playerVars: {
+              color: 'white',
+              controls: 1,
+            },
+          },
+        }}
         onReady={() => handleReady()}
         onEnded={() => handleEnd()}
         volume={player.volume}
