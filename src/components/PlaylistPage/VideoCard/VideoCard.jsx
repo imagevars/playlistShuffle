@@ -113,7 +113,7 @@ function VideoCard({
               </p>
             </div>
           </div>
-          <div className={`${player.currentSong === ele.snippet.resourceId.videoId ? (' bg-primaryColor shadow-none dark:bg-DarkPrimaryColor ') : ('bg-clearGray shadow-shadowLine dark:shadow-shadowLineDarkMode  ')}w-[88%] h-0.5 mx-auto rounded-full `} />
+          <div className={`${player.currentSong === ele.snippet.resourceId.videoId ? (' bg-primaryColor shadow-none dark:bg-DarkPrimaryColor ') : ('bg-bgShadow shadow-shadowLine dark:shadow-shadowLineDarkMode  ')}w-[88%] h-0.5 mx-auto rounded-full `} />
         </div>
       </button>
     ),

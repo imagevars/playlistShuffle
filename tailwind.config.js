@@ -16,7 +16,7 @@ module.exports = {
         shadowBox: '1.5px 1.5px 2px black;',
         shadowBoxDarkMode: '1.5px 1.5px 2px white;',
         shadowLine: '1px 1px 1px bgBlack;',
-        shadowLineDarkMode: '1px 1px 1px white;',
+        shadowLineDarkMode: '1px 1px 1px #8c8c8c;',
 
       },
     },
@@ -28,6 +28,7 @@ module.exports = {
       DarkPrimaryColorDarker: '#008BA7',
       borderColor: '#C6C6C6',
       bgBlack: '#000000',
+      bgShadow: '#4d4d4d',
       gray: '#4F4F4F',
       clearGray: '#C6C6C6',
       lightGray: '#d4d4d4',
