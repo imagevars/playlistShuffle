@@ -31,6 +31,7 @@ function PlaylistPage({
   isMutedActive,
   playlistDetails,
   lastPlayedIndexPlaylistDetails,
+  setVolume,
 }) {
   const { id } = useParams();
 
@@ -199,6 +200,7 @@ PlaylistPage.propTypes = {
     currentIndex: PropTypes.number.isRequired,
   })).isRequired,
   lastPlayedIndexPlaylistDetails: PropTypes.func.isRequired,
+  setVolume: PropTypes.func.isRequired,
 
 };
 
