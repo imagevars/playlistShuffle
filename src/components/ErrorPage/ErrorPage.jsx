@@ -15,7 +15,7 @@ function ErrorPage() {
   return (
     <div className="bg-bgWhite dark:bg-bgBlack h-screen min-h-screen">
       <Navbar />
-      <div className="flex flex-col text-primaryColor dark:text-DarkPrimaryColor justify-center items-center bg-bgWhite dark:bg-bgBlack w-4/4 md:w-3/5 mt-12">
+      <div className="flex flex-col items-center md:w-3/5 mt-14 mx-auto">
         <BiErrorCircle fill="red" size={75} />
         <h1 className="text-bgBlack text-center text-3xl font-semibold font-open dark:text-bgWhite ">An error has occurred</h1>
         <div>
