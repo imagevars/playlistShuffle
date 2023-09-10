@@ -79,12 +79,12 @@ function PlaylistPage({
           break;
         }
         case 'ArrowDown': {
-          if (player.volume - 0.05 >= 0) {
+          if (player.volume - 0.05 > 0.006) {
             setVolume(player.volume - 0.05);
           } else {
+            isMutedActive(true);
             setVolume(0);
           }
-          isMutedActive(false);
           break;
         }
         case 'ArrowLeft': {
