@@ -103,7 +103,7 @@ function Search({
         </label>
         <div className="w-full flex my-2 justify-between">
           <input
-            className={`inputSearch w-5/6 md:w-11/12 mr-2 py-2 rounded-md font-open shadow-2xl focus:outline-none focus:shadow-outline  ${
+            className={`inputSearch w-5/6 md:w-11/12 mr-2 py-2 px-2 rounded-md font-open shadow-2xl focus:outline-none focus:shadow-outline  ${
               isIdInvalid ? 'border border-red-500' : ''
             }`}
             pattern="^(?=.*.{24,})(?=.*PL).*|^play my pl$"
