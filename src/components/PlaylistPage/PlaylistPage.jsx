@@ -156,11 +156,11 @@ function PlaylistPage({
         />
         <Navbar />
 
-        <div className="h-1/5 mb-2 w-full  md:float-left md:w-3/5 md:h-[68%] md:flex-shrink">
+        <div className="h-1/5 mb-2 w-full  md:float-left md:w-3/5 md:h-[68%]">
           <PlaylistInfo />
           <Player />
         </div>
-        <div className="w-10/12  overflow-auto mt-9 md:float-right md:w-2/5  md:h-[68%] md:flex-shrink">
+        <div className="w-10/12  overflow-auto mt-9 md:mt-8 md:float-right md:w-2/5  md:h-[68%] ">
           <VideoCard />
         </div>
         <div className="w-11/12  md:w-full md:clear-both md:absolute md:bottom-0 md:flex">

@@ -80,7 +80,7 @@ function VideoCard({
     (ele, i) => (
       <button
         type="button"
-        className="w-full my-1 "
+        className="w-full my-1"
         title={ele.snippet.title}
         ref={refs[ele.snippet.resourceId.videoId]}
         id={`${ele.snippet.resourceId.videoId}`}
@@ -93,27 +93,27 @@ function VideoCard({
             player.currentSong === ele.snippet.resourceId.videoId
               ? 'border-b-primaryColor '
               : null
-          }  text-center `}
+          }  text-center  group`}
         >
-          <div className=" flex justify-between hover:text-primaryColor ">
+          <div className=" flex justify-between group-hover:text-primaryColor ">
 
             <div
               className={`${
                 player.currentSong === ele.snippet.resourceId.videoId
                   ? ' text-primaryColor  dark:text-DarkPrimaryColor font-semibold  dark:font-semibold '
                   : ' dark:text-bgWhite '
-              } font-normal w-full text-center md:text-left md:mx-4 md:truncate font-open hover:text-primaryColor  dark:hover:text-DarkPrimaryColor`}
+              } font-normal w-full text-center md:text-left md:mx-4 md:truncate font-open`}
             >
-              <p className="truncate ">
+              <p className="truncate group-hover:text-primaryColor group-hover:dark:text-DarkPrimaryColor">
                 {`${i + 1} - ${ele.snippet.title}`}
               </p>
 
-              <p className={`${player.currentSong === ele.snippet.resourceId.videoId ? ' text-primaryColor dark:text-DarkPrimaryColor  ' : 'text-gray dark:text-clearGray '}text-sm font-open `}>
+              <p className={`${player.currentSong === ele.snippet.resourceId.videoId ? ' text-primaryColor dark:text-DarkPrimaryColor  ' : 'text-gray dark:text-clearGray group-hover:text-primaryColor group-hover:dark:text-DarkPrimaryColor '}text-sm font-open `}>
                 {ele.snippet.videoOwnerChannelTitle}
               </p>
             </div>
           </div>
-          <div className={`${player.currentSong === ele.snippet.resourceId.videoId ? (' bg-primaryColor shadow-none dark:bg-DarkPrimaryColor ') : ('bg-bgShadow shadow-shadowLine dark:shadow-shadowLineDarkMode  ')}w-[88%] h-0.5 mx-auto rounded-full `} />
+          <div className={`${player.currentSong === ele.snippet.resourceId.videoId ? (' bg-primaryColor shadow-none dark:bg-DarkPrimaryColor ') : ('bg-bgShadow  ')}w-[88%] h-0.5 mx-auto rounded-full group-hover:bg-primaryColor group-hover:dark:bg-DarkPrimaryColor`} />
         </div>
       </button>
     ),
