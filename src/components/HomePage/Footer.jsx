@@ -24,7 +24,7 @@ function Footer() {
         <AiFillInfoCircle
           onClick={handleClick}
           size={30}
-          className="mx-3 my-1 text-primaryColor active:bg-DarkPrimaryColor dark:text-DarkPrimaryColor cursor-pointer hover:text-DarkPrimaryColor dark:hover:text-bgWhite"
+          className="mx-3 my-1 text-primaryColor dark:text-DarkPrimaryColor cursor-pointer hover:text-DarkPrimaryColor dark:hover:text-bgWhite"
         />
         <a
           target="_blank"
