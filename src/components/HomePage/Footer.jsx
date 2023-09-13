@@ -29,7 +29,7 @@ function Footer() {
         <a
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="github link"
+          aria-label="twitter link"
           href="https://twitter.com/Jonathhn1"
         >
           <AiOutlineTwitter size={30} className="mx-3 my-1 text-primaryColor dark:text-DarkPrimaryColor hover:text-[#1da1f2] dark:hover:text-[#1da1f2]" />
