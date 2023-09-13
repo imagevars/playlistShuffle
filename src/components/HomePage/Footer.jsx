@@ -1,7 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { AiFillGithub, AiOutlineTwitter, AiFillInfoCircle } from 'react-icons/ai';
 
 function Footer() {
   const navigate = useNavigate();
@@ -9,19 +8,36 @@ function Footer() {
     navigate('/about');
   };
   return (
-    <div className="flex justify-center">
-      <footer className="flex justify-center items-center">
-        <button type="button" onClick={handleClick} className="text-bgBlack text-center mx-2 font-open dark:text-bgWhite text-lg">About</button>
-      </footer>
-    </div>
+    <footer className="">
+      <div className="flex justify-center">
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="github link"
+          href="https://github.com/jooonathann/playlistShuffle"
+        >
+          <AiFillGithub
+            size={30}
+            className="mx-3 my-1 text-primaryColor dark:text-DarkPrimaryColor hover:text-[#333333] dark:hover:text-bgWhite"
+          />
+        </a>
+        <AiFillInfoCircle
+          onClick={handleClick}
+          size={30}
+          className="mx-3 my-1 text-primaryColor active:bg-DarkPrimaryColor dark:text-DarkPrimaryColor cursor-pointer hover:text-DarkPrimaryColor dark:hover:text-bgWhite"
+        />
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="github link"
+          href="https://twitter.com/Jonathhn1"
+        >
+          <AiOutlineTwitter size={30} className="mx-3 my-1 text-primaryColor dark:text-DarkPrimaryColor hover:text-[#1da1f2] dark:hover:text-[#1da1f2]" />
+        </a>
+      </div>
+    </footer>
+
   );
 }
 
-Footer.propTypes = {
-  player: PropTypes.shape({
-    darkMode: PropTypes.bool.isRequired,
-  }).isRequired,
-
-};
-
-export default connect(null, null)(Footer);
+export default Footer;

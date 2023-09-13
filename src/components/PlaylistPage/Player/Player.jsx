@@ -50,8 +50,7 @@ function Player({
       );
     } else if (playlistDetails[findPlaylistIndex].currentIndex
       === playlistSongsById[player.currentActivePlaylistId].length - 1) {
-      // eslint-disable-next-line
-      console.log('No more songs left');
+      // empty
     }
   };
 
@@ -60,8 +59,7 @@ function Player({
       playlistDetails[findPlaylistIndex].currentIndex
       === playlistSongsById[player.currentActivePlaylistId].length
     ) {
-      // eslint-disable-next-line
-      console.log('Playlist Ended');
+      // empty
       isPlaying(false);
     } else {
       afterSongEnds();
@@ -76,8 +74,7 @@ function Player({
       currIndex
       === playlistDetails[findPlaylistIndex].playlistLength
     ) {
-      // eslint-disable-next-line
-      console.log('Playlist Ended');
+      // empty
       isPlaying(false);
     } else afterSongEnds();
   };

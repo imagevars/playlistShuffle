@@ -118,8 +118,7 @@ function PlaylistPage({
             playlistDetails[findPlaylistIndex].currentIndex
             === playlistSongsById[player.currentActivePlaylistId].length - 1
           ) {
-          // eslint-disable-next-line
-            console.log('No more songs left');
+          // empty
           }
           break;
         }

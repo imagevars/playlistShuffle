@@ -11,8 +11,6 @@ const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'
 const { HotModuleReplacementPlugin } = require('webpack');
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
-// eslint-disable-next-line
-console.log('process.env.NODE_ENV  ', process.env.NODE_ENV);
 module.exports = {
   mode: isDevelopment ? 'development' : 'production',
   entry: ['./src/main.jsx', './src/app.css'],

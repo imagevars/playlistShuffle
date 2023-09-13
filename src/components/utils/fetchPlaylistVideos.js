@@ -39,8 +39,6 @@ const fetchPlaylistVideos = async (id, etag) => {
     } if (error.response.status === 404) {
       return error.response.status;
     } if (error.response.status === 500) {
-      // eslint-disable-next-line
-      console.log('Server Error');
       return 404;
     }
     // eslint-disable-next-line

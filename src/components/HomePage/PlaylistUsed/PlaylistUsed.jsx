@@ -91,9 +91,8 @@ function PlaylistUsed({
       currentPlaylistInfo[0].playlistEtag,
     );
     if (data === 304) {
-      console.log('The playlist is still the same');
+      // empty
     } else {
-      console.log('The playlist was updated');
       const playlistObject = {
         id,
         songs: data.responseArrToAdd,
