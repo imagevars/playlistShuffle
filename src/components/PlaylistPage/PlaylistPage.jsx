@@ -223,7 +223,7 @@ function PlaylistPage({
       // eslint-disable-next-line
       tabIndex={0}
       // passive="true"
-      className="h-screen min-h-screen bg-bgWhite dark:bg-bgBlack "
+      className="h-screen min-h-screen bg-bgWhite dark:bg-bgBlack  focus:outline-none "
     >
       <HelmetHelper
         title={
