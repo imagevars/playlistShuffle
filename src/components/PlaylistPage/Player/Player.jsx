@@ -29,6 +29,10 @@ function Player({
 }) {
   const playerRef = useRef(null);
 
+  useEffect(() => {
+    playerRef.current.seekTo(player.seekKeyboard, 'fraction');
+  }, [player.seekKeyboard]);
+
   const findPlaylistIndex = playlistDetails.findIndex(
     (element) => element.playlistId === player.currentActivePlaylistId,
   );
@@ -200,6 +204,7 @@ Player.propTypes = {
     seeking: PropTypes.bool.isRequired,
     seekTo: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
+    seekKeyboard: PropTypes.number.isRequired,
 
   }).isRequired,
   playlistDetails: PropTypes.arrayOf(PropTypes.shape({

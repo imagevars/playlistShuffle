@@ -12,6 +12,7 @@ import {
   currentSong,
   isMutedActive,
   setVolume,
+  setSeekKeyboard,
 } from '../../redux/actions/playerActions';
 import { lastPlayedIndexPlaylistDetails } from '../../redux/actions/playlistDetailsActions';
 import PlayingRightNow from './PlayingRightNow/PlayingRightNow';
@@ -32,6 +33,7 @@ function PlaylistPage({
   playlistDetails,
   lastPlayedIndexPlaylistDetails,
   setVolume,
+  setSeekKeyboard,
 }) {
   const { id } = useParams();
 
@@ -122,6 +124,86 @@ function PlaylistPage({
           }
           break;
         }
+        case 'Numpad0': {
+          setSeekKeyboard(0);
+          break;
+        }
+        case 'Numpad1': {
+          setSeekKeyboard(0.1);
+          break;
+        }
+        case 'Numpad2': {
+          setSeekKeyboard(0.2);
+          break;
+        }
+        case 'Numpad3': {
+          setSeekKeyboard(0.3);
+          break;
+        }
+        case 'Numpad4': {
+          setSeekKeyboard(0.4);
+          break;
+        }
+        case 'Numpad5': {
+          setSeekKeyboard(0.5);
+          break;
+        }
+        case 'Numpad6': {
+          setSeekKeyboard(0.6);
+          break;
+        }
+        case 'Numpad7': {
+          setSeekKeyboard(0.7);
+          break;
+        }
+        case 'Numpad8': {
+          setSeekKeyboard(0.8);
+          break;
+        }
+        case 'Numpad9': {
+          setSeekKeyboard(0.9);
+          break;
+        }
+        case 'Digit0': {
+          setSeekKeyboard(0);
+          break;
+        }
+        case 'Digit1': {
+          setSeekKeyboard(0.1);
+          break;
+        }
+        case 'Digit2': {
+          setSeekKeyboard(0.2);
+          break;
+        }
+        case 'Digit3': {
+          setSeekKeyboard(0.3);
+          break;
+        }
+        case 'Digit4': {
+          setSeekKeyboard(0.4);
+          break;
+        }
+        case 'Digit5': {
+          setSeekKeyboard(0.5);
+          break;
+        }
+        case 'Digit6': {
+          setSeekKeyboard(0.6);
+          break;
+        }
+        case 'Digit7': {
+          setSeekKeyboard(0.7);
+          break;
+        }
+        case 'Digit8': {
+          setSeekKeyboard(0.8);
+          break;
+        }
+        case 'Digit9': {
+          setSeekKeyboard(0.9);
+          break;
+        }
         default: break;
       }
     };
@@ -200,6 +282,7 @@ PlaylistPage.propTypes = {
   })).isRequired,
   lastPlayedIndexPlaylistDetails: PropTypes.func.isRequired,
   setVolume: PropTypes.func.isRequired,
+  setSeekKeyboard: PropTypes.func.isRequired,
 
 };
 
@@ -211,6 +294,7 @@ const mapDispatchToProps = {
   isMutedActive,
   lastPlayedIndexPlaylistDetails,
   setVolume,
+  setSeekKeyboard,
 };
 
 const mapStateToProps = (state) => ({
