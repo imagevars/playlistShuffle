@@ -165,6 +165,7 @@ function Player({
         onError={() => handleError()}
         onPlay={() => handlePlay()}
         onPause={() => handlePause()}
+        light
         config={{
           youtube: {
             playerVars: {
@@ -198,6 +199,7 @@ Player.propTypes = {
     volume: PropTypes.number.isRequired,
     seeking: PropTypes.bool.isRequired,
     seekTo: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
 
   }).isRequired,
   playlistDetails: PropTypes.arrayOf(PropTypes.shape({
