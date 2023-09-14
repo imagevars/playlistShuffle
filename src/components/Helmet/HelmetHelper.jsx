@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 function HelmetHelper({ title }) {
   return (
     <Helmet
-      defaultTitle="Shuffle Youtube Playlists - Playlist Randomizer"
+      defaultTitle="Playlist Randomizer - Shuffle Youtube Playlists"
       title={title}
       defer={false}
     />
