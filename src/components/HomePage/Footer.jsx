@@ -35,6 +35,7 @@ function Footer() {
           <AiOutlineTwitter size={30} className="mx-3 my-1 text-primaryColor dark:text-DarkPrimaryColor hover:text-[#1da1f2] dark:hover:text-[#1da1f2]" />
         </a>
       </div>
+      <p className="text-bgBlack dark:text-bgWhite text-center my-1 font-open">Made with ♥ by Jonathan</p>
     </footer>
 
   );
