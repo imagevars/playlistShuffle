@@ -51,8 +51,8 @@ function PlaylistUsed({
       playlistSongsById[id][playlistDetails[findPlaylistIndex].currentIndex]
         .snippet.resourceId.videoId,
     );
-    navigate(`/${id}`);
     setIsPlLoading(false);
+    navigate(`/${id}`);
   };
 
   const handleDeleteFromPlaylist = (id) => {
@@ -91,7 +91,7 @@ function PlaylistUsed({
       currentPlaylistInfo[0].playlistEtag,
     );
     if (data === 304 || data === undefined || data === 404) {
-      // empty
+      setIsPlLoading(false);
     } else {
       const playlistObject = {
         id,
