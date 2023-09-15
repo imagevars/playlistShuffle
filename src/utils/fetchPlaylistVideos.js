@@ -36,8 +36,7 @@ const fetchPlaylistVideos = async (id, etag) => {
   } catch (error) {
     if (error.response === undefined) {
       return undefined;
-    }
-    if (error.response.status === 304) {
+    } if (error.response.status === 304) {
       return error.response.status;
     } if (error.response.status === 404) {
       return error.response.status;

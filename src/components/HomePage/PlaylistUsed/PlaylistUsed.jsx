@@ -90,7 +90,7 @@ function PlaylistUsed({
       id,
       currentPlaylistInfo[0].playlistEtag,
     );
-    if (data === 304) {
+    if (data === 304 || data === undefined || data === 404) {
       // empty
     } else {
       const playlistObject = {
