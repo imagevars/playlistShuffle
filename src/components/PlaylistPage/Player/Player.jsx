@@ -213,8 +213,7 @@ Player.propTypes = {
     playlistImage: PropTypes.string.isRequired,
     playlistEtag: PropTypes.string.isRequired,
     currentIndex: PropTypes.number.isRequired,
-    playlistLength: PropTypes.number.isRequired,
-
+    playlistLength: PropTypes.number,
   })).isRequired,
   isPlaying: PropTypes.func.isRequired,
   currentSong: PropTypes.func.isRequired,

@@ -7,7 +7,7 @@ import {
   isShuffleActive,
   setVideoDuration,
 } from '../../../redux/actions/playerActions';
-import { lastPlayedIndexPlaylistDetails, playlistLength } from '../../../redux/actions/playlistDetailsActions';
+import { lastPlayedIndexPlaylistDetails, setPlaylistLength } from '../../../redux/actions/playlistDetailsActions';
 import { addSongsByPlaylistID } from '../../../redux/actions/playlistSongsByIdActions';
 
 function VideoCard({
@@ -17,7 +17,7 @@ function VideoCard({
   addSongsByPlaylistID,
   isShuffleActive,
   lastPlayedIndexPlaylistDetails,
-  playlistLength,
+  setPlaylistLength,
   setVideoDuration,
 }) {
   const refs = playlistSongsById[player.currentActivePlaylistId]?.reduce(
@@ -124,7 +124,7 @@ function VideoCard({
       playlistLength: videoList.length - 1,
       playlistId: player.currentActivePlaylistId,
     };
-    playlistLength(playlistLengthObj);
+    setPlaylistLength(playlistLengthObj);
   }, [playlistSongsById[player.currentActivePlaylistId]]);
   return (
     <div
@@ -151,7 +151,7 @@ VideoCard.propTypes = {
   addSongsByPlaylistID: PropTypes.func.isRequired,
   isShuffleActive: PropTypes.func.isRequired,
   lastPlayedIndexPlaylistDetails: PropTypes.func.isRequired,
-  playlistLength: PropTypes.func.isRequired,
+  setPlaylistLength: PropTypes.func.isRequired,
   setVideoDuration: PropTypes.func.isRequired,
 };
 
@@ -160,7 +160,7 @@ const mapDispatchToProps = {
   addSongsByPlaylistID,
   isShuffleActive,
   lastPlayedIndexPlaylistDetails,
-  playlistLength,
+  setPlaylistLength,
   setVideoDuration,
 };
 

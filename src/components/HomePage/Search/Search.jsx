@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import fetchPlaylistVideos from '../../utils/fetchPlaylistVideos';
-import fetchPlaylistData from '../../utils/fetchPlaylistData';
-import setIsHasPlaylistLoading from '../../../redux/actions/isPlaylistLoadingActions';
+import fetchPlaylistVideos from '../../../utils/fetchPlaylistVideos';
+import fetchPlaylistData from '../../../utils/fetchPlaylistData';
 import {
   currentSong,
   setCurrentActivePlaylistId,
   isShuffleActive,
+  setIsPlLoading,
 } from '../../../redux/actions/playerActions';
 import {
   addToPlaylistDetails,
@@ -26,17 +26,16 @@ function Search({
   setCurrentActivePlaylistId,
   modifyEtagInPlaylistDetailsById,
   isShuffleActive,
-  setIsHasPlaylistLoading,
-  isPlaylistLoading,
+  player,
+  setIsPlLoading,
 }) {
   const [playlistId, setPlaylistId] = useState('');
-  // const [isLoadingButton, setIsLoadingButton] = useState(false);
   const [isIdInvalid, setIsIdInvalid] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsHasPlaylistLoading(true);
+    setIsPlLoading(true);
     isShuffleActive(false);
     const regex = /PL[\w-]+(?=&|$)/;
     let id = '';
@@ -65,11 +64,11 @@ function Search({
         playlistSongsById[id][playlistDetails[findPlaylistIndex].currentIndex]
           .snippet.resourceId.videoId,
       );
-      setIsHasPlaylistLoading(false);
+      setIsPlLoading(false);
       navigate(`/${id}`);
-    } else if (data === 404) {
+    } else if (data === 404 || data === 403 || data === undefined) {
       setIsIdInvalid(true);
-      setIsHasPlaylistLoading(false);
+      setIsPlLoading(false);
     } else {
       const playlistDataInfo = await fetchPlaylistData(id, data.playlistEtag);
       const playlistEtagAndId = {
@@ -83,7 +82,7 @@ function Search({
       };
 
       await modifyEtagInPlaylistDetailsById(playlistEtagAndId);
-      setIsHasPlaylistLoading(false);
+      setIsPlLoading(false);
       await addSongsByPlaylistID(playlistObject);
       await currentSong(data.currentSong);
       navigate(`/${id}`);
@@ -117,7 +116,7 @@ function Search({
             className=" rounded-md px-4 w-2/12 md:w-1/12 font-open shadow-shadowBox active:shadow-none dark:shadow-shadowBoxDarkMode dark:active:shadow-none flex items-center justify-center text-bgWhite dark:bg-DarkPrimaryColorDarker dark:hover:bg-DarkPrimaryColor  bg-primaryColorDarker hover:bg-primaryColor"
             type="submit"
           >
-            {isPlaylistLoading === true ? (
+            {player.isPlLoading === true ? (
               <svg
                 className="animate-spin mx-auto h-5 w-5 text-white"
                 xmlns="http://www.w3.org/2000/svg"
@@ -143,19 +142,15 @@ function Search({
             )}
           </button>
         </div>
-        {/* {isIdInvalid ? (
-            <FormErrorMessage>
-              THE ID OR URL IS NOT A VALID ONE{" "}
-            </FormErrorMessage>
-          ) : (
-            <FormHelperText>ID or playlist URL</FormHelperText>
-          )} */}
       </form>
     </div>
   );
 }
 
 Search.propTypes = {
+  player: PropTypes.shape({
+    isPlLoading: PropTypes.bool.isRequired,
+  }).isRequired,
   playlistDetails: PropTypes.arrayOf(
     PropTypes.shape({
       playlistName: PropTypes.string.isRequired,
@@ -165,10 +160,6 @@ Search.propTypes = {
       currentIndex: PropTypes.number.isRequired,
     }),
   ).isRequired,
-  player: PropTypes.shape({
-    rememberLastVideo: PropTypes.bool.isRequired,
-  }).isRequired,
-  isPlaylistLoading: PropTypes.bool.isRequired,
   currentSong: PropTypes.func.isRequired,
   addToPlaylistDetails: PropTypes.func.isRequired,
   addSongsByPlaylistID: PropTypes.func.isRequired,
@@ -176,14 +167,13 @@ Search.propTypes = {
   setCurrentActivePlaylistId: PropTypes.func.isRequired,
   modifyEtagInPlaylistDetailsById: PropTypes.func.isRequired,
   isShuffleActive: PropTypes.func.isRequired,
-  setIsHasPlaylistLoading: PropTypes.func.isRequired,
+  setIsPlLoading: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   playlistSongsById: state.playlistSongsById,
   playlistDetails: state.playlistDetails,
   player: state.player,
-  isPlaylistLoading: state.isPlaylistLoading,
 });
 
 const mapDispatchToProps = {
@@ -193,8 +183,8 @@ const mapDispatchToProps = {
   setCurrentActivePlaylistId,
   modifyEtagInPlaylistDetailsById,
   isShuffleActive,
-  setIsHasPlaylistLoading,
   lastPlayedIndexPlaylistDetails,
+  setIsPlLoading,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);

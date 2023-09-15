@@ -27,7 +27,7 @@ export const lastPlayedIndexPlaylistDetails = (payload) => ({
   payload,
 });
 
-export const playlistLength = (payload) => ({
+export const setPlaylistLength = (payload) => ({
   type: PLAYLIST_DETAILS_LENGTH,
   payload,
 });

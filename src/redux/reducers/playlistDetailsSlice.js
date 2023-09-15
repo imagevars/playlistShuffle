@@ -35,8 +35,6 @@ export default function playlistDetailsReducer(state = initialState, action) {
         }
         return ele;
       });
-
-      // return {...state, playlistEtag: action.payload}
     }
     case PLAYLIST_DETAILS_LAST_PLAYED_INDEX: {
       return state.map((ele) => {

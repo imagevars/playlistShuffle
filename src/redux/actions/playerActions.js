@@ -15,6 +15,7 @@ import {
   PLAYER_ARTIST,
   PLAYER_TITLE,
   PLAYER_SEEK_KEYBOARD,
+  PLAYER_IS_PL_LOADING,
 } from '../constants/playerTypes';
 
 export const isPlaying = (payload) => ({ type: PLAYER_IS_PLAYING, payload });
@@ -91,5 +92,10 @@ export const setArtist = (payload) => ({
 
 export const setSeekKeyboard = (payload) => ({
   type: PLAYER_SEEK_KEYBOARD,
+  payload,
+});
+
+export const setIsPlLoading = (payload) => ({
+  type: PLAYER_IS_PL_LOADING,
   payload,
 });

@@ -29,3 +29,5 @@ export const PLAYER_TITLE = 'player/title';
 export const PLAYER_ARTIST = 'player/artist';
 
 export const PLAYER_SEEK_KEYBOARD = 'player/seekKeyboard';
+
+export const PLAYER_IS_PL_LOADING = 'player/isPlLoading';

@@ -15,9 +15,11 @@ import {
   PLAYER_ARTIST,
   PLAYER_TITLE,
   PLAYER_SEEK_KEYBOARD,
+  PLAYER_IS_PL_LOADING,
 } from '../constants/playerTypes';
 
 const initialState = {
+  isPlLoading: false,
   isPlaying: false,
   darkMode: false,
   currentSong: '',
@@ -83,6 +85,9 @@ export default function playerReducer(state = initialState, action) {
     }
     case PLAYER_TITLE: {
       return { ...state, title: action.payload };
+    }
+    case PLAYER_IS_PL_LOADING: {
+      return { ...state, isPlLoading: action.payload };
     }
     default:
       return state;

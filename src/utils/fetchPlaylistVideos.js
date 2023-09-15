@@ -34,11 +34,17 @@ const fetchPlaylistVideos = async (id, etag) => {
       } else nextToken = '';
     } while (nextToken);
   } catch (error) {
+    if (error.response === undefined) {
+      return undefined;
+    }
     if (error.response.status === 304) {
       return error.response.status;
     } if (error.response.status === 404) {
       return error.response.status;
-    } if (error.response.status === 500) {
+    } if (error.response.status === 403) {
+      return error.response.status;
+    }
+    if (error.response.status === 500) {
       return 404;
     }
     // eslint-disable-next-line

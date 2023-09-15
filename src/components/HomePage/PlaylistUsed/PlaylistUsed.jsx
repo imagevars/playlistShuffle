@@ -11,9 +11,8 @@ import {
   modifyEtagInPlaylistDetailsById,
   lastPlayedIndexPlaylistDetails,
 } from '../../../redux/actions/playlistDetailsActions';
-import setIsHasPlaylistLoading from '../../../redux/actions/isPlaylistLoadingActions';
-import fetchPlaylistVideos from '../../utils/fetchPlaylistVideos';
-import fetchPlaylistData from '../../utils/fetchPlaylistData';
+import fetchPlaylistVideos from '../../../utils/fetchPlaylistVideos';
+import fetchPlaylistData from '../../../utils/fetchPlaylistData';
 import {
   addSongsByPlaylistID,
   removePlaylistSongsById,
@@ -21,6 +20,7 @@ import {
 import {
   setCurrentActivePlaylistId,
   currentSong,
+  setIsPlLoading,
   isShuffleActive,
 } from '../../../redux/actions/playerActions';
 
@@ -36,7 +36,7 @@ function PlaylistUsed({
   isShuffleActive,
   playlistSongsById,
   lastPlayedIndexPlaylistDetails,
-  setIsHasPlaylistLoading,
+  setIsPlLoading,
 }) {
   const navigate = useNavigate();
 
@@ -44,7 +44,7 @@ function PlaylistUsed({
     isShuffleActive(false);
     setCurrentActivePlaylistId(id);
 
-    setIsHasPlaylistLoading(true);
+    setIsPlLoading(true);
     const findPlaylistIndex = playlistDetails.findIndex((element) => element.playlistId === id);
 
     currentSong(
@@ -52,7 +52,7 @@ function PlaylistUsed({
         .snippet.resourceId.videoId,
     );
     navigate(`/${id}`);
-    setIsHasPlaylistLoading(false);
+    setIsPlLoading(false);
   };
 
   const handleDeleteFromPlaylist = (id) => {
@@ -82,7 +82,7 @@ function PlaylistUsed({
   };
 
   const handleUpdate = async (id) => {
-    setIsHasPlaylistLoading(true);
+    setIsPlLoading(true);
     setCurrentActivePlaylistId(id);
     const currentPlaylistInfo = playlistDetails.filter((element) => element.playlistId === id);
 
@@ -113,7 +113,7 @@ function PlaylistUsed({
       };
       lastPlayedIndexPlaylistDetails(lastPlayedObj);
     }
-    setIsHasPlaylistLoading(false);
+    setIsPlLoading(false);
   };
 
   const playlists = playlistDetails.map((element) => (
@@ -202,8 +202,8 @@ PlaylistUsed.propTypes = {
   currentSong: PropTypes.func.isRequired,
   modifyEtagInPlaylistDetailsById: PropTypes.func.isRequired,
   isShuffleActive: PropTypes.func.isRequired,
-  setIsHasPlaylistLoading: PropTypes.func.isRequired,
   lastPlayedIndexPlaylistDetails: PropTypes.func.isRequired,
+  setIsPlLoading: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -222,6 +222,6 @@ const mapDispatchToProps = {
   removePlaylistSongsById,
   isShuffleActive,
   lastPlayedIndexPlaylistDetails,
-  setIsHasPlaylistLoading,
+  setIsPlLoading,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(PlaylistUsed);
