@@ -56,10 +56,10 @@ function ProgressBar({
         onTouchEnd={handleMouseUp}
       />
       <div className="flex font-medium justify-between">
-        <div className="font-nunito text-bgBlack dark:text-bgWhite">
+        <div className="font-nunito text-black dark:text-white">
           {secondsToTime(player.progress)}
         </div>
-        <div className="font-nunito text-bgBlack dark:text-bgWhite">
+        <div className="font-nunito text-black dark:text-white">
           {secondsToTime(player.videoDuration)}
         </div>
       </div>

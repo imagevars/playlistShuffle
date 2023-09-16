@@ -23,7 +23,7 @@ function VolumeManager({ player, isMutedActive, setVolume }) {
   };
 
   return (
-    <div className="flex justify-center w-1/2 mx-auto mb-2 md:mb-0  md:w-1/6   md:items-center">
+    <div className="flex justify-around w-2/3 sm:w-1/2 mx-auto mb-2 md:mb-0  md:w-1/6   md:items-center">
       { (player.volume >= 0.50 && player.isMutedActive === false)
       && (
       <BiVolumeFull
@@ -59,6 +59,7 @@ function VolumeManager({ player, isMutedActive, setVolume }) {
         max={1}
         step="any"
       />
+      <div className="w-4" />
     </div>
 
   );

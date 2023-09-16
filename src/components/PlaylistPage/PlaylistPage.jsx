@@ -3,7 +3,7 @@ import { Navigate, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import HelmetHelper from '../Helmet/HelmetHelper';
-import VideoCard from './VideoCard/VideoCard';
+import List from './VideoCard/List';
 import MediaButtons from './MediaButtons/MediaButtons';
 import {
   isPlaying,
@@ -233,7 +233,7 @@ function PlaylistPage({
         }
       />
       <div
-        className=" h-full flex flex-col  md:block  md:max-w-[2000px] items-center md:mx-auto"
+        className=" h-full flex flex-col overflow-hidden  md:block  md:max-w-[2000px] items-center md:mx-auto"
       >
         <Navbar />
 
@@ -241,8 +241,8 @@ function PlaylistPage({
           <PlaylistInfo />
           <Player />
         </div>
-        <div className="w-10/12  overflow-auto mt-9 md:mt-8 md:float-right md:w-2/5  md:h-[68%] ">
-          <VideoCard />
+        <div className="w-10/12 h-full  mt-9 md:mt-8 md:float-right md:w-2/5  md:h-[68%] ">
+          <List />
         </div>
         <div className="w-11/12  md:w-full md:clear-both md:absolute md:bottom-0 md:flex md:left-0 md:right-0">
           <PlayingRightNow />

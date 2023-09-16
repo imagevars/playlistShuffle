@@ -82,9 +82,9 @@ function Search({
       };
 
       await modifyEtagInPlaylistDetailsById(playlistEtagAndId);
-      setIsPlLoading(false);
       await addSongsByPlaylistID(playlistObject);
       await currentSong(data.currentSong);
+      setIsPlLoading(false);
       navigate(`/${id}`);
     }
   };

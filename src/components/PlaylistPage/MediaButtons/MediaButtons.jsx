@@ -122,7 +122,7 @@ const MediaButtons = memo(
               type="button"
               aria-label="pause video"
               className="
-              bg-white rounded-full cursor-auto"
+               rounded-full cursor-auto"
             >
               <AiFillPauseCircle
                 className="active:scale-105"
@@ -135,7 +135,7 @@ const MediaButtons = memo(
             <button
               type="button"
               aria-label="play video"
-              className="bg-white cursor-auto  rounded-full"
+              className="cursor-auto  rounded-full"
             >
               <AiFillPlayCircle
                 className="active:scale-105"
