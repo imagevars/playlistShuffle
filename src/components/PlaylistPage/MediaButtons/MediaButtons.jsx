@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { AiFillPlayCircle, AiFillPauseCircle } from 'react-icons/ai';
+import { BiPlay, BiPause } from 'react-icons/bi';
 import {
   MdSkipPrevious,
   MdSkipNext,
@@ -122,11 +122,11 @@ const MediaButtons = memo(
               type="button"
               aria-label="pause video"
               className="
-               rounded-full cursor-auto"
+               rounded-full cursor-auto dark:bg-[#baf3ff] bg-[#bcdcf7]"
             >
-              <AiFillPauseCircle
+              <BiPause
                 className="active:scale-105"
-                style={{ color: `${player.darkMode ? '#00aacd' : '#0b4677'}` }}
+                style={{ color: `${player.darkMode ? '#0089a5' : '#0b4677'}` }}
                 onClick={() => isPlaying(false)}
                 size={50}
               />
@@ -135,11 +135,11 @@ const MediaButtons = memo(
             <button
               type="button"
               aria-label="play video"
-              className="cursor-auto  rounded-full"
+              className="cursor-auto rounded-full dark:bg-[#baf3ff] bg-[#bcdcf7]"
             >
-              <AiFillPlayCircle
-                className="active:scale-105"
-                style={{ color: `${player.darkMode ? '#00aacd' : '#0b4677'}` }}
+              <BiPlay
+                className="active:scale-105 pl-1"
+                style={{ color: `${player.darkMode ? '#0089a5' : '#0b4677'}` }}
                 onClick={() => isPlaying(true)}
                 size={50}
               />
