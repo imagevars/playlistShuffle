@@ -9,6 +9,8 @@ import {
   isShuffleActive,
   setCurrentActivePlaylistId,
   isDarkModeActive,
+  setTitle,
+  setArtist,
 } from '../../redux/actions/playerActions';
 
 function Navbar({
@@ -18,6 +20,8 @@ function Navbar({
   isShuffleActive,
   player,
   isDarkModeActive,
+  setTitle,
+  setArtist,
 }) {
   const navigate = useNavigate();
 
@@ -26,6 +30,9 @@ function Navbar({
     currentSong('');
     isShuffleActive(false);
     setCurrentActivePlaylistId('');
+    setTitle('');
+    setArtist('');
+
     return navigate('/');
   };
 
@@ -90,12 +97,17 @@ Navbar.propTypes = {
     currentActivePlaylistId: PropTypes.string.isRequired,
     isMutedActive: PropTypes.bool.isRequired,
     darkMode: PropTypes.bool.isRequired,
+    title: PropTypes.string.isRequired,
+    artist: PropTypes.string.isRequired,
   }).isRequired,
   isPlaying: PropTypes.func.isRequired,
   currentSong: PropTypes.func.isRequired,
   isShuffleActive: PropTypes.func.isRequired,
   setCurrentActivePlaylistId: PropTypes.func.isRequired,
   isDarkModeActive: PropTypes.func.isRequired,
+  setTitle: PropTypes.func.isRequired,
+  setArtist: PropTypes.func.isRequired,
+
 };
 
 const mapDispatchToProps = {
@@ -104,6 +116,8 @@ const mapDispatchToProps = {
   isShuffleActive,
   setCurrentActivePlaylistId,
   isDarkModeActive,
+  setTitle,
+  setArtist,
 };
 
 const mapStateToProps = (state) => ({
