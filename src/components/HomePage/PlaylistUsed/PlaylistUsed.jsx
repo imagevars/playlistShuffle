@@ -126,7 +126,7 @@ function PlaylistUsed({
         className="flex w-4/6"
         onClick={() => handleClickPlaylist(element.playlistId)}
       >
-        {element.playlistId.includes('mix') ? (
+        {element.playlistId.includes('MIX') ? (
           <div
             className="object-cover w-[56px]  h-14 rounded-l-lg"
           />
@@ -144,7 +144,7 @@ function PlaylistUsed({
         </p>
       </button>
       <div className="w-1/4 flex justify-end">
-        {element.playlistId.includes('mix') ? null : (
+        {element.playlistId.includes('MIX') ? null : (
           <div className="group relative w-max my-auto">
 
             <button
