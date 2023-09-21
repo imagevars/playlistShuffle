@@ -38,7 +38,7 @@ function ProgressBar({
   };
 
   return (
-    <div className="flex flex-col justify-center w-full md:mb-[-25px]">
+    <div className="flex flex-col justify-center w-full md:mb-[-20px]">
       <input
         aria-label="progress bar"
         type="range"

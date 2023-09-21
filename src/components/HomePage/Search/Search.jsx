@@ -113,7 +113,7 @@ function Search({
         }
         if (mixArr.length === 0) return null;
 
-        const mixPlId = `MIXPL${Math.random().toString().slice(2, 20)}`;
+        const mixPlId = `MIXPL${PLinput.name}${Math.random().toString().slice(2, 20)}`;
         const playlistDetailsObject = {
           playlistName: PLinput.name,
           playlistId: mixPlId,
@@ -156,7 +156,6 @@ function Search({
             className={`inputSearch w-5/6 md:w-11/12 mr-2 py-2 px-2 rounded-md font-open shadow-2xl focus:outline-none focus:shadow-outline  ${
               isIdInvalid ? 'border border-red' : ''
             }`}
-            // pattern="^(?=.*.{24,})(?=.*PL).*|^play my pl$|^Play my pl$"
             placeholder="ID or playlist URL. eg: 'www.youtube.com/playlist?list=PLi06ybkpczJBvFfOhfqDyKMl1Lp2tDkTb'"
             type="text"
             required

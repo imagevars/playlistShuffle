@@ -122,7 +122,7 @@ const MediaButtons = memo(
               type="button"
               aria-label="pause video"
               className="
-               rounded-full cursor-auto dark:bg-[#baf3ff] bg-[#bcdcf7] mx-1 md:mx-0"
+               rounded-full cursor-auto dark:bg-[#baf3ff] bg-[#bcdcf7] mx-1 md:mx-0 my-0.5"
             >
               <BiPause
                 className="active:scale-105"
@@ -135,7 +135,7 @@ const MediaButtons = memo(
             <button
               type="button"
               aria-label="play video"
-              className="cursor-auto rounded-full dark:bg-[#baf3ff] bg-[#bcdcf7] mx-1 md:mx-0"
+              className="cursor-auto rounded-full dark:bg-[#baf3ff] bg-[#bcdcf7] mx-1 md:mx-0 my-0.5"
             >
               <BiPlay
                 className="active:scale-105 pl-1"
