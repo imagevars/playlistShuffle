@@ -82,24 +82,24 @@ const MediaButtons = memo(
           <button
             type="button"
             aria-label="no repeat video"
-            className=" p-[0.25rem] md:p-[0.50rem] cursor-auto"
+            className=" p-[0.25rem] mx-2 md:mx-0 md:p-[0.50rem] cursor-auto"
           >
             <MdRepeatOne
               className="active:drop-shadow-none  dark:text-DarkPrimaryColorDarker dark:hover:text-DarkPrimaryColor  text-primaryColorDarker hover:text-primaryColor  drop-shadow-svgShadow dark:drop-shadow-svgShadowDarkMode  active:scale-110"
               onClick={() => isLoopActive(false)}
-              size={32}
+              size={35}
             />
           </button>
         ) : (
           <button
             type="button"
             aria-label="repeat video"
-            className="active:drop-shadow-2xl cursor-auto p-[0.25rem] md:p-[0.50rem]"
+            className="active:drop-shadow-2xl cursor-auto p-[0.25rem] md:p-[0.50rem] mx-2 md:mx-0"
           >
             <MdRepeat
               className="active:drop-shadow-none  dark:text-DarkPrimaryColorDarker dark:hover:text-DarkPrimaryColor  text-primaryColorDarker hover:text-primaryColor   drop-shadow-svgShadow dark:drop-shadow-svgShadowDarkMode  active:scale-110"
               onClick={() => isLoopActive(true)}
-              size={32}
+              size={35}
             />
           </button>
         )}
@@ -109,12 +109,12 @@ const MediaButtons = memo(
           <button
             type="button"
             aria-label="previous video"
-            className=" p-[0.25rem] md:p-[0.50rem]  cursor-auto "
+            className=" p-[0.25rem] md:p-[0.50rem]  cursor-auto mx-1 md:mx-0"
           >
             <MdSkipPrevious
               className="active:drop-shadow-none dark:text-DarkPrimaryColorDarker dark:hover:text-DarkPrimaryColor  text-primaryColorDarker hover:text-primaryColor drop-shadow-svgShadow dark:drop-shadow-svgShadowDarkMode  active:scale-110"
               onClick={handleClickPreviousButton}
-              size={32}
+              size={35}
             />
           </button>
           {player.isPlaying === true ? (
@@ -122,50 +122,50 @@ const MediaButtons = memo(
               type="button"
               aria-label="pause video"
               className="
-               rounded-full cursor-auto dark:bg-[#baf3ff] bg-[#bcdcf7]"
+               rounded-full cursor-auto dark:bg-[#baf3ff] bg-[#bcdcf7] mx-1 md:mx-0"
             >
               <BiPause
                 className="active:scale-105"
                 style={{ color: `${player.darkMode ? '#0089a5' : '#0b4677'}` }}
                 onClick={() => isPlaying(false)}
-                size={45}
+                size={50}
               />
             </button>
           ) : (
             <button
               type="button"
               aria-label="play video"
-              className="cursor-auto rounded-full dark:bg-[#baf3ff] bg-[#bcdcf7]"
+              className="cursor-auto rounded-full dark:bg-[#baf3ff] bg-[#bcdcf7] mx-1 md:mx-0"
             >
               <BiPlay
                 className="active:scale-105 pl-1"
                 style={{ color: `${player.darkMode ? '#0089a5' : '#0b4677'}` }}
                 onClick={() => isPlaying(true)}
-                size={45}
+                size={50}
               />
             </button>
           )}
           <button
             type="button"
             aria-label="next video"
-            className=" p-[0.25rem] md:p-[0.50rem] cursor-auto"
+            className=" p-[0.25rem] md:p-[0.50rem] cursor-auto mx-1 md:mx-0"
           >
             <MdSkipNext
               className="active:drop-shadow-none dark:text-DarkPrimaryColorDarker dark:hover:text-DarkPrimaryColor  text-primaryColorDarker hover:text-primaryColor   drop-shadow-svgShadow dark:drop-shadow-svgShadowDarkMode  active:scale-110"
               onClick={handleClickNextButton}
-              size={32}
+              size={35}
             />
           </button>
         </div>
         <button
           type="button"
           aria-label="shuffle playlist"
-          className=" p-[0.25rem] md:p-[0.50rem] cursor-auto "
+          className=" p-[0.25rem] md:p-[0.50rem] cursor-auto mx-2 md:mx-0"
         >
           <MdShuffle
             className="active:drop-shadow-none dark:text-DarkPrimaryColorDarker dark:hover:text-DarkPrimaryColor  text-primaryColorDarker hover:text-primaryColor  drop-shadow-svgShadow dark:drop-shadow-svgShadowDarkMode  active:scale-110"
             onClick={handleClickShuffle}
-            size={32}
+            size={35}
           />
         </button>
       </div>
