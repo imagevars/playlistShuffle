@@ -4,10 +4,9 @@ import PropTypes from 'prop-types';
 
 function PlayingRightNow({ player }) {
   return (
-    <div className="md:flex  md:w-1/4 ">
-
-      <div className="md:text-clip md:w-full">
-        <p className="songTitle text-black font-semibold dark:font-semibold dark:text-white text-center md:text-left text-base lg:text-md truncate tracking-wide  mx-auto w-[95%] mt-2 md:mt-0 font-open">
+    <div className="flex  md:w-1/4  justify-center md:justify-normal w-full items-center">
+      <div className="md:text-clip max-w-[75%] ml-1 md:w-full">
+        <p className="songTitle text-black font-semibold   dark:text-white text-center md:text-left text-md  truncate tracking-wide  mx-auto md:w-[95%]  md:mt-0 font-open">
           {
           player.artist
             ? (
@@ -22,7 +21,7 @@ function PlayingRightNow({ player }) {
             )
           }
         </p>
-        <p className="songTitle text-gray dark:text-clearGray font-normal tracking-wide text-center md:text-left  lg:text-md truncate font-open mx-auto w-[95%]">
+        <p className="songTitle text-sm text-gray dark:text-clearGray font-normal tracking-wide text-center md:text-left  lg:text-md truncate font-open mx-auto md:w-[95%]">
           {
           player.artist
             ? (

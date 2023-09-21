@@ -126,28 +126,38 @@ function PlaylistUsed({
         className="flex w-4/6"
         onClick={() => handleClickPlaylist(element.playlistId)}
       >
-        <img
-          className="object-cover  h-14 rounded-l-lg"
-          width="56px"
-          alt={`${element.playlistName}`}
-          src={element.playlistImage}
-        />
+        {element.playlistId.includes('mix') ? (
+          <div
+            className="object-cover w-[56px]  h-14 rounded-l-lg"
+          />
+        ) : (
+          <img
+            className="object-cover  h-14 rounded-l-lg"
+            width="56px"
+            alt={`${element.playlistName}`}
+            src={element.playlistImage}
+          />
+        )}
+
         <p className="usedPlaylistName ml-2 text-sm md:text-base font-open text-bgWhite dark:text-bgWhite font-medium truncate ">
           {element.playlistName}
         </p>
       </button>
       <div className="w-1/4 flex justify-end">
-        <div className="group relative w-max my-auto">
+        {element.playlistId.includes('mix') ? null : (
+          <div className="group relative w-max my-auto">
 
-          <button
-            type="button"
-            className="text-bgWhite dark:text-bgWhite mx-0.5 active:scale-110"
-            onClick={() => handleUpdate(element.playlistId)}
-          >
-            <MdUpdate size="24" />
-          </button>
-          <span className="pointer-events-none absolute -translate-x-2/4  left-2/4  -bottom-full w-max rounded bg-bgBlack px-2 py-1 text-sm font-medium text-bgWhite opacity-0 shadow transition-opacity duration-250 ease-in group-hover:opacity-100"> Update </span>
-        </div>
+            <button
+              type="button"
+              className="text-bgWhite dark:text-bgWhite mx-0.5 active:scale-110"
+              onClick={() => handleUpdate(element.playlistId)}
+            >
+              <MdUpdate size="24" />
+            </button>
+            <span className="pointer-events-none absolute -translate-x-2/4  left-2/4  -bottom-full w-max rounded bg-bgBlack px-2 py-1 text-sm font-medium text-bgWhite opacity-0 shadow transition-opacity duration-250 ease-in group-hover:opacity-100"> Update </span>
+          </div>
+        )}
+
         <div className="group relative w-max my-auto">
           <button
             type="button"

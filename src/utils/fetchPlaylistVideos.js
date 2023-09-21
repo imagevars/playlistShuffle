@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const fetchPlaylistVideos = async (id, etag) => {
+export default async function fetchPlaylistVideos(id, etag) {
   const responseArr = [];
   const baseApiUrl = 'https://www.googleapis.com/youtube/v3';
   const apiKey = 'AIzaSyA8JtiLpC8D9nhMK44CRTciv64H1MNFNDw';
@@ -57,6 +57,4 @@ const fetchPlaylistVideos = async (id, etag) => {
   };
 
   return dataReturned;
-};
-
-export default fetchPlaylistVideos;
+}

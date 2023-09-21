@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const fetchPlaylistData = async (id, etag) => {
+export default async function fetchPlaylistData(id, etag) {
   const baseApiUrl = 'https://www.googleapis.com/youtube/v3';
   const apiKey = 'AIzaSyA8JtiLpC8D9nhMK44CRTciv64H1MNFNDw';
 
@@ -24,8 +24,8 @@ const fetchPlaylistData = async (id, etag) => {
   } catch (error) {
     // eslint-disable-next-line
     console.log('Error fetching data: ', error);
+    return null;
   }
 
   return playlistDetailsObject;
-};
-export default fetchPlaylistData;
+}

@@ -87,7 +87,7 @@ const MediaButtons = memo(
             <MdRepeatOne
               className="active:drop-shadow-none  dark:text-DarkPrimaryColorDarker dark:hover:text-DarkPrimaryColor  text-primaryColorDarker hover:text-primaryColor  drop-shadow-svgShadow dark:drop-shadow-svgShadowDarkMode  active:scale-110"
               onClick={() => isLoopActive(false)}
-              size={40}
+              size={32}
             />
           </button>
         ) : (
@@ -99,7 +99,7 @@ const MediaButtons = memo(
             <MdRepeat
               className="active:drop-shadow-none  dark:text-DarkPrimaryColorDarker dark:hover:text-DarkPrimaryColor  text-primaryColorDarker hover:text-primaryColor   drop-shadow-svgShadow dark:drop-shadow-svgShadowDarkMode  active:scale-110"
               onClick={() => isLoopActive(true)}
-              size={40}
+              size={32}
             />
           </button>
         )}
@@ -114,7 +114,7 @@ const MediaButtons = memo(
             <MdSkipPrevious
               className="active:drop-shadow-none dark:text-DarkPrimaryColorDarker dark:hover:text-DarkPrimaryColor  text-primaryColorDarker hover:text-primaryColor drop-shadow-svgShadow dark:drop-shadow-svgShadowDarkMode  active:scale-110"
               onClick={handleClickPreviousButton}
-              size={40}
+              size={32}
             />
           </button>
           {player.isPlaying === true ? (
@@ -128,7 +128,7 @@ const MediaButtons = memo(
                 className="active:scale-105"
                 style={{ color: `${player.darkMode ? '#0089a5' : '#0b4677'}` }}
                 onClick={() => isPlaying(false)}
-                size={50}
+                size={45}
               />
             </button>
           ) : (
@@ -141,7 +141,7 @@ const MediaButtons = memo(
                 className="active:scale-105 pl-1"
                 style={{ color: `${player.darkMode ? '#0089a5' : '#0b4677'}` }}
                 onClick={() => isPlaying(true)}
-                size={50}
+                size={45}
               />
             </button>
           )}
@@ -153,7 +153,7 @@ const MediaButtons = memo(
             <MdSkipNext
               className="active:drop-shadow-none dark:text-DarkPrimaryColorDarker dark:hover:text-DarkPrimaryColor  text-primaryColorDarker hover:text-primaryColor   drop-shadow-svgShadow dark:drop-shadow-svgShadowDarkMode  active:scale-110"
               onClick={handleClickNextButton}
-              size={40}
+              size={32}
             />
           </button>
         </div>
@@ -165,7 +165,7 @@ const MediaButtons = memo(
           <MdShuffle
             className="active:drop-shadow-none dark:text-DarkPrimaryColorDarker dark:hover:text-DarkPrimaryColor  text-primaryColorDarker hover:text-primaryColor  drop-shadow-svgShadow dark:drop-shadow-svgShadowDarkMode  active:scale-110"
             onClick={handleClickShuffle}
-            size={40}
+            size={32}
           />
         </button>
       </div>

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import fetchPlaylistVideos from '../../../utils/fetchPlaylistVideos';
 import fetchPlaylistData from '../../../utils/fetchPlaylistData';
+import validateId from '../../../utils/validateId';
 import {
   currentSong,
   setCurrentActivePlaylistId,
@@ -35,59 +36,109 @@ function Search({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsPlLoading(true);
-    isShuffleActive(false);
-    const regex = /PL[\w-]+(?=&|$)/;
-    let id = '';
-    if (playlistId === 'play my pl' || playlistId === 'Play my pl') {
-      id = 'PLi06ybkpczJDt0Ydo3Umjtv97bDOcCtAZ';
-    } else {
-      const match = playlistId.match(regex);
-      [id] = match;
-    }
-
-    const currentPlaylistInfo = playlistDetails.filter(
-      (element) => element.playlistId === id,
-    );
-
-    setCurrentActivePlaylistId(id);
-
-    const currEtag = currentPlaylistInfo.length > 0 ? currentPlaylistInfo[0].playlistEtag : '';
-    const data = await fetchPlaylistVideos(id, currEtag);
-
-    // if playlistDataInfo is 304 it means that the playlist hasn't change so
-    // we can use the one in localStorage, that way we save api quota
-    if (data === 304) {
-      const findPlaylistIndex = playlistDetails.findIndex((element) => element.playlistId === id);
-
-      currentSong(
-        playlistSongsById[id][playlistDetails[findPlaylistIndex].currentIndex]
-          .snippet.resourceId.videoId,
+    const PLinput = await validateId(playlistId);
+    if (typeof PLinput === 'string') {
+      const currentPlaylistInfo = playlistDetails.filter(
+        (element) => element.playlistId === PLinput,
       );
+      if (currentPlaylistInfo.length === 1) {
+        const findPLIndex = playlistDetails.findIndex((element) => element.playlistId === PLinput);
+        setCurrentActivePlaylistId(PLinput);
+        currentSong(
+          playlistSongsById[PLinput][playlistDetails[findPLIndex].currentIndex]
+            .snippet.resourceId.videoId,
+        );
+        navigate(`/${PLinput}`);
+      }
+      if (currentPlaylistInfo.length === 0) {
+        try {
+          setIsPlLoading(true);
+          const currEtag = '';
+          const data = await fetchPlaylistVideos(PLinput, currEtag);
+          if (data === 404) {
+            setIsIdInvalid(true);
+            setIsPlLoading(false);
+            return null;
+          }
+          const playlistDataInfo = await fetchPlaylistData(PLinput, data.playlistEtag);
+          const playlistEtagAndId = {
+            playlistId: PLinput,
+            etag: data.playlistEtag,
+          };
+          await addToPlaylistDetails(playlistDataInfo);
+          const playlistObject = {
+            id: PLinput,
+            songs: data.responseArrToAdd,
+          };
+          await addSongsByPlaylistID(playlistObject);
+          setIsPlLoading(false);
+          setCurrentActivePlaylistId(PLinput);
+          await modifyEtagInPlaylistDetailsById(playlistEtagAndId);
+          await currentSong(data.currentSong);
+          isShuffleActive(false);
+          navigate(`/${PLinput}`);
+        } catch (error) {
+          setIsPlLoading(false);
+          return null;
+        }
+      }
       setIsPlLoading(false);
-      navigate(`/${id}`);
-    } else if (data === 404 || data === 403 || data === undefined) {
-      setIsIdInvalid(true);
-      setIsPlLoading(false);
-    } else {
-      const playlistDataInfo = await fetchPlaylistData(id, data.playlistEtag);
-      const playlistEtagAndId = {
-        playlistId: id,
-        etag: data.playlistEtag,
-      };
-      await addToPlaylistDetails(playlistDataInfo);
-      const playlistObject = {
-        id,
-        songs: data.responseArrToAdd,
-      };
-
-      await modifyEtagInPlaylistDetailsById(playlistEtagAndId);
-      await addSongsByPlaylistID(playlistObject);
-      await currentSong(data.currentSong);
-      setIsPlLoading(false);
-      navigate(`/${id}`);
+      return null;
     }
+    if (typeof PLinput === 'object') {
+      if (PLinput === null) {
+        setIsIdInvalid(true);
+        setIsPlLoading(false);
+        return null;
+      }
+      if (typeof PLinput === 'object') {
+        const mixArr = [];
+        setIsPlLoading(true);
+        for (let i = 0; i < PLinput.playlists.length; i += 1) {
+          const currEtag = '';
+          /* eslint-disable no-await-in-loop */
+          const data = await fetchPlaylistVideos(PLinput.playlists[i], currEtag);
+          if (data === 404) {
+            // if there's an error on a playlist of the mix,
+            // that playlist will not be included on the mix
+            // eslint-disable-next-line
+            console.log(`Error on playlist ${PLinput.playlists[i].name}`);
+          }
+          // Basic, I know
+          if (mixArr.length > 15000) {
+            break;
+          } else {
+            mixArr.push(...data.responseArrToAdd);
+          }
+        }
+        if (mixArr.length === 0) return null;
+
+        const mixPlId = `mixPL${Math.random().toString().slice(2, 20)}`;
+        const playlistDetailsObject = {
+          playlistName: PLinput.name,
+          playlistId: mixPlId,
+          playlistImage: '',
+          playlistEtag: '',
+          currentIndex: 0,
+        };
+
+        await addToPlaylistDetails(playlistDetailsObject);
+        const playlistObject = {
+          id: mixPlId,
+          songs: mixArr,
+        };
+        await addSongsByPlaylistID(playlistObject);
+        setIsPlLoading(false);
+        setCurrentActivePlaylistId(mixPlId);
+        await currentSong(mixArr[0].snippet.resourceId.videoId);
+        isShuffleActive(false);
+        navigate(`/${mixPlId}`);
+      } else return null;
+    }
+    setIsPlLoading(false);
+    return null;
   };
+
   const handleChange = (e) => {
     e.preventDefault();
     setPlaylistId(e.target.value);
@@ -103,9 +154,9 @@ function Search({
         <div className="w-full flex my-2 justify-between">
           <input
             className={`inputSearch w-5/6 md:w-11/12 mr-2 py-2 px-2 rounded-md font-open shadow-2xl focus:outline-none focus:shadow-outline  ${
-              isIdInvalid ? 'border border-red-500' : ''
+              isIdInvalid ? 'border border-red' : ''
             }`}
-            pattern="^(?=.*.{24,})(?=.*PL).*|^play my pl$|^Play my pl$"
+            // pattern="^(?=.*.{24,})(?=.*PL).*|^play my pl$|^Play my pl$"
             placeholder="ID or playlist URL. eg: 'www.youtube.com/playlist?list=PLi06ybkpczJBvFfOhfqDyKMl1Lp2tDkTb'"
             type="text"
             required

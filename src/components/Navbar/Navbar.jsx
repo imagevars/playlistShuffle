@@ -57,7 +57,7 @@ function Navbar({
   const style = { color: 'bgBlack' };
 
   return (
-    <div className="NAVBAR1 w-full flex justify-between px-1 ">
+    <div className=" w-full flex justify-between px-1 ">
       <div className="flex justify-between w-full mx-2 md:max-w-[2000x]">
         {/* eslint-disable-next-line */}
         <a href="https://twitter.com/Jonathhn1" className="w-24" target="_blank" rel="noopener noreferrer" aria-label="github link">
@@ -65,7 +65,7 @@ function Navbar({
         </a>
         {/* eslint-disable-next-line */}
         <h1
-          className="navbar text-xl font-open text-center text-bgBlack dark:text-bgWhite font-bold cursor-pointer"
+          className="navbar text-2xl font-open text-center text-bgBlack dark:text-bgWhite font-bold cursor-pointer"
           cursor="pointer"
           onClick={handleClickHome}
         >
