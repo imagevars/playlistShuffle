@@ -113,7 +113,7 @@ function Search({
         }
         if (mixArr.length === 0) return null;
 
-        const mixPlId = `MIXPL${PLinput.name}${Math.random().toString().slice(2, 20)}`;
+        const mixPlId = `MIXpl${Math.random().toString().slice(2, 20)}`;
         const playlistDetailsObject = {
           playlistName: PLinput.name,
           playlistId: mixPlId,
@@ -146,11 +146,28 @@ function Search({
   return (
     <div className="searchContainer w-full my-4 mx-auto ">
       <form className="" onSubmit={(e) => handleSubmit(e)}>
-        <label htmlFor="searchInput" className="text-bgBlack dark:text-bgWhite font-open">
-          {`${
-            isIdInvalid ? 'Invalid playlist' : 'Enter a playlist:'
-          }`}
-        </label>
+        {
+          isIdInvalid ? (
+            <p>
+              Invalid playlist
+            </p>
+          ) : (
+            <p>
+              To add multiple playlist read
+              <a
+                className="text-primaryColor dark:text-DarkPrimaryColor font-semibold font-open hover:scale-110"
+                href="https://github.com/jooonathann/playlistShuffle#How-to-combine-multiple-playlist"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="github link"
+              >
+                &nbsp;here&nbsp;
+              </a>
+              or Enter a playlist:
+            </p>
+          )
+        }
+
         <div className="w-full flex my-2 justify-between">
           <input
             className={`inputSearch w-5/6 md:w-11/12 mr-2 py-2 px-2 rounded-md font-open shadow-2xl focus:outline-none focus:shadow-outline  ${
