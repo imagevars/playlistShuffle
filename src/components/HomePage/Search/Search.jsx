@@ -113,7 +113,7 @@ function Search({
         }
         if (mixArr.length === 0) return null;
 
-        const mixPlId = `mixPL${Math.random().toString().slice(2, 20)}`;
+        const mixPlId = `MIXPL${Math.random().toString().slice(2, 20)}`;
         const playlistDetailsObject = {
           playlistName: PLinput.name,
           playlistId: mixPlId,
