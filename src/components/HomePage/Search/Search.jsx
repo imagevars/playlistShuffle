@@ -148,11 +148,11 @@ function Search({
       <form className="" onSubmit={(e) => handleSubmit(e)}>
         {
           isIdInvalid ? (
-            <p>
+            <p className="text-black dark:text-white font-open">
               Invalid playlist
             </p>
           ) : (
-            <p>
+            <p className="text-black dark:text-white font-open">
               To add multiple playlist read
               <a
                 className="text-primaryColor dark:text-DarkPrimaryColor font-semibold font-open hover:scale-110"
