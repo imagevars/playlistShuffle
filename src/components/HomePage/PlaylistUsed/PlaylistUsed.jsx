@@ -126,18 +126,12 @@ function PlaylistUsed({
         className="flex w-4/6"
         onClick={() => handleClickPlaylist(element.playlistId)}
       >
-        {element.playlistId.includes('MIX') ? (
-          <div
-            className="object-cover w-[56px]  h-14 rounded-l-lg"
-          />
-        ) : (
-          <img
-            className="object-cover  h-14 rounded-l-lg"
-            width="56px"
-            alt={`${element.playlistName}`}
-            src={element.playlistImage}
-          />
-        )}
+        <img
+          className="object-cover  h-14 rounded-l-lg"
+          width="56px"
+          alt={`${element.playlistName}`}
+          src={element.playlistImage}
+        />
 
         <p className="usedPlaylistName ml-2 text-sm md:text-base font-open text-bgWhite dark:text-bgWhite font-medium truncate ">
           {element.playlistName}

@@ -117,7 +117,7 @@ function Search({
         const playlistDetailsObject = {
           playlistName: PLinput.name,
           playlistId: mixPlId,
-          playlistImage: '',
+          playlistImage: `https://i.ytimg.com/vi/${mixArr[0].snippet.resourceId.videoId}/mqdefault.jpg`,
           playlistEtag: '',
           currentIndex: 0,
         };
