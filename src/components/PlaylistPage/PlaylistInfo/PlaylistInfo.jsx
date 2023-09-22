@@ -18,7 +18,13 @@ function PlaylistInfo({ playlistDetails }) {
         <a href={`https://www.youtube.com/playlist?list=${id}`} target="_blank" rel="noopener noreferrer">
           {' '}
           {info?.playlistName}
+          &nbsp;
         </a>
+      </p>
+      <p className="text-black dark:text-white ml-2 tracking-tight font-open font-semibold">
+        {info.currentIndex + 1}
+        /
+        {info.playlistLength + 1}
       </p>
     </div>
   );
@@ -30,7 +36,7 @@ PlaylistInfo.propTypes = {
       playlistName: PropTypes.string.isRequired,
       playlistId: PropTypes.string.isRequired,
       playlistImage: PropTypes.string.isRequired,
-      playlistEtag: PropTypes.string.isRequired,
+      playlistLength: PropTypes.number.isRequired,
     }),
   ).isRequired,
 };

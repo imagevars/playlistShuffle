@@ -7,8 +7,8 @@ Playlist Shuffle - A web application with a better algorithm than YouTube's for 
 
 ## How to combine multiple playlist
 The maximum playlist size is "12000"
-To combine multiple playlist you need to separate the playlist with a comma and add ", name:" at the end with the name you want the playlist to be called
-These are valid ways to combine them:
+To combine multiple playlist you need to separate the playlist with a comma and add ", name:" at the end with the name you want the playlist to be called.
+These are valid ways to mix playlists on the Search Bar:
 # With the full playlist URL
 https://www.youtube.com/playlist?list=PLH9twT5faHZX6hcW5fl-_WtsV2lMWbtjX, https://www.youtube.com/playlist?list=PL_dT1kMRpJEQyewQehX8LWYxve3iktijD, https://www.youtube.com/playlist?list=PLi06ybkpczJBvFfOhfqDyKMl1Lp2tDkTb, name:new playlist MIX with URL's
 # With playlist ID's.
