@@ -153,17 +153,17 @@ function Search({
             </p>
           ) : (
             <p className="text-black dark:text-white font-open">
-              To add multiple playlist read
+              To add multiple playlist read&nbsp;
               <a
-                className="text-primaryColor dark:text-DarkPrimaryColor font-semibold font-open hover:scale-110"
+                className="text-primaryColor dark:text-DarkPrimaryColor font-semibold font-open hover:scale-110 underline"
                 href="https://github.com/jooonathann/playlistShuffle#How-to-combine-multiple-playlist"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="github link"
               >
-                &nbsp;here&nbsp;
+                here
               </a>
-              or Enter a playlist:
+              &nbsp;or Enter a playlist:
             </p>
           )
         }
