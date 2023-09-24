@@ -5,7 +5,7 @@ export default function validateId(str) {
     name: '',
     playlists: [],
   };
-  const basicRegex = /^(?=.*.{24,})(?=.*PL).*/;
+  const basicRegex = /^(?=.*.{18,})(?=.*PL).*/;
   const PLRegex = /PL[\w-]+(?=&|$)/;
 
   if (arrayOfIds[0] === 'play my pl' || arrayOfIds[0] === 'Play my pl') {
@@ -16,7 +16,7 @@ export default function validateId(str) {
       const [id] = arrayOfIds[0].replace(/\s/g, '').match(basicRegex);
       if (id.match(PLRegex)) {
         const [PLId] = id.match(PLRegex);
-        if (PLId.length > 24) {
+        if (PLId.length >= 18) {
           return PLId;
         }
         return null;
