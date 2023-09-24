@@ -42,7 +42,7 @@ function ProgressBar({
       <input
         aria-label="progress bar"
         type="range"
-        className="w-full  dark:accent-DarkPrimaryColorDarker dark:hover:accent-DarkPrimaryColor active:accent-primaryColorDarker dark:active:accent-DarkPrimaryColorDarker accent-primaryColor hover:accent-primaryColor"
+        className="w-full  accent-primary hover:accent-secondary active:accent-secondary"
         name="volume"
         id="volume"
         value={player.videoPercentage / 100}
@@ -56,10 +56,10 @@ function ProgressBar({
         onTouchEnd={handleMouseUp}
       />
       <div className="flex font-medium justify-between">
-        <div className="font-nunito text-black dark:text-white">
+        <div className="font-nunito text-textColor">
           {secondsToTime(player.progress)}
         </div>
-        <div className="font-nunito text-black dark:text-white">
+        <div className="font-nunito text-textColor">
           {secondsToTime(player.videoDuration)}
         </div>
       </div>

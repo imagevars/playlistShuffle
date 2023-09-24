@@ -13,7 +13,7 @@ function PlaylistInfo({ playlistDetails }) {
 
   return (
     <div className="flex my-1 justify-center md:justify-start">
-      <p className="text-black dark:text-white ml-2 tracking-tight font-open font-semibold truncate">
+      <p className="text-textColor ml-2 tracking-tight font-open font-semibold truncate">
         {' '}
         <a href={`https://www.youtube.com/playlist?list=${id}`} target="_blank" rel="noopener noreferrer">
           {' '}
@@ -21,7 +21,7 @@ function PlaylistInfo({ playlistDetails }) {
           &nbsp;
         </a>
       </p>
-      <p className="text-black dark:text-white ml-2 tracking-tight font-open font-semibold">
+      <p className="text-textColor ml-2 tracking-tight font-open font-semibold">
         {info.currentIndex + 1}
         /
         {info.playlistLength + 1}

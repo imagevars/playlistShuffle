@@ -6,7 +6,7 @@ import Footer from '../HomePage/Footer';
 
 function AboutPage() {
   return (
-    <div className="flex flex-col justify-between bg-bgWhite dark:bg-bgBlack h-screen min-h-screen">
+    <div className="flex flex-col justify-between transition-colors bg-backColor image:bg-[unset]  h-screen min-h-screen">
       <Navbar />
       <div className="flex text-primaryColor dark:text-DarkPrimaryColor justify-center items-center bg-bgWhite dark:bg-bgBlack">
         <div className="text-bgBlack dark:text-bgWhite bg-bgWhite dark:bg-bgBlack  text-base w-4/4 md:w-3/5 text-justify">

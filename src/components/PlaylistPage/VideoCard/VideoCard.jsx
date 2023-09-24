@@ -120,26 +120,26 @@ function VideoCard({
                   : null
               }  text-center  group`}
             >
-              <div className=" flex justify-between group-hover:text-primaryColor ">
+              <div className=" flex justify-between group-hover:text-textColor ">
                 <div
                   className={`${
                     player.currentSong
                     === playlistSongsById[
                       player.currentActivePlaylistId][index].snippet.resourceId.videoId
-                      ? ' text-primaryColor  dark:text-DarkPrimaryColor font-semibold  dark:font-semibold '
-                      : ' dark:text-white text-black '
+                      ? ' text-secondary  font-semibold  dark:font-semibold '
+                      : ' text-textColor '
                   } font-normal w-full text-center md:text-left md:mx-4 md:truncate font-open`}
                 >
-                  <p className="truncate group-hover:text-primaryColor group-hover:dark:text-DarkPrimaryColor">
+                  <p className="truncate group-hover:text-secondary ">
                     {`${index + 1} - ${playlistSongsById[player.currentActivePlaylistId][index].snippet.title}`}
                   </p>
-                  <p className={`${player.currentSong === playlistSongsById[player.currentActivePlaylistId][index].snippet.resourceId.videoId ? ' text-primaryColor dark:text-DarkPrimaryColor  ' : 'text-gray dark:text-clearGray group-hover:text-primaryColor group-hover:dark:text-DarkPrimaryColor '}text-sm font-open `}>
+                  <p className={`${player.currentSong === playlistSongsById[player.currentActivePlaylistId][index].snippet.resourceId.videoId ? ' text-secondary  ' : 'text-gray group-hover:text-secondary group-hover:dark:text-DarkPrimaryColor '} truncate text-sm font-open `}>
                     {playlistSongsById[player.currentActivePlaylistId][
                       index].snippet.videoOwnerChannelTitle}
                   </p>
                 </div>
               </div>
-              <div className={`${player.currentSong === playlistSongsById[player.currentActivePlaylistId][index].snippet.resourceId.videoId ? (' bg-primaryColor shadow-none dark:bg-DarkPrimaryColor ') : ('bg-bgShadow  ')}w-[88%] h-0.5 mx-auto rounded-full group-hover:bg-primaryColor group-hover:dark:bg-DarkPrimaryColor`} />
+              <div className={`${player.currentSong === playlistSongsById[player.currentActivePlaylistId][index].snippet.resourceId.videoId ? (' bg-secondary shadow-none') : ('bg-bgShadow  ')} w-[88%] h-0.5 mx-auto rounded-full group-hover:bg-primary`} />
             </div>
           </button>
         )}

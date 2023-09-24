@@ -27,7 +27,7 @@ function VolumeManager({ player, isMutedActive, setVolume }) {
       { (player.volume >= 0.50 && player.isMutedActive === false)
       && (
       <BiVolumeFull
-        className="  dark:text-DarkPrimaryColorDarker dark:hover:text-DarkPrimaryColor  text-primaryColorDarker hover:text-primaryColor  active:drop-shadow-svgShadow active:scale-110"
+        className="text-primary hover:text-secondary active:drop-shadow-svgShadow active:scale-110"
         size={30}
         onClick={handleIconClick}
       />
@@ -35,14 +35,14 @@ function VolumeManager({ player, isMutedActive, setVolume }) {
       { (player.volume < 0.50 && player.isMutedActive === false)
       && (
       <BiVolumeLow
-        className=" dark:text-DarkPrimaryColorDarker dark:hover:text-DarkPrimaryColor  text-primaryColorDarker hover:text-primaryColor  active:drop-shadow-svgShadow active:scale-110"
+        className="text-primary hover:text-secondary active:drop-shadow-svgShadow active:scale-110"
         size={30}
         onClick={handleIconClick}
       />
       )}
       { player.isMutedActive === true && (
       <BiVolumeMute
-        className=" dark:text-DarkPrimaryColorDarker dark:hover:text-DarkPrimaryColor  text-primaryColorDarker hover:text-primaryColor  active:drop-shadow-svgShadow active:scale-110"
+        className="text-primary hover:text-secondary active:drop-shadow-svgShadow active:scale-110"
         size={30}
         onClick={handleIconClick}
       />
@@ -50,7 +50,7 @@ function VolumeManager({ player, isMutedActive, setVolume }) {
       <input
         aria-label="volume manager"
         type="range"
-        className="w-full  dark:accent-DarkPrimaryColorDarker dark:hover:accent-DarkPrimaryColor active:accent-primaryColorDarker dark:active:accent-DarkPrimaryColorDarker accent-primaryColor hover:accent-primaryColor "
+        className="w-full accent-primary hover:accent-secondary active:accent-secondary"
         name="volume"
         id="volume"
         value={player.volume}

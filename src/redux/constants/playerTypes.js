@@ -16,7 +16,7 @@ export const PLAYER_VIDEO_DURATION = 'player/videoDuration';
 
 export const PLAYER_SET_PERCENTAGE = 'player/videoPercentage';
 
-export const PLAYER_IS_DARK_MODE_ACTIVE = 'player/darkMode';
+export const PLAYER_SET_THEME = 'player/theme';
 
 export const PLAYER_VOLUME = 'player/volume';
 

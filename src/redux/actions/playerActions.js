@@ -8,7 +8,7 @@ import {
   PLAYER_VIDEO_DURATION,
   PLAYER_SET_PROGRESS,
   PLAYER_SET_PERCENTAGE,
-  PLAYER_IS_DARK_MODE_ACTIVE,
+  PLAYER_SET_THEME,
   PLAYER_VOLUME,
   PLAYER_SEEK_TO,
   PLAYER_SEEKING,
@@ -60,8 +60,8 @@ export const setPercentage = (payload) => ({
   payload,
 });
 
-export const isDarkModeActive = (payload) => ({
-  type: PLAYER_IS_DARK_MODE_ACTIVE,
+export const setTheme = (payload) => ({
+  type: PLAYER_SET_THEME,
   payload,
 });
 

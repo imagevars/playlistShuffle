@@ -8,7 +8,7 @@ import {
   PLAYER_SET_PROGRESS,
   PLAYER_VIDEO_DURATION,
   PLAYER_SET_PERCENTAGE,
-  PLAYER_IS_DARK_MODE_ACTIVE,
+  PLAYER_SET_THEME,
   PLAYER_VOLUME,
   PLAYER_SEEK_TO,
   PLAYER_SEEKING,
@@ -21,7 +21,7 @@ import {
 const initialState = {
   isPlLoading: false,
   isPlaying: false,
-  darkMode: false,
+  theme: 'image',
   currentSong: '',
   isShuffleActive: false,
   isLoopActive: false,
@@ -65,8 +65,8 @@ export default function playerReducer(state = initialState, action) {
     case PLAYER_SET_PERCENTAGE: {
       return { ...state, videoPercentage: action.payload };
     }
-    case PLAYER_IS_DARK_MODE_ACTIVE: {
-      return { ...state, darkMode: action.payload };
+    case PLAYER_SET_THEME: {
+      return { ...state, theme: action.payload };
     }
     case PLAYER_VOLUME: {
       return { ...state, volume: action.payload };

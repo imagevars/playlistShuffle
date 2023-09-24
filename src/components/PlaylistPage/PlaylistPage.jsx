@@ -223,7 +223,7 @@ function PlaylistPage({
       // eslint-disable-next-line
       tabIndex={0}
       // passive="true"
-      className="h-screen min-h-screen bg-bgWhite dark:bg-bgBlack  focus:outline-none "
+      className="h-screen min-h-screen transition-colors bg-backColor image:bg-[unset] focus:outline-none "
     >
       <HelmetHelper
         title={
@@ -267,6 +267,7 @@ PlaylistPage.propTypes = {
     currentActivePlaylistId: PropTypes.string.isRequired,
     isMutedActive: PropTypes.bool.isRequired,
     volume: PropTypes.number.isRequired,
+    theme: PropTypes.string.isRequired,
   }).isRequired,
   isLoopActive: PropTypes.func.isRequired,
   isShuffleActive: PropTypes.func.isRequired,

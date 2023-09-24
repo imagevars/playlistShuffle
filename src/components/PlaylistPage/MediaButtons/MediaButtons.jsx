@@ -85,7 +85,7 @@ const MediaButtons = memo(
             className=" p-[0.25rem] mx-2 md:mx-0 md:p-[0.50rem] cursor-auto"
           >
             <MdRepeatOne
-              className="active:drop-shadow-none  dark:text-DarkPrimaryColorDarker dark:hover:text-DarkPrimaryColor  text-primaryColorDarker hover:text-primaryColor  drop-shadow-svgShadow dark:drop-shadow-svgShadowDarkMode  active:scale-110"
+              className="active:drop-shadow-none  text-primary hover:text-secondary   drop-shadow-svgShadow dark:drop-shadow-svgShadowDarkMode  active:scale-110"
               onClick={() => isLoopActive(false)}
               size={35}
             />
@@ -97,7 +97,7 @@ const MediaButtons = memo(
             className="active:drop-shadow-2xl cursor-auto p-[0.25rem] md:p-[0.50rem] mx-2 md:mx-0"
           >
             <MdRepeat
-              className="active:drop-shadow-none  dark:text-DarkPrimaryColorDarker dark:hover:text-DarkPrimaryColor  text-primaryColorDarker hover:text-primaryColor   drop-shadow-svgShadow dark:drop-shadow-svgShadowDarkMode  active:scale-110"
+              className="active:drop-shadow-none  text-primary hover:text-secondary    drop-shadow-svgShadow dark:drop-shadow-svgShadowDarkMode  active:scale-110"
               onClick={() => isLoopActive(true)}
               size={35}
             />
@@ -112,7 +112,7 @@ const MediaButtons = memo(
             className=" p-[0.25rem] md:p-[0.50rem]  cursor-auto mx-1 md:mx-0"
           >
             <MdSkipPrevious
-              className="active:drop-shadow-none dark:text-DarkPrimaryColorDarker dark:hover:text-DarkPrimaryColor  text-primaryColorDarker hover:text-primaryColor drop-shadow-svgShadow dark:drop-shadow-svgShadowDarkMode  active:scale-110"
+              className="active:drop-shadow-none text-primary hover:text-secondary    drop-shadow-svgShadow dark:drop-shadow-svgShadowDarkMode  active:scale-110"
               onClick={handleClickPreviousButton}
               size={35}
             />
@@ -126,7 +126,6 @@ const MediaButtons = memo(
             >
               <BiPause
                 className="active:scale-105"
-                style={{ color: `${player.darkMode ? '#0089a5' : '#0b4677'}` }}
                 onClick={() => isPlaying(false)}
                 size={50}
               />
@@ -135,11 +134,10 @@ const MediaButtons = memo(
             <button
               type="button"
               aria-label="play video"
-              className="cursor-auto rounded-full dark:bg-[#baf3ff] bg-[#bcdcf7] mx-1 md:mx-0 my-0.5"
+              className="cursor-auto rounded-full bg-accent mx-1 md:mx-0 my-0.5"
             >
               <BiPlay
                 className="active:scale-105 pl-1"
-                style={{ color: `${player.darkMode ? '#0089a5' : '#0b4677'}` }}
                 onClick={() => isPlaying(true)}
                 size={50}
               />
@@ -151,7 +149,7 @@ const MediaButtons = memo(
             className=" p-[0.25rem] md:p-[0.50rem] cursor-auto mx-1 md:mx-0"
           >
             <MdSkipNext
-              className="active:drop-shadow-none dark:text-DarkPrimaryColorDarker dark:hover:text-DarkPrimaryColor  text-primaryColorDarker hover:text-primaryColor   drop-shadow-svgShadow dark:drop-shadow-svgShadowDarkMode  active:scale-110"
+              className="active:drop-shadow-none text-primary hover:text-secondary   drop-shadow-svgShadow dark:drop-shadow-svgShadowDarkMode  active:scale-110"
               onClick={handleClickNextButton}
               size={35}
             />
@@ -163,7 +161,7 @@ const MediaButtons = memo(
           className=" p-[0.25rem] md:p-[0.50rem] cursor-auto mx-2 md:mx-0"
         >
           <MdShuffle
-            className="active:drop-shadow-none dark:text-DarkPrimaryColorDarker dark:hover:text-DarkPrimaryColor  text-primaryColorDarker hover:text-primaryColor  drop-shadow-svgShadow dark:drop-shadow-svgShadowDarkMode  active:scale-110"
+            className="active:drop-shadow-none text-primary hover:text-secondary  drop-shadow-svgShadow dark:drop-shadow-svgShadowDarkMode  active:scale-110"
             onClick={handleClickShuffle}
             size={35}
           />

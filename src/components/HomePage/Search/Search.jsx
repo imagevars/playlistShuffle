@@ -148,14 +148,14 @@ function Search({
       <form className="" onSubmit={(e) => handleSubmit(e)}>
         {
           isIdInvalid ? (
-            <p className="text-black dark:text-white font-open">
+            <p className="text-textColor font-open">
               Invalid playlist
             </p>
           ) : (
-            <p className="text-black dark:text-white font-open">
+            <p className="text-textColor font-open">
               To add multiple playlist read&nbsp;
               <a
-                className="text-primaryColor dark:text-DarkPrimaryColor font-semibold font-open hover:scale-110 underline"
+                className="text-primary font-semibold font-open hover:scale-110 underline"
                 href="https://github.com/jooonathann/playlistShuffle#How-to-combine-multiple-playlist"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -180,7 +180,7 @@ function Search({
             value={playlistId}
           />
           <button
-            className=" rounded-md px-4 w-2/12 md:w-1/12 font-open shadow-shadowBox active:shadow-none dark:shadow-shadowBoxDarkMode dark:active:shadow-none flex items-center justify-center text-bgWhite dark:bg-DarkPrimaryColorDarker dark:hover:bg-DarkPrimaryColor  bg-primaryColorDarker hover:bg-primaryColor"
+            className=" rounded-md px-4 w-2/12 md:w-1/12 font-open shadow-shadowBox active:shadow-none dark:shadow-shadowBoxDarkMode dark:active:shadow-none flex items-center justify-center text-textColorInside bg-primary dark:hover:bg-DarkPrimaryColor   hover:bg-primaryColor"
             type="submit"
           >
             {player.isPlLoading === true ? (

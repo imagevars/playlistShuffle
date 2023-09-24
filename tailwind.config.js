@@ -1,3 +1,5 @@
+const { createThemes } = require('tw-colors');
+
 module.exports = {
   content: ['./src/**/*.{html,jsx}'],
   darkMode: 'class',
@@ -37,5 +39,36 @@ module.exports = {
       red: '#fe0000',
     },
   },
-  plugins: [],
+  plugins: [
+    createThemes({
+      light: {
+        primary: '#0b4677',
+        secondary: '#0c518a',
+        backColor: '#F2E7FE',
+        textColor: '#000000',
+        textColorInside: '#ffffff',
+        gray: '#4d4d4d',
+        accent: '#bcdcf7',
+
+      },
+      dark: {
+        primary: '#008BA7',
+        secondary: '#00aacd',
+        backColor: '#000000',
+        textColor: '#ffffff',
+        textColorInside: '#ffffff',
+        gray: '#808080',
+        accent: '#baf3ff',
+      },
+      image: {
+        primary: '#008BA7',
+        secondary: '#00aacd',
+        backColor: '#404040',
+        textColor: '#ffffff',
+        textColorInside: '#ffffff',
+        gray: '#999999',
+        accent: '#baf3ff',
+      },
+    }),
+  ],
 };
