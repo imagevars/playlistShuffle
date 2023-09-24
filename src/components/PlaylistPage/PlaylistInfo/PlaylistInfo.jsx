@@ -36,7 +36,7 @@ PlaylistInfo.propTypes = {
       playlistName: PropTypes.string.isRequired,
       playlistId: PropTypes.string.isRequired,
       playlistImage: PropTypes.string.isRequired,
-      playlistLength: PropTypes.number.isRequired,
+      playlistLength: PropTypes.number,
     }),
   ).isRequired,
 };

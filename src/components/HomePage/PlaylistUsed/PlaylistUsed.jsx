@@ -56,6 +56,7 @@ function PlaylistUsed({
   };
 
   const handleDeleteFromPlaylist = (id) => {
+    currentSong('');
     removePlaylistSongsById(id);
     deleteFromPlaylistDetails(id);
   };

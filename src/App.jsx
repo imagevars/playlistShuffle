@@ -12,7 +12,7 @@ import AboutPage from './components/AboutPage/AboutPage';
 
 function App({ player }) {
   useEffect(() => {
-    if (player.theme === 'image') {
+    if (player.theme === 'image' && player.currentSong !== '') {
       document.getElementById('app').style.backgroundImage = `url(https://i.ytimg.com/vi/${player.currentSong}/hqdefault.jpg)`;
       document.getElementById('app').style.backgroundBlendMode = 'multiply';
       document.getElementById('app').style.backgroundSize = 'cover';
