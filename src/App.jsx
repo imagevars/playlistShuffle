@@ -14,12 +14,18 @@ function App({ player }) {
   const ref = useRef(null);
   useEffect(() => {
     if (player.theme === 'image') {
-      ref.current.style.transition = 'background 700ms ease-in-out 150ms';
-      ref.current.style.backgroundImage = `url(https://i.ytimg.com/vi/${player.currentSong}/hqdefault.jpg)`;
-      ref.current.style.backgroundBlendMode = 'multiply';
-      ref.current.style.backgroundSize = 'cover';
-      ref.current.style.backgroundPosition = 'center';
-      ref.current.style.backgroundColor = '#404040';
+      if (player.currentSong === '') {
+        ref.current.style.backgroundColor = '#404040';
+        ref.current.style.backgroundImage = 'none';
+        ref.current.style.transition = 'background 700ms ease-in-out 150ms';
+      } else {
+        ref.current.style.transition = 'background 700ms ease-in-out 150ms';
+        ref.current.style.backgroundImage = `url(https://i.ytimg.com/vi/${player.currentSong}/hqdefault.jpg)`;
+        ref.current.style.backgroundBlendMode = 'multiply';
+        ref.current.style.backgroundSize = 'cover';
+        ref.current.style.backgroundPosition = 'center';
+        ref.current.style.backgroundColor = '#404040';
+      }
     }
   }, [player.currentSong]);
 
