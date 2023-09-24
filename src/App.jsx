@@ -12,12 +12,12 @@ import AboutPage from './components/AboutPage/AboutPage';
 
 function App({ player }) {
   useEffect(() => {
-    if (player.theme === 'image' && player.currentSong !== '') {
+    if (player.theme === 'image') {
       document.getElementById('app').style.backgroundImage = `url(https://i.ytimg.com/vi/${player.currentSong}/hqdefault.jpg)`;
       document.getElementById('app').style.backgroundBlendMode = 'multiply';
       document.getElementById('app').style.backgroundSize = 'cover';
       document.getElementById('app').style.backgroundPosition = 'center';
-      document.getElementById('app').style.transition = '650ms';
+      document.getElementById('app').style.transition = '500ms';
       document.getElementById('app').style.backgroundColor = '#404040';
     }
   }, [player.currentSong]);

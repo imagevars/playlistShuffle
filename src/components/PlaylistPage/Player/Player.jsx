@@ -103,7 +103,7 @@ function Player({
       if (title === 'Private video') {
         return title;
       }
-      if (joinedTitleAndOwnerTitle[0].includes('-')) {
+      if (joinedTitleAndOwnerTitle[0].includes(' - ')) {
         const regex = /^(.*?)-(.*)$/;
         const match = joinedTitleAndOwnerTitle[0].match(regex);
 
