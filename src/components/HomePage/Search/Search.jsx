@@ -180,7 +180,7 @@ function Search({
             value={playlistId}
           />
           <button
-            className=" rounded-md px-4 w-2/12 md:w-1/12 font-open shadow-shadowBox active:shadow-none dark:shadow-shadowBoxDarkMode dark:active:shadow-none flex items-center justify-center text-textColorInside bg-primary hover:bg-secondary"
+            className=" rounded-md px-4 w-2/12 md:w-1/12 font-open shadow-shadowBox active:shadow-none dark:shadow-shadowBoxDarkMode dark:active:shadow-none flex items-center justify-center text-textColorInside light:hover:bg-secondary dark:hover:bg-secondary light:bg-primary dark:bg-primary  image:backdrop-blur-xl image:bg-white/30 image:hover:bg-white/50"
             type="submit"
           >
             {player.isPlLoading === true ? (
