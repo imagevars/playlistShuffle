@@ -54,7 +54,7 @@ function Navbar({
     }
   }, []);
 
-  const handleClickDarkMode = () => {
+  const handleClickTheme = () => {
     if (player.theme === 'light') {
       document.documentElement.classList.remove('image');
       document.documentElement.classList.remove('light');
@@ -93,17 +93,17 @@ function Navbar({
         </h1>
         {player.theme === 'image' && (
           <div className="w-24 flex justify-end">
-            <BsFillSunFill fill="white" onClick={handleClickDarkMode} className="cursor-pointer mt-1" aria-label="sun icon" size={25} />
+            <BsFillSunFill fill="white" onClick={handleClickTheme} className="cursor-pointer mt-1" aria-label="sun icon" size={25} />
           </div>
         )}
         {player.theme === 'dark' && (
           <div className="w-24 flex justify-end">
-            <BsImageFill fill="white" onClick={handleClickDarkMode} className="cursor-pointer mt-1" aria-label="image icon" size={25} />
+            <BsImageFill fill="white" onClick={handleClickTheme} className="cursor-pointer mt-1" aria-label="image icon" size={25} />
           </div>
         )}
         {player.theme === 'light' && (
           <div className="w-24 flex justify-end">
-            <BsFillMoonFill fill="black" onClick={handleClickDarkMode} className="cursor-pointer mt-1" aria-label="moon icon" size={25} />
+            <BsFillMoonFill fill="black" onClick={handleClickTheme} className="cursor-pointer mt-1" aria-label="moon icon" size={25} />
           </div>
         )}
 

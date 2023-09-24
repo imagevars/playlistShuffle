@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Navbar from '../Navbar/Navbar';
 import Footer from '../HomePage/Footer';
@@ -23,11 +22,5 @@ function AboutPage() {
     </div>
   );
 }
-
-AboutPage.propTypes = {
-  player: PropTypes.shape({
-    darkMode: PropTypes.bool.isRequired,
-  }).isRequired,
-};
 
 export default connect(null, null)(AboutPage);
