@@ -12,7 +12,7 @@ import AboutPage from './components/AboutPage/AboutPage';
 
 function App({ player }) {
   useEffect(() => {
-    if (player.theme === 'image' && player.currentSong !== '') {
+    if (player.theme === 'image') {
       document.getElementById('app').style.backgroundImage = `url(https://i.ytimg.com/vi/${player.currentSong}/hqdefault.jpg)`;
       document.getElementById('app').style.backgroundBlendMode = 'multiply';
       document.getElementById('app').style.backgroundSize = 'cover';
@@ -23,7 +23,7 @@ function App({ player }) {
   }, [player.currentSong]);
 
   useEffect(() => {
-    if (player.theme === 'image') {
+    if (player.theme === 'image' && player.currentSong !== '') {
       document.body.style.backgroundImage = `url(https://i.ytimg.com/vi/${player.currentSong}/hqdefault.jpg)`;
       document.getElementById('app').style.backgroundBlendMode = 'multiply';
       document.getElementById('app').style.backgroundSize = 'cover';
@@ -48,30 +48,9 @@ function App({ player }) {
 }
 App.propTypes = {
   player: PropTypes.shape({
-    isPlaying: PropTypes.bool.isRequired,
     currentSong: PropTypes.string.isRequired,
-    isShuffleActive: PropTypes.bool.isRequired,
-    isLoopActive: PropTypes.bool.isRequired,
-    currentActivePlaylistId: PropTypes.string.isRequired,
-    isMutedActive: PropTypes.bool.isRequired,
-    volume: PropTypes.number.isRequired,
     theme: PropTypes.string.isRequired,
   }).isRequired,
-  // isLoopActive: PropTypes.func.isRequired,
-  // isShuffleActive: PropTypes.func.isRequired,
-  // currentSong: PropTypes.func.isRequired,
-  // playlistSongsById: PropTypes.objectOf(PropTypes.arrayOf).isRequired,
-  // isMutedActive: PropTypes.func.isRequired,
-  // playlistDetails: PropTypes.arrayOf(PropTypes.shape({
-  //   playlistName: PropTypes.string.isRequired,
-  //   playlistId: PropTypes.string.isRequired,
-  //   playlistImage: PropTypes.string.isRequired,
-  //   playlistEtag: PropTypes.string.isRequired,
-  //   currentIndex: PropTypes.number.isRequired,
-  // })).isRequired,
-  // lastPlayedIndexPlaylistDetails: PropTypes.func.isRequired,
-  // setVolume: PropTypes.func.isRequired,
-  // setSeekKeyboard: PropTypes.func.isRequired,
 
 };
 
