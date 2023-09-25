@@ -61,8 +61,8 @@ module.exports = {
         accent: '#baf3ff',
       },
       image: {
-        primary: 'rgba(237, 105, 105, 0.7)',
-        secondary: 'rgba(237, 105, 105, 1)',
+        primary: '#e94747',
+        secondary: '#ed6969',
         backColor: '#404040',
         textColor: '#ffffff',
         textColorInside: '#ffffff',
