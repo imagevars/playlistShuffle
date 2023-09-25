@@ -42,13 +42,13 @@ module.exports = {
   plugins: [
     createThemes({
       light: {
-        primary: '#006666',
-        secondary: '#008080',
+        primary: '#006868',
+        secondary: '#006666',
         backColor: '#F2E7FE',
         textColor: '#000000',
         textColorInside: '#ffffff',
         gray: '#4d4d4d',
-        accent: '#00e7e7',
+        accent: '#00b5b5',
 
       },
       dark: {
