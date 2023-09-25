@@ -125,6 +125,7 @@ const MediaButtons = memo(
                rounded-full cursor-auto bg-accent mx-1 md:mx-0 my-0.5"
             >
               <BiPause
+                style={{ color: `${player.theme === 'light' ? '#0b4677' : '#0089a5'}` }}
                 className="active:scale-105"
                 onClick={() => isPlaying(false)}
                 size={50}
@@ -137,6 +138,7 @@ const MediaButtons = memo(
               className="cursor-auto rounded-full bg-accent mx-1 md:mx-0 my-0.5"
             >
               <BiPlay
+                style={{ color: `${player.theme === 'light' ? '#0b4677' : '#0089a5'}` }}
                 className="active:scale-105 pl-1"
                 onClick={() => isPlaying(true)}
                 size={50}
@@ -179,6 +181,7 @@ MediaButtons.propTypes = {
     isLoopActive: PropTypes.bool.isRequired,
     currentActivePlaylistId: PropTypes.string.isRequired,
     isMutedActive: PropTypes.bool.isRequired,
+    theme: PropTypes.string.isRequired,
   }).isRequired,
   isPlaying: PropTypes.func.isRequired,
   isLoopActive: PropTypes.func.isRequired,
