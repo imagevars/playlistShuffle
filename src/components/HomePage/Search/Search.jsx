@@ -163,7 +163,7 @@ function Search({
               >
                 here
               </a>
-              &nbsp;or Enter a playlist:
+              &nbsp;or Enter a playlist URL or ID:
             </p>
           )
         }
@@ -173,7 +173,7 @@ function Search({
             className={`inputSearch w-5/6 md:w-11/12 mr-2 py-2 px-2 rounded-md font-open shadow-lg focus:outline-none focus:shadow-outline  ${
               isIdInvalid ? 'border border-red' : ''
             }`}
-            placeholder="ID or playlist URL. eg: 'www.youtube.com/playlist?list=PLi06ybkpczJBvFfOhfqDyKMl1Lp2tDkTb'"
+            placeholder="example of a PL ID: PLi9drqWffJ9FWBo7ZVOiaVy0UQQEm4IbP"
             type="text"
             required
             onChange={(e) => handleChange(e)}
