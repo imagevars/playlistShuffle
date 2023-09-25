@@ -155,7 +155,7 @@ function Search({
             <p className="text-textColor font-open">
               To add multiple playlist read&nbsp;
               <a
-                className="text-primary font-semibold font-open hover:scale-110 underline"
+                className="text-secondary font-semibold font-open hover:scale-110 underline"
                 href="https://github.com/jooonathann/playlistShuffle#How-to-combine-multiple-playlist"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -180,7 +180,7 @@ function Search({
             value={playlistId}
           />
           <button
-            className=" rounded-md px-4 w-2/12 md:w-1/12 font-open shadow-shadowBox active:shadow-none dark:shadow-shadowBoxDarkMode dark:active:shadow-none flex items-center justify-center text-textColorInside light:hover:bg-secondary dark:hover:bg-secondary light:bg-primary dark:bg-primary  image:backdrop-blur-xl image:bg-white/30 image:hover:bg-white/50"
+            className=" rounded-md px-4 w-2/12 md:w-1/12 font-open shadow-shadowBox active:shadow-none dark:shadow-shadowBoxDarkMode dark:active:shadow-none flex items-center justify-center text-textColorInside hover:bg-secondary bg-primary"
             type="submit"
           >
             {player.isPlLoading === true ? (
