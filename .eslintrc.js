@@ -16,5 +16,7 @@ module.exports = {
     'no-shadow': 'off',
     'default-param-last': 0,
     'jsx-a11y/click-events-have-key-events': 'off',
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+
   },
 };

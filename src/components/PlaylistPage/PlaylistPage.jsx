@@ -233,7 +233,7 @@ function PlaylistPage({
         }
       />
       <div
-        className=" h-full flex flex-col overflow-hidden  md:block  md:max-w-[2000px] items-center md:mx-auto"
+        className=" h-full flex flex-col overflow-hidden  md:block  items-center md:mx-auto"
       >
         <Navbar />
 
