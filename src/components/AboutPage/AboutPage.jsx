@@ -5,9 +5,9 @@ import Footer from '../HomePage/Footer';
 
 function AboutPage() {
   return (
-    <div className="flex flex-col justify-between transition-colors bg-backColor image:bg-[unset]  h-screen min-h-screen">
+    <div className="transition-colors bg-backColor image:bg-[unset] flex flex-col justify-between h-[100vh]">
       <Navbar />
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center overflow-y-auto">
         <div className="text-textColor text-base w-4/4 md:w-3/5 text-justify">
           <p className="font-open mx-4 my-2 list-disc">
             If you like the page don&apos;t forget the give a star ★ to the github

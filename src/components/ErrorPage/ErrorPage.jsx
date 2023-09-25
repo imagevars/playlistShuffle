@@ -14,7 +14,7 @@ function ErrorPage() {
     navigate('/about');
   };
   return (
-    <div className="transition-colors bg-backColor image:bg-[unset] h-screen min-h-screen flex flex-col justify-between">
+    <div className="transition-colors bg-backColor image:bg-[unset] flex flex-col justify-between h-[100vh]">
       <Navbar />
       <div className="flex flex-col items-center md:w-3/5  mx-auto">
         <BiErrorCircle fill="red" size={75} />
@@ -22,13 +22,13 @@ function ErrorPage() {
         <div>
           <p className="text-textColor my-1 font-open text-center">
             To report the problem on github&nbsp;
-            <a className="text-primaryColor dark:text-DarkPrimaryColor font-semibold font-open hover:scale-110" href="https://github.com/jooonathann/playlistShuffle/issues" target="_blank" rel="noopener noreferrer" aria-label="github link">here</a>
+            <a className="text-primary font-semibold font-open" href="https://github.com/jooonathann/playlistShuffle/issues" target="_blank" rel="noopener noreferrer" aria-label="github link">here</a>
           </p>
           <p className="text-textColor font-open text-center">
             More info about the page&nbsp;
             <button
               onClick={handleClickAbout}
-              className="text-textColor my-1 font-semibold font-open"
+              className="text-primary font-semibold font-open"
               type="button"
             >
               here
@@ -38,7 +38,7 @@ function ErrorPage() {
             To go back home&nbsp;
             <button
               onClick={handleClickHome}
-              className="text-primaryColor dark:text-DarkPrimaryColor font-semibold font-open"
+              className="text-primary font-semibold font-open"
               type="button"
             >
               here
