@@ -9,6 +9,7 @@ const CompressionPlugin = require('compression-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const { HotModuleReplacementPlugin } = require('webpack');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 module.exports = {
@@ -62,6 +63,11 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './index.html',
       scriptLoading: 'defer',
+    }),
+    new CopyPlugin({
+      patterns: [
+        { from: 'sitemap.xml', to: '' },
+      ],
     }),
     new MiniCssExtractPlugin(),
     new FaviconsWebpackPlugin('./src/favicon.png'),

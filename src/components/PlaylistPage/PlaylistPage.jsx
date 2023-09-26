@@ -42,16 +42,18 @@ function PlaylistPage({
   }
   const ref = useRef(null);
 
-  const findPlaylistIndex = playlistDetails.findIndex((element) => element.playlistId
-  === player.currentActivePlaylistId);
+  const findPlaylistIndex = playlistDetails.findIndex(
+    (element) => element.playlistId === player.currentActivePlaylistId,
+  );
 
   const currentVideoName = playlistSongsById[player.currentActivePlaylistId][
     playlistDetails[findPlaylistIndex].currentIndex
   ].snippet.title;
 
   useEffect(() => {
-    const findPlaylistIndex = playlistDetails.findIndex((element) => element.playlistId
-    === player.currentActivePlaylistId);
+    const findPlaylistIndex = playlistDetails.findIndex(
+      (element) => element.playlistId === player.currentActivePlaylistId,
+    );
     const currIndex = playlistDetails[findPlaylistIndex].currentIndex;
     const handleClick = (e) => {
       switch (e.code) {
@@ -105,7 +107,8 @@ function PlaylistPage({
         }
         case 'ArrowRight': {
           if (
-            currIndex < playlistSongsById[player.currentActivePlaylistId].length - 1
+            currIndex
+            < playlistSongsById[player.currentActivePlaylistId].length - 1
           ) {
             const lastPlayedObj = {
               currentIndex: playlistDetails[findPlaylistIndex].currentIndex + 1,
@@ -120,7 +123,7 @@ function PlaylistPage({
             playlistDetails[findPlaylistIndex].currentIndex
             === playlistSongsById[player.currentActivePlaylistId].length - 1
           ) {
-          // empty
+            // empty
           }
           break;
         }
@@ -204,7 +207,8 @@ function PlaylistPage({
           setSeekKeyboard(0.9);
           break;
         }
-        default: break;
+        default:
+          break;
       }
     };
 
@@ -232,9 +236,7 @@ function PlaylistPage({
             : 'Playlist Shuffle | randomize your playlist'
         }
       />
-      <div
-        className=" h-full flex flex-col overflow-hidden  md:block  items-center md:mx-auto"
-      >
+      <div className=" h-full flex flex-col overflow-hidden  md:block  items-center md:mx-auto">
         <Navbar />
 
         <div className="h-1/5 mb-2 w-full  md:float-left md:w-3/5 md:h-[68%]">
@@ -274,17 +276,18 @@ PlaylistPage.propTypes = {
   currentSong: PropTypes.func.isRequired,
   playlistSongsById: PropTypes.objectOf(PropTypes.arrayOf).isRequired,
   isMutedActive: PropTypes.func.isRequired,
-  playlistDetails: PropTypes.arrayOf(PropTypes.shape({
-    playlistName: PropTypes.string.isRequired,
-    playlistId: PropTypes.string.isRequired,
-    playlistImage: PropTypes.string.isRequired,
-    playlistEtag: PropTypes.string.isRequired,
-    currentIndex: PropTypes.number.isRequired,
-  })).isRequired,
+  playlistDetails: PropTypes.arrayOf(
+    PropTypes.shape({
+      playlistName: PropTypes.string.isRequired,
+      playlistId: PropTypes.string.isRequired,
+      playlistImage: PropTypes.string.isRequired,
+      playlistEtag: PropTypes.string.isRequired,
+      currentIndex: PropTypes.number.isRequired,
+    }),
+  ).isRequired,
   lastPlayedIndexPlaylistDetails: PropTypes.func.isRequired,
   setVolume: PropTypes.func.isRequired,
   setSeekKeyboard: PropTypes.func.isRequired,
-
 };
 
 const mapDispatchToProps = {
