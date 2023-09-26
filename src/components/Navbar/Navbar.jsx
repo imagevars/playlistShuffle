@@ -104,7 +104,7 @@ function Navbar({
             <BsFillSunFill
               fill="white"
               onClick={handleClickTheme}
-              className="cursor-pointer mt-1"
+              className="cursor-pointer"
               aria-label="sun icon"
               size={25}
             />
@@ -115,7 +115,7 @@ function Navbar({
             <BsImageFill
               fill="white"
               onClick={handleClickTheme}
-              className="cursor-pointer mt-1"
+              className="cursor-pointer"
               aria-label="image icon"
               size={25}
             />
@@ -126,7 +126,7 @@ function Navbar({
             <BsFillMoonFill
               fill="black"
               onClick={handleClickTheme}
-              className="cursor-pointer mt-1"
+              className="cursor-pointer"
               aria-label="moon icon"
               size={25}
             />
