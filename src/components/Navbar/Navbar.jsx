@@ -76,19 +76,21 @@ function Navbar({
 
   return (
     <div className=" w-full flex justify-between px-1">
-      <div className="flex justify-between w-full mx-4 my-1 md:max-w-[2000x]">
+      <div className="flex justify-between w-full mx-2 my-1">
         {/* eslint-disable-next-line */}
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="github link"
-          href="https://github.com/jooonathann/playlistShuffle"
-        >
-          <AiFillGithub
-            size={30}
-            className="mx-3 my-1 text-primary hover:text-accent "
-          />
-        </a>
+        <div>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="github link"
+            href="https://github.com/jooonathann/playlistShuffle"
+          >
+            <AiFillGithub
+              size={30}
+              className="text-primary hover:text-accent "
+            />
+          </a>
+        </div>
         {/* eslint-disable-next-line */}
         <h1
           className="navbar text-2xl font-open text-center text-textColor font-bold cursor-pointer"
@@ -98,7 +100,7 @@ function Navbar({
           Shuffle Playlist{' '}
         </h1>
         {player.theme === 'image' && (
-          <div className="w-24 flex justify-end">
+          <div className="">
             <BsFillSunFill
               fill="white"
               onClick={handleClickTheme}
@@ -109,7 +111,7 @@ function Navbar({
           </div>
         )}
         {player.theme === 'dark' && (
-          <div className="w-24 flex justify-end">
+          <div className="">
             <BsImageFill
               fill="white"
               onClick={handleClickTheme}
@@ -120,7 +122,7 @@ function Navbar({
           </div>
         )}
         {player.theme === 'light' && (
-          <div className="w-24 flex justify-end">
+          <div className="">
             <BsFillMoonFill
               fill="black"
               onClick={handleClickTheme}
