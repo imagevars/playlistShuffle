@@ -12,6 +12,7 @@ import AboutPage from './components/AboutPage/AboutPage';
 
 function App({ player }) {
   const ref = useRef(null);
+  const coverImage = `https://i.ytimg.com/vi/${player.currentSong}/hqdefault.jpg`;
   useEffect(() => {
     if (player.theme === 'image') {
       ref.current.style.transition = 'background 700ms ease-in-out 150ms';
@@ -22,7 +23,7 @@ function App({ player }) {
         ref.current.style.backgroundImage =
           'url(./assets/images/silivan-munguarakarama-NrR9gn3lFKU-unsplash.jpg)';
       } else {
-        ref.current.style.backgroundImage = `url(https://i.ytimg.com/vi/${player.currentSong}/hqdefault.jpg)`;
+        ref.current.style.backgroundImage = `url(${coverImage})`;
       }
       ref.current.style.backgroundColor = '#404040';
     }
