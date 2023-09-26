@@ -76,7 +76,7 @@ function Navbar({
 
   return (
     <div className=" w-full flex justify-between px-1">
-      <div className="flex justify-between w-full mx-2 my-1">
+      <div className="flex justify-between w-full mx-2 my-2">
         {/* eslint-disable-next-line */}
         <div>
           <a
