@@ -47,8 +47,7 @@ function PlaylistPage({
   );
 
   const currentVideoName = playlistSongsById[player.currentActivePlaylistId][
-    playlistDetails[findPlaylistIndex].currentIndex
-  ].snippet.title;
+    playlistDetails[findPlaylistIndex].currentIndex].snippet.title;
 
   useEffect(() => {
     const findPlaylistIndex = playlistDetails.findIndex(
