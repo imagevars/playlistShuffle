@@ -1,25 +1,25 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
-const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
-const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CompressionPlugin = require('compression-webpack-plugin');
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
+const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
+const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CompressionPlugin = require("compression-webpack-plugin");
 // eslint-disable-next-line
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-const { HotModuleReplacementPlugin } = require('webpack');
-const CopyPlugin = require('copy-webpack-plugin');
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
+const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
+const { HotModuleReplacementPlugin } = require("webpack");
+const CopyPlugin = require("copy-webpack-plugin");
 
-const isDevelopment = process.env.NODE_ENV !== 'production';
+const isDevelopment = process.env.NODE_ENV !== "production";
 module.exports = {
-  mode: isDevelopment ? 'development' : 'production',
-  entry: ['./src/main.jsx', './src/app.css'],
+  mode: isDevelopment ? "development" : "production",
+  entry: ["./src/main.jsx", "./src/app.css"],
   output: {
-    publicPath: '/',
-    path: path.join(process.cwd(), 'dist'),
-    filename: '[name].bundle.js',
-    chunkFilename: '[name].[contenthash].js',
+    publicPath: "/",
+    path: path.join(process.cwd(), "dist"),
+    filename: "[name].bundle.js",
+    chunkFilename: "[name].[contenthash].js",
     clean: true,
   },
   // devtool: "source-map",
@@ -27,7 +27,7 @@ module.exports = {
     minimize: true,
     minimizer: [new TerserPlugin()],
     splitChunks: {
-      chunks: 'all',
+      chunks: "all",
     },
   },
 
@@ -38,11 +38,11 @@ module.exports = {
         exclude: /node_modules/,
         use: [
           {
-            loader: require.resolve('babel-loader'),
+            loader: require.resolve("babel-loader"),
             options: {
-              presets: ['@babel/preset-env', '@babel/preset-react'],
+              presets: ["@babel/preset-env", "@babel/preset-react"],
               plugins: [
-                isDevelopment && require.resolve('react-refresh/babel'),
+                isDevelopment && require.resolve("react-refresh/babel"),
               ].filter(Boolean),
             },
           },
@@ -51,42 +51,40 @@ module.exports = {
       {
         test: /\.css$/i,
         exclude: /node_modules/,
-        include: path.resolve(__dirname, 'src'),
-        use: ['style-loader', 'css-loader', 'postcss-loader'],
+        include: path.resolve(__dirname, "src"),
+        use: ["style-loader", "css-loader", "postcss-loader"],
       },
     ],
   },
   resolve: {
-    extensions: ['', '.js', '.jsx'],
+    extensions: ["", ".js", ".jsx"],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './index.html',
-      scriptLoading: 'defer',
+      template: "./index.html",
+      scriptLoading: "defer",
     }),
     new CopyPlugin({
-      patterns: [
-        { from: 'sitemap.xml', to: '' },
-      ],
+      patterns: [{ from: "sitemap.xml", to: "" }],
     }),
     new MiniCssExtractPlugin(),
-    new FaviconsWebpackPlugin('./src/favicon.png'),
+    new FaviconsWebpackPlugin("./src/favicon.png"),
     new WebpackManifestPlugin(),
     // new BundleAnalyzerPlugin(),
     new CompressionPlugin({
       test: /\.js$|\.css$|\.html$/,
-      algorithm: 'gzip',
+      algorithm: "gzip",
     }),
     new CompressionPlugin({
       test: /\.js$|\.css$|\.html$/,
-      algorithm: 'brotliCompress',
+      algorithm: "brotliCompress",
     }),
     isDevelopment && new HotModuleReplacementPlugin(),
     isDevelopment && new ReactRefreshWebpackPlugin(),
   ].filter(Boolean),
   devServer: {
     hot: true,
-    watchFiles: ['src/**/*'],
+    watchFiles: ["src/**/*"],
     client: {
       overlay: {
         errors: true,
@@ -94,14 +92,14 @@ module.exports = {
       },
     },
     historyApiFallback: {
-      index: '/',
+      index: "/",
     },
 
     static: {
-      directory: path.join(__dirname, 'dist'),
+      directory: path.join(__dirname, "dist"),
     },
     headers: {
-      'Access-Control-Allow-Origin': '*',
+      "Access-Control-Allow-Origin": "*",
     },
     compress: true,
     port: 9550,

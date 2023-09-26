@@ -1,6 +1,6 @@
-import React, { memo } from 'react';
-import { Helmet } from 'react-helmet-async';
-import PropTypes from 'prop-types';
+import React, { memo } from "react";
+import { Helmet } from "react-helmet-async";
+import PropTypes from "prop-types";
 
 function HelmetHelper({ title }) {
   return (

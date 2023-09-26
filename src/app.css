@@ -3,12 +3,13 @@
 @tailwind utilities;
 
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
 @layer components {
   .truncate-unset {
     overflow: unset;
     text-overflow: unset;
-    white-space: unset;  }
+    white-space: unset;
+  }
 }

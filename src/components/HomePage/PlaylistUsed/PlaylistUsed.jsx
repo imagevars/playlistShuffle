@@ -1,28 +1,28 @@
-import React from 'react';
-import { TbArrowsSort } from 'react-icons/tb';
-import { TiDeleteOutline } from 'react-icons/ti';
-import { MdUpdate } from 'react-icons/md';
-import { connect } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import React from "react";
+import { TbArrowsSort } from "react-icons/tb";
+import { TiDeleteOutline } from "react-icons/ti";
+import { MdUpdate } from "react-icons/md";
+import { connect } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 import {
   addToPlaylistDetails,
   deleteFromPlaylistDetails,
   modifyEtagInPlaylistDetailsById,
   lastPlayedIndexPlaylistDetails,
-} from '../../../redux/actions/playlistDetailsActions';
-import fetchPlaylistVideos from '../../../utils/fetchPlaylistVideos';
-import fetchPlaylistData from '../../../utils/fetchPlaylistData';
+} from "../../../redux/actions/playlistDetailsActions";
+import fetchPlaylistVideos from "../../../utils/fetchPlaylistVideos";
+import fetchPlaylistData from "../../../utils/fetchPlaylistData";
 import {
   addSongsByPlaylistID,
   removePlaylistSongsById,
-} from '../../../redux/actions/playlistSongsByIdActions';
+} from "../../../redux/actions/playlistSongsByIdActions";
 import {
   setCurrentActivePlaylistId,
   currentSong,
   setIsPlLoading,
   isShuffleActive,
-} from '../../../redux/actions/playerActions';
+} from "../../../redux/actions/playerActions";
 
 function PlaylistUsed({
   playlistDetails,
@@ -45,7 +45,9 @@ function PlaylistUsed({
     setCurrentActivePlaylistId(id);
 
     setIsPlLoading(true);
-    const findPlaylistIndex = playlistDetails.findIndex((element) => element.playlistId === id);
+    const findPlaylistIndex = playlistDetails.findIndex(
+      (element) => element.playlistId === id,
+    );
 
     currentSong(
       playlistSongsById[id][playlistDetails[findPlaylistIndex].currentIndex]
@@ -56,7 +58,7 @@ function PlaylistUsed({
   };
 
   const handleDeleteFromPlaylist = (id) => {
-    currentSong('');
+    currentSong("");
     removePlaylistSongsById(id);
     deleteFromPlaylistDetails(id);
   };
@@ -85,7 +87,9 @@ function PlaylistUsed({
   const handleUpdate = async (id) => {
     setIsPlLoading(true);
     setCurrentActivePlaylistId(id);
-    const currentPlaylistInfo = playlistDetails.filter((element) => element.playlistId === id);
+    const currentPlaylistInfo = playlistDetails.filter(
+      (element) => element.playlistId === id,
+    );
 
     const data = await fetchPlaylistVideos(
       id,
@@ -139,9 +143,8 @@ function PlaylistUsed({
         </p>
       </button>
       <div className="w-1/4 flex justify-end">
-        {element.playlistId.includes('MIX') ? null : (
+        {element.playlistId.includes("MIX") ? null : (
           <div className="group relative w-max my-auto">
-
             <button
               type="button"
               className="text-white mx-0.5 active:scale-110"
@@ -149,7 +152,10 @@ function PlaylistUsed({
             >
               <MdUpdate size="24" />
             </button>
-            <span className="pointer-events-none absolute -translate-x-2/4  left-2/4  -bottom-full w-max rounded bg-bgBlack px-2 py-1 text-sm font-medium text-bgWhite opacity-0 shadow transition-opacity duration-250 ease-in group-hover:opacity-100"> Update </span>
+            <span className="pointer-events-none absolute -translate-x-2/4  left-2/4  -bottom-full w-max rounded bg-bgBlack px-2 py-1 text-sm font-medium text-bgWhite opacity-0 shadow transition-opacity duration-250 ease-in group-hover:opacity-100">
+              {" "}
+              Update{" "}
+            </span>
           </div>
         )}
 
@@ -161,7 +167,9 @@ function PlaylistUsed({
           >
             <TbArrowsSort size="24" />
           </button>
-          <span className="pointer-events-none absolute -translate-x-2/4  left-1/4  -bottom-full w-max rounded bg-bgBlack px-2 py-1 text-sm font-medium text-bgWhite opacity-0 shadow transition-opacity duration-250 ease-in group-hover:opacity-100">Sort by Default</span>
+          <span className="pointer-events-none absolute -translate-x-2/4  left-1/4  -bottom-full w-max rounded bg-bgBlack px-2 py-1 text-sm font-medium text-bgWhite opacity-0 shadow transition-opacity duration-250 ease-in group-hover:opacity-100">
+            Sort by Default
+          </span>
         </div>
         <div className="group relative w-max my-auto">
           <button
@@ -171,7 +179,9 @@ function PlaylistUsed({
           >
             <TiDeleteOutline size="24" />
           </button>
-          <span className="pointer-events-none absolute -translate-x-2/4  left-1/4  -bottom-full w-max rounded bg-bgBlack px-2 py-1 text-sm font-medium text-bgWhite opacity-0 shadow transition-opacity duration-250 ease-in group-hover:opacity-100">Delete</span>
+          <span className="pointer-events-none absolute -translate-x-2/4  left-1/4  -bottom-full w-max rounded bg-bgBlack px-2 py-1 text-sm font-medium text-bgWhite opacity-0 shadow transition-opacity duration-250 ease-in group-hover:opacity-100">
+            Delete
+          </span>
         </div>
       </div>
     </div>
@@ -192,7 +202,6 @@ PlaylistUsed.propTypes = {
       playlistImage: PropTypes.string.isRequired,
       playlistEtag: PropTypes.string.isRequired,
       currentIndex: PropTypes.number.isRequired,
-
     }),
   ).isRequired,
   player: PropTypes.shape({

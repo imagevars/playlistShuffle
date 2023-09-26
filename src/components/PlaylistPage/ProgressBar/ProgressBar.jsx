@@ -1,31 +1,42 @@
-import React, { memo } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React, { memo } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import {
-  setPercentage, setSeekTo, setSeeking, setProgress,
-} from '../../../redux/actions/playerActions';
+  setPercentage,
+  setSeekTo,
+  setSeeking,
+  setProgress,
+} from "../../../redux/actions/playerActions";
 
 function ProgressBar({
-  player, setSeekTo, setSeeking, setProgress, setPercentage,
+  player,
+  setSeekTo,
+  setSeeking,
+  setProgress,
+  setPercentage,
 }) {
   const secondsToTime = (e) => {
     const h = Math.floor(e / 3600)
       .toString()
-      .padStart(2, '0');
+      .padStart(2, "0");
     const m = Math.floor((e % 3600) / 60)
       .toString()
-      .padStart(2, '0');
+      .padStart(2, "0");
     const s = Math.floor(e % 60)
       .toString()
-      .padStart(2, '0');
+      .padStart(2, "0");
 
-    return h === '00' ? `${m}:${s}` : `${h}:${m}:${s}`;
+    return h === "00" ? `${m}:${s}` : `${h}:${m}:${s}`;
   };
 
   const handleChange = (e) => {
     setProgress(Math.floor(e.target.value * player.videoDuration));
     setSeekTo(parseFloat(e.target.value));
-    setPercentage((Math.floor(e.target.value * player.videoDuration) / player.videoDuration) * 100);
+    setPercentage(
+      (Math.floor(e.target.value * player.videoDuration) /
+        player.videoDuration) *
+        100,
+    );
   };
 
   const handleMouseDown = () => {

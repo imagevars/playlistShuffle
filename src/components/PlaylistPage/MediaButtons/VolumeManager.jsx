@@ -1,12 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import {
-  BiVolumeMute,
-  BiVolumeLow,
-  BiVolumeFull,
-} from 'react-icons/bi';
-import { isMutedActive, setVolume } from '../../../redux/actions/playerActions';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { BiVolumeMute, BiVolumeLow, BiVolumeFull } from "react-icons/bi";
+import { isMutedActive, setVolume } from "../../../redux/actions/playerActions";
 
 function VolumeManager({ player, isMutedActive, setVolume }) {
   const handleIconClick = () => {
@@ -24,28 +20,26 @@ function VolumeManager({ player, isMutedActive, setVolume }) {
 
   return (
     <div className="flex justify-around w-2/3 sm:w-1/2 mx-auto mb-2 md:mb-0  md:w-1/6   md:items-center">
-      { (player.volume >= 0.50 && player.isMutedActive === false)
-      && (
-      <BiVolumeFull
-        className="text-primary hover:text-secondary active:drop-shadow-svgShadow active:scale-110"
-        size={30}
-        onClick={handleIconClick}
-      />
+      {player.volume >= 0.5 && player.isMutedActive === false && (
+        <BiVolumeFull
+          className="text-primary hover:text-secondary active:drop-shadow-svgShadow active:scale-110"
+          size={30}
+          onClick={handleIconClick}
+        />
       )}
-      { (player.volume < 0.50 && player.isMutedActive === false)
-      && (
-      <BiVolumeLow
-        className="text-primary hover:text-secondary active:drop-shadow-svgShadow active:scale-110"
-        size={30}
-        onClick={handleIconClick}
-      />
+      {player.volume < 0.5 && player.isMutedActive === false && (
+        <BiVolumeLow
+          className="text-primary hover:text-secondary active:drop-shadow-svgShadow active:scale-110"
+          size={30}
+          onClick={handleIconClick}
+        />
       )}
-      { player.isMutedActive === true && (
-      <BiVolumeMute
-        className="text-primary hover:text-secondary active:drop-shadow-svgShadow active:scale-110"
-        size={30}
-        onClick={handleIconClick}
-      />
+      {player.isMutedActive === true && (
+        <BiVolumeMute
+          className="text-primary hover:text-secondary active:drop-shadow-svgShadow active:scale-110"
+          size={30}
+          onClick={handleIconClick}
+        />
       )}
       <input
         aria-label="volume manager"
@@ -61,7 +55,6 @@ function VolumeManager({ player, isMutedActive, setVolume }) {
       />
       <div className="w-4" />
     </div>
-
   );
 }
 
@@ -77,7 +70,6 @@ VolumeManager.propTypes = {
   }).isRequired,
   isMutedActive: PropTypes.func.isRequired,
   setVolume: PropTypes.func.isRequired,
-
 };
 
 const mapDispatchToProps = {

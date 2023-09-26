@@ -16,7 +16,7 @@ import {
   PLAYER_TITLE,
   PLAYER_SEEK_KEYBOARD,
   PLAYER_IS_PL_LOADING,
-} from '../constants/playerTypes';
+} from "../constants/playerTypes";
 
 export const isPlaying = (payload) => ({ type: PLAYER_IS_PLAYING, payload });
 

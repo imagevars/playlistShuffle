@@ -1,16 +1,19 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import MersenneTwister from 'mersenne-twister';
-import { FixedSizeList } from 'react-window';
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import MersenneTwister from "mersenne-twister";
+import { FixedSizeList } from "react-window";
 
 import {
   currentSong,
   isShuffleActive,
   setVideoDuration,
-} from '../../../redux/actions/playerActions';
-import { lastPlayedIndexPlaylistDetails, setPlaylistLength } from '../../../redux/actions/playlistDetailsActions';
-import { addSongsByPlaylistID } from '../../../redux/actions/playlistSongsByIdActions';
+} from "../../../redux/actions/playerActions";
+import {
+  lastPlayedIndexPlaylistDetails,
+  setPlaylistLength,
+} from "../../../redux/actions/playlistDetailsActions";
+import { addSongsByPlaylistID } from "../../../redux/actions/playlistSongsByIdActions";
 
 function VideoCard({
   player,
@@ -77,14 +80,19 @@ function VideoCard({
   };
 
   useEffect(() => {
-    const findPlaylistIndex = playlistDetails.findIndex((element) => element.playlistId
-    === player.currentActivePlaylistId);
-    listRef.current.scrollToItem(playlistDetails[findPlaylistIndex].currentIndex, 'start');
+    const findPlaylistIndex = playlistDetails.findIndex(
+      (element) => element.playlistId === player.currentActivePlaylistId,
+    );
+    listRef.current.scrollToItem(
+      playlistDetails[findPlaylistIndex].currentIndex,
+      "start",
+    );
   }, [player.currentSong]);
 
   useEffect(() => {
     const playlistLengthObj = {
-      playlistLength: playlistSongsById[player.currentActivePlaylistId].length - 1,
+      playlistLength:
+        playlistSongsById[player.currentActivePlaylistId].length - 1,
       playlistId: player.currentActivePlaylistId,
     };
     setPlaylistLength(playlistLengthObj);
@@ -104,48 +112,74 @@ function VideoCard({
             type="button"
             className="w-full my-1"
             style={style}
-            title={playlistSongsById[player.currentActivePlaylistId][index].snippet.title}
+            title={
+              playlistSongsById[player.currentActivePlaylistId][index].snippet
+                .title
+            }
             // ref={refs[index]}
-            id={`${playlistSongsById[player.currentActivePlaylistId][index].snippet.resourceId.videoId}`}
+            id={`${
+              playlistSongsById[player.currentActivePlaylistId][index].snippet
+                .resourceId.videoId
+            }`}
             onClick={() => handleClick(index)}
             // eslint-disable-next-line
             key={theKey}
           >
             <div
               className={`${
-                player.currentSong
-                === playlistSongsById[
-                  player.currentActivePlaylistId][index].snippet.resourceId.videoId
-                  ? 'border-b-primaryColor '
+                player.currentSong ===
+                playlistSongsById[player.currentActivePlaylistId][index].snippet
+                  .resourceId.videoId
+                  ? "border-b-primaryColor "
                   : null
               }  text-center  group`}
             >
               <div className=" flex justify-between group-hover:text-textColor ">
                 <div
                   className={`${
-                    player.currentSong
-                    === playlistSongsById[
-                      player.currentActivePlaylistId][index].snippet.resourceId.videoId
-                      ? ' text-secondary  font-semibold  dark:font-semibold '
-                      : ' text-textColor '
+                    player.currentSong ===
+                    playlistSongsById[player.currentActivePlaylistId][index]
+                      .snippet.resourceId.videoId
+                      ? " text-secondary  font-semibold  dark:font-semibold "
+                      : " text-textColor "
                   } font-normal w-full text-center md:text-left md:mx-4 md:truncate font-open`}
                 >
                   <p className="truncate group-hover:text-secondary ">
-                    {`${index + 1} - ${playlistSongsById[player.currentActivePlaylistId][index].snippet.title}`}
+                    {`${index + 1} - ${
+                      playlistSongsById[player.currentActivePlaylistId][index]
+                        .snippet.title
+                    }`}
                   </p>
-                  <p className={`${player.currentSong === playlistSongsById[player.currentActivePlaylistId][index].snippet.resourceId.videoId ? ' text-secondary  ' : 'text-gray group-hover:text-secondary group-hover:dark:text-DarkPrimaryColor '} truncate text-sm font-open `}>
-                    {playlistSongsById[player.currentActivePlaylistId][
-                      index].snippet.videoOwnerChannelTitle}
+                  <p
+                    className={`${
+                      player.currentSong ===
+                      playlistSongsById[player.currentActivePlaylistId][index]
+                        .snippet.resourceId.videoId
+                        ? " text-secondary  "
+                        : "text-gray group-hover:text-secondary group-hover:dark:text-DarkPrimaryColor "
+                    } truncate text-sm font-open `}
+                  >
+                    {
+                      playlistSongsById[player.currentActivePlaylistId][index]
+                        .snippet.videoOwnerChannelTitle
+                    }
                   </p>
                 </div>
               </div>
-              <div className={`${player.currentSong === playlistSongsById[player.currentActivePlaylistId][index].snippet.resourceId.videoId ? (' bg-secondary shadow-none') : ('bg-bgShadow  ')} w-[88%] h-0.5 mx-auto rounded-full group-hover:bg-primary`} />
+              <div
+                className={`${
+                  player.currentSong ===
+                  playlistSongsById[player.currentActivePlaylistId][index]
+                    .snippet.resourceId.videoId
+                    ? " bg-secondary shadow-none"
+                    : "bg-bgShadow  "
+                } w-[88%] h-0.5 mx-auto rounded-full group-hover:bg-primary`}
+              />
             </div>
           </button>
         )}
       </FixedSizeList>
     </div>
-
   );
 }
 
@@ -176,7 +210,6 @@ VideoCard.propTypes = {
   setVideoDuration: PropTypes.func.isRequired,
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
-
 };
 
 const mapDispatchToProps = {

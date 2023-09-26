@@ -1,22 +1,22 @@
-import React, { memo } from 'react';
-import { BiPlay, BiPause } from 'react-icons/bi';
+import React, { memo } from "react";
+import { BiPlay, BiPause } from "react-icons/bi";
 import {
   MdSkipPrevious,
   MdSkipNext,
   MdShuffle,
   MdRepeat,
   MdRepeatOne,
-} from 'react-icons/md';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+} from "react-icons/md";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import {
   isPlaying,
   currentSong,
   isLoopActive,
   isMutedActive,
   isShuffleActive,
-} from '../../../redux/actions/playerActions';
-import { lastPlayedIndexPlaylistDetails } from '../../../redux/actions/playlistDetailsActions';
+} from "../../../redux/actions/playerActions";
+import { lastPlayedIndexPlaylistDetails } from "../../../redux/actions/playlistDetailsActions";
 
 const MediaButtons = memo(
   ({
@@ -50,7 +50,8 @@ const MediaButtons = memo(
 
     const handleClickNextButton = () => {
       if (
-        currIndex < playlistSongsById[player.currentActivePlaylistId].length - 1
+        currIndex <
+        playlistSongsById[player.currentActivePlaylistId].length - 1
       ) {
         const lastPlayedObj = {
           currentIndex: playlistDetails[findPlaylistIndex].currentIndex + 1,
@@ -62,8 +63,8 @@ const MediaButtons = memo(
             ?.snippet.resourceId.videoId,
         );
       } else if (
-        currIndex
-        === playlistSongsById[player.currentActivePlaylistId].length - 1
+        currIndex ===
+        playlistSongsById[player.currentActivePlaylistId].length - 1
       ) {
         // empty
       }
@@ -74,10 +75,7 @@ const MediaButtons = memo(
     };
 
     return (
-      <div
-        className="flex justify-center w-[95%]"
-      >
-
+      <div className="flex justify-center w-[95%]">
         {player.isLoopActive === true ? (
           <button
             type="button"
@@ -103,9 +101,7 @@ const MediaButtons = memo(
             />
           </button>
         )}
-        <div
-          className="flex items-center"
-        >
+        <div className="flex items-center">
           <button
             type="button"
             aria-label="previous video"
@@ -186,14 +182,15 @@ MediaButtons.propTypes = {
   isShuffleActive: PropTypes.func.isRequired,
   currentSong: PropTypes.func.isRequired,
   playlistSongsById: PropTypes.objectOf(PropTypes.arrayOf).isRequired,
-  playlistDetails: PropTypes.arrayOf(PropTypes.shape({
-    playlistName: PropTypes.string.isRequired,
-    playlistId: PropTypes.string.isRequired,
-    playlistImage: PropTypes.string.isRequired,
-    playlistEtag: PropTypes.string.isRequired,
-    currentIndex: PropTypes.number.isRequired,
-
-  })).isRequired,
+  playlistDetails: PropTypes.arrayOf(
+    PropTypes.shape({
+      playlistName: PropTypes.string.isRequired,
+      playlistId: PropTypes.string.isRequired,
+      playlistImage: PropTypes.string.isRequired,
+      playlistEtag: PropTypes.string.isRequired,
+      currentIndex: PropTypes.number.isRequired,
+    }),
+  ).isRequired,
   lastPlayedIndexPlaylistDetails: PropTypes.func.isRequired,
 };
 

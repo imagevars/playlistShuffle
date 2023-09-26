@@ -1,7 +1,7 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import Navbar from '../Navbar/Navbar';
-import Footer from '../HomePage/Footer';
+import React from "react";
+import { connect } from "react-redux";
+import Navbar from "../Navbar/Navbar";
+import Footer from "../HomePage/Footer";
 
 function AboutPage() {
   return (
@@ -10,12 +10,31 @@ function AboutPage() {
       <div className="flex justify-center items-center overflow-y-auto">
         <div className="text-textColor text-base w-4/4 md:w-3/5 text-justify">
           <p className="font-open mx-4 my-2 list-disc">
-            If you like the page don&apos;t forget the give a star ★ to the github
-            <a className="text-primary  font-semibold font-open hover:scale-110" href="https://github.com/jooonathann/playlistShuffle" target="_blank" rel="noopener noreferrer" aria-label="github link"> repo</a>
+            If you like the page don&apos;t forget the give a star ★ to the
+            github
+            <a
+              className="text-primary  font-semibold font-open hover:scale-110"
+              href="https://github.com/jooonathann/playlistShuffle"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="github link"
+            >
+              {" "}
+              repo
+            </a>
             , its free (for now).
           </p>
-          <p className="font-open mx-4 my-2">I made this because the shuffle algo of Youtube does not shuffle, and the other pages that I&apos;ve tried didn&apos;t had the things that I wanted.</p>
-          <p className="font-open mx-4 my-2">This page uses localStorage of the browser as the database and according to me it can fit at least 20000 worth of videos in playlist on chrome desktop, if you have an error while loading a playlist you will have to deleted it and load it again.</p>
+          <p className="font-open mx-4 my-2">
+            I made this because the shuffle algo of Youtube does not shuffle,
+            and the other pages that I&apos;ve tried didn&apos;t had the things
+            that I wanted.
+          </p>
+          <p className="font-open mx-4 my-2">
+            This page uses localStorage of the browser as the database and
+            according to me it can fit at least 20000 worth of videos in
+            playlist on chrome desktop, if you have an error while loading a
+            playlist you will have to deleted it and load it again.
+          </p>
         </div>
       </div>
       <Footer />
