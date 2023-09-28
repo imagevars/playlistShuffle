@@ -1,7 +1,7 @@
-import React, { useEffect, useRef } from "react";
-import { connect } from "react-redux";
-import ReactPlayer from "react-player/youtube";
-import PropTypes from "prop-types";
+import React, { useEffect, useRef } from 'react';
+import { connect } from 'react-redux';
+import ReactPlayer from 'react-player/youtube';
+import PropTypes from 'prop-types';
 import {
   isPlaying,
   currentSong,
@@ -11,8 +11,8 @@ import {
   setSeeking,
   setArtist,
   setTitle,
-} from "../../../redux/actions/playerActions";
-import { lastPlayedIndexPlaylistDetails } from "../../../redux/actions/playlistDetailsActions";
+} from '../../../redux/actions/playerActions';
+import { lastPlayedIndexPlaylistDetails } from '../../../redux/actions/playlistDetailsActions';
 
 function Player({
   player,
@@ -30,7 +30,7 @@ function Player({
   const playerRef = useRef(null);
 
   useEffect(() => {
-    playerRef.current.seekTo(player.seekKeyboard, "fraction");
+    playerRef.current.seekTo(player.seekKeyboard, 'fraction');
   }, [player.seekKeyboard]);
 
   const findPlaylistIndex = playlistDetails.findIndex(
@@ -99,10 +99,10 @@ function Player({
   const getTitleAndArtist = (title, ownerTitle) => {
     try {
       const joinedTitleAndOwnerTitle = [title, ownerTitle];
-      if (title === "Private video") {
+      if (title === 'Private video') {
         return title;
       }
-      if (joinedTitleAndOwnerTitle[0].includes(" - ")) {
+      if (joinedTitleAndOwnerTitle[0].includes(' - ')) {
         const regex = /^(.*?)-(.*)$/;
         const match = joinedTitleAndOwnerTitle[0].match(regex);
 
@@ -110,7 +110,7 @@ function Player({
 
         return [title, artist];
       }
-      if (joinedTitleAndOwnerTitle[0].includes("//")) {
+      if (joinedTitleAndOwnerTitle[0].includes('//')) {
         const regex = /^(.*?)\s\/\/\s(.*)$/;
         const match = joinedTitleAndOwnerTitle[0].match(regex);
 
@@ -118,7 +118,7 @@ function Player({
 
         return [title, artist];
       }
-      if (joinedTitleAndOwnerTitle[1].includes(" - Topic")) {
+      if (joinedTitleAndOwnerTitle[1].includes(' - Topic')) {
         const regex = /^(.*?)\s-\sTopic$/;
         const match = joinedTitleAndOwnerTitle[1].match(regex);
         const artist = match[1];
@@ -174,7 +174,7 @@ function Player({
         config={{
           youtube: {
             playerVars: {
-              color: "white",
+              color: 'white',
               controls: 1,
             },
           },

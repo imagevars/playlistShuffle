@@ -1,7 +1,7 @@
-import React from "react";
-import { connect } from "react-redux";
-import Navbar from "../Navbar/Navbar";
-import Footer from "../HomePage/Footer";
+import React from 'react';
+import { connect } from 'react-redux';
+import Navbar from '../Navbar/Navbar';
+import Footer from '../HomePage/Footer';
 
 function AboutPage() {
   return (
@@ -19,7 +19,7 @@ function AboutPage() {
               rel="noopener noreferrer"
               aria-label="github link"
             >
-              {" "}
+              {' '}
               repo
             </a>
             , its free (for now).

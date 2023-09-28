@@ -4,13 +4,13 @@ import {
   PLAYLIST_DETAILS_ETAG,
   PLAYLIST_DETAILS_LAST_PLAYED_INDEX,
   PLAYLIST_DETAILS_LENGTH,
-} from "../constants/playlistDetailsTypes";
+} from '../constants/playlistDetailsTypes';
 
 const initialState = [];
 
 export default function playlistDetailsReducer(state = initialState, action) {
   switch (action.type) {
-    case "playlistDetails/add": {
+    case 'playlistDetails/add': {
       return action.payload;
     }
     case PLAYLIST_DETAILS_ADD_TO_PLAYLIST_DETAILS: {

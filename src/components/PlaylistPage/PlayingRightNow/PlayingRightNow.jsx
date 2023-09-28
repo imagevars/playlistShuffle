@@ -1,6 +1,6 @@
-import React, { memo } from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
+import React, { memo } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 function PlayingRightNow({ player }) {
   return (
@@ -16,7 +16,7 @@ function PlayingRightNow({ player }) {
               {player.title}
             </a>
           ) : (
-            ""
+            ''
           )}
         </p>
         <p className="songTitle text-sm text-gray font-normal tracking-wide text-center md:text-left  lg:text-md truncate font-open mx-auto md:w-[95%]">
@@ -29,7 +29,7 @@ function PlayingRightNow({ player }) {
               {player.artist}
             </a>
           ) : (
-            ""
+            ''
           )}
         </p>
       </div>

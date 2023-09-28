@@ -4,7 +4,7 @@ import {
   PLAYLIST_DETAILS_ETAG,
   PLAYLIST_DETAILS_LAST_PLAYED_INDEX,
   PLAYLIST_DETAILS_LENGTH,
-} from "../constants/playlistDetailsTypes";
+} from '../constants/playlistDetailsTypes';
 
 export const addToPlaylistDetails = (payload) => ({
   type: PLAYLIST_DETAILS_ADD_TO_PLAYLIST_DETAILS,

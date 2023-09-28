@@ -1,28 +1,28 @@
-import React from "react";
-import { TbArrowsSort } from "react-icons/tb";
-import { TiDeleteOutline } from "react-icons/ti";
-import { MdUpdate } from "react-icons/md";
-import { connect } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import PropTypes from "prop-types";
+import React from 'react';
+import { TbArrowsSort } from 'react-icons/tb';
+import { TiDeleteOutline } from 'react-icons/ti';
+import { MdUpdate } from 'react-icons/md';
+import { connect } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import {
   addToPlaylistDetails,
   deleteFromPlaylistDetails,
   modifyEtagInPlaylistDetailsById,
   lastPlayedIndexPlaylistDetails,
-} from "../../../redux/actions/playlistDetailsActions";
-import fetchPlaylistVideos from "../../../utils/fetchPlaylistVideos";
-import fetchPlaylistData from "../../../utils/fetchPlaylistData";
+} from '../../../redux/actions/playlistDetailsActions';
+import fetchPlaylistVideos from '../../../utils/fetchPlaylistVideos';
+import fetchPlaylistData from '../../../utils/fetchPlaylistData';
 import {
   addSongsByPlaylistID,
   removePlaylistSongsById,
-} from "../../../redux/actions/playlistSongsByIdActions";
+} from '../../../redux/actions/playlistSongsByIdActions';
 import {
   setCurrentActivePlaylistId,
   currentSong,
   setIsPlLoading,
   isShuffleActive,
-} from "../../../redux/actions/playerActions";
+} from '../../../redux/actions/playerActions';
 
 function PlaylistUsed({
   playlistDetails,
@@ -58,7 +58,7 @@ function PlaylistUsed({
   };
 
   const handleDeleteFromPlaylist = (id) => {
-    currentSong("");
+    currentSong('');
     removePlaylistSongsById(id);
     deleteFromPlaylistDetails(id);
   };
@@ -143,7 +143,7 @@ function PlaylistUsed({
         </p>
       </button>
       <div className="w-1/4 flex justify-end">
-        {element.playlistId.includes("MIX") ? null : (
+        {element.playlistId.includes('MIX') ? null : (
           <div className="group relative w-max my-auto">
             <button
               type="button"
@@ -153,8 +153,8 @@ function PlaylistUsed({
               <MdUpdate size="24" />
             </button>
             <span className="pointer-events-none absolute -translate-x-2/4  left-2/4  -bottom-full w-max rounded bg-bgBlack px-2 py-1 text-sm font-medium text-bgWhite opacity-0 shadow transition-opacity duration-250 ease-in group-hover:opacity-100">
-              {" "}
-              Update{" "}
+              {' '}
+              Update{' '}
             </span>
           </div>
         )}

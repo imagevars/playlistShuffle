@@ -1,7 +1,7 @@
-import React, { memo, useMemo } from "react";
-import { connect } from "react-redux";
-import { useParams } from "react-router-dom";
-import PropTypes from "prop-types";
+import React, { memo, useMemo } from 'react';
+import { connect } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 function PlaylistInfo({ playlistDetails }) {
   const { id } = useParams();
@@ -14,13 +14,13 @@ function PlaylistInfo({ playlistDetails }) {
   return (
     <div className="flex my-1 justify-center md:justify-start text-secondary">
       <p className=" ml-2 tracking-tight font-open font-semibold truncate">
-        {" "}
+        {' '}
         <a
           href={`https://www.youtube.com/playlist?list=${id}`}
           target="_blank"
           rel="noopener noreferrer"
         >
-          {" "}
+          {' '}
           {info?.playlistName}
           &nbsp;
         </a>

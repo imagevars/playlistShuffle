@@ -1,22 +1,22 @@
-import React, { memo } from "react";
-import { BiPlay, BiPause } from "react-icons/bi";
+import React, { memo } from 'react';
+import { BiPlay, BiPause } from 'react-icons/bi';
 import {
   MdSkipPrevious,
   MdSkipNext,
   MdShuffle,
   MdRepeat,
   MdRepeatOne,
-} from "react-icons/md";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
+} from 'react-icons/md';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import {
   isPlaying,
   currentSong,
   isLoopActive,
   isMutedActive,
   isShuffleActive,
-} from "../../../redux/actions/playerActions";
-import { lastPlayedIndexPlaylistDetails } from "../../../redux/actions/playlistDetailsActions";
+} from '../../../redux/actions/playerActions';
+import { lastPlayedIndexPlaylistDetails } from '../../../redux/actions/playlistDetailsActions';
 
 const MediaButtons = memo(
   ({

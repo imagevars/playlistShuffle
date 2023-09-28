@@ -1,14 +1,14 @@
-import axios from "axios";
+import axios from 'axios';
 
 export default async function fetchPlaylistData(id, etag) {
-  const baseApiUrl = "https://www.googleapis.com/youtube/v3";
-  const apiKey = "AIzaSyA8JtiLpC8D9nhMK44CRTciv64H1MNFNDw";
+  const baseApiUrl = 'https://www.googleapis.com/youtube/v3';
+  const apiKey = 'AIzaSyA8JtiLpC8D9nhMK44CRTciv64H1MNFNDw';
 
   let playlistDetailsObject = {};
   try {
     const playlistDetailsQuery = await axios.get(`${baseApiUrl}/playlists`, {
       params: {
-        part: "snippet",
+        part: 'snippet',
         id,
         key: apiKey,
       },
@@ -23,7 +23,7 @@ export default async function fetchPlaylistData(id, etag) {
     };
   } catch (error) {
     // eslint-disable-next-line
-    console.log("Error fetching data: ", error);
+    console.log('Error fetching data: ', error);
     return null;
   }
 

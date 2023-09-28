@@ -1,8 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { BiVolumeMute, BiVolumeLow, BiVolumeFull } from "react-icons/bi";
-import { isMutedActive, setVolume } from "../../../redux/actions/playerActions";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { BiVolumeMute, BiVolumeLow, BiVolumeFull } from 'react-icons/bi';
+import { isMutedActive, setVolume } from '../../../redux/actions/playerActions';
 
 function VolumeManager({ player, isMutedActive, setVolume }) {
   const handleIconClick = () => {

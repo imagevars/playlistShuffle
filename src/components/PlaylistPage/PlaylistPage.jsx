@@ -1,10 +1,10 @@
-import React, { useEffect, useRef } from "react";
-import { Navigate, useParams } from "react-router-dom";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import HelmetHelper from "../Helmet/HelmetHelper";
-import List from "./VideoCard/List";
-import MediaButtons from "./MediaButtons/MediaButtons";
+import React, { useEffect, useRef } from 'react';
+import { Navigate, useParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import HelmetHelper from '../Helmet/HelmetHelper';
+import List from './VideoCard/List';
+import MediaButtons from './MediaButtons/MediaButtons';
 import {
   isPlaying,
   isLoopActive,
@@ -13,14 +13,14 @@ import {
   isMutedActive,
   setVolume,
   setSeekKeyboard,
-} from "../../redux/actions/playerActions";
-import { lastPlayedIndexPlaylistDetails } from "../../redux/actions/playlistDetailsActions";
-import PlayingRightNow from "./PlayingRightNow/PlayingRightNow";
-import Navbar from "../Navbar/Navbar";
-import PlaylistInfo from "./PlaylistInfo/PlaylistInfo";
-import Player from "./Player/Player";
-import ProgressBar from "./ProgressBar/ProgressBar";
-import VolumeManger from "./MediaButtons/VolumeManager";
+} from '../../redux/actions/playerActions';
+import { lastPlayedIndexPlaylistDetails } from '../../redux/actions/playlistDetailsActions';
+import PlayingRightNow from './PlayingRightNow/PlayingRightNow';
+import Navbar from '../Navbar/Navbar';
+import PlaylistInfo from './PlaylistInfo/PlaylistInfo';
+import Player from './Player/Player';
+import ProgressBar from './ProgressBar/ProgressBar';
+import VolumeManger from './MediaButtons/VolumeManager';
 
 function PlaylistPage({
   isPlaying,
@@ -58,23 +58,23 @@ function PlaylistPage({
     const currIndex = playlistDetails[findPlaylistIndex].currentIndex;
     const handleClick = (e) => {
       switch (e.code) {
-        case "Space": {
+        case 'Space': {
           isPlaying(player.isPlaying !== true);
           break;
         }
-        case "KeyR": {
+        case 'KeyR': {
           isLoopActive(player.isLoopActive !== true);
           break;
         }
-        case "KeyS": {
+        case 'KeyS': {
           isShuffleActive(player.isShuffleActive !== true);
           break;
         }
-        case "KeyM": {
+        case 'KeyM': {
           isMutedActive(player.isMutedActive !== true);
           break;
         }
-        case "ArrowUp": {
+        case 'ArrowUp': {
           if (player.volume + 0.05 <= 1) {
             setVolume(player.volume + 0.05);
           } else {
@@ -83,7 +83,7 @@ function PlaylistPage({
           isMutedActive(false);
           break;
         }
-        case "ArrowDown": {
+        case 'ArrowDown': {
           if (player.volume - 0.05 > 0.006) {
             setVolume(player.volume - 0.05);
           } else {
@@ -92,7 +92,7 @@ function PlaylistPage({
           }
           break;
         }
-        case "ArrowLeft": {
+        case 'ArrowLeft': {
           if (currIndex > 0) {
             const lastPlayedObj = {
               currentIndex: playlistDetails[findPlaylistIndex].currentIndex - 1,
@@ -106,7 +106,7 @@ function PlaylistPage({
           }
           break;
         }
-        case "ArrowRight": {
+        case 'ArrowRight': {
           if (
             currIndex <
             playlistSongsById[player.currentActivePlaylistId].length - 1
@@ -128,83 +128,83 @@ function PlaylistPage({
           }
           break;
         }
-        case "Numpad0": {
+        case 'Numpad0': {
           setSeekKeyboard(0);
           break;
         }
-        case "Numpad1": {
+        case 'Numpad1': {
           setSeekKeyboard(0.1);
           break;
         }
-        case "Numpad2": {
+        case 'Numpad2': {
           setSeekKeyboard(0.2);
           break;
         }
-        case "Numpad3": {
+        case 'Numpad3': {
           setSeekKeyboard(0.3);
           break;
         }
-        case "Numpad4": {
+        case 'Numpad4': {
           setSeekKeyboard(0.4);
           break;
         }
-        case "Numpad5": {
+        case 'Numpad5': {
           setSeekKeyboard(0.5);
           break;
         }
-        case "Numpad6": {
+        case 'Numpad6': {
           setSeekKeyboard(0.6);
           break;
         }
-        case "Numpad7": {
+        case 'Numpad7': {
           setSeekKeyboard(0.7);
           break;
         }
-        case "Numpad8": {
+        case 'Numpad8': {
           setSeekKeyboard(0.8);
           break;
         }
-        case "Numpad9": {
+        case 'Numpad9': {
           setSeekKeyboard(0.9);
           break;
         }
-        case "Digit0": {
+        case 'Digit0': {
           setSeekKeyboard(0);
           break;
         }
-        case "Digit1": {
+        case 'Digit1': {
           setSeekKeyboard(0.1);
           break;
         }
-        case "Digit2": {
+        case 'Digit2': {
           setSeekKeyboard(0.2);
           break;
         }
-        case "Digit3": {
+        case 'Digit3': {
           setSeekKeyboard(0.3);
           break;
         }
-        case "Digit4": {
+        case 'Digit4': {
           setSeekKeyboard(0.4);
           break;
         }
-        case "Digit5": {
+        case 'Digit5': {
           setSeekKeyboard(0.5);
           break;
         }
-        case "Digit6": {
+        case 'Digit6': {
           setSeekKeyboard(0.6);
           break;
         }
-        case "Digit7": {
+        case 'Digit7': {
           setSeekKeyboard(0.7);
           break;
         }
-        case "Digit8": {
+        case 'Digit8': {
           setSeekKeyboard(0.8);
           break;
         }
-        case "Digit9": {
+        case 'Digit9': {
           setSeekKeyboard(0.9);
           break;
         }
@@ -215,10 +215,10 @@ function PlaylistPage({
 
     const element = ref.current;
 
-    element.addEventListener("keydown", handleClick, { passive: true });
+    element.addEventListener('keydown', handleClick, { passive: true });
 
     return () => {
-      element.removeEventListener("keydown", handleClick, { passive: true });
+      element.removeEventListener('keydown', handleClick, { passive: true });
     };
   }, [player]);
 
@@ -234,7 +234,7 @@ function PlaylistPage({
         title={
           currentVideoName
             ? `${currentVideoName} - Playlist Shuffle`
-            : "Playlist Shuffle | randomize your playlist"
+            : 'Playlist Shuffle | randomize your playlist'
         }
       />
       <div className=" h-full flex flex-col overflow-hidden  md:block  items-center md:mx-auto">

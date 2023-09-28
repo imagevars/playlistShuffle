@@ -1,17 +1,17 @@
-import React, { useEffect } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import PlaylistUsed from "./PlaylistUsed/PlaylistUsed";
-import Search from "./Search/Search";
-import Navbar from "../Navbar/Navbar";
-import HelmetHelper from "../Helmet/HelmetHelper";
-import Footer from "./Footer";
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import PlaylistUsed from './PlaylistUsed/PlaylistUsed';
+import Search from './Search/Search';
+import Navbar from '../Navbar/Navbar';
+import HelmetHelper from '../Helmet/HelmetHelper';
+import Footer from './Footer';
 import {
   setProgress,
   setPercentage,
   setSeekTo,
   setVideoDuration,
-} from "../../redux/actions/playerActions";
+} from '../../redux/actions/playerActions';
 
 function HomePage({ setProgress, setPercentage, setSeekTo, setVideoDuration }) {
   useEffect(() => {

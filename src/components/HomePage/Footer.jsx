@@ -1,15 +1,15 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   AiFillGithub,
   AiOutlineTwitter,
   AiFillInfoCircle,
-} from "react-icons/ai";
+} from 'react-icons/ai';
 
 function Footer() {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate("/about");
+    navigate('/about');
   };
   const deleteLocalStorage = () => {
     localStorage.clear();

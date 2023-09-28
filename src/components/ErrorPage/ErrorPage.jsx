@@ -1,17 +1,17 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import { BiErrorCircle } from "react-icons/bi";
-import Navbar from "../Navbar/Navbar";
-import Footer from "../HomePage/Footer";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { BiErrorCircle } from 'react-icons/bi';
+import Navbar from '../Navbar/Navbar';
+import Footer from '../HomePage/Footer';
 
 function ErrorPage() {
   const navigate = useNavigate();
   const handleClickHome = () => {
-    navigate("/");
+    navigate('/');
   };
 
   const handleClickAbout = () => {
-    navigate("/about");
+    navigate('/about');
   };
   return (
     <div className="transition-colors bg-backColor image:bg-[unset] flex flex-col justify-between h-[100vh]">
