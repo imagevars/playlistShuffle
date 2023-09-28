@@ -8,6 +8,13 @@ module.exports = {
       open: ['Open Sans', 'sans-serif'],
       nunito: ['Nunito', 'sans-serif'],
     },
+    screens: {
+      sm: '476px',
+      md: '768px',
+      lg: '1024px',
+      xl: '1280px',
+      '2xl': '1536px',
+    },
     extend: {
       dropShadow: {
         '3xl': '3px 5px 2px rgb(0 0 0 / 0.4)',
@@ -42,12 +49,13 @@ module.exports = {
     createThemes({
       light: {
         primary: '#006868',
-        secondary: '#006666',
+        secondary: '#008484',
         backColor: '#F2E7FE',
         textColor: '#000000',
         textColorInside: '#ffffff',
         gray: '#4d4d4d',
-        accent: '#00b5b5',
+        accent: '#00cdcd',
+        kofiHover: '#13C3FF',
       },
       dark: {
         primary: '#008BA7',
@@ -57,6 +65,7 @@ module.exports = {
         textColorInside: '#ffffff',
         gray: '#808080',
         accent: '#baf3ff',
+        kofiHover: '#FF5E5B',
       },
       image: {
         primary: '#e94747',
@@ -65,7 +74,8 @@ module.exports = {
         textColor: '#ffffff',
         textColorInside: '#ffffff',
         gray: '#999999',
-        accent: 'rgb(247, 184, 184)',
+        accent: '#f7bfbf',
+        kofiHover: '#13C3FF',
       },
     }),
   ],

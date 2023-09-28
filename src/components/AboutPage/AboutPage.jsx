@@ -13,19 +13,19 @@ function AboutPage() {
       <Navbar />
       <div className="flex justify-center items-center overflow-y-auto">
         <div className="text-textColor text-base w-4/4 md:w-3/5 text-justify">
-          <p className="text-textColor text-center my-1 font-open font-medium">
+          <p className="font-open mx-4 my-2">
             To clean the localStorage data click&nbsp;
             <button
               type="button"
-              className="text-[blue]"
+              className="text-primary"
               onClick={deleteLocalStorage}
             >
               here
             </button>
           </p>
           <p className="font-open mx-4 my-2 list-disc">
-            If you like the page don&apos;t forget the give a star ★ to the
-            github
+            If you like the page, don&apos;t forget to give a star ★ to the
+            GitHub
             <a
               className="text-primary  font-semibold font-open hover:scale-110"
               href="https://github.com/jooonathann/playlistShuffle"
@@ -34,18 +34,18 @@ function AboutPage() {
               aria-label="github link"
             >
               {' '}
-              repo
+              repository.
             </a>
-            , its free (for now).
+            &nbsp;It&apos;s free
           </p>
           <p className="font-open mx-4 my-2">
-            I made this because the shuffle algo of Youtube does not shuffle,
-            and the other pages that I&apos;ve tried didn&apos;t had the things
-            that I wanted.
+            I created this because the shuffle algorithm on YouTube doesn&apos;t
+            effectively shuffle, and the other pages I tried didn&apos;t have
+            the features I was looking for.
           </p>
           <p className="font-open mx-4 my-2">
-            This page uses localStorage of the browser as the database and
-            according to me it can fit at least 20000 worth of videos in
+            This page utilizes the browser&apos;s localStorage as the database.
+            In my experience, it can fit at least 20000 worth of videos in
             playlist on chrome desktop, if you have an error while loading a
             playlist you will have to deleted it and load it again.
           </p>

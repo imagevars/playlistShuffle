@@ -1,22 +1,22 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import fetchPlaylistVideos from "../../../utils/fetchPlaylistVideos";
-import fetchPlaylistData from "../../../utils/fetchPlaylistData";
-import validateId from "../../../utils/validateId";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import fetchPlaylistVideos from '../../../utils/fetchPlaylistVideos';
+import fetchPlaylistData from '../../../utils/fetchPlaylistData';
+import validateId from '../../../utils/validateId';
 import {
   currentSong,
   setCurrentActivePlaylistId,
   isShuffleActive,
   setIsPlLoading,
-} from "../../../redux/actions/playerActions";
+} from '../../../redux/actions/playerActions';
 import {
   addToPlaylistDetails,
   modifyEtagInPlaylistDetailsById,
   lastPlayedIndexPlaylistDetails,
-} from "../../../redux/actions/playlistDetailsActions";
-import { addSongsByPlaylistID } from "../../../redux/actions/playlistSongsByIdActions";
+} from '../../../redux/actions/playlistDetailsActions';
+import { addSongsByPlaylistID } from '../../../redux/actions/playlistSongsByIdActions';
 
 function Search({
   playlistDetails,
@@ -30,14 +30,14 @@ function Search({
   player,
   setIsPlLoading,
 }) {
-  const [playlistId, setPlaylistId] = useState("");
+  const [playlistId, setPlaylistId] = useState('');
   const [isIdInvalid, setIsIdInvalid] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const PLinput = await validateId(playlistId);
-    if (typeof PLinput === "string") {
+    if (typeof PLinput === 'string') {
       const currentPlaylistInfo = playlistDetails.filter(
         (element) => element.playlistId === PLinput,
       );
@@ -55,9 +55,9 @@ function Search({
       if (currentPlaylistInfo.length === 0) {
         try {
           setIsPlLoading(true);
-          const currEtag = "";
+          const currEtag = '';
           const data = await fetchPlaylistVideos(PLinput, currEtag);
-          if (data === 404) {
+          if (data === 404 || data === 403) {
             setIsIdInvalid(true);
             setIsPlLoading(false);
             return null;
@@ -90,17 +90,17 @@ function Search({
       setIsPlLoading(false);
       return null;
     }
-    if (typeof PLinput === "object") {
+    if (typeof PLinput === 'object') {
       if (PLinput === null) {
         setIsIdInvalid(true);
         setIsPlLoading(false);
         return null;
       }
-      if (typeof PLinput === "object") {
+      if (typeof PLinput === 'object') {
         const mixArr = [];
         setIsPlLoading(true);
         for (let i = 0; i < PLinput.playlists.length; i += 1) {
-          const currEtag = "";
+          const currEtag = '';
           /* eslint-disable no-await-in-loop */
           const data = await fetchPlaylistVideos(
             PLinput.playlists[i],
@@ -126,7 +126,7 @@ function Search({
           playlistName: PLinput.name,
           playlistId: mixPlId,
           playlistImage: `https://i.ytimg.com/vi/${mixArr[0].snippet.resourceId.videoId}/mqdefault.jpg`,
-          playlistEtag: "",
+          playlistEtag: '',
           currentIndex: 0,
         };
 
@@ -175,7 +175,7 @@ function Search({
         <div className="w-full flex my-2 justify-between">
           <input
             className={`inputSearch w-5/6 md:w-11/12 mr-2 py-2 px-2 rounded-md font-open shadow-lg focus:outline-none focus:shadow-outline  ${
-              isIdInvalid ? "border border-red" : ""
+              isIdInvalid ? 'border border-red' : ''
             }`}
             placeholder="example of a PL ID: PLi9drqWffJ9FWBo7ZVOiaVy0UQQEm4IbP"
             type="text"
@@ -184,7 +184,7 @@ function Search({
             value={playlistId}
           />
           <button
-            className=" rounded-md px-4 w-2/12 md:w-1/12 font-open shadow-shadowBox active:shadow-none dark:shadow-shadowBoxDarkMode dark:active:shadow-none flex items-center justify-center text-textColorInside hover:bg-secondary bg-primary"
+            className=" rounded-md px-4 w-2/12 md:w-1/12 font-open shadow-shadowBox active:shadow-none dark:shadow-shadowBoxDarkMode dark:active:shadow-none flex items-center justify-center text-textColorInside hover:bg-secondary bg-primary  active:scale-105 "
             type="submit"
           >
             {player.isPlLoading === true ? (
@@ -209,7 +209,7 @@ function Search({
                 />
               </svg>
             ) : (
-              "Play"
+              'Play'
             )}
           </button>
         </div>

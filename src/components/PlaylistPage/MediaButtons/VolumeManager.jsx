@@ -19,7 +19,7 @@ function VolumeManager({ player, isMutedActive, setVolume }) {
   };
 
   return (
-    <div className="flex justify-around w-2/3 sm:w-1/2 mx-auto mb-2 md:mb-0  md:w-1/6   md:items-center">
+    <div className="flex justify-between w-2/3 sm:w-1/2 mx-auto mb-2 md:mb-0  md:w-1/6   md:items-center">
       {player.volume >= 0.5 && player.isMutedActive === false && (
         <BiVolumeFull
           className="text-primary hover:text-secondary active:drop-shadow-svgShadow active:scale-110"
@@ -44,7 +44,7 @@ function VolumeManager({ player, isMutedActive, setVolume }) {
       <input
         aria-label="volume manager"
         type="range"
-        className="w-full accent-primary hover:accent-secondary active:accent-secondary"
+        className="mx-2 w-full accent-primary hover:accent-secondary active:accent-secondary"
         name="volume"
         id="volume"
         value={player.volume}

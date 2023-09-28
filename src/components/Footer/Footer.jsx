@@ -43,7 +43,9 @@ function Footer() {
           />
         </a>
       </div>
-      {/* <p className="text-textColor text-center my-1 font-open">Made with ♥ by Jonathan</p> */}
+      <p className="text-textColor text-center my-1 font-open">
+        Made with ♥ by Jonathan
+      </p>
     </footer>
   );
 }

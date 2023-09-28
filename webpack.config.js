@@ -71,8 +71,13 @@ module.exports = {
           from: 'src/images/silivan-munguarakarama-NrR9gn3lFKU-unsplash.jpg',
           to: 'assets/images/',
         },
+        {
+          from: 'src/images/Logo_white.png',
+          to: 'assets/images/',
+        },
       ],
     }),
+
     new MiniCssExtractPlugin(),
     new FaviconsWebpackPlugin('./src/images/favicon.png'),
     new WebpackManifestPlugin(),

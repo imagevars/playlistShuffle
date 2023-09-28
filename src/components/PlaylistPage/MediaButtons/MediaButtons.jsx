@@ -121,7 +121,7 @@ const MediaButtons = memo(
                rounded-full cursor-auto bg-accent mx-1 md:mx-0 my-0.5"
             >
               <BiPause
-                className="active:scale-105 text-secondary"
+                className="active:scale-105 text-primary"
                 onClick={() => isPlaying(false)}
                 size={50}
               />
@@ -133,7 +133,7 @@ const MediaButtons = memo(
               className="cursor-auto rounded-full bg-accent mx-1 md:mx-0 my-0.5"
             >
               <BiPlay
-                className="active:scale-105 pl-1 text-secondary"
+                className="active:scale-105 pl-1 text-primary"
                 onClick={() => isPlaying(true)}
                 size={50}
               />

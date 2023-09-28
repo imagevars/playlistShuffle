@@ -2,11 +2,9 @@ import React, { memo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { BsFillMoonFill, BsFillSunFill, BsImageFill } from 'react-icons/bs';
-import { AiFillGithub } from 'react-icons/ai';
 import PropTypes from 'prop-types';
 import {
   isPlaying,
-  currentSong,
   isShuffleActive,
   setCurrentActivePlaylistId,
   setTheme,
@@ -75,63 +73,70 @@ function Navbar({
   };
 
   return (
-    <div className=" w-full flex justify-between px-1">
-      <div className="flex justify-between w-full mx-2 my-2">
-        {/* eslint-disable-next-line */}
-        <div>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="github link"
-            href="https://github.com/jooonathann/playlistShuffle"
+    <div className=" w-full  px-1">
+      <div className="flex justify-between w-full mx-1 my-1">
+        <button type="button" onClick={handleClickHome}>
+          <h1
+            className="navbar text-lg sm:text-2xl font-open text-left text-textColor font-bold cursor-pointer"
+            cursor="pointer"
           >
-            <AiFillGithub
-              size={30}
-              className="text-primary light:hover:text-[#333333] hover:text-textColorInside"
-            />
-          </a>
+            Shuffle Playlist{' '}
+          </h1>
+        </button>
+        <div className="flex flex-row mr-2">
+          <div className="mx-4">
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Ko-fi link"
+              href="https://ko-fi.com/playlistshuffle"
+            >
+              <div className="flex justify-evenly flex-row bg-primary hover:scale-105	hover:bg-kofiHover  active:scale-110 rounded-md  max-w-[160px] py-0.5 px-3 md:px-6 ">
+                <img
+                  className="w-8 my-auto"
+                  src="./assets/images/Logo_white.png"
+                  alt="ko-fi"
+                />
+                <p className=" my-auto ml-0.5 font-nunito tracking-normal leading-4 text-sm md:text-md text-center text-textColorInside font-bold italic">
+                  Buy me <br />a coffee
+                </p>
+              </div>
+            </a>
+          </div>
+          {player.theme === 'image' && (
+            <div className="my-auto mr-1">
+              <BsFillSunFill
+                fill="white"
+                onClick={handleClickTheme}
+                className="cursor-pointer"
+                aria-label="sun icon"
+                size={25}
+              />
+            </div>
+          )}
+          {player.theme === 'dark' && (
+            <div className="my-auto mr-1">
+              <BsImageFill
+                fill="white"
+                onClick={handleClickTheme}
+                className="cursor-pointer"
+                aria-label="image icon"
+                size={25}
+              />
+            </div>
+          )}
+          {player.theme === 'light' && (
+            <div className="my-auto mr-1">
+              <BsFillMoonFill
+                fill="black"
+                onClick={handleClickTheme}
+                className="cursor-pointer"
+                aria-label="moon icon"
+                size={25}
+              />
+            </div>
+          )}
         </div>
-        {/* eslint-disable-next-line */}
-        <h1
-          className="navbar text-2xl font-open text-center text-textColor font-bold cursor-pointer"
-          cursor="pointer"
-          onClick={handleClickHome}
-        >
-          Shuffle Playlist{' '}
-        </h1>
-        {player.theme === 'image' && (
-          <div className="">
-            <BsFillSunFill
-              fill="white"
-              onClick={handleClickTheme}
-              className="cursor-pointer"
-              aria-label="sun icon"
-              size={25}
-            />
-          </div>
-        )}
-        {player.theme === 'dark' && (
-          <div className="">
-            <BsImageFill
-              fill="white"
-              onClick={handleClickTheme}
-              className="cursor-pointer"
-              aria-label="image icon"
-              size={25}
-            />
-          </div>
-        )}
-        {player.theme === 'light' && (
-          <div className="">
-            <BsFillMoonFill
-              fill="black"
-              onClick={handleClickTheme}
-              className="cursor-pointer"
-              aria-label="moon icon"
-              size={25}
-            />
-          </div>
-        )}
       </div>
     </div>
   );
@@ -139,15 +144,7 @@ function Navbar({
 
 Navbar.propTypes = {
   player: PropTypes.shape({
-    isPlaying: PropTypes.bool.isRequired,
-    currentSong: PropTypes.string.isRequired,
-    isShuffleActive: PropTypes.bool.isRequired,
-    isLoopActive: PropTypes.bool.isRequired,
-    currentActivePlaylistId: PropTypes.string.isRequired,
-    isMutedActive: PropTypes.bool.isRequired,
     theme: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    artist: PropTypes.string.isRequired,
   }).isRequired,
   isPlaying: PropTypes.func.isRequired,
   isShuffleActive: PropTypes.func.isRequired,
@@ -159,7 +156,6 @@ Navbar.propTypes = {
 
 const mapDispatchToProps = {
   isPlaying,
-  currentSong,
   isShuffleActive,
   setCurrentActivePlaylistId,
   setTheme,

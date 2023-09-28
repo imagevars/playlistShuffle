@@ -1,19 +1,19 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import MersenneTwister from "mersenne-twister";
-import { FixedSizeList } from "react-window";
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import MersenneTwister from 'mersenne-twister';
+import { FixedSizeList } from 'react-window';
 
 import {
   currentSong,
   isShuffleActive,
   setVideoDuration,
-} from "../../../redux/actions/playerActions";
+} from '../../../redux/actions/playerActions';
 import {
   lastPlayedIndexPlaylistDetails,
   setPlaylistLength,
-} from "../../../redux/actions/playlistDetailsActions";
-import { addSongsByPlaylistID } from "../../../redux/actions/playlistSongsByIdActions";
+} from '../../../redux/actions/playlistDetailsActions';
+import { addSongsByPlaylistID } from '../../../redux/actions/playlistSongsByIdActions';
 
 function VideoCard({
   player,
@@ -85,7 +85,7 @@ function VideoCard({
     );
     listRef.current.scrollToItem(
       playlistDetails[findPlaylistIndex].currentIndex,
-      "start",
+      'start',
     );
   }, [player.currentSong]);
 
@@ -130,18 +130,18 @@ function VideoCard({
                 player.currentSong ===
                 playlistSongsById[player.currentActivePlaylistId][index].snippet
                   .resourceId.videoId
-                  ? "border-b-primaryColor "
+                  ? 'border-b-secondary '
                   : null
               }  text-center  group`}
             >
-              <div className=" flex justify-between group-hover:text-textColor ">
+              <div className=" flex justify-between group-hover:text-secondary ">
                 <div
                   className={`${
                     player.currentSong ===
                     playlistSongsById[player.currentActivePlaylistId][index]
                       .snippet.resourceId.videoId
-                      ? " text-secondary  font-semibold  dark:font-semibold "
-                      : " text-textColor "
+                      ? ' text-secondary  font-semibold  '
+                      : ' text-textColor '
                   } font-normal w-full text-center md:text-left md:mx-4 md:truncate font-open`}
                 >
                   <p className="truncate group-hover:text-secondary ">
@@ -155,8 +155,8 @@ function VideoCard({
                       player.currentSong ===
                       playlistSongsById[player.currentActivePlaylistId][index]
                         .snippet.resourceId.videoId
-                        ? " text-secondary  "
-                        : "text-gray group-hover:text-secondary group-hover:dark:text-DarkPrimaryColor "
+                        ? ' text-secondary  '
+                        : 'text-gray group-hover:text-secondary '
                     } truncate text-sm font-open `}
                   >
                     {
@@ -171,9 +171,9 @@ function VideoCard({
                   player.currentSong ===
                   playlistSongsById[player.currentActivePlaylistId][index]
                     .snippet.resourceId.videoId
-                    ? " bg-secondary shadow-none"
-                    : "bg-bgShadow  "
-                } w-[88%] h-0.5 mx-auto rounded-full group-hover:bg-primary`}
+                    ? ' bg-secondary shadow-none'
+                    : 'bg-gray  '
+                } w-[88%] h-0.5 mx-auto rounded-full group-hover:bg-secondary`}
               />
             </div>
           </button>
