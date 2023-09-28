@@ -87,7 +87,7 @@ function Navbar({
           >
             <AiFillGithub
               size={30}
-              className="text-primary hover:text-textColorInside"
+              className="text-primary light:hover:text-[#333333] hover:text-textColorInside"
             />
           </a>
         </div>

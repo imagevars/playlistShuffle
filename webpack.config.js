@@ -68,13 +68,13 @@ module.exports = {
       patterns: [
         { from: 'sitemap.xml', to: '' },
         {
-          from: 'silivan-munguarakarama-NrR9gn3lFKU-unsplash.jpg',
+          from: 'src/images/silivan-munguarakarama-NrR9gn3lFKU-unsplash.jpg',
           to: 'assets/images/',
         },
       ],
     }),
     new MiniCssExtractPlugin(),
-    new FaviconsWebpackPlugin('./src/favicon.png'),
+    new FaviconsWebpackPlugin('./src/images/favicon.png'),
     new WebpackManifestPlugin(),
     // new BundleAnalyzerPlugin(),
     new CompressionPlugin({

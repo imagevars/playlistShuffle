@@ -19,13 +19,13 @@ function App({ player }) {
       ref.current.style.backgroundBlendMode = 'multiply';
       ref.current.style.backgroundSize = 'cover';
       ref.current.style.backgroundPosition = 'center';
+      ref.current.style.backgroundColor = '#404040';
       if (player.currentSong === '') {
         ref.current.style.backgroundImage =
           'url(./assets/images/silivan-munguarakarama-NrR9gn3lFKU-unsplash.jpg)';
       } else {
         ref.current.style.backgroundImage = `url(${coverImage})`;
       }
-      ref.current.style.backgroundColor = '#404040';
     }
   }, [player.currentSong, player.theme]);
 
