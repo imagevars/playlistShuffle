@@ -1,14 +1,28 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Navbar from '../Navbar/Navbar';
-import Footer from '../HomePage/Footer';
+import Footer from '../Footer/Footer';
 
 function AboutPage() {
+  const deleteLocalStorage = () => {
+    localStorage.clear();
+    window.location.reload();
+  };
   return (
     <div className="transition-colors bg-backColor image:bg-[unset] flex flex-col justify-between h-[100vh]">
       <Navbar />
       <div className="flex justify-center items-center overflow-y-auto">
         <div className="text-textColor text-base w-4/4 md:w-3/5 text-justify">
+          <p className="text-textColor text-center my-1 font-open font-medium">
+            To clean the localStorage data click&nbsp;
+            <button
+              type="button"
+              className="text-[blue]"
+              onClick={deleteLocalStorage}
+            >
+              here
+            </button>
+          </p>
           <p className="font-open mx-4 my-2 list-disc">
             If you like the page don&apos;t forget the give a star ★ to the
             github

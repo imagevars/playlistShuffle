@@ -5,7 +5,7 @@ import PlaylistUsed from './PlaylistUsed/PlaylistUsed';
 import Search from './Search/Search';
 import Navbar from '../Navbar/Navbar';
 import HelmetHelper from '../Helmet/HelmetHelper';
-import Footer from './Footer';
+import Footer from '../Footer/Footer';
 import {
   setProgress,
   setPercentage,

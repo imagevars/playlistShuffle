@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BiErrorCircle } from 'react-icons/bi';
 import Navbar from '../Navbar/Navbar';
-import Footer from '../HomePage/Footer';
+import Footer from '../Footer/Footer';
 
 function ErrorPage() {
   const navigate = useNavigate();

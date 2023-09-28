@@ -11,10 +11,7 @@ function Footer() {
   const handleClick = () => {
     navigate('/about');
   };
-  const deleteLocalStorage = () => {
-    localStorage.clear();
-    window.location.reload();
-  };
+
   return (
     <footer className="">
       <div className="flex justify-center">
@@ -47,21 +44,6 @@ function Footer() {
         </a>
       </div>
       {/* <p className="text-textColor text-center my-1 font-open">Made with ♥ by Jonathan</p> */}
-      <p className="text-textColor text-center my-1 font-open font-medium">
-        Had to break the old theme system to make a new one. &nbsp;Save your
-        playlist ID&apos;s and click&nbsp;
-        <button
-          type="button"
-          className="text-[blue]"
-          onClick={deleteLocalStorage}
-        >
-          here
-        </button>
-        &nbsp;to fix the theme
-      </p>
-      <p className="text-textColor text-center my-1 font-open text-xs">
-        The message will be here for a week
-      </p>
     </footer>
   );
 }
