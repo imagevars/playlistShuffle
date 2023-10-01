@@ -13,6 +13,7 @@ import {
   isMutedActive,
   setVolume,
   setSeekKeyboard,
+  setCurrentActivePlaylistId,
 } from '../../redux/actions/playerActions';
 import { lastPlayedIndexPlaylistDetails } from '../../redux/actions/playlistDetailsActions';
 import PlayingRightNow from './PlayingRightNow/PlayingRightNow';
@@ -34,17 +35,30 @@ function PlaylistPage({
   lastPlayedIndexPlaylistDetails,
   setVolume,
   setSeekKeyboard,
+  setCurrentActivePlaylistId,
 }) {
   const { id } = useParams();
+  let findPlaylistIndex = playlistDetails.findIndex(
+    (element) => element.playlistId === player.currentActivePlaylistId,
+  );
 
   if (player.currentActivePlaylistId !== id) {
-    return <Navigate to="/error" />;
+    const doesPlExist = playlistDetails.findIndex(
+      (element) => element.playlistId === id,
+    );
+    if (doesPlExist !== -1) {
+      setCurrentActivePlaylistId(id);
+      findPlaylistIndex = doesPlExist;
+      currentSong(
+        playlistSongsById[id][playlistDetails[findPlaylistIndex].currentIndex]
+          .snippet.resourceId.videoId,
+      );
+    } else {
+      return <Navigate to="/error" />;
+    }
   }
   const ref = useRef(null);
 
-  const findPlaylistIndex = playlistDetails.findIndex(
-    (element) => element.playlistId === player.currentActivePlaylistId,
-  );
 
   const currentVideoName =
     playlistSongsById[player.currentActivePlaylistId][
@@ -289,6 +303,7 @@ PlaylistPage.propTypes = {
   lastPlayedIndexPlaylistDetails: PropTypes.func.isRequired,
   setVolume: PropTypes.func.isRequired,
   setSeekKeyboard: PropTypes.func.isRequired,
+  setCurrentActivePlaylistId: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = {
@@ -300,6 +315,7 @@ const mapDispatchToProps = {
   lastPlayedIndexPlaylistDetails,
   setVolume,
   setSeekKeyboard,
+  setCurrentActivePlaylistId,
 };
 
 const mapStateToProps = (state) => ({

@@ -160,7 +160,6 @@ function Player({
 
   return (
     <div className="player h-full aspect-auto md:w-full md:mx-2 md:h-full">
-      {/* https://img.youtube.com/vi/Eeb4aZObp-0/0.jpg */}
       <ReactPlayer
         playing={player.isPlaying}
         ref={playerRef}
@@ -175,7 +174,6 @@ function Player({
           youtube: {
             playerVars: {
               color: 'white',
-              controls: 1,
             },
           },
         }}
