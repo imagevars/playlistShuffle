@@ -1,19 +1,19 @@
 export default function validateId(str) {
-  if (typeof str !== 'string') return null;
-  const arrayOfIds = str.split(',');
+  if (typeof str !== "string") return null;
+  const arrayOfIds = str.split(",");
   const PLMixData = {
-    name: '',
+    name: "",
     playlists: [],
   };
-  const basicRegex = /^(?=.*.{18,})(?=.*PL).*/;
-  const PLRegex = /PL[\w-]+(?=&|$)/;
+  const basicRegex = /^(?=.*.{18,})(?=.*(?:PL|OLAK)).*/;
+  const PLRegex = /(PL|OLAK)[\w-]+(?=&|$)/;
 
-  if (arrayOfIds[0] === 'play my pl' || arrayOfIds[0] === 'Play my pl') {
-    return 'PLi06ybkpczJDt0Ydo3Umjtv97bDOcCtAZ';
+  if (arrayOfIds[0] === "play my pl" || arrayOfIds[0] === "Play my pl") {
+    return "PLi06ybkpczJDt0Ydo3Umjtv97bDOcCtAZ";
   }
   if (arrayOfIds.length === 1) {
     try {
-      const [id] = arrayOfIds[0].replace(/\s/g, '').match(basicRegex);
+      const [id] = arrayOfIds[0].replace(/\s/g, "").match(basicRegex);
       if (id.match(PLRegex)) {
         const [PLId] = id.match(PLRegex);
         if (PLId.length >= 18) {
@@ -26,21 +26,21 @@ export default function validateId(str) {
       return null;
     }
   }
-  if (!arrayOfIds[arrayOfIds.length - 1].includes('name:')) {
+  if (!arrayOfIds[arrayOfIds.length - 1].includes("name:")) {
     return null;
   }
   if (arrayOfIds.length > 21) {
     // eslint-disable-next-line
-    console.log('Only 20 playlist ids allowed');
+    console.log("Only 20 playlist ids allowed");
     return null;
   }
   const last = arrayOfIds.pop();
-  const [, plName] = last.split('name:');
+  const [, plName] = last.split("name:");
   PLMixData.name = plName;
   for (let i = 0; i < arrayOfIds.length; i += 1) {
     if (
       (!arrayOfIds[i].match(basicRegex) || arrayOfIds[i].length < 24) &&
-      !arrayOfIds[i].includes('name:')
+      !arrayOfIds[i].includes("name:")
     ) {
       return null;
     }
@@ -50,7 +50,7 @@ export default function validateId(str) {
         return null;
       }
     }
-    const [id] = arrayOfIds[i].replace(/\s/g, '').match(PLRegex);
+    const [id] = arrayOfIds[i].replace(/\s/g, "").match(PLRegex);
     if (id.length < 24) {
       return null;
     }
