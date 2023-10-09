@@ -34,118 +34,118 @@ function Search({
   const [isIdInvalid, setIsIdInvalid] = useState(false);
   const navigate = useNavigate();
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const PLinput = await validateId(playlistId);
-  //   if (typeof PLinput === "string") {
-  //     const currentPlaylistInfo = playlistDetails.filter(
-  //       (element) => element.playlistId === PLinput,
-  //     );
-  //     if (currentPlaylistInfo.length === 1) {
-  //       const findPLIndex = playlistDetails.findIndex(
-  //         (element) => element.playlistId === PLinput,
-  //       );
-  //       setCurrentActivePlaylistId(PLinput);
-  //       currentSong(
-  //         playlistSongsById[PLinput][playlistDetails[findPLIndex].currentIndex]
-  //           .snippet.resourceId.videoId,
-  //       );
-  //       navigate(`/${PLinput}`);
-  //     }
-  //     if (currentPlaylistInfo.length === 0) {
-  //       try {
-  //         setIsPlLoading(true);
-  //         const currEtag = "";
-  //         const data = await fetchPlaylistVideos(PLinput, currEtag);
-  //         if (data === 404 || data === 403) {
-  //           setIsIdInvalid(true);
-  //           setIsPlLoading(false);
-  //           return null;
-  //         }
-  //         const playlistDataInfo = await fetchPlaylistData(
-  //           PLinput,
-  //           data.playlistEtag,
-  //         );
-  //         const playlistEtagAndId = {
-  //           playlistId: PLinput,
-  //           etag: data.playlistEtag,
-  //         };
-  //         await addToPlaylistDetails(playlistDataInfo);
-  //         const playlistObject = {
-  //           id: PLinput,
-  //           songs: data.responseArrToAdd,
-  //         };
-  //         await addSongsByPlaylistID(playlistObject);
-  //         setIsPlLoading(false);
-  //         setCurrentActivePlaylistId(PLinput);
-  //         await modifyEtagInPlaylistDetailsById(playlistEtagAndId);
-  //         await currentSong(data.currentSong);
-  //         isShuffleActive(false);
-  //         navigate(`/${PLinput}`);
-  //       } catch (error) {
-  //         setIsPlLoading(false);
-  //         return null;
-  //       }
-  //     }
-  //     setIsPlLoading(false);
-  //     return null;
-  //   }
-  //   if (typeof PLinput === "object") {
-  //     if (PLinput === null) {
-  //       setIsIdInvalid(true);
-  //       setIsPlLoading(false);
-  //       return null;
-  //     }
-  //     if (typeof PLinput === "object") {
-  //       const mixArr = [];
-  //       setIsPlLoading(true);
-  //       for (let i = 0; i < PLinput.playlists.length; i += 1) {
-  //         const currEtag = "";
-  //         /* eslint-disable no-await-in-loop */
-  //         const data = await fetchPlaylistVideos(
-  //           PLinput.playlists[i],
-  //           currEtag,
-  //         );
-  //         if (data === 404) {
-  //           // if there's an error on a playlist of the mix,
-  //           // that playlist will not be included on the mix
-  //           // eslint-disable-next-line
-  //           console.log(`Error on playlist ${PLinput.playlists[i].name}`);
-  //         }
-  //         // Basic, I know
-  //         if (mixArr.length > 15000) {
-  //           break;
-  //         } else {
-  //           mixArr.push(...data.responseArrToAdd);
-  //         }
-  //       }
-  //       if (mixArr.length === 0) return null;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const PLinput = await validateId(playlistId);
+    if (typeof PLinput === "string") {
+      const currentPlaylistInfo = playlistDetails.filter(
+        (element) => element.playlistId === PLinput,
+      );
+      if (currentPlaylistInfo.length === 1) {
+        const findPLIndex = playlistDetails.findIndex(
+          (element) => element.playlistId === PLinput,
+        );
+        setCurrentActivePlaylistId(PLinput);
+        currentSong(
+          playlistSongsById[PLinput][playlistDetails[findPLIndex].currentIndex]
+            .snippet.resourceId.videoId,
+        );
+        navigate(`/${PLinput}`);
+      }
+      if (currentPlaylistInfo.length === 0) {
+        try {
+          setIsPlLoading(true);
+          const currEtag = "";
+          const data = await fetchPlaylistVideos(PLinput, currEtag);
+          if (data === 404 || data === 403) {
+            setIsIdInvalid(true);
+            setIsPlLoading(false);
+            return null;
+          }
+          const playlistDataInfo = await fetchPlaylistData(
+            PLinput,
+            data.playlistEtag,
+          );
+          const playlistEtagAndId = {
+            playlistId: PLinput,
+            etag: data.playlistEtag,
+          };
+          await addToPlaylistDetails(playlistDataInfo);
+          const playlistObject = {
+            id: PLinput,
+            songs: data.responseArrToAdd,
+          };
+          await addSongsByPlaylistID(playlistObject);
+          setIsPlLoading(false);
+          setCurrentActivePlaylistId(PLinput);
+          await modifyEtagInPlaylistDetailsById(playlistEtagAndId);
+          await currentSong(data.currentSong);
+          isShuffleActive(false);
+          navigate(`/${PLinput}`);
+        } catch (error) {
+          setIsPlLoading(false);
+          return null;
+        }
+      }
+      setIsPlLoading(false);
+      return null;
+    }
+    if (typeof PLinput === "object") {
+      if (PLinput === null) {
+        setIsIdInvalid(true);
+        setIsPlLoading(false);
+        return null;
+      }
+      if (typeof PLinput === "object") {
+        const mixArr = [];
+        setIsPlLoading(true);
+        for (let i = 0; i < PLinput.playlists.length; i += 1) {
+          const currEtag = "";
+          /* eslint-disable no-await-in-loop */
+          const data = await fetchPlaylistVideos(
+            PLinput.playlists[i],
+            currEtag,
+          );
+          if (data === 404) {
+            // if there's an error on a playlist of the mix,
+            // that playlist will not be included on the mix
+            // eslint-disable-next-line
+            console.log(`Error on playlist ${PLinput.playlists[i].name}`);
+          }
+          // Basic, I know
+          if (mixArr.length > 15000) {
+            break;
+          } else {
+            mixArr.push(...data.responseArrToAdd);
+          }
+        }
+        if (mixArr.length === 0) return null;
 
-  //       const mixPlId = `MIXpl${Math.random().toString().slice(2, 20)}`;
-  //       const playlistDetailsObject = {
-  //         playlistName: PLinput.name,
-  //         playlistId: mixPlId,
-  //         playlistImage: `https://i.ytimg.com/vi/${mixArr[0].snippet.resourceId.videoId}/mqdefault.jpg`,
-  //         playlistEtag: "",
-  //         currentIndex: 0,
-  //       };
+        const mixPlId = `MIXpl${Math.random().toString().slice(2, 20)}`;
+        const playlistDetailsObject = {
+          playlistName: PLinput.name,
+          playlistId: mixPlId,
+          playlistImage: `https://i.ytimg.com/vi/${mixArr[0].snippet.resourceId.videoId}/mqdefault.jpg`,
+          playlistEtag: "",
+          currentIndex: 0,
+        };
 
-  //       await addToPlaylistDetails(playlistDetailsObject);
-  //       const playlistObject = {
-  //         id: mixPlId,
-  //         songs: mixArr,
-  //       };
-  //       await addSongsByPlaylistID(playlistObject);
-  //       setIsPlLoading(false);
-  //       setCurrentActivePlaylistId(mixPlId);
-  //       await currentSong(mixArr[0].snippet.resourceId.videoId);
-  //       isShuffleActive(false);
-  //       navigate(`/${mixPlId}`);
-  //     } else return null;
-  //   }
-  //   setIsPlLoading(false);
-  //   return null;
-  // };
+        await addToPlaylistDetails(playlistDetailsObject);
+        const playlistObject = {
+          id: mixPlId,
+          songs: mixArr,
+        };
+        await addSongsByPlaylistID(playlistObject);
+        setIsPlLoading(false);
+        setCurrentActivePlaylistId(mixPlId);
+        await currentSong(mixArr[0].snippet.resourceId.videoId);
+        isShuffleActive(false);
+        navigate(`/${mixPlId}`);
+      } else return null;
+    }
+    setIsPlLoading(false);
+    return null;
+  };
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -153,14 +153,22 @@ function Search({
   };
   return (
     <div className="searchContainer w-full my-4 mx-auto ">
-      {/* <form className="" onSubmit={(e) => handleSubmit(e)}> */}
-      <form className="" onSubmit={() => console.log("submitted")}>
+      <form className="" onSubmit={(e) => handleSubmit(e)}>
         {isIdInvalid ? (
           <p className="text-textColor font-open">Invalid playlist</p>
         ) : (
           <p className="text-textColor font-open">
-            The api YT quota was exceed. Most likely by an infinite loop. The
-            quota will restart in a day
+            To add multiple playlist read&nbsp;
+            <a
+              className="text-secondary font-semibold font-open hover:scale-110 underline"
+              href="https://github.com/jooonathann/playlistShuffle#How-to-combine-multiple-playlist"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="github link"
+            >
+              here
+            </a>
+            &nbsp;or Enter a playlist URL or ID:
           </p>
         )}
 
