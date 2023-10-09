@@ -8,6 +8,7 @@ export default async function fetchPlaylistVideos(id, etag) {
   try {
     let nextToken = "";
     let timesInLoop = 0;
+    let totalVideos = 0;
     do {
       /* eslint-disable no-await-in-loop */
       const responseListItems = await axios.get(`${baseApiUrl}/playlistItems`, {
@@ -25,11 +26,9 @@ export default async function fetchPlaylistVideos(id, etag) {
         },
       });
       responseArr.push(...responseListItems.data.items);
+      totalVideos = responseListItems.data.pageInfo.totalResults;
       timesInLoop += 1;
-      // For now
-      if (timesInLoop >= 105) {
-        // eslint-disable-next-line
-        console.log("Infinite loop");
+      if (timesInLoop > Math.ceil(totalVideos / 50)) {
         break;
       }
       if (responseEtag === "") {
