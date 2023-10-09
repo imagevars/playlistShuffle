@@ -1,37 +1,44 @@
-import axios from 'axios';
+import axios from "axios";
+import "dotenv/config";
 
 export default async function fetchPlaylistVideos(id, etag) {
   const responseArr = [];
-  const baseApiUrl = 'https://www.googleapis.com/youtube/v3';
-  const apiKey = 'AIzaSyA8JtiLpC8D9nhMK44CRTciv64H1MNFNDw';
-  let responseEtag = '';
+  const baseApiUrl = "https://www.googleapis.com/youtube/v3";
+  const apiKey = "AIzaSyD4nA8bLUU8rUqx6dZwIOV7x6EXyFPru9w";
+  let responseEtag = "";
   try {
-    let nextToken = '';
-
+    let nextToken = "";
+    let times = 0;
     do {
       /* eslint-disable no-await-in-loop */
       const responseListItems = await axios.get(`${baseApiUrl}/playlistItems`, {
         headers: {
-          'If-None-Match': etag,
+          "If-None-Match": etag,
         },
         params: {
-          part: 'snippet',
+          part: "snippet",
           maxResults: 50,
           key: apiKey,
           pageToken: nextToken,
           playlistId: id,
           fields:
-            'etag,nextPageToken,items(snippet(title,videoOwnerChannelTitle,position, resourceId(videoId))),pageInfo',
+            "etag,nextPageToken,items(snippet(title,videoOwnerChannelTitle,position, resourceId(videoId))),pageInfo",
         },
       });
       responseArr.push(...responseListItems.data.items);
-      if (responseEtag === '') {
+      times += 1;
+      // For now
+      if (times >= 105) {
+        // eslint-disable-next-line
+        console.log("Infinite loop");
+        break;
+      }
+      if (responseEtag === "") {
         responseEtag = responseListItems.data.etag;
       }
       if (responseListItems.data.nextPageToken) {
         nextToken = responseListItems.data.nextPageToken;
-        /* eslint-enable no-await-in-loop */
-      } else nextToken = '';
+      } else nextToken = "";
     } while (nextToken);
   } catch (error) {
     if (error.response === undefined) {
@@ -50,7 +57,7 @@ export default async function fetchPlaylistVideos(id, etag) {
       return 404;
     }
     // eslint-disable-next-line
-    console.log('Error ', error.response);
+    console.log("Error ", error.response);
     return 404;
   }
   const dataReturned = {
