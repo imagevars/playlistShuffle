@@ -153,7 +153,8 @@ function Search({
   };
   return (
     <div className="searchContainer w-full my-4 mx-auto ">
-      <form className="" onSubmit={(e) => handleSubmit(e)}>
+      {/* <form className="" onSubmit={(e) => handleSubmit(e)}> */}
+      <form className="" onSubmit={() => console.log("submitted")}>
         {isIdInvalid ? (
           <p className="text-textColor font-open">Invalid playlist</p>
         ) : (
