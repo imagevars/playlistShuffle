@@ -1,5 +1,4 @@
 import axios from "axios";
-import "dotenv/config";
 
 export default async function fetchPlaylistVideos(id, etag) {
   const responseArr = [];
