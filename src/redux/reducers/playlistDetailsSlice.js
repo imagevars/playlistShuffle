@@ -4,13 +4,14 @@ import {
   PLAYLIST_DETAILS_ETAG,
   PLAYLIST_DETAILS_LAST_PLAYED_INDEX,
   PLAYLIST_DETAILS_LENGTH,
-} from '../constants/playlistDetailsTypes';
+  PLAYLIST_DETAILS_IMAGE,
+} from "../constants/playlistDetailsTypes";
 
 const initialState = [];
 
 export default function playlistDetailsReducer(state = initialState, action) {
   switch (action.type) {
-    case 'playlistDetails/add': {
+    case "playlistDetails/add": {
       return action.payload;
     }
     case PLAYLIST_DETAILS_ADD_TO_PLAYLIST_DETAILS: {
@@ -54,6 +55,17 @@ export default function playlistDetailsReducer(state = initialState, action) {
           return {
             ...ele,
             playlistLength: action.payload.playlistLength,
+          };
+        }
+        return ele;
+      });
+    }
+    case PLAYLIST_DETAILS_IMAGE: {
+      return state.map((ele) => {
+        if (ele.playlistId === action.payload.playlistId) {
+          return {
+            ...ele,
+            playlistImage: action.payload.playlistImage,
           };
         }
         return ele;

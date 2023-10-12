@@ -1,22 +1,25 @@
-import React, { memo } from 'react';
-import { BiPlay, BiPause } from 'react-icons/bi';
+import React, { memo } from "react";
+import { BiPlay, BiPause } from "react-icons/bi";
 import {
   MdSkipPrevious,
   MdSkipNext,
   MdShuffle,
   MdRepeat,
   MdRepeatOne,
-} from 'react-icons/md';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+} from "react-icons/md";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import {
   isPlaying,
   currentSong,
   isLoopActive,
   isMutedActive,
   isShuffleActive,
-} from '../../../redux/actions/playerActions';
-import { lastPlayedIndexPlaylistDetails } from '../../../redux/actions/playlistDetailsActions';
+} from "../../../redux/actions/playerActions";
+import {
+  lastPlayedIndexPlaylistDetails,
+  setPlaylistImage,
+} from "../../../redux/actions/playlistDetailsActions";
 
 const MediaButtons = memo(
   ({
@@ -28,6 +31,7 @@ const MediaButtons = memo(
     playlistSongsById,
     playlistDetails,
     lastPlayedIndexPlaylistDetails,
+    setPlaylistImage,
   }) => {
     const findPlaylistIndex = playlistDetails.findIndex(
       (element) => element.playlistId === player.currentActivePlaylistId,
@@ -45,6 +49,14 @@ const MediaButtons = memo(
           playlistSongsById[player.currentActivePlaylistId][currIndex - 1]
             ?.snippet.resourceId.videoId,
         );
+        const obj = {
+          playlistId: player.currentActivePlaylistId,
+          playlistImage: `https://i.ytimg.com/vi/${
+            playlistSongsById[player.currentActivePlaylistId][currIndex - 1]
+              ?.snippet.resourceId.videoId
+          }/mqdefault.jpg`,
+        };
+        setPlaylistImage(obj);
       }
     };
 
@@ -62,6 +74,14 @@ const MediaButtons = memo(
           playlistSongsById[player.currentActivePlaylistId][currIndex + 1]
             ?.snippet.resourceId.videoId,
         );
+        const obj = {
+          playlistId: player.currentActivePlaylistId,
+          playlistImage: `https://i.ytimg.com/vi/${
+            playlistSongsById[player.currentActivePlaylistId][currIndex + 1]
+              ?.snippet.resourceId.videoId
+          }/mqdefault.jpg`,
+        };
+        setPlaylistImage(obj);
       } else if (
         currIndex ===
         playlistSongsById[player.currentActivePlaylistId].length - 1
@@ -192,6 +212,7 @@ MediaButtons.propTypes = {
     }),
   ).isRequired,
   lastPlayedIndexPlaylistDetails: PropTypes.func.isRequired,
+  setPlaylistImage: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -207,6 +228,7 @@ const mapDispatchToProps = {
   currentSong,
   isMutedActive,
   lastPlayedIndexPlaylistDetails,
+  setPlaylistImage,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MediaButtons);

@@ -1,19 +1,20 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import MersenneTwister from 'mersenne-twister';
-import { FixedSizeList } from 'react-window';
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import MersenneTwister from "mersenne-twister";
+import { FixedSizeList } from "react-window";
 
 import {
   currentSong,
   isShuffleActive,
   setVideoDuration,
-} from '../../../redux/actions/playerActions';
+} from "../../../redux/actions/playerActions";
 import {
   lastPlayedIndexPlaylistDetails,
+  setPlaylistImage,
   setPlaylistLength,
-} from '../../../redux/actions/playlistDetailsActions';
-import { addSongsByPlaylistID } from '../../../redux/actions/playlistSongsByIdActions';
+} from "../../../redux/actions/playlistDetailsActions";
+import { addSongsByPlaylistID } from "../../../redux/actions/playlistSongsByIdActions";
 
 function VideoCard({
   player,
@@ -27,14 +28,8 @@ function VideoCard({
   setVideoDuration,
   width,
   height,
+  setPlaylistImage,
 }) {
-  // const refs = playlistSongsById[player.currentActivePlaylistId]?.reduce(
-  //   (acc, value, i) => {
-  //     acc[i + 1] = React.createRef();
-  //     return acc;
-  //   },
-  //   {},
-  // );
   const listRef = React.createRef();
 
   const shuffleIsActive = () => {
@@ -58,6 +53,11 @@ function VideoCard({
       playlistId: player.currentActivePlaylistId,
     };
     lastPlayedIndexPlaylistDetails(lastPlayedObj);
+    const obj = {
+      playlistId: player.currentActivePlaylistId,
+      playlistImage: `https://i.ytimg.com/vi/${shuffleArr[0].snippet.resourceId.videoId}/mqdefault.jpg`,
+    };
+    setPlaylistImage(obj);
     isShuffleActive(false);
   };
 
@@ -77,6 +77,14 @@ function VideoCard({
       playlistSongsById[player.currentActivePlaylistId][index]?.snippet
         .resourceId.videoId,
     );
+    const obj = {
+      playlistId: player.currentActivePlaylistId,
+      playlistImage: `https://i.ytimg.com/vi/${
+        playlistSongsById[player.currentActivePlaylistId][index].snippet
+          .resourceId.videoId
+      }/mqdefault.jpg`,
+    };
+    setPlaylistImage(obj);
   };
 
   useEffect(() => {
@@ -85,7 +93,7 @@ function VideoCard({
     );
     listRef.current.scrollToItem(
       playlistDetails[findPlaylistIndex].currentIndex,
-      'start',
+      "start",
     );
   }, [player.currentSong]);
 
@@ -130,7 +138,7 @@ function VideoCard({
                 player.currentSong ===
                 playlistSongsById[player.currentActivePlaylistId][index].snippet
                   .resourceId.videoId
-                  ? 'border-b-secondary '
+                  ? "border-b-secondary "
                   : null
               }  text-center  group`}
             >
@@ -140,8 +148,8 @@ function VideoCard({
                     player.currentSong ===
                     playlistSongsById[player.currentActivePlaylistId][index]
                       .snippet.resourceId.videoId
-                      ? ' text-secondary  font-semibold  '
-                      : ' text-textColor '
+                      ? " text-secondary  font-semibold  "
+                      : " text-textColor "
                   } font-normal w-full text-center md:text-left md:mx-4 md:truncate font-open`}
                 >
                   <p className="truncate group-hover:text-secondary ">
@@ -155,8 +163,8 @@ function VideoCard({
                       player.currentSong ===
                       playlistSongsById[player.currentActivePlaylistId][index]
                         .snippet.resourceId.videoId
-                        ? ' text-secondary  '
-                        : 'text-gray group-hover:text-secondary '
+                        ? " text-secondary  "
+                        : "text-gray group-hover:text-secondary "
                     } truncate text-sm font-open `}
                   >
                     {
@@ -171,8 +179,8 @@ function VideoCard({
                   player.currentSong ===
                   playlistSongsById[player.currentActivePlaylistId][index]
                     .snippet.resourceId.videoId
-                    ? ' bg-secondary shadow-none'
-                    : 'bg-gray  '
+                    ? " bg-secondary shadow-none"
+                    : "bg-gray  "
                 } w-[88%] h-0.5 mx-auto rounded-full group-hover:bg-secondary`}
               />
             </div>
@@ -208,6 +216,7 @@ VideoCard.propTypes = {
   lastPlayedIndexPlaylistDetails: PropTypes.func.isRequired,
   setPlaylistLength: PropTypes.func.isRequired,
   setVideoDuration: PropTypes.func.isRequired,
+  setPlaylistImage: PropTypes.func.isRequired,
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
 };
@@ -219,6 +228,7 @@ const mapDispatchToProps = {
   lastPlayedIndexPlaylistDetails,
   setPlaylistLength,
   setVideoDuration,
+  setPlaylistImage,
 };
 
 const mapStateToProps = (state) => ({

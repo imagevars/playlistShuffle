@@ -1,7 +1,7 @@
-import React, { useEffect, useRef } from 'react';
-import { connect } from 'react-redux';
-import ReactPlayer from 'react-player/youtube';
-import PropTypes from 'prop-types';
+import React, { useEffect, useRef } from "react";
+import { connect } from "react-redux";
+import ReactPlayer from "react-player/youtube";
+import PropTypes from "prop-types";
 import {
   isPlaying,
   currentSong,
@@ -11,8 +11,11 @@ import {
   setSeeking,
   setArtist,
   setTitle,
-} from '../../../redux/actions/playerActions';
-import { lastPlayedIndexPlaylistDetails } from '../../../redux/actions/playlistDetailsActions';
+} from "../../../redux/actions/playerActions";
+import {
+  lastPlayedIndexPlaylistDetails,
+  setPlaylistImage,
+} from "../../../redux/actions/playlistDetailsActions";
 
 function Player({
   player,
@@ -26,11 +29,12 @@ function Player({
   setArtist,
   setTitle,
   lastPlayedIndexPlaylistDetails,
+  setPlaylistImage,
 }) {
   const playerRef = useRef(null);
 
   useEffect(() => {
-    playerRef.current.seekTo(player.seekKeyboard, 'fraction');
+    playerRef.current.seekTo(player.seekKeyboard, "fraction");
   }, [player.seekKeyboard]);
 
   const findPlaylistIndex = playlistDetails.findIndex(
@@ -75,9 +79,7 @@ function Player({
   // and playlist the next song, or if it is the last the playlist will end
   const handleError = () => {
     const currIndex = playlistDetails[findPlaylistIndex].currentIndex;
-    // eslint-disable-next-line
     if (currIndex === playlistDetails[findPlaylistIndex].playlistLength) {
-      // empty
       isPlaying(false);
     } else afterSongEnds();
   };
@@ -99,10 +101,10 @@ function Player({
   const getTitleAndArtist = (title, ownerTitle) => {
     try {
       const joinedTitleAndOwnerTitle = [title, ownerTitle];
-      if (title === 'Private video') {
+      if (title === "Private video") {
         return title;
       }
-      if (joinedTitleAndOwnerTitle[0].includes(' - ')) {
+      if (joinedTitleAndOwnerTitle[0].includes(" - ")) {
         const regex = /^(.*?)-(.*)$/;
         const match = joinedTitleAndOwnerTitle[0].match(regex);
 
@@ -110,7 +112,7 @@ function Player({
 
         return [title, artist];
       }
-      if (joinedTitleAndOwnerTitle[0].includes('//')) {
+      if (joinedTitleAndOwnerTitle[0].includes("//")) {
         const regex = /^(.*?)\s\/\/\s(.*)$/;
         const match = joinedTitleAndOwnerTitle[0].match(regex);
 
@@ -118,7 +120,7 @@ function Player({
 
         return [title, artist];
       }
-      if (joinedTitleAndOwnerTitle[1].includes(' - Topic')) {
+      if (joinedTitleAndOwnerTitle[1].includes(" - Topic")) {
         const regex = /^(.*?)\s-\sTopic$/;
         const match = joinedTitleAndOwnerTitle[1].match(regex);
         const artist = match[1];
@@ -146,6 +148,11 @@ function Player({
     setProgress(0);
     setVideoDuration(playerRef.current.getDuration());
     isPlaying(true);
+    const obj = {
+      playlistId: player.currentActivePlaylistId,
+      playlistImage: `https://i.ytimg.com/vi/${player.currentSong}/mqdefault.jpg`,
+    };
+    setPlaylistImage(obj);
   };
   const getPercentage = (a, b) => {
     const trimmedA = Math.floor(a);
@@ -173,7 +180,7 @@ function Player({
         config={{
           youtube: {
             playerVars: {
-              color: 'white',
+              color: "white",
             },
           },
         }}
@@ -224,6 +231,7 @@ Player.propTypes = {
   setTitle: PropTypes.func.isRequired,
   setArtist: PropTypes.func.isRequired,
   lastPlayedIndexPlaylistDetails: PropTypes.func.isRequired,
+  setPlaylistImage: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = {
@@ -235,6 +243,7 @@ const mapDispatchToProps = {
   lastPlayedIndexPlaylistDetails,
   setTitle,
   setArtist,
+  setPlaylistImage,
 };
 
 const mapStateToProps = (state) => ({
