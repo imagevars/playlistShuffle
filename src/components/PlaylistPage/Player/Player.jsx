@@ -11,6 +11,7 @@ import {
   setSeeking,
   setArtist,
   setTitle,
+  setSeekKeyboard,
 } from "../../../redux/actions/playerActions";
 import {
   lastPlayedIndexPlaylistDetails,
@@ -30,11 +31,15 @@ function Player({
   setTitle,
   lastPlayedIndexPlaylistDetails,
   setPlaylistImage,
+  setSeekKeyboard,
 }) {
   const playerRef = useRef(null);
 
   useEffect(() => {
-    playerRef.current.seekTo(player.seekKeyboard, "fraction");
+    if (player.seekKeyboard !== null) {
+      playerRef.current.seekTo(player.seekKeyboard, "fraction");
+    }
+    setSeekKeyboard(null);
   }, [player.seekKeyboard]);
 
   const findPlaylistIndex = playlistDetails.findIndex(
@@ -210,7 +215,7 @@ Player.propTypes = {
     seeking: PropTypes.bool.isRequired,
     seekTo: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
-    seekKeyboard: PropTypes.number.isRequired,
+    seekKeyboard: PropTypes.number,
   }).isRequired,
   playlistDetails: PropTypes.arrayOf(
     PropTypes.shape({
@@ -232,6 +237,7 @@ Player.propTypes = {
   setArtist: PropTypes.func.isRequired,
   lastPlayedIndexPlaylistDetails: PropTypes.func.isRequired,
   setPlaylistImage: PropTypes.func.isRequired,
+  setSeekKeyboard: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = {
@@ -244,6 +250,7 @@ const mapDispatchToProps = {
   setTitle,
   setArtist,
   setPlaylistImage,
+  setSeekKeyboard,
 };
 
 const mapStateToProps = (state) => ({
