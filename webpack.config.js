@@ -66,7 +66,6 @@ module.exports = {
     }),
     new CopyPlugin({
       patterns: [
-        { from: "sitemap.xml", to: "" },
         {
           from: "src/images/silivan-munguarakarama-NrR9gn3lFKU-unsplash.jpg",
           to: "assets/images/",

@@ -22,8 +22,6 @@ export default async function fetchPlaylistData(id, etag) {
       currentIndex: 0,
     };
   } catch (error) {
-    // eslint-disable-next-line
-    console.log("Error fetching data: ", error);
     return null;
   }
 

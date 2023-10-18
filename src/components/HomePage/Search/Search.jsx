@@ -32,6 +32,7 @@ function Search({
 }) {
   const [playlistId, setPlaylistId] = useState("");
   const [isIdInvalid, setIsIdInvalid] = useState(false);
+  const [errorReason, setErrorReason] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -57,15 +58,23 @@ function Search({
           setIsPlLoading(true);
           const currEtag = "";
           const data = await fetchPlaylistVideos(PLinput, currEtag);
-          if (data === 404 || data === 403) {
-            setIsIdInvalid(true);
+          if (data === 404) {
             setIsPlLoading(false);
+            setErrorReason("Playlist doesn't seems valid");
+            setIsIdInvalid(true);
+            return null;
+          }
+          if (data === 403) {
+            setIsPlLoading(false);
+            setErrorReason("You're out of luck, try in a few hours");
+            setIsIdInvalid(true);
             return null;
           }
           const playlistDataInfo = await fetchPlaylistData(
             PLinput,
             data.playlistEtag,
           );
+          setErrorReason("");
           const playlistEtagAndId = {
             playlistId: PLinput,
             etag: data.playlistEtag,
@@ -112,6 +121,12 @@ function Search({
             // eslint-disable-next-line
             console.log(`Error on playlist ${PLinput.playlists[i].name}`);
           }
+          if (data === 403) {
+            setIsPlLoading(false);
+            setErrorReason("You're out of luck, try in a few hours");
+            setIsIdInvalid(true);
+            return null;
+          }
           // Basic, I know
           if (mixArr.length > 15000) {
             break;
@@ -155,7 +170,7 @@ function Search({
     <div className="searchContainer w-full my-4 mx-auto ">
       <form className="" onSubmit={(e) => handleSubmit(e)}>
         {isIdInvalid ? (
-          <p className="text-textColor font-open">Invalid playlist</p>
+          <p className="text-textColor font-open">{errorReason}</p>
         ) : (
           <p className="text-textColor font-open">
             To add multiple playlist read&nbsp;
