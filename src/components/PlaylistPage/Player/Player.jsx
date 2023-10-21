@@ -12,6 +12,7 @@ import {
   setArtist,
   setTitle,
   setSeekKeyboard,
+  setSeekTo,
 } from "../../../redux/actions/playerActions";
 import {
   lastPlayedIndexPlaylistDetails,
@@ -32,6 +33,7 @@ function Player({
   lastPlayedIndexPlaylistDetails,
   setPlaylistImage,
   setSeekKeyboard,
+  setSeekTo,
 }) {
   const playerRef = useRef(null);
 
@@ -90,9 +92,11 @@ function Player({
   };
 
   useEffect(() => {
-    if (player.seeking === true) {
+    if (player.seeking === true && player.seekTo !== null) {
       playerRef.current.seekTo(player.seekTo);
+      console.log("Truetrue");
       setSeeking(false);
+      setSeekTo(null);
     }
   }, [player.seekTo]);
 
@@ -213,7 +217,7 @@ Player.propTypes = {
     videoDuration: PropTypes.number.isRequired,
     volume: PropTypes.number.isRequired,
     seeking: PropTypes.bool.isRequired,
-    seekTo: PropTypes.number.isRequired,
+    seekTo: PropTypes.number,
     title: PropTypes.string.isRequired,
     seekKeyboard: PropTypes.number,
   }).isRequired,
@@ -238,6 +242,11 @@ Player.propTypes = {
   lastPlayedIndexPlaylistDetails: PropTypes.func.isRequired,
   setPlaylistImage: PropTypes.func.isRequired,
   setSeekKeyboard: PropTypes.func.isRequired,
+  setSeekTo: PropTypes.func,
+};
+
+Player.defaultProps = {
+  setSeekTo: null,
 };
 
 const mapDispatchToProps = {
@@ -251,6 +260,7 @@ const mapDispatchToProps = {
   setArtist,
   setPlaylistImage,
   setSeekKeyboard,
+  setSeekTo,
 };
 
 const mapStateToProps = (state) => ({

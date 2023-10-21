@@ -1,12 +1,12 @@
-import React, { memo } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React, { memo } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import {
   setPercentage,
   setSeekTo,
   setSeeking,
   setProgress,
-} from '../../../redux/actions/playerActions';
+} from "../../../redux/actions/playerActions";
 
 function ProgressBar({
   player,
@@ -18,15 +18,15 @@ function ProgressBar({
   const secondsToTime = (e) => {
     const h = Math.floor(e / 3600)
       .toString()
-      .padStart(2, '0');
+      .padStart(2, "0");
     const m = Math.floor((e % 3600) / 60)
       .toString()
-      .padStart(2, '0');
+      .padStart(2, "0");
     const s = Math.floor(e % 60)
       .toString()
-      .padStart(2, '0');
+      .padStart(2, "0");
 
-    return h === '00' ? `${m}:${s}` : `${h}:${m}:${s}`;
+    return h === "00" ? `${m}:${s}` : `${h}:${m}:${s}`;
   };
 
   const handleChange = (e) => {
@@ -45,7 +45,6 @@ function ProgressBar({
 
   const handleMouseUp = (e) => {
     setSeekTo(parseFloat(e.target.value));
-    setSeeking(false);
   };
 
   return (
@@ -84,10 +83,14 @@ ProgressBar.propTypes = {
     progress: PropTypes.number.isRequired,
     videoDuration: PropTypes.number.isRequired,
   }).isRequired,
-  setSeekTo: PropTypes.func.isRequired,
+  setSeekTo: PropTypes.func,
   setSeeking: PropTypes.func.isRequired,
   setProgress: PropTypes.func.isRequired,
   setPercentage: PropTypes.func.isRequired,
+};
+
+ProgressBar.defaultProps = {
+  setSeekTo: null,
 };
 
 const mapStateToProps = (state) => ({
