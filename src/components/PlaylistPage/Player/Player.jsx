@@ -94,7 +94,6 @@ function Player({
   useEffect(() => {
     if (player.seeking === true && player.seekTo !== null) {
       playerRef.current.seekTo(player.seekTo);
-      console.log("Truetrue");
       setSeeking(false);
       setSeekTo(null);
     }
