@@ -16,16 +16,16 @@ import {
   PLAYER_TITLE,
   PLAYER_SEEK_KEYBOARD,
   PLAYER_IS_PL_LOADING,
-} from '../constants/playerTypes';
+} from "../constants/playerTypes";
 
 const initialState = {
   isPlLoading: false,
   isPlaying: false,
-  theme: 'image',
-  currentSong: '',
+  theme: "image",
+  currentSong: "",
   isShuffleActive: false,
   isLoopActive: false,
-  currentActivePlaylistId: '',
+  currentActivePlaylistId: "",
   isMutedActive: false,
   progress: 0,
   videoDuration: 0,
@@ -34,8 +34,8 @@ const initialState = {
   seeking: false,
   seekTo: 0,
   seekKeyboard: 0,
-  title: '',
-  artist: '',
+  title: "",
+  artist: "",
 };
 
 export default function playerReducer(state = initialState, action) {

@@ -1,8 +1,8 @@
-import React, { memo, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { BsFillMoonFill, BsFillSunFill, BsImageFill } from 'react-icons/bs';
-import PropTypes from 'prop-types';
+import React, { memo, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { connect } from "react-redux";
+import { BsFillMoonFill, BsFillSunFill, BsImageFill } from "react-icons/bs";
+import PropTypes from "prop-types";
 import {
   isPlaying,
   isShuffleActive,
@@ -10,7 +10,7 @@ import {
   setTheme,
   setTitle,
   setArtist,
-} from '../../redux/actions/playerActions';
+} from "../../redux/actions/playerActions";
 
 function Navbar({
   isPlaying,
@@ -26,49 +26,49 @@ function Navbar({
   const handleClickHome = () => {
     isPlaying(true);
     isShuffleActive(false);
-    setCurrentActivePlaylistId('');
-    setTitle('');
-    setArtist('');
+    setCurrentActivePlaylistId("");
+    setTitle("");
+    setArtist("");
 
-    return navigate('/');
+    return navigate("/");
   };
 
   useEffect(() => {
-    if (player.theme === 'light') {
-      document.documentElement.classList.remove('dark');
-      document.documentElement.classList.remove('image');
-      document.documentElement.classList.add('light');
+    if (player.theme === "light") {
+      document.documentElement.classList.remove("dark");
+      document.documentElement.classList.remove("image");
+      document.documentElement.classList.add("light");
     }
-    if (player.theme === 'dark') {
-      document.documentElement.classList.remove('light');
-      document.documentElement.classList.remove('image');
-      document.documentElement.classList.add('dark');
+    if (player.theme === "dark") {
+      document.documentElement.classList.remove("light");
+      document.documentElement.classList.remove("image");
+      document.documentElement.classList.add("dark");
     }
-    if (player.theme === 'image') {
-      document.documentElement.classList.remove('light');
-      document.documentElement.classList.remove('dark');
-      document.documentElement.classList.add('image');
+    if (player.theme === "image") {
+      document.documentElement.classList.remove("light");
+      document.documentElement.classList.remove("dark");
+      document.documentElement.classList.add("image");
     }
   }, []);
 
   const handleClickTheme = () => {
-    if (player.theme === 'light') {
-      document.documentElement.classList.remove('image');
-      document.documentElement.classList.remove('light');
-      document.documentElement.classList.add('dark');
-      setTheme('dark');
+    if (player.theme === "light") {
+      document.documentElement.classList.remove("image");
+      document.documentElement.classList.remove("light");
+      document.documentElement.classList.add("dark");
+      setTheme("dark");
     }
-    if (player.theme === 'dark') {
-      document.documentElement.classList.remove('dark');
-      document.documentElement.classList.remove('light');
-      document.documentElement.classList.add('image');
-      setTheme('image');
+    if (player.theme === "dark") {
+      document.documentElement.classList.remove("dark");
+      document.documentElement.classList.remove("light");
+      document.documentElement.classList.add("image");
+      setTheme("image");
     }
-    if (player.theme === 'image') {
-      document.documentElement.classList.remove('image');
-      document.documentElement.classList.remove('dark');
-      document.documentElement.classList.add('light');
-      setTheme('light');
+    if (player.theme === "image") {
+      document.documentElement.classList.remove("image");
+      document.documentElement.classList.remove("dark");
+      document.documentElement.classList.add("light");
+      setTheme("light");
     }
   };
 
@@ -80,7 +80,7 @@ function Navbar({
             className="navbar text-lg sm:text-2xl font-open text-left text-textColor font-bold cursor-pointer"
             cursor="pointer"
           >
-            Shuffle Playlist{' '}
+            Shuffle Playlist{" "}
           </h1>
         </button>
         <div className="flex flex-row mr-2">
@@ -103,7 +103,7 @@ function Navbar({
               </div>
             </a>
           </div>
-          {player.theme === 'image' && (
+          {player.theme === "image" && (
             <div className="my-auto mr-1">
               <BsFillSunFill
                 fill="white"
@@ -114,7 +114,7 @@ function Navbar({
               />
             </div>
           )}
-          {player.theme === 'dark' && (
+          {player.theme === "dark" && (
             <div className="my-auto mr-1">
               <BsImageFill
                 fill="white"
@@ -125,7 +125,7 @@ function Navbar({
               />
             </div>
           )}
-          {player.theme === 'light' && (
+          {player.theme === "light" && (
             <div className="my-auto mr-1">
               <BsFillMoonFill
                 fill="black"
