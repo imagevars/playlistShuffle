@@ -1,5 +1,4 @@
 import React from "react";
-import GitHubButton from "react-github-btn";
 import { connect } from "react-redux";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
@@ -51,16 +50,6 @@ function AboutPage() {
             playlist you will have to deleted it and load it again.
           </p>
         </div>
-      </div>
-      <div className="mx-auto">
-        <GitHubButton
-          href="https://github.com/jooonathann/playlistShuffle"
-          data-size="large"
-          data-show-count="true"
-          aria-label="Star jooonathann/playlistShuffle on GitHub"
-        >
-          Star
-        </GitHubButton>
       </div>
       <Footer />
     </div>
