@@ -1,15 +1,16 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import GitHubButton from "react-github-btn";
+import { useNavigate } from "react-router-dom";
 import {
   AiFillGithub,
   AiOutlineTwitter,
   AiFillInfoCircle,
-} from 'react-icons/ai';
+} from "react-icons/ai";
 
 function Footer() {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate('/about');
+    navigate("/about");
   };
 
   return (
@@ -43,9 +44,21 @@ function Footer() {
           />
         </a>
       </div>
-      <p className="text-textColor text-center my-1 font-open">
-        Made with ♥ by Jonathan
-      </p>
+      <div className="flex items-center justify-center">
+        <p className="text-textColor text-center my-1 font-open">
+          Made with ♥ by Jonathan
+        </p>
+        <div className="mx-2 items-center mt-auto mb-0">
+          <GitHubButton
+            href="https://github.com/jooonathann/playlistShuffle"
+            data-icon="octicon-star"
+            data-show-count="true"
+            aria-label="Star jooonathann/playlistShuffle on GitHub"
+          >
+            Star
+          </GitHubButton>
+        </div>
+      </div>
     </footer>
   );
 }

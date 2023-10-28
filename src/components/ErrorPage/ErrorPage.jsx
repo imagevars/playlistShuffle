@@ -1,5 +1,4 @@
 import React from "react";
-import GitHubButton from "react-github-btn";
 import { useNavigate } from "react-router-dom";
 import { BiErrorCircle } from "react-icons/bi";
 import Navbar from "../Navbar/Navbar";
@@ -55,16 +54,6 @@ function ErrorPage() {
               here
             </button>
           </p>
-        </div>
-        <div className="mx-auto my-2">
-          <GitHubButton
-            href="https://github.com/jooonathann/playlistShuffle"
-            data-size="large"
-            data-show-count="true"
-            aria-label="Star jooonathann/playlistShuffle on GitHub"
-          >
-            Star
-          </GitHubButton>
         </div>
       </div>
       <Footer />
