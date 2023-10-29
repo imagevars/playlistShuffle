@@ -28,7 +28,7 @@ export default async function fetchPlaylistVideos(id, etag) {
       responseArr.push(...responseListItems.data.items);
       totalVideos = responseListItems.data.pageInfo.totalResults;
       timesInLoop += 1;
-      if (timesInLoop > Math.ceil(totalVideos / 50)) {
+      if (timesInLoop >= Math.ceil(totalVideos / 50)) {
         break;
       }
       if (responseEtag === "") {

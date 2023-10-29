@@ -5,8 +5,9 @@ export default function validateId(str) {
     name: "",
     playlists: [],
   };
-  const basicRegex = /^(?=.*.{18,})(?=.*(?:PL|OLAK)).*/;
-  const PLRegex = /(PL|OLAK)[\w-]+(?=&|$)/;
+  const basicRegex = /^(?=.*.{13,})(?=.*(?:PL|OLAK|RD)).*/;
+  const PLRegex = /(PL|OLAK|RD)[\w-]+(?=&|$)/;
+  const minLength = 13;
 
   if (arrayOfIds[0] === "play my pl" || arrayOfIds[0] === "Play my pl") {
     return "PLi06ybkpczJDt0Ydo3Umjtv97bDOcCtAZ";
@@ -16,7 +17,7 @@ export default function validateId(str) {
       const [id] = arrayOfIds[0].replace(/\s/g, "").match(basicRegex);
       if (id.match(PLRegex)) {
         const [PLId] = id.match(PLRegex);
-        if (PLId.length >= 18) {
+        if (PLId.length >= minLength) {
           return PLId;
         }
         return null;
@@ -39,7 +40,7 @@ export default function validateId(str) {
   PLMixData.name = plName;
   for (let i = 0; i < arrayOfIds.length; i += 1) {
     if (
-      (!arrayOfIds[i].match(basicRegex) || arrayOfIds[i].length < 24) &&
+      (!arrayOfIds[i].match(basicRegex) || arrayOfIds[i].length < minLength) &&
       !arrayOfIds[i].includes("name:")
     ) {
       return null;
@@ -51,7 +52,7 @@ export default function validateId(str) {
       }
     }
     const [id] = arrayOfIds[i].replace(/\s/g, "").match(PLRegex);
-    if (id.length < 24) {
+    if (id.length < minLength) {
       return null;
     }
     PLMixData.playlists.push(id);
