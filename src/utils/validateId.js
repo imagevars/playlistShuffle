@@ -5,8 +5,8 @@ export default function validateId(str) {
     name: "",
     playlists: [],
   };
-  const basicRegex = /^(?=.*.{13,})(?=.*(?:PL|OLAK|RD)).*/;
-  const PLRegex = /(PL|OLAK|RD)[\w-]+(?=&|$)/;
+  const basicRegex = /^(?=.*.{13,})(?=.*(?:PL|OLAK|RD|UU)).*/;
+  const PLRegex = /(PL|OLAK|RD|UU)[\w-]+(?=&|$)/;
   const minLength = 13;
 
   if (arrayOfIds[0] === "play my pl" || arrayOfIds[0] === "Play my pl") {
