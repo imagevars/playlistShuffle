@@ -1,8 +1,8 @@
-import React, { memo, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { connect } from "react-redux";
-import { BsFillMoonFill, BsFillSunFill, BsImageFill } from "react-icons/bs";
-import PropTypes from "prop-types";
+import React, { memo, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { BsFillMoonFill, BsFillSunFill, BsImageFill } from 'react-icons/bs';
+import PropTypes from 'prop-types';
 import {
   isPlaying,
   isShuffleActive,
@@ -10,7 +10,7 @@ import {
   setTheme,
   setTitle,
   setArtist,
-} from "../../redux/actions/playerActions";
+} from '../../redux/actions/playerActions';
 
 function Navbar({
   isPlaying,
@@ -26,49 +26,49 @@ function Navbar({
   const handleClickHome = () => {
     isPlaying(true);
     isShuffleActive(false);
-    setCurrentActivePlaylistId("");
-    setTitle("");
-    setArtist("");
+    setCurrentActivePlaylistId('');
+    setTitle('');
+    setArtist('');
 
-    return navigate("/");
+    return navigate('/');
   };
 
   useEffect(() => {
-    if (player.theme === "light") {
-      document.documentElement.classList.remove("dark");
-      document.documentElement.classList.remove("image");
-      document.documentElement.classList.add("light");
+    if (player.theme === 'light') {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.remove('image');
+      document.documentElement.classList.add('light');
     }
-    if (player.theme === "dark") {
-      document.documentElement.classList.remove("light");
-      document.documentElement.classList.remove("image");
-      document.documentElement.classList.add("dark");
+    if (player.theme === 'dark') {
+      document.documentElement.classList.remove('light');
+      document.documentElement.classList.remove('image');
+      document.documentElement.classList.add('dark');
     }
-    if (player.theme === "image") {
-      document.documentElement.classList.remove("light");
-      document.documentElement.classList.remove("dark");
-      document.documentElement.classList.add("image");
+    if (player.theme === 'image') {
+      document.documentElement.classList.remove('light');
+      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('image');
     }
   }, []);
 
   const handleClickTheme = () => {
-    if (player.theme === "light") {
-      document.documentElement.classList.remove("image");
-      document.documentElement.classList.remove("light");
-      document.documentElement.classList.add("dark");
-      setTheme("dark");
+    if (player.theme === 'light') {
+      document.documentElement.classList.remove('image');
+      document.documentElement.classList.remove('light');
+      document.documentElement.classList.add('dark');
+      setTheme('dark');
     }
-    if (player.theme === "dark") {
-      document.documentElement.classList.remove("dark");
-      document.documentElement.classList.remove("light");
-      document.documentElement.classList.add("image");
-      setTheme("image");
+    if (player.theme === 'dark') {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.remove('light');
+      document.documentElement.classList.add('image');
+      setTheme('image');
     }
-    if (player.theme === "image") {
-      document.documentElement.classList.remove("image");
-      document.documentElement.classList.remove("dark");
-      document.documentElement.classList.add("light");
-      setTheme("light");
+    if (player.theme === 'image') {
+      document.documentElement.classList.remove('image');
+      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light');
+      setTheme('light');
     }
   };
 
@@ -80,60 +80,89 @@ function Navbar({
             className="navbar text-lg sm:text-2xl font-open text-left text-textColor font-bold cursor-pointer"
             cursor="pointer"
           >
-            Shuffle Playlist{" "}
+            Shuffle Playlist{' '}
           </h1>
         </button>
         <div className="flex flex-row mr-2">
-          <div className="mx-4">
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Ko-fi link"
-              href="https://ko-fi.com/playlistshuffle"
-            >
-              <div className="flex justify-evenly flex-row bg-primary hover:scale-105	hover:bg-kofiHover  active:scale-110 rounded-md  max-w-[160px] py-0.5 px-3 md:px-6 ">
-                <img
-                  className="w-8 my-auto"
-                  src="./assets/images/Logo_white.png"
-                  alt="ko-fi"
-                />
-                <p className=" my-auto ml-0.5 font-nunito tracking-normal leading-4 text-sm md:text-md text-center text-textColorInside font-bold italic">
-                  Buy me <br />a coffee
-                </p>
+          {player.theme === 'image' && (
+            <div className="flex">
+              <div className="w-32 mx-4 flex justify-evenly flex-row hover:scale-105  active:scale-110 rounded-md">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="buymeacoffee link"
+                  href="https://www.buymeacoffee.com/playlistshuffle"
+                >
+                  <img
+                    className="my-auto"
+                    src="./assets/images/white-button.png"
+                    alt="Buy me a Coffee"
+                  />
+                </a>
               </div>
-            </a>
-          </div>
-          {player.theme === "image" && (
-            <div className="my-auto mr-1">
-              <BsFillSunFill
-                fill="white"
-                onClick={handleClickTheme}
-                className="cursor-pointer"
-                aria-label="sun icon"
-                size={25}
-              />
+              <div className="my-auto mr-1">
+                <BsFillSunFill
+                  fill="white"
+                  onClick={handleClickTheme}
+                  className="cursor-pointer"
+                  aria-label="sun icon"
+                  size={25}
+                />
+              </div>
             </div>
           )}
-          {player.theme === "dark" && (
-            <div className="my-auto mr-1">
-              <BsImageFill
-                fill="white"
-                onClick={handleClickTheme}
-                className="cursor-pointer"
-                aria-label="image icon"
-                size={25}
-              />
+          {player.theme === 'dark' && (
+            <div className="flex">
+              <div className="w-32 mx-4 flex justify-evenly flex-row hover:scale-105  active:scale-110 rounded-md">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="buymeacoffee link"
+                  href="https://www.buymeacoffee.com/playlistshuffle"
+                >
+                  <img
+                    className="my-auto"
+                    src="./assets/images/white-button.png"
+                    alt="Buy me a Coffee"
+                  />
+                </a>
+              </div>
+              <div className="my-auto mr-1">
+                <BsImageFill
+                  fill="white"
+                  onClick={handleClickTheme}
+                  className="cursor-pointer"
+                  aria-label="image icon"
+                  size={25}
+                />
+              </div>
             </div>
           )}
-          {player.theme === "light" && (
-            <div className="my-auto mr-1">
-              <BsFillMoonFill
-                fill="black"
-                onClick={handleClickTheme}
-                className="cursor-pointer"
-                aria-label="moon icon"
-                size={25}
-              />
+          {player.theme === 'light' && (
+            <div className="flex">
+              <div className="w-32 mx-4 flex justify-evenly flex-row hover:scale-105  active:scale-110 rounded-md">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="buymeacoffee link"
+                  href="https://www.buymeacoffee.com/playlistshuffle"
+                >
+                  <img
+                    className="my-auto"
+                    src="./assets/images/black-button.png"
+                    alt="Buy me a Coffee"
+                  />
+                </a>
+              </div>
+              <div className="my-auto mr-1">
+                <BsFillMoonFill
+                  fill="black"
+                  onClick={handleClickTheme}
+                  className="cursor-pointer"
+                  aria-label="moon icon"
+                  size={25}
+                />
+              </div>
             </div>
           )}
         </div>
