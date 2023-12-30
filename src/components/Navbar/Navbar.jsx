@@ -11,6 +11,7 @@ import {
   setTitle,
   setArtist,
 } from '../../redux/actions/playerActions';
+import setSearchInput from '../../redux/actions/homepageActions';
 
 function Navbar({
   isPlaying,
@@ -20,6 +21,7 @@ function Navbar({
   setTheme,
   setTitle,
   setArtist,
+  setSearchInput,
 }) {
   const navigate = useNavigate();
 
@@ -29,7 +31,7 @@ function Navbar({
     setCurrentActivePlaylistId('');
     setTitle('');
     setArtist('');
-
+    setSearchInput('');
     return navigate('/');
   };
 
@@ -181,6 +183,7 @@ Navbar.propTypes = {
   setTheme: PropTypes.func.isRequired,
   setTitle: PropTypes.func.isRequired,
   setArtist: PropTypes.func.isRequired,
+  setSearchInput: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = {
@@ -190,6 +193,7 @@ const mapDispatchToProps = {
   setTheme,
   setTitle,
   setArtist,
+  setSearchInput,
 };
 
 const mapStateToProps = (state) => ({
