@@ -16,16 +16,18 @@ import {
   PLAYER_TITLE,
   PLAYER_SEEK_KEYBOARD,
   PLAYER_IS_PL_LOADING,
-} from "../constants/playerTypes";
+  PLAYER_SEARCH_WORDS,
+} from '../constants/playerTypes';
 
 const initialState = {
   isPlLoading: false,
   isPlaying: false,
-  theme: "image",
-  currentSong: "",
+  theme: 'image',
+  currentSong: '',
   isShuffleActive: false,
   isLoopActive: false,
-  currentActivePlaylistId: "",
+  currentActivePlaylistId: '',
+  searchWords: '',
   isMutedActive: false,
   progress: 0,
   videoDuration: 0,
@@ -34,8 +36,8 @@ const initialState = {
   seeking: false,
   seekTo: 0,
   seekKeyboard: 0,
-  title: "",
-  artist: "",
+  title: '',
+  artist: '',
 };
 
 export default function playerReducer(state = initialState, action) {
@@ -88,6 +90,9 @@ export default function playerReducer(state = initialState, action) {
     }
     case PLAYER_IS_PL_LOADING: {
       return { ...state, isPlLoading: action.payload };
+    }
+    case PLAYER_SEARCH_WORDS: {
+      return { ...state, searchWords: action.payload };
     }
     default:
       return state;

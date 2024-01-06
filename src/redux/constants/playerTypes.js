@@ -32,3 +32,5 @@ export const PLAYER_ARTIST = 'player/artist';
 export const PLAYER_SEEK_KEYBOARD = 'player/seekKeyboard';
 
 export const PLAYER_IS_PL_LOADING = 'player/isPlLoading';
+
+export const PLAYER_SEARCH_WORDS = 'player/searchWords';

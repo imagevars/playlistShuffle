@@ -1,10 +1,10 @@
-import React from "react";
-import AutoSizer from "react-virtualized-auto-sizer";
-import VideoCard from "./VideoCard";
+import React from 'react';
+import AutoSizer from 'react-virtualized-auto-sizer';
+import VideoCard from './VideoCard';
 
 function List() {
   return (
-    <div className="h-full w-full ">
+    <div className="h-full w-full mt-2">
       <AutoSizer>
         {({ height, width }) => <VideoCard height={height} width={width} />}
       </AutoSizer>

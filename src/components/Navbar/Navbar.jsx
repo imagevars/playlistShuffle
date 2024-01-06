@@ -10,6 +10,7 @@ import {
   setTheme,
   setTitle,
   setArtist,
+  setWordsToSearch,
 } from '../../redux/actions/playerActions';
 import setSearchInput from '../../redux/actions/homepageActions';
 
@@ -22,6 +23,7 @@ function Navbar({
   setTitle,
   setArtist,
   setSearchInput,
+  setWordsToSearch,
 }) {
   const navigate = useNavigate();
 
@@ -32,6 +34,7 @@ function Navbar({
     setTitle('');
     setArtist('');
     setSearchInput('');
+    setWordsToSearch('');
     return navigate('/');
   };
 
@@ -184,6 +187,7 @@ Navbar.propTypes = {
   setTitle: PropTypes.func.isRequired,
   setArtist: PropTypes.func.isRequired,
   setSearchInput: PropTypes.func.isRequired,
+  setWordsToSearch: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = {
@@ -194,6 +198,7 @@ const mapDispatchToProps = {
   setTitle,
   setArtist,
   setSearchInput,
+  setWordsToSearch,
 };
 
 const mapStateToProps = (state) => ({

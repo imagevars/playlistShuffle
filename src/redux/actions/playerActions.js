@@ -16,6 +16,7 @@ import {
   PLAYER_TITLE,
   PLAYER_SEEK_KEYBOARD,
   PLAYER_IS_PL_LOADING,
+  PLAYER_SEARCH_WORDS,
 } from '../constants/playerTypes';
 
 export const isPlaying = (payload) => ({ type: PLAYER_IS_PLAYING, payload });
@@ -97,5 +98,10 @@ export const setSeekKeyboard = (payload) => ({
 
 export const setIsPlLoading = (payload) => ({
   type: PLAYER_IS_PL_LOADING,
+  payload,
+});
+
+export const setWordsToSearch = (payload) => ({
+  type: PLAYER_SEARCH_WORDS,
   payload,
 });

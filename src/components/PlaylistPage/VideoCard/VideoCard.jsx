@@ -1,20 +1,19 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import MersenneTwister from "mersenne-twister";
-import { FixedSizeList } from "react-window";
-
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import MersenneTwister from 'mersenne-twister';
+import { FixedSizeList } from 'react-window';
 import {
   currentSong,
   isShuffleActive,
   setVideoDuration,
-} from "../../../redux/actions/playerActions";
+} from '../../../redux/actions/playerActions';
 import {
   lastPlayedIndexPlaylistDetails,
   setPlaylistImage,
   setPlaylistLength,
-} from "../../../redux/actions/playlistDetailsActions";
-import { addSongsByPlaylistID } from "../../../redux/actions/playlistSongsByIdActions";
+} from '../../../redux/actions/playlistDetailsActions';
+import { addSongsByPlaylistID } from '../../../redux/actions/playlistSongsByIdActions';
 
 function VideoCard({
   player,
@@ -30,6 +29,7 @@ function VideoCard({
   height,
   setPlaylistImage,
 }) {
+  const [searchResults, setSearchResults] = useState([]);
   const listRef = React.createRef();
 
   const shuffleIsActive = () => {
@@ -88,14 +88,40 @@ function VideoCard({
   };
 
   useEffect(() => {
-    const findPlaylistIndex = playlistDetails.findIndex(
-      (element) => element.playlistId === player.currentActivePlaylistId,
-    );
-    listRef.current.scrollToItem(
-      playlistDetails[findPlaylistIndex].currentIndex,
-      "start",
-    );
-  }, [player.currentSong]);
+    if (player.searchWords.length >= 3) {
+      const result = playlistSongsById[player.currentActivePlaylistId].reduce(
+        (filtered, song, index) => {
+          if (song.snippet.videoOwnerChannelTitle === undefined) {
+            return filtered;
+          }
+          if (
+            song.snippet.title.toLowerCase().includes(player.searchWords) ||
+            song.snippet.videoOwnerChannelTitle
+              .toLowerCase()
+              .includes(player.searchWords)
+          ) {
+            const indexNumber = { index };
+            const clone = { ...song, ...indexNumber };
+            filtered.push(clone);
+          }
+          return filtered;
+        },
+        [],
+      );
+      setSearchResults(result);
+    }
+    if (searchResults.length && player.searchWords.length >= 3) {
+      listRef.current.scrollToItem(0, 'start');
+    } else if (player.searchWords.length < 3 || searchResults.length === 0) {
+      const findPlaylistIndex = playlistDetails.findIndex(
+        (element) => element.playlistId === player.currentActivePlaylistId,
+      );
+      listRef.current.scrollToItem(
+        playlistDetails[findPlaylistIndex].currentIndex,
+        'start',
+      );
+    }
+  }, [player.currentSong, player.searchWords]);
 
   useEffect(() => {
     const playlistLengthObj = {
@@ -105,6 +131,83 @@ function VideoCard({
     };
     setPlaylistLength(playlistLengthObj);
   }, [playlistSongsById[player.currentActivePlaylistId]]);
+
+  if (
+    player.searchWords &&
+    player.searchWords.length >= 3 &&
+    searchResults.length !== 0
+  ) {
+    return (
+      <div className="h-full w-full ">
+        <FixedSizeList
+          className="list"
+          ref={listRef}
+          width={width}
+          height={height}
+          itemCount={searchResults.length}
+          itemSize={50}
+        >
+          {({ index, theKey, style }) => (
+            <button
+              type="button"
+              className="w-full my-1"
+              style={style}
+              title={searchResults[index].snippet.title}
+              // ref={refs[index]}
+              id={`${searchResults[index].snippet.resourceId.videoId}`}
+              onClick={() => handleClick(searchResults[index].index)}
+              // eslint-disable-next-line
+              key={theKey}
+            >
+              <div
+                className={`${
+                  player.currentSong ===
+                  searchResults.snippet?.resourceId.videoId
+                    ? 'border-b-secondary '
+                    : null
+                }  text-center  group`}
+              >
+                <div className=" flex justify-between group-hover:text-secondary ">
+                  <div
+                    className={`${
+                      player.currentSong ===
+                      searchResults[index]?.snippet.resourceId.videoId
+                        ? ' text-secondary  font-semibold  '
+                        : ' text-textColor '
+                    } font-normal w-full text-center md:text-left md:mx-4 md:truncate font-open`}
+                  >
+                    <p className="truncate group-hover:text-secondary ">
+                      {`${searchResults[index].index + 1} - ${
+                        searchResults[index].snippet.title
+                      }`}
+                    </p>
+                    <p
+                      className={`${
+                        player.currentSong ===
+                        searchResults[index].snippet.resourceId.videoId
+                          ? ' text-secondary  '
+                          : 'text-gray group-hover:text-secondary '
+                      } truncate text-sm font-open `}
+                    >
+                      {searchResults[index].snippet.videoOwnerChannelTitle}
+                    </p>
+                  </div>
+                </div>
+                <div
+                  className={`${
+                    player.currentSong ===
+                    searchResults[index].snippet.resourceId.videoId
+                      ? ' bg-secondary shadow-none'
+                      : 'bg-gray  '
+                  } w-[88%] h-0.5 mx-auto rounded-full group-hover:bg-secondary`}
+                />
+              </div>
+            </button>
+          )}
+        </FixedSizeList>
+      </div>
+    );
+  }
   return (
     <div className="h-full w-full ">
       <FixedSizeList
@@ -138,7 +241,7 @@ function VideoCard({
                 player.currentSong ===
                 playlistSongsById[player.currentActivePlaylistId][index].snippet
                   .resourceId.videoId
-                  ? "border-b-secondary "
+                  ? 'border-b-secondary '
                   : null
               }  text-center  group`}
             >
@@ -148,8 +251,8 @@ function VideoCard({
                     player.currentSong ===
                     playlistSongsById[player.currentActivePlaylistId][index]
                       .snippet.resourceId.videoId
-                      ? " text-secondary  font-semibold  "
-                      : " text-textColor "
+                      ? ' text-secondary  font-semibold  '
+                      : ' text-textColor '
                   } font-normal w-full text-center md:text-left md:mx-4 md:truncate font-open`}
                 >
                   <p className="truncate group-hover:text-secondary ">
@@ -163,8 +266,8 @@ function VideoCard({
                       player.currentSong ===
                       playlistSongsById[player.currentActivePlaylistId][index]
                         .snippet.resourceId.videoId
-                        ? " text-secondary  "
-                        : "text-gray group-hover:text-secondary "
+                        ? ' text-secondary  '
+                        : 'text-gray group-hover:text-secondary '
                     } truncate text-sm font-open `}
                   >
                     {
@@ -179,8 +282,8 @@ function VideoCard({
                   player.currentSong ===
                   playlistSongsById[player.currentActivePlaylistId][index]
                     .snippet.resourceId.videoId
-                    ? " bg-secondary shadow-none"
-                    : "bg-gray  "
+                    ? ' bg-secondary shadow-none'
+                    : 'bg-gray  '
                 } w-[88%] h-0.5 mx-auto rounded-full group-hover:bg-secondary`}
               />
             </div>
@@ -199,6 +302,7 @@ VideoCard.propTypes = {
     isLoopActive: PropTypes.bool.isRequired,
     currentActivePlaylistId: PropTypes.string.isRequired,
     isMutedActive: PropTypes.bool.isRequired,
+    searchWords: PropTypes.string.isRequired,
   }).isRequired,
   playlistDetails: PropTypes.arrayOf(
     PropTypes.shape({

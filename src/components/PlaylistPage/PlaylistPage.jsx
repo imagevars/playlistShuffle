@@ -14,6 +14,7 @@ import {
   setVolume,
   setSeekKeyboard,
   setCurrentActivePlaylistId,
+  setWordsToSearch,
 } from '../../redux/actions/playerActions';
 import setSearchInput from '../../redux/actions/homepageActions';
 import {
@@ -26,6 +27,7 @@ import PlaylistInfo from './PlaylistInfo/PlaylistInfo';
 import Player from './Player/Player';
 import ProgressBar from './ProgressBar/ProgressBar';
 import VolumeManger from './MediaButtons/VolumeManager';
+import SearchSongs from './SearchSongs/SearchSongs';
 
 function PlaylistPage({
   isPlaying,
@@ -42,11 +44,15 @@ function PlaylistPage({
   setCurrentActivePlaylistId,
   setPlaylistImage,
   setSearchInput,
+  setWordsToSearch,
 }) {
   const { id } = useParams();
   let findPlaylistIndex = playlistDetails.findIndex(
     (element) => element.playlistId === player.currentActivePlaylistId,
   );
+  useEffect(() => {
+    setWordsToSearch('');
+  }, []);
 
   if (player.currentActivePlaylistId !== id) {
     const doesPlExist = playlistDetails.findIndex(
@@ -60,12 +66,8 @@ function PlaylistPage({
           .snippet.resourceId.videoId,
       );
     } else {
-      // const validId = validateId(id);
-      // if (validId) {
       setSearchInput(id);
       return <Navigate to="/" />;
-      // }
-      // return <Navigate to="/error" />;
     }
   }
   const ref = useRef(null);
@@ -81,178 +83,183 @@ function PlaylistPage({
     );
     const currIndex = playlistDetails[findPlaylistIndex].currentIndex;
     const handleClick = (e) => {
-      switch (e.code) {
-        case 'Space': {
-          isPlaying(player.isPlaying !== true);
-          break;
-        }
-        case 'KeyR': {
-          isLoopActive(player.isLoopActive !== true);
-          break;
-        }
-        case 'KeyS': {
-          isShuffleActive(player.isShuffleActive !== true);
-          break;
-        }
-        case 'KeyM': {
-          isMutedActive(player.isMutedActive !== true);
-          break;
-        }
-        case 'ArrowUp': {
-          if (player.volume + 0.05 <= 1) {
-            setVolume(player.volume + 0.05);
-          } else {
-            setVolume(1);
+      if (e.target.nodeName.toLowerCase() !== 'input') {
+        switch (e.code) {
+          case 'Space': {
+            isPlaying(player.isPlaying !== true);
+            break;
           }
-          isMutedActive(false);
-          break;
-        }
-        case 'ArrowDown': {
-          if (player.volume - 0.05 > 0.006) {
-            setVolume(player.volume - 0.05);
-          } else {
-            isMutedActive(true);
-            setVolume(0);
+          case 'KeyR': {
+            isLoopActive(player.isLoopActive !== true);
+            break;
           }
-          break;
-        }
-        case 'ArrowLeft': {
-          if (currIndex > 0) {
-            const lastPlayedObj = {
-              currentIndex: playlistDetails[findPlaylistIndex].currentIndex - 1,
-              playlistId: player.currentActivePlaylistId,
-            };
-            lastPlayedIndexPlaylistDetails(lastPlayedObj);
-            currentSong(
-              playlistSongsById[player.currentActivePlaylistId][currIndex - 1]
-                ?.snippet.resourceId.videoId,
-            );
-            const obj = {
-              playlistId: player.currentActivePlaylistId,
-              playlistImage: `https://i.ytimg.com/vi/${
+          case 'KeyS': {
+            isShuffleActive(player.isShuffleActive !== true);
+            break;
+          }
+          case 'KeyM': {
+            isMutedActive(player.isMutedActive !== true);
+            break;
+          }
+          case 'ArrowUp': {
+            if (player.volume + 0.05 <= 1) {
+              setVolume(player.volume + 0.05);
+            } else {
+              setVolume(1);
+            }
+            isMutedActive(false);
+            break;
+          }
+          case 'ArrowDown': {
+            if (player.volume - 0.05 > 0.006) {
+              setVolume(player.volume - 0.05);
+            } else {
+              isMutedActive(true);
+              setVolume(0);
+            }
+            break;
+          }
+          case 'ArrowLeft': {
+            if (currIndex > 0) {
+              const lastPlayedObj = {
+                currentIndex:
+                  playlistDetails[findPlaylistIndex].currentIndex - 1,
+                playlistId: player.currentActivePlaylistId,
+              };
+              lastPlayedIndexPlaylistDetails(lastPlayedObj);
+              currentSong(
                 playlistSongsById[player.currentActivePlaylistId][currIndex - 1]
-                  ?.snippet.resourceId.videoId
-              }/mqdefault.jpg`,
-            };
-            setPlaylistImage(obj);
+                  ?.snippet.resourceId.videoId,
+              );
+              const obj = {
+                playlistId: player.currentActivePlaylistId,
+                playlistImage: `https://i.ytimg.com/vi/${
+                  playlistSongsById[player.currentActivePlaylistId][
+                    currIndex - 1
+                  ]?.snippet.resourceId.videoId
+                }/mqdefault.jpg`,
+              };
+              setPlaylistImage(obj);
+            }
+            break;
           }
-          break;
-        }
-        case 'ArrowRight': {
-          if (
-            currIndex <
-            playlistSongsById[player.currentActivePlaylistId].length - 1
-          ) {
-            const lastPlayedObj = {
-              currentIndex: playlistDetails[findPlaylistIndex].currentIndex + 1,
-              playlistId: player.currentActivePlaylistId,
-            };
-            lastPlayedIndexPlaylistDetails(lastPlayedObj);
-            currentSong(
-              playlistSongsById[player.currentActivePlaylistId][currIndex + 1]
-                ?.snippet.resourceId.videoId,
-            );
-            const obj = {
-              playlistId: player.currentActivePlaylistId,
-              playlistImage: `https://i.ytimg.com/vi/${
+          case 'ArrowRight': {
+            if (
+              currIndex <
+              playlistSongsById[player.currentActivePlaylistId].length - 1
+            ) {
+              const lastPlayedObj = {
+                currentIndex:
+                  playlistDetails[findPlaylistIndex].currentIndex + 1,
+                playlistId: player.currentActivePlaylistId,
+              };
+              lastPlayedIndexPlaylistDetails(lastPlayedObj);
+              currentSong(
                 playlistSongsById[player.currentActivePlaylistId][currIndex + 1]
-                  ?.snippet.resourceId.videoId
-              }/mqdefault.jpg`,
-            };
-            setPlaylistImage(obj);
-          } else if (
-            playlistDetails[findPlaylistIndex].currentIndex ===
-            playlistSongsById[player.currentActivePlaylistId].length - 1
-          ) {
-            // empty
+                  ?.snippet.resourceId.videoId,
+              );
+              const obj = {
+                playlistId: player.currentActivePlaylistId,
+                playlistImage: `https://i.ytimg.com/vi/${
+                  playlistSongsById[player.currentActivePlaylistId][
+                    currIndex + 1
+                  ]?.snippet.resourceId.videoId
+                }/mqdefault.jpg`,
+              };
+              setPlaylistImage(obj);
+            } else if (
+              playlistDetails[findPlaylistIndex].currentIndex ===
+              playlistSongsById[player.currentActivePlaylistId].length - 1
+            ) {
+              // empty
+            }
+            break;
           }
-          break;
+          case 'Numpad0': {
+            setSeekKeyboard(0);
+            break;
+          }
+          case 'Numpad1': {
+            setSeekKeyboard(0.1);
+            break;
+          }
+          case 'Numpad2': {
+            setSeekKeyboard(0.2);
+            break;
+          }
+          case 'Numpad3': {
+            setSeekKeyboard(0.3);
+            break;
+          }
+          case 'Numpad4': {
+            setSeekKeyboard(0.4);
+            break;
+          }
+          case 'Numpad5': {
+            setSeekKeyboard(0.5);
+            break;
+          }
+          case 'Numpad6': {
+            setSeekKeyboard(0.6);
+            break;
+          }
+          case 'Numpad7': {
+            setSeekKeyboard(0.7);
+            break;
+          }
+          case 'Numpad8': {
+            setSeekKeyboard(0.8);
+            break;
+          }
+          case 'Numpad9': {
+            setSeekKeyboard(0.9);
+            break;
+          }
+          case 'Digit0': {
+            setSeekKeyboard(0);
+            break;
+          }
+          case 'Digit1': {
+            setSeekKeyboard(0.1);
+            break;
+          }
+          case 'Digit2': {
+            setSeekKeyboard(0.2);
+            break;
+          }
+          case 'Digit3': {
+            setSeekKeyboard(0.3);
+            break;
+          }
+          case 'Digit4': {
+            setSeekKeyboard(0.4);
+            break;
+          }
+          case 'Digit5': {
+            setSeekKeyboard(0.5);
+            break;
+          }
+          case 'Digit6': {
+            setSeekKeyboard(0.6);
+            break;
+          }
+          case 'Digit7': {
+            setSeekKeyboard(0.7);
+            break;
+          }
+          case 'Digit8': {
+            setSeekKeyboard(0.8);
+            break;
+          }
+          case 'Digit9': {
+            setSeekKeyboard(0.9);
+            break;
+          }
+          default:
+            break;
         }
-        case 'Numpad0': {
-          setSeekKeyboard(0);
-          break;
-        }
-        case 'Numpad1': {
-          setSeekKeyboard(0.1);
-          break;
-        }
-        case 'Numpad2': {
-          setSeekKeyboard(0.2);
-          break;
-        }
-        case 'Numpad3': {
-          setSeekKeyboard(0.3);
-          break;
-        }
-        case 'Numpad4': {
-          setSeekKeyboard(0.4);
-          break;
-        }
-        case 'Numpad5': {
-          setSeekKeyboard(0.5);
-          break;
-        }
-        case 'Numpad6': {
-          setSeekKeyboard(0.6);
-          break;
-        }
-        case 'Numpad7': {
-          setSeekKeyboard(0.7);
-          break;
-        }
-        case 'Numpad8': {
-          setSeekKeyboard(0.8);
-          break;
-        }
-        case 'Numpad9': {
-          setSeekKeyboard(0.9);
-          break;
-        }
-        case 'Digit0': {
-          setSeekKeyboard(0);
-          break;
-        }
-        case 'Digit1': {
-          setSeekKeyboard(0.1);
-          break;
-        }
-        case 'Digit2': {
-          setSeekKeyboard(0.2);
-          break;
-        }
-        case 'Digit3': {
-          setSeekKeyboard(0.3);
-          break;
-        }
-        case 'Digit4': {
-          setSeekKeyboard(0.4);
-          break;
-        }
-        case 'Digit5': {
-          setSeekKeyboard(0.5);
-          break;
-        }
-        case 'Digit6': {
-          setSeekKeyboard(0.6);
-          break;
-        }
-        case 'Digit7': {
-          setSeekKeyboard(0.7);
-          break;
-        }
-        case 'Digit8': {
-          setSeekKeyboard(0.8);
-          break;
-        }
-        case 'Digit9': {
-          setSeekKeyboard(0.9);
-          break;
-        }
-        default:
-          break;
       }
     };
-
     const element = ref.current;
 
     element.addEventListener('keydown', handleClick, { passive: true });
@@ -267,7 +274,6 @@ function PlaylistPage({
       ref={ref}
       // eslint-disable-next-line
       tabIndex={0}
-      // passive="true"
       className="h-screen min-h-screen transition-colors bg-backColor image:bg-[unset] focus:outline-none "
     >
       <HelmetHelper
@@ -280,11 +286,12 @@ function PlaylistPage({
       <div className=" h-full flex flex-col overflow-hidden  md:block  items-center md:mx-auto">
         <Navbar />
 
-        <div className="h-1/5 mb-2 w-full  md:float-left md:w-3/5 md:h-[68%]">
+        <div className="h-1/5  w-full  md:float-left md:w-3/5 md:h-[70%]">
           <PlaylistInfo />
           <Player />
         </div>
-        <div className="w-10/12 h-full  mt-9 md:mt-8 md:float-right md:w-2/5  md:h-[68%] ">
+        <div className="w-10/12 h-full  mt-12 md:mt-8 mb-2    md:float-right md:w-2/5  md:h-[69%] flex flex-col ">
+          <SearchSongs />
           <List />
         </div>
         <div className="w-11/12  md:w-full md:clear-both md:absolute md:bottom-0 md:flex md:left-0 md:right-0">
@@ -332,6 +339,7 @@ PlaylistPage.propTypes = {
   setCurrentActivePlaylistId: PropTypes.func.isRequired,
   setPlaylistImage: PropTypes.func.isRequired,
   setSearchInput: PropTypes.func.isRequired,
+  setWordsToSearch: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = {
@@ -346,6 +354,7 @@ const mapDispatchToProps = {
   setCurrentActivePlaylistId,
   setPlaylistImage,
   setSearchInput,
+  setWordsToSearch,
 };
 
 const mapStateToProps = (state) => ({
