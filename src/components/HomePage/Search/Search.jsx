@@ -197,7 +197,9 @@ function Search({
             </a>
             &nbsp;or Enter a playlist URL or ID:
           </p>
+          
         )}
+        <p className='text-textColor font-open text-sm'>If you have a problem loading the playlist click on the page title</p>
 
         <div className="w-full flex my-2 justify-between">
           <input
