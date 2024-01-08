@@ -9,8 +9,11 @@ import PlaylistPage from './components/PlaylistPage/PlaylistPage';
 import './app.css';
 import ErrorPage from './components/ErrorPage/ErrorPage';
 import AboutPage from './components/AboutPage/AboutPage';
-
-function App({ player }) {
+import { setWordsToSearch } from './redux/actions/playerActions';
+function App({ player, setWordsToSearch }) {
+  useEffect(() => {
+    setWordsToSearch('');
+  },[])
   const ref = useRef(null);
   const coverImage = `https://i.ytimg.com/vi/${player.currentSong}/hqdefault.jpg`;
   useEffect(() => {
@@ -47,7 +50,9 @@ App.propTypes = {
   player: PropTypes.shape({
     currentSong: PropTypes.string.isRequired,
     theme: PropTypes.string.isRequired,
+    searchWords: PropTypes.string.isRequired,
   }).isRequired,
+  setWordsToSearch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -56,4 +61,8 @@ const mapStateToProps = (state) => ({
   playlistDetails: state.playlistDetails,
 });
 
-export default connect(mapStateToProps, null)(App);
+const mapDispatchToProps = {
+  setWordsToSearch
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
