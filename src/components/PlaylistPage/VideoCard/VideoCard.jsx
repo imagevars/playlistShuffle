@@ -221,7 +221,7 @@ function VideoCard({
         {({ index, theKey, style }) => (
           <button
             type="button"
-            className="w-full my-1"
+            className="w-full my-1 cursor-default"
             style={style}
             title={
               playlistSongsById[player.currentActivePlaylistId][index].snippet

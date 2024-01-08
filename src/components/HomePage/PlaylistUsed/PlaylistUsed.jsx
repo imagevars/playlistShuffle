@@ -123,12 +123,12 @@ function PlaylistUsed({
 
   const playlists = playlistDetails.map((element) => (
     <div
-      className="playlistUsedList flex justify-between cursor-pointer  my-2 mx-2 rounded-lg text-bgWhite  bg-primary image:bg-primary/60 hover:bg-secondary hover:image:bg-primary/80"
+      className="playlistUsedList flex justify-between   my-2 mx-2 rounded-lg text-bgWhite  bg-primary image:bg-primary/60 hover:bg-secondary hover:image:bg-primary/80"
       key={element.playlistId}
     >
       <button
         type="button"
-        className="flex w-4/6"
+        className="flex w-4/6 cursor-default"
         onClick={() => handleClickPlaylist(element.playlistId)}
       >
         <img
