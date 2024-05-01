@@ -277,6 +277,7 @@ function PlaylistPage({
       className="h-screen min-h-screen transition-colors bg-backColor image:bg-[unset] focus:outline-none "
     >
       <HelmetHelper
+        percentage={player.videoPercentage}
         title={
           currentVideoName
             ? `${currentVideoName} - Playlist Shuffle`
@@ -318,6 +319,7 @@ PlaylistPage.propTypes = {
     isMutedActive: PropTypes.bool.isRequired,
     volume: PropTypes.number.isRequired,
     theme: PropTypes.string.isRequired,
+    videoPercentage: PropTypes.number.isRequired,
   }).isRequired,
   isLoopActive: PropTypes.func.isRequired,
   isShuffleActive: PropTypes.func.isRequired,

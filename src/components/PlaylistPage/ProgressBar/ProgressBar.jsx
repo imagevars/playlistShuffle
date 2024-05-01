@@ -30,13 +30,13 @@ function ProgressBar({
   };
 
   const handleChange = (e) => {
-    setProgress(Math.floor(e.target.value * player.videoDuration));
+    setProgress(Math.ceil(e.target.value * player.videoDuration));
     setSeekTo(parseFloat(e.target.value));
     setPercentage(
-      (Math.floor(e.target.value * player.videoDuration) /
+      parseInt((Math.ceil(e.target.value * player.videoDuration) /
         player.videoDuration) *
         100,
-    );
+        ));
   };
 
   const handleMouseDown = () => {

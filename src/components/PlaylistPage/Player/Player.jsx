@@ -163,13 +163,13 @@ function Player({
     setPlaylistImage(obj);
   };
   const getPercentage = (a, b) => {
-    const trimmedA = Math.floor(a);
+    const trimmedA = Math.ceil(a);
     const percentage = (trimmedA / b) * 100;
-    setPercentage(Math.floor(percentage));
+    setPercentage(Math.ceil(parseInt(percentage)));
   };
 
   const handleProgress = (e) => {
-    setProgress(Math.floor(e.playedSeconds));
+    setProgress(Math.ceil(e.playedSeconds));
     getPercentage(e.playedSeconds, player.videoDuration);
   };
 
