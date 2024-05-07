@@ -95,7 +95,7 @@ const MediaButtons = memo(
     };
 
     return (
-      <div className="flex justify-center w-[95%]">
+      <div className="flex justify-center w-full">
         {player.isLoopActive === true ? (
           <button
             type="button"

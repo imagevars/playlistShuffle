@@ -21,7 +21,7 @@ function SearchSongs({ setWordsToSearch, player }) {
         value={player.searchWords}
         type="text"
         placeholder="Search"
-        className="inputSearch w-full md:w-[90%]  py-2 mx-auto px-2 bg-backColor image:bg-[unset] text-textColor text-center md:text-left rounded-md font-open focus:outline-double focus:outline-secondary pr-10 md:mr-0.5 md:mx-4 text-base"
+        className="inputSearch w-full md:w-[90%]  py-2 mx-auto px-2 bg-backColor image:bg-[unset] text-textColor text-center md:text-left rounded-md font-open focus:outline-double focus:outline-secondary pr-10 md:mr-0.5 md:mx-4 text-base pl-10 md:pl-2"
       />
       {player.searchWords.length ? (
         <button
