@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -262,17 +262,19 @@ function PlaylistPage({
     };
     const element = ref.current;
 
+    element.focus()
     element.addEventListener('keydown', handleClick, { passive: true });
 
     return () => {
       element.removeEventListener('keydown', handleClick, { passive: true });
     };
   }, [player]);
-
+  
   return (
     <div
       ref={ref}
       // eslint-disable-next-line
+
       tabIndex={0}
       className="h-screen min-h-screen transition-colors bg-backColor image:bg-[unset] focus:outline-none "
     >
@@ -363,7 +365,6 @@ const mapStateToProps = (state) => ({
   player: state.player,
   playlistSongsById: state.playlistSongsById,
   playlistDetails: state.playlistDetails,
-  // homepage: state.homepage,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlaylistPage);
