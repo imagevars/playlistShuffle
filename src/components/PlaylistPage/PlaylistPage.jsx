@@ -262,7 +262,6 @@ function PlaylistPage({
     };
     const element = ref.current;
 
-    element.focus()
     element.addEventListener('keydown', handleClick, { passive: true });
 
     return () => {
