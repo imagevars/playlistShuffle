@@ -46,6 +46,7 @@ function PlaylistPage({
   setSearchInput,
   setWordsToSearch,
 }) {
+
   const { id } = useParams();
   let findPlaylistIndex = playlistDetails.findIndex(
     (element) => element.playlistId === player.currentActivePlaylistId,
@@ -83,6 +84,7 @@ function PlaylistPage({
     );
     const currIndex = playlistDetails[findPlaylistIndex].currentIndex;
     const handleClick = (e) => {
+
       if (e.target.nodeName.toLowerCase() !== 'input') {
         switch (e.code) {
           case 'Space': {
@@ -261,7 +263,10 @@ function PlaylistPage({
       }
     };
     const element = ref.current;
+    if (document.activeElement.tagName !== 'INPUT') {
+    element.focus()
 
+    }
     element.addEventListener('keydown', handleClick, { passive: true });
 
     return () => {
