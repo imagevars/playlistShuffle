@@ -263,7 +263,7 @@ function PlaylistPage({
       }
     };
     const element = ref.current;
-    if (document.activeElement.tagName !== 'INPUT') {
+    if (document.activeElement.tagName !== 'INPUT' && document.activeElement.id !== 'widget2') {
     element.focus()
 
     }
