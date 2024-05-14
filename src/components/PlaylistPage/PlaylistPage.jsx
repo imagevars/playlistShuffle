@@ -1,9 +1,10 @@
-import React, { useEffect, useRef, useCallback } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import HelmetHelper from '../Helmet/HelmetHelper';
 import List from './VideoCard/List';
+import useDocumentVisibility from '../../hooks/visibility'
 import MediaButtons from './MediaButtons/MediaButtons';
 import {
   isPlaying,
@@ -54,6 +55,7 @@ function PlaylistPage({
   useEffect(() => {
     setWordsToSearch('');
   }, []);
+  const isDocumentVisible = useDocumentVisibility();
 
   if (player.currentActivePlaylistId !== id) {
     const doesPlExist = playlistDetails.findIndex(
@@ -77,6 +79,7 @@ function PlaylistPage({
     playlistSongsById[player.currentActivePlaylistId][
       playlistDetails[findPlaylistIndex].currentIndex
     ].snippet.title;
+
 
   useEffect(() => {
     const findPlaylistIndex = playlistDetails.findIndex(
@@ -262,8 +265,9 @@ function PlaylistPage({
         }
       }
     };
+
     const element = ref.current;
-    if (document.activeElement.tagName !== 'INPUT' && document.activeElement.id !== 'widget2') {
+    if (document.activeElement.tagName !== 'INPUT' && document.activeElement.id !== 'widget2' | isDocumentVisible === false) {
     element.focus()
 
     }
