@@ -103,7 +103,7 @@ function Navbar({
                 >
                   <img
                     className="my-auto"
-                    src="./assets/images/white-button.png"
+                    src="./assets/images/bmc-button.png"
                     alt="Buy me a Coffee"
                   />
                 </a>
@@ -130,7 +130,7 @@ function Navbar({
                 >
                   <img
                     className="my-auto"
-                    src="./assets/images/white-button.png"
+                    src="./assets/images/bmc-button.png"
                     alt="Buy me a Coffee"
                   />
                 </a>
@@ -157,7 +157,7 @@ function Navbar({
                 >
                   <img
                     className="my-auto"
-                    src="./assets/images/black-button.png"
+                    src="./assets/images/bmc-button.png"
                     alt="Buy me a Coffee"
                   />
                 </a>

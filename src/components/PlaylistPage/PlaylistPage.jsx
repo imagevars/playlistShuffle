@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import HelmetHelper from '../Helmet/HelmetHelper';
 import List from './VideoCard/List';
-import useDocumentVisibility from '../../hooks/visibility'
+import useDocumentVisibility from '../../hooks/visibility';
 import MediaButtons from './MediaButtons/MediaButtons';
 import {
   isPlaying,
@@ -47,7 +47,6 @@ function PlaylistPage({
   setSearchInput,
   setWordsToSearch,
 }) {
-
   const { id } = useParams();
   let findPlaylistIndex = playlistDetails.findIndex(
     (element) => element.playlistId === player.currentActivePlaylistId,
@@ -80,14 +79,12 @@ function PlaylistPage({
       playlistDetails[findPlaylistIndex].currentIndex
     ].snippet.title;
 
-
   useEffect(() => {
     const findPlaylistIndex = playlistDetails.findIndex(
       (element) => element.playlistId === player.currentActivePlaylistId,
     );
     const currIndex = playlistDetails[findPlaylistIndex].currentIndex;
     const handleClick = (e) => {
-
       if (e.target.nodeName.toLowerCase() !== 'input') {
         switch (e.code) {
           case 'Space': {
@@ -267,9 +264,12 @@ function PlaylistPage({
     };
 
     const element = ref.current;
-    if (document.activeElement.tagName !== 'INPUT' && document.activeElement.id !== 'widget2' | isDocumentVisible === false) {
-    element.focus()
-
+    if (
+      (document.activeElement.tagName !== 'INPUT' &&
+        document.activeElement.id !== 'widget2') ||
+      isDocumentVisible === false
+    ) {
+      element.focus();
     }
     element.addEventListener('keydown', handleClick, { passive: true });
 
@@ -277,12 +277,11 @@ function PlaylistPage({
       element.removeEventListener('keydown', handleClick, { passive: true });
     };
   }, [player]);
-  
+
   return (
     <div
       ref={ref}
       // eslint-disable-next-line
-
       tabIndex={0}
       className="h-screen min-h-screen transition-colors bg-backColor image:bg-[unset] focus:outline-none "
     >
