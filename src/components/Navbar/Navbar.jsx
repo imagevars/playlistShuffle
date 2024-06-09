@@ -94,17 +94,16 @@ function Navbar({
         <div className="flex flex-row mr-2">
           {player.theme === 'image' && (
             <div className="flex">
-              <div className="w-32 mx-4 flex justify-evenly flex-row hover:scale-105  active:scale-110 rounded-md">
+              <div className="w-44 mx-4 flex justify-evenly flex-row hover:scale-105  active:scale-110 rounded-md my-auto">
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="buymeacoffee link"
                   href="https://www.buymeacoffee.com/playlistshuffle"
+                  aria-label="buy me a coffee link"
                 >
                   <img
-                    className="my-auto"
-                    src="./assets/images/bmc-button.png"
-                    alt="Buy me a Coffee"
+                    src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=playlistshuffle&button_colour=e94747&font_colour=ffffff&font_family=Lato&outline_colour=000000&coffee_colour=FFDD00"
+                    alt="buy me a coffee button"
                   />
                 </a>
               </div>
@@ -121,17 +120,16 @@ function Navbar({
           )}
           {player.theme === 'dark' && (
             <div className="flex">
-              <div className="w-32 mx-4 flex justify-evenly flex-row hover:scale-105  active:scale-110 rounded-md">
+              <div className="w-44 mx-4 flex justify-evenly flex-row hover:scale-105  active:scale-110 rounded-md my-auto">
                 <a
+                  href="https://www.buymeacoffee.com/playlistshuffle"
+                  aria-label="buy me a coffee link"
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="buymeacoffee link"
-                  href="https://www.buymeacoffee.com/playlistshuffle"
                 >
                   <img
-                    className="my-auto"
-                    src="./assets/images/bmc-button.png"
-                    alt="Buy me a Coffee"
+                    src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=playlistshuffle&button_colour=008BA7&font_colour=ffffff&font_family=Lato&outline_colour=000000&coffee_colour=FFDD00"
+                    alt="buy me a coffee button"
                   />
                 </a>
               </div>
@@ -148,17 +146,16 @@ function Navbar({
           )}
           {player.theme === 'light' && (
             <div className="flex">
-              <div className="w-32 mx-4 flex justify-evenly flex-row hover:scale-105  active:scale-110 rounded-md">
+              <div className="w-44 mx-4 flex justify-evenly flex-row hover:scale-105  active:scale-110 rounded-md my-auto">
                 <a
+                  href="https://www.buymeacoffee.com/playlistshuffle"
+                  aria-label="buy me a coffee link"
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="buymeacoffee link"
-                  href="https://www.buymeacoffee.com/playlistshuffle"
                 >
                   <img
-                    className="my-auto"
-                    src="./assets/images/bmc-button.png"
-                    alt="Buy me a Coffee"
+                    src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=playlistshuffle&button_colour=006868&font_colour=ffffff&font_family=Lato&outline_colour=000000&coffee_colour=FFDD00"
+                    alt="buy me a coffee button"
                   />
                 </a>
               </div>

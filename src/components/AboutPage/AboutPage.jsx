@@ -1,7 +1,7 @@
-import React from "react";
-import { connect } from "react-redux";
-import Navbar from "../Navbar/Navbar";
-import Footer from "../Footer/Footer";
+import React from 'react';
+import { connect } from 'react-redux';
+import Navbar from '../Navbar/Navbar';
+import Footer from '../Footer/Footer';
 
 function AboutPage() {
   const deleteLocalStorage = () => {
@@ -24,19 +24,8 @@ function AboutPage() {
             </button>
           </p>
           <p className="font-open mx-4 my-2 list-disc">
-            If you like the page, don&apos;t forget to give a star ★ to the
-            GitHub
-            <a
-              className="text-primary  font-semibold font-open hover:scale-110"
-              href="https://github.com/jooonathann/playlistShuffle"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="github link"
-            >
-              {" "}
-              repository.
-            </a>
-            &nbsp;It&apos;s free
+            If you are enjoying the site, you can support it by buying me a
+            coffee. Thank you!
           </p>
           <p className="font-open mx-4 my-2">
             I created this because the shuffle algorithm on YouTube doesn&apos;t

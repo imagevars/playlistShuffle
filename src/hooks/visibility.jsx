@@ -1,4 +1,5 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect } from 'react';
+
 function useDocumentVisibility() {
   const [isDocumentVisible, setIsDocumentVisible] = useState(!document.hidden);
 
@@ -17,4 +18,4 @@ function useDocumentVisibility() {
   return useMemo(() => isDocumentVisible, [isDocumentVisible]);
 }
 
-export default useDocumentVisibility
+export default useDocumentVisibility;

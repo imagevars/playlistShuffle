@@ -147,6 +147,7 @@ function PlaylistUsed({
           <div className="group relative w-max my-auto">
             <button
               type="button"
+              aria-label="update playlist"
               className="text-white mx-0.5 active:scale-110"
               onClick={() => handleUpdate(element.playlistId)}
             >
@@ -162,6 +163,7 @@ function PlaylistUsed({
         <div className="group relative w-max my-auto">
           <button
             type="button"
+            aria-label="sort playlist"
             onClick={() => handleSortClick(element.playlistId)}
             className="text-bgWhite dark:text-bgWhite mx-0.5 active:scale-110"
           >
@@ -174,6 +176,7 @@ function PlaylistUsed({
         <div className="group relative w-max my-auto">
           <button
             type="button"
+            aria-label="delete playlist"
             className=" text-bgWhite dark:text-bgWhite mx-0.5 active:scale-110"
             onClick={() => handleDeleteFromPlaylist(element.playlistId)}
           >

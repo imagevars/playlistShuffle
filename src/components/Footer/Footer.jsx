@@ -1,16 +1,12 @@
-import React from "react";
-import GitHubButton from "react-github-btn";
-import { useNavigate } from "react-router-dom";
-import {
-  AiFillGithub,
-  AiOutlineTwitter,
-  AiFillInfoCircle,
-} from "react-icons/ai";
+import React from 'react';
+import GitHubButton from 'react-github-btn';
+import { useNavigate } from 'react-router-dom';
+import { AiFillInfoCircle } from 'react-icons/ai';
 
 function Footer() {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate("/about");
+    navigate('/about');
   };
 
   return (
