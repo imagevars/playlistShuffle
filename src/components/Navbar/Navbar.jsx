@@ -101,10 +101,7 @@ function Navbar({
                   href="https://www.buymeacoffee.com/playlistshuffle"
                   aria-label="buy me a coffee link"
                 >
-                  <img
-                    src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=playlistshuffle&button_colour=e94747&font_colour=ffffff&font_family=Lato&outline_colour=000000&coffee_colour=FFDD00"
-                    alt="buy me a coffee button"
-                  />
+                  <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=playlistshuffle&button_colour=e94747&font_colour=ffffff&font_family=Lato&outline_colour=000000&coffee_colour=FFDD00" />
                 </a>
               </div>
               <div className="my-auto mr-1">
@@ -127,10 +124,7 @@ function Navbar({
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <img
-                    src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=playlistshuffle&button_colour=008BA7&font_colour=ffffff&font_family=Lato&outline_colour=000000&coffee_colour=FFDD00"
-                    alt="buy me a coffee button"
-                  />
+                  <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=playlistshuffle&button_colour=008BA7&font_colour=ffffff&font_family=Lato&outline_colour=000000&coffee_colour=FFDD00" />
                 </a>
               </div>
               <div className="my-auto mr-1">
@@ -153,10 +147,7 @@ function Navbar({
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <img
-                    src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=playlistshuffle&button_colour=006868&font_colour=ffffff&font_family=Lato&outline_colour=000000&coffee_colour=FFDD00"
-                    alt="buy me a coffee button"
-                  />
+                  <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=playlistshuffle&button_colour=006868&font_colour=ffffff&font_family=Lato&outline_colour=000000&coffee_colour=FFDD00" />
                 </a>
               </div>
               <div className="my-auto mr-1">
