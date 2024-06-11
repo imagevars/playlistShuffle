@@ -24,8 +24,18 @@ function AboutPage() {
             </button>
           </p>
           <p className="font-open mx-4 my-2 list-disc">
-            If you are enjoying the site, you can support it by buying me a
-            coffee. Thank you!
+            If you are enjoying the site, you can support it by buying me
+            a&nbsp;
+            <a
+              aria-label="buy me a coffee link"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary"
+              href="https://buymeacoffee.com/playlistshuffle"
+            >
+              coffee
+            </a>
+            . Thank you!
           </p>
           <p className="font-open mx-4 my-2">
             I created this because the shuffle algorithm on YouTube doesn&apos;t
