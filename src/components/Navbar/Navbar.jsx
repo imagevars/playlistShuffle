@@ -104,6 +104,7 @@ function Navbar({
                   <img
                     src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=playlistshuffle&button_colour=e94747&font_colour=ffffff&font_family=Lato&outline_colour=000000&coffee_colour=FFDD00"
                     alt="buy me a coffee button"
+                    className="h-[37px]"
                   />
                 </a>
               </div>
@@ -130,6 +131,7 @@ function Navbar({
                   <img
                     src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=playlistshuffle&button_colour=008BA7&font_colour=ffffff&font_family=Lato&outline_colour=000000&coffee_colour=FFDD00"
                     alt="buy me a coffee button"
+                    className="h-[37px]"
                   />
                 </a>
               </div>
@@ -156,6 +158,7 @@ function Navbar({
                   <img
                     src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=playlistshuffle&button_colour=006868&font_colour=ffffff&font_family=Lato&outline_colour=000000&coffee_colour=FFDD00"
                     alt="buy me a coffee button"
+                    className="h-[37px]"
                   />
                 </a>
               </div>
