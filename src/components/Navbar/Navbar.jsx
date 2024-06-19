@@ -102,7 +102,7 @@ function Navbar({
                   aria-label="buy me a coffee link"
                 >
                   <img
-                    src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=playlistshuffle&button_colour=e94747&font_colour=ffffff&font_family=Lato&outline_colour=000000&coffee_colour=FFDD00"
+                    src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=playlistshuffle&button_colour=E94747&font_colour=FFFFFF&font_family=Lato&outline_colour=000000&coffee_colour=FFDD00"
                     alt="buy me a coffee button"
                     className="h-[37px]"
                   />
@@ -129,7 +129,7 @@ function Navbar({
                   rel="noopener noreferrer"
                 >
                   <img
-                    src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=playlistshuffle&button_colour=008BA7&font_colour=ffffff&font_family=Lato&outline_colour=000000&coffee_colour=FFDD00"
+                    src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=playlistshuffle&button_colour=008BA7&font_colour=FFFFFF&font_family=Lato&outline_colour=000000&coffee_colour=FFDD00"
                     alt="buy me a coffee button"
                     className="h-[37px]"
                   />
@@ -156,7 +156,7 @@ function Navbar({
                   rel="noopener noreferrer"
                 >
                   <img
-                    src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=playlistshuffle&button_colour=006868&font_colour=ffffff&font_family=Lato&outline_colour=000000&coffee_colour=FFDD00"
+                    src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=playlistshuffle&button_colour=006868&font_colour=FFFFFF&font_family=Lato&outline_colour=000000&coffee_colour=FFDD00"
                     alt="buy me a coffee button"
                     className="h-[37px]"
                   />
