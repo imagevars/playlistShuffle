@@ -10,10 +10,11 @@ import './app.css';
 import ErrorPage from './components/ErrorPage/ErrorPage';
 import AboutPage from './components/AboutPage/AboutPage';
 import { setWordsToSearch } from './redux/actions/playerActions';
+
 function App({ player, setWordsToSearch }) {
   useEffect(() => {
     setWordsToSearch('');
-  },[])
+  }, []);
   const ref = useRef(null);
   const coverImage = `https://i.ytimg.com/vi/${player.currentSong}/hqdefault.jpg`;
   useEffect(() => {
@@ -62,7 +63,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  setWordsToSearch
+  setWordsToSearch,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

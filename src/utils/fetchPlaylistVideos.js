@@ -1,28 +1,28 @@
-import axios from "axios";
+import axios from 'axios';
 
 export default async function fetchPlaylistVideos(id, etag) {
   const responseArr = [];
-  const baseApiUrl = "https://www.googleapis.com/youtube/v3";
-  const apiKey = "AIzaSyBgcvba5FQ3KQfEeiJOAZwh4Br4uh_EwdI";
-  let responseEtag = "";
+  const baseApiUrl = 'https://www.googleapis.com/youtube/v3';
+  const apiKey = 'AIzaSyDF6ZGCNQ0oWuyIVcu7LMqzPfy6Df6ZlQI';
+  let responseEtag = '';
   try {
-    let nextToken = "";
+    let nextToken = '';
     let timesInLoop = 0;
     let totalVideos = 0;
     do {
       /* eslint-disable no-await-in-loop */
       const responseListItems = await axios.get(`${baseApiUrl}/playlistItems`, {
         headers: {
-          "If-None-Match": etag,
+          'If-None-Match': etag,
         },
         params: {
-          part: "snippet",
+          part: 'snippet',
           maxResults: 50,
           key: apiKey,
           pageToken: nextToken,
           playlistId: id,
           fields:
-            "etag,nextPageToken,items(snippet(title,videoOwnerChannelTitle,position, resourceId(videoId))),pageInfo",
+            'etag,nextPageToken,items(snippet(title,videoOwnerChannelTitle,position, resourceId(videoId))),pageInfo',
         },
       });
       responseArr.push(...responseListItems.data.items);
@@ -31,12 +31,12 @@ export default async function fetchPlaylistVideos(id, etag) {
       if (timesInLoop >= Math.ceil(totalVideos / 50)) {
         break;
       }
-      if (responseEtag === "") {
+      if (responseEtag === '') {
         responseEtag = responseListItems.data.etag;
       }
       if (responseListItems.data.nextPageToken) {
         nextToken = responseListItems.data.nextPageToken;
-      } else nextToken = "";
+      } else nextToken = '';
     } while (nextToken);
   } catch (error) {
     if (error.response === undefined) {
@@ -55,7 +55,7 @@ export default async function fetchPlaylistVideos(id, etag) {
       return 404;
     }
     // eslint-disable-next-line
-    console.log("Error ", error.response);
+    console.log('Error ', error.response);
     return 404;
   }
   const dataReturned = {
