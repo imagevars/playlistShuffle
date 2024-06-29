@@ -3,8 +3,7 @@ import axios from 'axios';
 export default async function fetchPlaylistVideos(id, etag) {
   const responseArr = [];
   const baseApiUrl = 'https://www.googleapis.com/youtube/v3';
-  const apiKey =
-    process.env.API_KEY || 'AIzaSyDF6ZGCNQ0oWuyIVcu7LMqzPfy6Df6ZlQI';
+  const apiKey = 'AIzaSyDF6ZGCNQ0oWuyIVcu7LMqzPfy6Df6ZlQI';
   let responseEtag = '';
   try {
     let nextToken = '';
