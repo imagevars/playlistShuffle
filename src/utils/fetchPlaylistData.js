@@ -2,8 +2,7 @@ import axios from 'axios';
 
 export default async function fetchPlaylistData(id, etag) {
   const baseApiUrl = 'https://www.googleapis.com/youtube/v3';
-  const apiKey = 'AIzaSyDF6ZGCNQ0oWuyIVcu7LMqzPfy6Df6ZlQI';
-
+  const apiKey = process.env.API_KEY;
   let playlistDetailsObject = {};
   try {
     const playlistDetailsQuery = await axios.get(`${baseApiUrl}/playlists`, {

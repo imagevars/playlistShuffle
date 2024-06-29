@@ -197,7 +197,6 @@ function Search({
             </a>
             &nbsp;or Enter a playlist URL or ID:
           </p>
-          
         )}
 
         <div className="w-full flex my-2 justify-between">

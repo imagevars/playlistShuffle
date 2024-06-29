@@ -14,7 +14,7 @@ export default function validateId(str) {
   }
   if (arrayOfIds.length === 1) {
     try {
-      const [id] = arrayOfIds[0].replace(/\s/g, '').match(basicRegex);
+      const [id] = arrayOfIds[0].trim().match(basicRegex);
       if (id.match(PLRegex)) {
         const [PLId] = id.match(PLRegex);
         if (PLId.length >= minLength) {
@@ -51,7 +51,7 @@ export default function validateId(str) {
         return null;
       }
     }
-    const [id] = arrayOfIds[i].replace(/\s/g, '').match(PLRegex);
+    const [id] = arrayOfIds[i].trim().match(PLRegex);
     if (id.length < minLength) {
       return null;
     }

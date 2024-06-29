@@ -10,8 +10,16 @@ const CompressionPlugin = require('compression-webpack-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const { HotModuleReplacementPlugin } = require('webpack');
 const CopyPlugin = require('copy-webpack-plugin');
+const dotenv = require('dotenv');
+const webpack = require('webpack');
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
+const env = dotenv.config().parsed;
+
+const envKeys = Object.keys(env).reduce((prev, next) => {
+  prev[`process.env.${next}`] = JSON.stringify(env[next]);
+  return prev;
+}, {});
 module.exports = {
   mode: isDevelopment ? 'development' : 'production',
   entry: ['./src/main.jsx', './src/app.css'],
@@ -64,6 +72,7 @@ module.exports = {
       template: './index.html',
       scriptLoading: 'defer',
     }),
+    new webpack.DefinePlugin(envKeys),
     new CopyPlugin({
       patterns: [
         {
