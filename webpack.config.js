@@ -17,6 +17,7 @@ const isDevelopment = process.env.NODE_ENV !== 'production';
 const env = dotenv.config().parsed;
 
 const envKeys = Object.keys(env).reduce((prev, next) => {
+  // eslint-disable-next-line
   prev[`process.env.${next}`] = JSON.stringify(env[next]);
   return prev;
 }, {});
