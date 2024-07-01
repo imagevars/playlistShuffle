@@ -81,11 +81,11 @@ function Navbar({
   };
 
   return (
-    <div className=" w-full  px-1">
+    <div className="w-full px-1 ">
       <div className="flex justify-between w-full mx-1 my-1">
         <button type="button" onClick={handleClickHome}>
           <h1
-            className="navbar text-lg sm:text-2xl font-open text-left text-textColor font-bold cursor-pointer"
+            className="text-lg font-bold text-left cursor-pointer navbar sm:text-2xl font-open text-textColor"
             cursor="pointer"
           >
             Shuffle Playlist{' '}
@@ -94,11 +94,11 @@ function Navbar({
         <div className="flex flex-row mr-2">
           {player.theme === 'image' && (
             <div className="flex">
-              <div className="w-44 mx-4 flex justify-evenly flex-row hover:scale-105  active:scale-110 rounded-md my-auto">
+              <div className="flex flex-row mx-4 my-auto rounded-md w-44 justify-evenly hover:scale-105 active:scale-110">
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
-                  href="https://www.buymeacoffee.com/playlistshuffle"
+                  href="https://www.buymeacoffee.com/shufflePlaylist"
                   aria-label="buy me a coffee link"
                 >
                   <img
@@ -121,9 +121,9 @@ function Navbar({
           )}
           {player.theme === 'dark' && (
             <div className="flex">
-              <div className="w-44 mx-4 flex justify-evenly flex-row hover:scale-105  active:scale-110 rounded-md my-auto">
+              <div className="flex flex-row mx-4 my-auto rounded-md w-44 justify-evenly hover:scale-105 active:scale-110">
                 <a
-                  href="https://www.buymeacoffee.com/playlistshuffle"
+                  href="https://www.buymeacoffee.com/shufflePlaylist"
                   aria-label="buy me a coffee link"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -148,9 +148,9 @@ function Navbar({
           )}
           {player.theme === 'light' && (
             <div className="flex">
-              <div className="w-44 mx-4 flex justify-evenly flex-row hover:scale-105  active:scale-110 rounded-md my-auto">
+              <div className="flex flex-row mx-4 my-auto rounded-md w-44 justify-evenly hover:scale-105 active:scale-110">
                 <a
-                  href="https://www.buymeacoffee.com/playlistshuffle"
+                  href="https://www.buymeacoffee.com/shufflePlaylist"
                   aria-label="buy me a coffee link"
                   target="_blank"
                   rel="noopener noreferrer"
