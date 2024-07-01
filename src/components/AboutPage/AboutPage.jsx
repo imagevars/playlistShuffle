@@ -11,9 +11,9 @@ function AboutPage() {
   return (
     <div className="transition-colors bg-backColor image:bg-[unset] flex flex-col justify-between h-[100vh]">
       <Navbar />
-      <div className="flex justify-center items-center overflow-y-auto">
-        <div className="text-textColor text-base w-4/4 md:w-3/5 text-justify">
-          <p className="font-open mx-4 my-2">
+      <div className="flex items-center justify-center overflow-y-auto">
+        <div className="text-base text-justify text-textColor w-4/4 md:w-3/5">
+          <p className="mx-4 my-2 font-open">
             To clean the localStorage data click&nbsp;
             <button
               type="button"
@@ -23,7 +23,7 @@ function AboutPage() {
               here
             </button>
           </p>
-          <p className="font-open mx-4 my-2 list-disc">
+          <p className="mx-4 my-2 list-disc font-open">
             If you are enjoying the site, you can support it by buying me
             a&nbsp;
             <a
@@ -31,18 +31,18 @@ function AboutPage() {
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary"
-              href="https://buymeacoffee.com/playlistshuffle"
+              href="https://www.buymeacoffee.com/shufflePlaylist"
             >
               coffee
             </a>
             . Thank you!
           </p>
-          <p className="font-open mx-4 my-2">
+          <p className="mx-4 my-2 font-open">
             I created this because the shuffle algorithm on YouTube doesn&apos;t
             effectively shuffle, and the other pages I tried didn&apos;t have
             the features I was looking for.
           </p>
-          <p className="font-open mx-4 my-2">
+          <p className="mx-4 my-2 font-open">
             This page utilizes the browser&apos;s localStorage as the database.
             In my experience, it can fit at least 20000 worth of videos in
             playlist on chrome desktop, if you have an error while loading a

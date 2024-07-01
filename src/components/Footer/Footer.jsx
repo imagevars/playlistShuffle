@@ -15,14 +15,14 @@ function Footer() {
         <AiFillInfoCircle
           onClick={handleClick}
           size={30}
-          className="mx-3 my-1 text-primary cursor-pointer hover:text-secondary"
+          className="mx-3 my-1 cursor-pointer text-primary hover:text-secondary"
         />
       </div>
       <div className="flex items-center justify-center">
-        <p className="text-textColor text-center my-1 font-open">
+        <p className="my-1 text-center text-textColor font-open">
           Made with ♥ by Jonathan
         </p>
-        <div className="mx-2 items-center mt-auto mb-0">
+        <div className="items-center mx-2 mt-auto mb-0">
           <GitHubButton
             href="https://github.com/jooonathann/playlistShuffle"
             data-icon="octicon-star"
