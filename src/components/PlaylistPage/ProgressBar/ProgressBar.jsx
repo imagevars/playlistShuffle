@@ -6,6 +6,7 @@ import {
   setSeekTo,
   setSeeking,
   setProgress,
+  setReverseDuration,
 } from '../../../redux/actions/playerActions';
 
 function ProgressBar({
@@ -14,6 +15,7 @@ function ProgressBar({
   setSeeking,
   setProgress,
   setPercentage,
+  setReverseDuration,
 }) {
   const secondsToTime = (e) => {
     const h = Math.floor(e / 3600)
@@ -50,6 +52,10 @@ function ProgressBar({
     setSeekTo(parseFloat(e.target.value));
   };
 
+  const handleDurationReverse = () => {
+    console.log(!player.reverseDuration)
+    setReverseDuration(!player.reverseDuration)
+  }
   return (
     <div className="flex flex-col justify-center w-full md:mb-[-20px]">
       <input
@@ -69,12 +75,14 @@ function ProgressBar({
         onTouchEnd={handleMouseUp}
       />
       <div className="flex font-medium justify-between">
-        <div className="font-nunito text-textColor">
+        <div className="font-nunito text-textColor cursor-default">
           {secondsToTime(player.progress)}
         </div>
-        <div className="font-nunito text-textColor">
-          {secondsToTime(player.videoDuration)}
-        </div>
+        <button type="button" className="font-nunito text-textColor cursor-default" onClick={() => handleDurationReverse()}>
+          {player.reverseDuration ?
+          ( `- ${secondsToTime(player.videoDuration - player.progress)}`)
+          : (secondsToTime(player.videoDuration))}
+        </button>
       </div>
     </div>
   );
@@ -85,11 +93,13 @@ ProgressBar.propTypes = {
     videoPercentage: PropTypes.number.isRequired,
     progress: PropTypes.number.isRequired,
     videoDuration: PropTypes.number.isRequired,
+    reverseDuration: PropTypes.bool.isRequired,
   }).isRequired,
   setSeekTo: PropTypes.func,
   setSeeking: PropTypes.func.isRequired,
   setProgress: PropTypes.func.isRequired,
   setPercentage: PropTypes.func.isRequired,
+  setReverseDuration: PropTypes.func.isRequired,
 };
 
 ProgressBar.defaultProps = {
@@ -105,5 +115,33 @@ const mapDispatchToProps = {
   setSeekTo,
   setProgress,
   setSeeking,
+  setReverseDuration,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(memo(ProgressBar));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

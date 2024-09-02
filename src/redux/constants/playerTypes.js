@@ -34,3 +34,5 @@ export const PLAYER_SEEK_KEYBOARD = 'player/seekKeyboard';
 export const PLAYER_IS_PL_LOADING = 'player/isPlLoading';
 
 export const PLAYER_SEARCH_WORDS = 'player/searchWords';
+
+export const PLAYER_REVERSE_DURATION = 'player/reverseDuration';
