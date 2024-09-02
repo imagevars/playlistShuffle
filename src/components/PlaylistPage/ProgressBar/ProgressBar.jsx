@@ -6,7 +6,7 @@ import {
   setSeekTo,
   setSeeking,
   setProgress,
-  setReverseDuration,
+  setVideoCountdown,
 } from '../../../redux/actions/playerActions';
 
 function ProgressBar({
@@ -15,7 +15,7 @@ function ProgressBar({
   setSeeking,
   setProgress,
   setPercentage,
-  setReverseDuration,
+  setVideoCountdown,
 }) {
   const secondsToTime = (e) => {
     const h = Math.floor(e / 3600)
@@ -53,8 +53,7 @@ function ProgressBar({
   };
 
   const handleDurationReverse = () => {
-    console.log(!player.reverseDuration)
-    setReverseDuration(!player.reverseDuration)
+    setVideoCountdown(!player.videoCountdown)
   }
   return (
     <div className="flex flex-col justify-center w-full md:mb-[-20px]">
@@ -79,7 +78,7 @@ function ProgressBar({
           {secondsToTime(player.progress)}
         </div>
         <button type="button" className="font-nunito text-textColor cursor-default" onClick={() => handleDurationReverse()}>
-          {player.reverseDuration ?
+          {player.videoCountdown ?
           ( `- ${secondsToTime(player.videoDuration - player.progress)}`)
           : (secondsToTime(player.videoDuration))}
         </button>
@@ -93,13 +92,13 @@ ProgressBar.propTypes = {
     videoPercentage: PropTypes.number.isRequired,
     progress: PropTypes.number.isRequired,
     videoDuration: PropTypes.number.isRequired,
-    reverseDuration: PropTypes.bool.isRequired,
+    videoCountdown: PropTypes.bool.isRequired,
   }).isRequired,
   setSeekTo: PropTypes.func,
   setSeeking: PropTypes.func.isRequired,
   setProgress: PropTypes.func.isRequired,
   setPercentage: PropTypes.func.isRequired,
-  setReverseDuration: PropTypes.func.isRequired,
+  setVideoCountdown: PropTypes.func.isRequired,
 };
 
 ProgressBar.defaultProps = {
@@ -115,7 +114,7 @@ const mapDispatchToProps = {
   setSeekTo,
   setProgress,
   setSeeking,
-  setReverseDuration,
+  setVideoCountdown,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(memo(ProgressBar));
 

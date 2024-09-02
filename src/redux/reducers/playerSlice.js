@@ -39,7 +39,7 @@ const initialState = {
   seekKeyboard: 0,
   title: '',
   artist: '',
-  reverseDuration: false,
+  videoCountdown: false,
 };
 
 export default function playerReducer(state = initialState, action) {
@@ -97,7 +97,7 @@ export default function playerReducer(state = initialState, action) {
       return { ...state, searchWords: action.payload };
     }
     case PLAYER_REVERSE_DURATION: {
-      return { ...state, reverseDuration: action.payload};
+      return { ...state, videoCountdown: action.payload};
     }
     default:
       return state;

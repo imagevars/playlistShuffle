@@ -107,7 +107,7 @@ export const setWordsToSearch = (payload) => ({
   payload,
 });
 
-export const setReverseDuration = (payload) => ({
+export const setVideoCountdown = (payload) => ({
   type: PLAYER_REVERSE_DURATION,
   payload,
 });
