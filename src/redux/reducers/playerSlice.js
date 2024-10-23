@@ -17,6 +17,7 @@ import {
   PLAYER_SEEK_KEYBOARD,
   PLAYER_IS_PL_LOADING,
   PLAYER_SEARCH_WORDS,
+  PLAYER_REVERSE_DURATION,
 } from '../constants/playerTypes';
 
 const initialState = {
@@ -38,6 +39,7 @@ const initialState = {
   seekKeyboard: 0,
   title: '',
   artist: '',
+  videoCountdown: false,
 };
 
 export default function playerReducer(state = initialState, action) {
@@ -93,6 +95,9 @@ export default function playerReducer(state = initialState, action) {
     }
     case PLAYER_SEARCH_WORDS: {
       return { ...state, searchWords: action.payload };
+    }
+    case PLAYER_REVERSE_DURATION: {
+      return { ...state, videoCountdown: action.payload};
     }
     default:
       return state;
