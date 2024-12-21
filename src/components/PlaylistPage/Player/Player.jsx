@@ -154,7 +154,7 @@ function Player({
     );
     setArtist(artist);
     setProgress(0);
-    setVideoDuration(playerRef.current.getDuration());
+    setVideoDuration(parseInt(playerRef.current.getDuration(),10));
     isPlaying(true);
     const obj = {
       playlistId: player.currentActivePlaylistId,

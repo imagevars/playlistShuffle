@@ -16,6 +16,9 @@ import {
   setSeekKeyboard,
   setCurrentActivePlaylistId,
   setWordsToSearch,
+  setProgress,
+  setSeekTo,
+  setPercentage,
 } from '../../redux/actions/playerActions';
 import setSearchInput from '../../redux/actions/homepageActions';
 import {
@@ -46,6 +49,9 @@ function PlaylistPage({
   setPlaylistImage,
   setSearchInput,
   setWordsToSearch,
+  setProgress,
+  setSeekTo,
+  setPercentage,
 }) {
   const { id } = useParams();
   let findPlaylistIndex = playlistDetails.findIndex(
@@ -86,7 +92,42 @@ function PlaylistPage({
     const currIndex = playlistDetails[findPlaylistIndex].currentIndex;
     const handleClick = (e) => {
       if (e.target.nodeName.toLowerCase() !== 'input') {
+        if (e.ctrlKey && e.code === 'ArrowLeft' ) {
+          if (player.progress > 5) {
+            const backwardTo = (player.progress - 5) / player.videoDuration
+            setProgress(Math.ceil(backwardTo * player.videoDuration));
+            setSeekTo(parseFloat(backwardTo));
+            setPercentage(
+              parseInt(
+                (Math.ceil(backwardTo * player.videoDuration) /
+                  player.videoDuration) *
+                  100,
+                10,
+              )
+            );
+
+          }
+          return;
+        }
+        if (e.ctrlKey && e.code === 'ArrowRight') {
+          if (player.videoDuration - player.progress > 5) {
+            const forwardTo = (player.progress + 5) / player.videoDuration
+            setProgress(Math.ceil(forwardTo * player.videoDuration));
+            setSeekTo(parseFloat(forwardTo));
+            setPercentage(
+              parseInt(
+                (Math.ceil(forwardTo * player.videoDuration) /
+                  player.videoDuration) *
+                  100,
+                10,
+              )
+            );
+            
+          }
+          return;
+        }
         switch (e.code) {
+          
           case 'Space': {
             isPlaying(player.isPlaying !== true);
             break;
@@ -329,7 +370,10 @@ PlaylistPage.propTypes = {
     volume: PropTypes.number.isRequired,
     theme: PropTypes.string.isRequired,
     videoPercentage: PropTypes.number.isRequired,
+    progress: PropTypes.number.isRequired,
+    videoDuration: PropTypes.number.isRequired,
   }).isRequired,
+
   isLoopActive: PropTypes.func.isRequired,
   isShuffleActive: PropTypes.func.isRequired,
   currentSong: PropTypes.func.isRequired,
@@ -344,6 +388,7 @@ PlaylistPage.propTypes = {
       currentIndex: PropTypes.number.isRequired,
     }),
   ).isRequired,
+
   lastPlayedIndexPlaylistDetails: PropTypes.func.isRequired,
   setVolume: PropTypes.func.isRequired,
   setSeekKeyboard: PropTypes.func.isRequired,
@@ -351,6 +396,9 @@ PlaylistPage.propTypes = {
   setPlaylistImage: PropTypes.func.isRequired,
   setSearchInput: PropTypes.func.isRequired,
   setWordsToSearch: PropTypes.func.isRequired,
+  setProgress: PropTypes.func.isRequired,
+  setSeekTo: PropTypes.func.isRequired,
+  setPercentage: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = {
@@ -366,6 +414,9 @@ const mapDispatchToProps = {
   setPlaylistImage,
   setSearchInput,
   setWordsToSearch,
+  setProgress,
+  setSeekTo,
+  setPercentage,
 };
 
 const mapStateToProps = (state) => ({
